@@ -1,0 +1,11 @@
+/* 
+  GMSLocalizable.strings
+  GlobalMessageService
+
+  Created by Vitalii Budnik on 2/9/16.
+
+*/
+
+"PUSH" = "Push";
+"SMS" = "SMS";
+"VIBER" = "Viber";

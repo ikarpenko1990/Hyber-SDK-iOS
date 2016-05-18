@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="246" id="w9o-z4-twr" customClass="HyberInboxControllerMessageCell" customModule="Hyber" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="246"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w9o-z4-twr" id="fEb-9q-Lke">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="245"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="100" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOa-vM-pax" customClass="HyberBubbleTextView" customModule="Hyber" customModuleProvider="target">
+                        <rect key="frame" x="28" y="1" width="517" height="243"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" staticText="YES" adjustable="YES"/>
+                        </accessibility>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                    </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13:13 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXc-SF-EMS">
+                        <rect key="frame" x="630" y="116" width="51" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="51" id="rkI-VX-jaN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UAm-rg-2Lk">
+                        <rect key="frame" x="8" y="224" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="87w-JX-LTW"/>
+                            <constraint firstAttribute="width" secondItem="UAm-rg-2Lk" secondAttribute="height" multiplier="1:1" id="OBv-Fe-hv2"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="FXc-SF-EMS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eOa-vM-pax" secondAttribute="trailing" constant="4" id="8jk-7Y-xrn"/>
+                    <constraint firstItem="eOa-vM-pax" firstAttribute="leading" secondItem="UAm-rg-2Lk" secondAttribute="trailing" id="B7i-TH-XpS"/>
+                    <constraint firstItem="UAm-rg-2Lk" firstAttribute="bottom" secondItem="eOa-vM-pax" secondAttribute="bottom" id="Lpu-ah-eEm"/>
+                    <constraint firstItem="FXc-SF-EMS" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fEb-9q-Lke" secondAttribute="trailingMargin" id="MpQ-kh-tCU"/>
+                    <constraint firstAttribute="bottom" secondItem="eOa-vM-pax" secondAttribute="bottom" constant="1" id="Q9p-tR-vFD"/>
+                    <constraint firstItem="eOa-vM-pax" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="fEb-9q-Lke" secondAttribute="trailingMargin" constant="-38" id="W50-cV-jFI"/>
+                    <constraint firstItem="UAm-rg-2Lk" firstAttribute="leading" secondItem="fEb-9q-Lke" secondAttribute="leadingMargin" id="Yds-hk-2Fq"/>
+                    <constraint firstItem="FXc-SF-EMS" firstAttribute="leading" secondItem="fEb-9q-Lke" secondAttribute="trailing" priority="999" constant="30" id="hWZ-2k-NUd"/>
+                    <constraint firstItem="eOa-vM-pax" firstAttribute="top" secondItem="fEb-9q-Lke" secondAttribute="top" constant="1" id="jvW-zD-6n9"/>
+                    <constraint firstItem="FXc-SF-EMS" firstAttribute="centerY" secondItem="eOa-vM-pax" secondAttribute="centerY" id="kWL-3W-oBf"/>
+                    <constraint firstItem="FXc-SF-EMS" firstAttribute="height" relation="lessThanOrEqual" secondItem="eOa-vM-pax" secondAttribute="height" id="uWq-wF-SsQ"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="8jk-7Y-xrn"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="avatarImageView" destination="UAm-rg-2Lk" id="qHS-KU-WFn"/>
+                <outlet property="avatarImageViewSizeConstraint" destination="87w-JX-LTW" id="lL7-yQ-l0v"/>
+                <outlet property="textView" destination="eOa-vM-pax" id="oES-II-ZuQ"/>
+                <outlet property="timeLabel" destination="FXc-SF-EMS" id="CJi-Dt-hAo"/>
+                <outlet property="timeLabelLeadingConstraint" destination="hWZ-2k-NUd" id="XQx-Ri-sOx"/>
+                <outlet property="timeLabelWidthConstraint" destination="rkI-VX-jaN" id="QkI-cl-h2Q"/>
+                <outlet property="trailingConstraint" destination="W50-cV-jFI" id="1IW-8h-lmn"/>
+            </connections>
+            <point key="canvasLocation" x="503" y="446"/>
+        </tableViewCell>
+    </objects>
+</document>

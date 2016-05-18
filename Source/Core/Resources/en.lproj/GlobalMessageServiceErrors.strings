@@ -1,0 +1,31 @@
+/* 
+  GlobalMessageServiceErrors.strings
+  GlobalMessageService
+
+  Created by Vitalii Budnik on 2/16/16.
+  Copyright © 2016 Global Message Services Worldwide. All rights reserved.
+*/
+
+"GlobalMessageServiceApplicationRegistrationError.ProviderError" = "HTTP request error: %@";
+"GlobalMessageServiceApplicationRegistrationError.ProviderUnknownError" = "Data refresh unknown error";
+"GlobalMessageServiceApplicationRegistrationError.NoAppDeviceId" = "No requested Global Message Service token";
+"GlobalMessageServiceApplicationRegistrationError.AppDeviceIdWrondType" = "Wrong Global Message Service token type";
+"GlobalMessageServiceApplicationRegistrationError.AppDeviceIdLessOrEqualZero" = "Global Message Service token less or equal zero";
+"GlobalMessageServiceApplicationRegistrationError.AddSubscriberInProgress" = "Another task in progress: add subscriber";
+"GlobalMessageServiceApplicationRegistrationError.UpdateSubscriberInProgress" = "Another task in progress: ubdate subscriber info";
+"GlobalMessageServiceApplicationRegistrationError.UpdateGCMTokenInProgress" = "Another task in progress: ubdate Google Cloud Messaging token";
+"GlobalMessageServiceApplicationRegistrationError.UpdateGCMTokenInProgress" = "UnknownError";
+
+
+"GlobalMessageServiceApplicationError.ProviderError" = "HTTP request error: %@";
+"GlobalMessageServiceApplicationError.ProviderUnknownError" = "Data refresh unknown error";
+"GlobalMessageServiceApplicationError.GMSTokenIsNotSet" = "Global Message Service token is not set";
+"GlobalMessageServiceApplicationError.GCMTokenIsNotSet" = "No Google Cloud Messaging token";
+"GlobalMessageServiceApplicationError.ApplicationRegistrationError" = "Registration error: %@";
+
+"GlobalMessageServiceProviderResultParsingError.AlamofireError" = "%@";
+"GlobalMessageServiceProviderResultParsingError.AlamofireUnknownError" = "HTTP request unknown error";
+"GlobalMessageServiceProviderResultParsingError.CantRepresentResultAsDictionary" = "Wrong result format";
+"GlobalMessageServiceProviderResultParsingError.NoStatus" = "No operation status flag";
+"GlobalMessageServiceProviderResultParsingError.StatusIsFalse" = "Failed. %@";
+"GlobalMessageServiceProviderResultParsingError.UnknownError" = "Result parser error";

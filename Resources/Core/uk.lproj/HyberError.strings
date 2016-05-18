@@ -1,0 +1,36 @@
+/* 
+  HyberErrors.strings
+  Hyber
+
+  Created by Vitalii Budnik on 2/16/16.
+  Copyright © 2016 Global Message Services Worldwide. All rights reserved.
+*/
+
+"MessageFetcher.NoPhone" = "У абонента не вказан телефонний номер";
+"MessageFetcher.CoreDataSaveError" = "Помилка при збереженні повідомлення: %@";
+
+"Request.Error" = "Помилка HTTP запиту: %@";
+"Request.UnknownError" = "Невідома помилка HTTP запиту";
+"Request.ParametersSerializationError" = "Виникла помилка серіалізаціі параметрів HTTP запиту: %@";
+
+"ResultParsing.CantRepresentResultAsDictionary" = "Невірний формат відповіді сервера";
+"ResultParsing.NoStatus" = "Відсутній флаг статуса виконаної операції";
+"ResultParsing.StatusIsFalse" = "Помилка. %@";
+"ResultParsing.UnknownError" = "Невідома помилка розбору відповіді від сервера";
+"ResultParsing.JSONSerializationError" = "Помилка серіалізації відповіді від сервера: %@";
+
+"Subscriber.NoAppDeviceId" = "Не отримано очікуваний токен Global Message Service";
+"Subscriber.AppDeviceIdWrondType" = "Не вірний тип токена Global Message Service";
+"Subscriber.AppDeviceIdLessOrEqualZero" = "Токен Global Message Service менший або дорівнює нулю";
+
+"AnotherTaskInProgress.AddSubscriber" = "Виконується інший запит: реєстрація абонента";
+"AnotherTaskInProgress.UpdateSubscriber" = "Виконується інший запит: оновлення інформації абонента";
+"AnotherTaskInProgress.UpdateGCMToken" = "Виконується інший запит: отримання токену Global Message Service";
+
+"CoreData.SaveError" = "Помилка при збереженні даних: %@";
+"CoreData.FetchError" = "Fetch error: %@";
+
+"HyberError.GMSTokenIsNotSet" = "Не встановлене значення токена Global Message Service";
+"HyberError.GCMTokenIsNotSet" = "Немає токена Google Cloud Messaging";
+"HyberError.NoPhoneOrEmailPassed" = "Потрібно вказати електронну адресу чи телефон";
+"HyberError.UnknownError" = "Невідома помилка";

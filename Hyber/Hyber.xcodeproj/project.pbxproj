@@ -1,0 +1,1198 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8001D1F81C7314D300636645 /* HyberError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8001D1FA1C7314D300636645 /* HyberError.strings */; };
+		8009602A1CEC84B700180283 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 800960291CEC84B700180283 /* .travis.yml */; };
+		8020E28A1CCE45A700633797 /* HyberInboxControllerRefreshCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020E2891CCE45A700633797 /* HyberInboxControllerRefreshCell.swift */; };
+		8020E28C1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8020E28B1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib */; };
+		802239971CAA5CEA002A7D79 /* HyberResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802239961CAA5CE9002A7D79 /* HyberResult.swift */; };
+		8022399D1CAACF1E002A7D79 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8022399C1CAACF1E002A7D79 /* CoreLocation.framework */; };
+		804B4FB31C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804B4FB21C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift */; };
+		804B4FB51C7DACA50006AA8C /* HyberHelper+GCMToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804B4FB41C7DACA50006AA8C /* HyberHelper+GCMToken.swift */; };
+		804B4FD91C7DD5C30006AA8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C3A6061C75D585007721CA /* Foundation.framework */; };
+		804B4FDD1C7DD94F0006AA8C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 804B4FDC1C7DD94F0006AA8C /* CoreData.framework */; };
+		804B4FDF1C7DD9580006AA8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 804B4FDE1C7DD9580006AA8C /* UIKit.framework */; };
+		8083BF5F1CA92915004240A9 /* Hyber+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083BF5E1CA92915004240A9 /* Hyber+Localization.swift */; };
+		8083BF631CA935B0004240A9 /* HyberHelper+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083BF621CA935AF004240A9 /* HyberHelper+Validation.swift */; };
+		809A13C41C6CA7A900CB3977 /* Hyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 809A13B91C6CA7A900CB3977 /* Hyber.framework */; };
+		809A13C91C6CA7A900CB3977 /* HyberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13C81C6CA7A900CB3977 /* HyberTests.swift */; };
+		809A14061C6CA88F00CB3977 /* NSManagedObject+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13D61C6CA88F00CB3977 /* NSManagedObject+Search.swift */; };
+		809A14071C6CA88F00CB3977 /* NSManagedObjectContext+Save_Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13D71C6CA88F00CB3977 /* NSManagedObjectContext+Save_Clear.swift */; };
+		809A14081C6CA88F00CB3977 /* HyberCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13D81C6CA88F00CB3977 /* HyberCoreDataHelper.swift */; };
+		809A14091C6CA88F00CB3977 /* HyberDataInboxFetchedDate+Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13D91C6CA88F00CB3977 /* HyberDataInboxFetchedDate+Searchable.swift */; };
+		809A140A1C6CA88F00CB3977 /* HyberDataInboxMessage+Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13DA1C6CA88F00CB3977 /* HyberDataInboxMessage+Searchable.swift */; };
+		809A14101C6CA88F00CB3977 /* NSDate+DayBoundaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E21C6CA88F00CB3977 /* NSDate+DayBoundaries.swift */; };
+		809A14111C6CA88F00CB3977 /* NSFileManager+DirectoryURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E31C6CA88F00CB3977 /* NSFileManager+DirectoryURLs.swift */; };
+		809A14121C6CA88F00CB3977 /* Hyber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E41C6CA88F00CB3977 /* Hyber.swift */; };
+		809A14131C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E51C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift */; };
+		809A14141C6CA88F00CB3977 /* HyberHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E61C6CA88F00CB3977 /* HyberHelper.swift */; };
+		809A14151C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E71C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift */; };
+		809A14161C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E81C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift */; };
+		809A14181C6CA88F00CB3977 /* HyberError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13EA1C6CA88F00CB3977 /* HyberError.swift */; };
+		809A14191C6CA88F00CB3977 /* HyberSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13EB1C6CA88F00CB3977 /* HyberSubscriber.swift */; };
+		809A141A1C6CA88F00CB3977 /* Hyber.h in Headers */ = {isa = PBXBuildFile; fileRef = 809A13ED1C6CA88F00CB3977 /* Hyber.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		809A141D1C6CA88F00CB3977 /* Hyber+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13F11C6CA88F00CB3977 /* Hyber+Log.swift */; };
+		809A141E1C6CA88F00CB3977 /* HyberMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13F31C6CA88F00CB3977 /* HyberMessage.swift */; };
+		809A141F1C6CA88F00CB3977 /* HyberMessagesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13F41C6CA88F00CB3977 /* HyberMessagesFetcher.swift */; };
+		809A14201C6CA88F00CB3977 /* HyberPushNotification+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13F61C6CA88F00CB3977 /* HyberPushNotification+CoreData.swift */; };
+		809A14211C6CA88F00CB3977 /* HyberPushNotification+LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13F71C6CA88F00CB3977 /* HyberPushNotification+LocalNotification.swift */; };
+		809A14221C6CA88F00CB3977 /* HyberPushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13F81C6CA88F00CB3977 /* HyberPushNotification.swift */; };
+		809A14231C6CA88F00CB3977 /* HyberMessageTypes.strings in Resources */ = {isa = PBXBuildFile; fileRef = 809A13FA1C6CA88F00CB3977 /* HyberMessageTypes.strings */; };
+		809A14241C6CA88F00CB3977 /* HyberData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 809A13FC1C6CA88F00CB3977 /* HyberData.xcdatamodeld */; };
+		809A14251C6CA88F00CB3977 /* HyberProvider+POST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A14001C6CA88F00CB3977 /* HyberProvider+POST.swift */; };
+		809A14261C6CA88F00CB3977 /* HyberProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A14011C6CA88F00CB3977 /* HyberProvider.swift */; };
+		809A14281C6CA88F00CB3977 /* Hyber+SettingsOnTopLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A14041C6CA88F00CB3977 /* Hyber+SettingsOnTopLevel.swift */; };
+		809A14291C6CA88F00CB3977 /* HyberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A14051C6CA88F00CB3977 /* HyberSettings.swift */; };
+		80A984B71C870B2900AF64AD /* HyberMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A984B61C870B2900AF64AD /* HyberMessageType.swift */; };
+		80ADC5841C9048BC006C285D /* Syncronized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ADC5831C9048BC006C285D /* Syncronized.swift */; };
+		80AE624B1C7F3E7900FE12D8 /* HyberDataInboxFetchedDate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE62451C7F3E7900FE12D8 /* HyberDataInboxFetchedDate+CoreDataProperties.swift */; };
+		80AE624C1C7F3E7900FE12D8 /* HyberDataInboxFetchedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE62461C7F3E7900FE12D8 /* HyberDataInboxFetchedDate.swift */; };
+		80AE624D1C7F3E7900FE12D8 /* HyberDataInboxSender+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE62471C7F3E7900FE12D8 /* HyberDataInboxSender+CoreDataProperties.swift */; };
+		80AE624E1C7F3E7900FE12D8 /* HyberDataInboxSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE62481C7F3E7900FE12D8 /* HyberDataInboxSender.swift */; };
+		80AE624F1C7F3E7900FE12D8 /* HyberDataInboxMessage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE62491C7F3E7900FE12D8 /* HyberDataInboxMessage+CoreDataProperties.swift */; };
+		80AE62501C7F3E7900FE12D8 /* HyberDataInboxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE624A1C7F3E7900FE12D8 /* HyberDataInboxMessage.swift */; };
+		80AE62521C7F3EF200FE12D8 /* HyberDataInboxSender+Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE62511C7F3EF200FE12D8 /* HyberDataInboxSender+Searchable.swift */; };
+		80C56A9F1CABB68100BDFC17 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C56A9E1CABB68100BDFC17 /* XCGLogger.swift */; };
+		80C56AA11CABC1E000BDFC17 /* NSURLRequest+cURLPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C56AA01CABC1E000BDFC17 /* NSURLRequest+cURLPresentation.swift */; };
+		80D477021CCA64AE00B0FEA3 /* HyberInboxCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476DC1CCA64AE00B0FEA3 /* HyberInboxCellData.swift */; };
+		80D477031CCA64AE00B0FEA3 /* HyberInboxCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476DD1CCA64AE00B0FEA3 /* HyberInboxCellType.swift */; };
+		80D477041CCA64AE00B0FEA3 /* Array+EqualByPointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476DF1CCA64AE00B0FEA3 /* Array+EqualByPointer.swift */; };
+		80D477051CCA64AE00B0FEA3 /* CGSize+max.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E01CCA64AE00B0FEA3 /* CGSize+max.swift */; };
+		80D477061CCA64AE00B0FEA3 /* String+AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E11CCA64AE00B0FEA3 /* String+AttributedString.swift */; };
+		80D477071CCA64AE00B0FEA3 /* UIColor+DarkerLighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E21CCA64AE00B0FEA3 /* UIColor+DarkerLighter.swift */; };
+		80D477081CCA64AE00B0FEA3 /* UIEdgeInsets+Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E31CCA64AE00B0FEA3 /* UIEdgeInsets+Insets.swift */; };
+		80D477091CCA64AE00B0FEA3 /* UIFont+Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E41CCA64AE00B0FEA3 /* UIFont+Bold.swift */; };
+		80D4770A1CCA64AE00B0FEA3 /* UIImage+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E51CCA64AE00B0FEA3 /* UIImage+Images.swift */; };
+		80D4770B1CCA64AE00B0FEA3 /* UIScrollView+ContentOffsetPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E61CCA64AE00B0FEA3 /* UIScrollView+ContentOffsetPosition.swift */; };
+		80D4770C1CCA64AE00B0FEA3 /* HyberBubbleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E71CCA64AE00B0FEA3 /* HyberBubbleLayer.swift */; };
+		80D4770D1CCA64AE00B0FEA3 /* HyberBubbleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E81CCA64AE00B0FEA3 /* HyberBubbleTableViewCell.swift */; };
+		80D4770E1CCA64AE00B0FEA3 /* HyberBubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476E91CCA64AE00B0FEA3 /* HyberBubbleTextView.swift */; };
+		80D4770F1CCA64AE00B0FEA3 /* HyberInboxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476EA1CCA64AE00B0FEA3 /* HyberInboxController.swift */; };
+		80D477101CCA64AE00B0FEA3 /* HyberInboxController+Bars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476EB1CCA64AE00B0FEA3 /* HyberInboxController+Bars.swift */; };
+		80D477111CCA64AE00B0FEA3 /* HyberInboxController+Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476EC1CCA64AE00B0FEA3 /* HyberInboxController+Configure.swift */; };
+		80D477121CCA64AE00B0FEA3 /* HyberInboxController+MessageFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476ED1CCA64AE00B0FEA3 /* HyberInboxController+MessageFetching.swift */; };
+		80D477131CCA64AE00B0FEA3 /* HyberInboxController+PanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476EE1CCA64AE00B0FEA3 /* HyberInboxController+PanGestureRecognizer.swift */; };
+		80D477141CCA64AE00B0FEA3 /* HyberInboxController+SearchAndFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476EF1CCA64AE00B0FEA3 /* HyberInboxController+SearchAndFilter.swift */; };
+		80D477151CCA64AE00B0FEA3 /* HyberInboxController+TableViewDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476F01CCA64AE00B0FEA3 /* HyberInboxController+TableViewDataSourceAndDelegate.swift */; };
+		80D477161CCA64AE00B0FEA3 /* HyberInboxControllerHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476F11CCA64AE00B0FEA3 /* HyberInboxControllerHeaderCell.swift */; };
+		80D477171CCA64AE00B0FEA3 /* HyberInboxControllerMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476F21CCA64AE00B0FEA3 /* HyberInboxControllerMessageCell.swift */; };
+		80D477181CCA64AE00B0FEA3 /* HyberInboxFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476F31CCA64AE00B0FEA3 /* HyberInboxFilterTableViewController.swift */; };
+		80D477191CCA64AE00B0FEA3 /* HyberInboxViewControllerMessageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476F41CCA64AE00B0FEA3 /* HyberInboxViewControllerMessageFetcher.swift */; };
+		80D4771B1CCA64AE00B0FEA3 /* HyberDateTimeLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476F81CCA64AE00B0FEA3 /* HyberDateTimeLabelStyle.swift */; };
+		80D4771C1CCA64AE00B0FEA3 /* HyberLabelsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476F91CCA64AE00B0FEA3 /* HyberLabelsStyles.swift */; };
+		80D4771D1CCA64AE00B0FEA3 /* HyberTextLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476FA1CCA64AE00B0FEA3 /* HyberTextLabelStyle.swift */; };
+		80D4771E1CCA64AE00B0FEA3 /* HyberTimeLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476FB1CCA64AE00B0FEA3 /* HyberTimeLabelStyle.swift */; };
+		80D4771F1CCA64AE00B0FEA3 /* HyberInboxDateTimeLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476FC1CCA64AE00B0FEA3 /* HyberInboxDateTimeLabelStyle.swift */; };
+		80D477201CCA64AE00B0FEA3 /* HyberInboxLabelsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476FD1CCA64AE00B0FEA3 /* HyberInboxLabelsStyles.swift */; };
+		80D477211CCA64AE00B0FEA3 /* HyberInboxTextLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476FE1CCA64AE00B0FEA3 /* HyberInboxTextLabelStyle.swift */; };
+		80D477221CCA64AE00B0FEA3 /* HyberInboxTimeLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D476FF1CCA64AE00B0FEA3 /* HyberInboxTimeLabelStyle.swift */; };
+		80D477231CCA64AE00B0FEA3 /* LinesAndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D477001CCA64AE00B0FEA3 /* LinesAndPoints.swift */; };
+		80D477281CCA64EF00B0FEA3 /* HyberInboxControllerHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D477261CCA64EF00B0FEA3 /* HyberInboxControllerHeaderCell.xib */; };
+		80D477291CCA64EF00B0FEA3 /* HyberInboxControllerMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D477271CCA64EF00B0FEA3 /* HyberInboxControllerMessageCell.xib */; };
+		80D4772B1CCA650200B0FEA3 /* HyperInboxControllerSendersImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D4772A1CCA650200B0FEA3 /* HyperInboxControllerSendersImages.xcassets */; };
+		80D4773C1CCA65FB00B0FEA3 /* HyberInboxController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80D4773E1CCA65FB00B0FEA3 /* HyberInboxController.strings */; };
+		80D8F1D81CCE109900D45AE3 /* HyberError+AnotherTaskInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1D71CCE109900D45AE3 /* HyberError+AnotherTaskInProgress.swift */; };
+		80D8F1DA1CCE10BA00D45AE3 /* HyberError+Subscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1D91CCE10BA00D45AE3 /* HyberError+Subscriber.swift */; };
+		80D8F1DC1CCE10D200D45AE3 /* HyberError+ResultParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1DB1CCE10D200D45AE3 /* HyberError+ResultParsing.swift */; };
+		80D8F1DE1CCE10F900D45AE3 /* HyberError+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1DD1CCE10F900D45AE3 /* HyberError+Request.swift */; };
+		80D8F1E01CCE111300D45AE3 /* HyberError+MessageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1DF1CCE111300D45AE3 /* HyberError+MessageFetcher.swift */; };
+		80D8F1E21CCE119100D45AE3 /* HyberError+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1E11CCE119100D45AE3 /* HyberError+CoreData.swift */; };
+		80FFF8491CEC4B5D000067FA /* HyberInboxControllerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8481CEC4B5D000067FA /* HyberInboxControllerStyle.swift */; };
+		80FFF84C1CEC4B9C000067FA /* HyberBubbleViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF84B1CEC4B9C000067FA /* HyberBubbleViewStyle.swift */; };
+		80FFF84F1CEC4BDA000067FA /* HyberInboxBubbleViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF84E1CEC4BDA000067FA /* HyberInboxBubbleViewStyle.swift */; };
+		80FFF8511CEC4C41000067FA /* HyberMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8501CEC4C41000067FA /* HyberMessageData.swift */; };
+		80FFF8531CEC4D43000067FA /* HyberInboxControllerStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8521CEC4D43000067FA /* HyberInboxControllerStyler.swift */; };
+		80FFF8551CEC61A7000067FA /* SyncronizableOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8541CEC61A7000067FA /* SyncronizableOperationQueue.swift */; };
+		80FFF8571CEC61CF000067FA /* SerialOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8561CEC61CF000067FA /* SerialOperationQueue.swift */; };
+		80FFF8591CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8581CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift */; };
+		80FFF85B1CEC629D000067FA /* HyberInboxControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF85A1CEC629D000067FA /* HyberInboxControllerCell.swift */; };
+		80FFF85D1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF85C1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift */; };
+		D5561D17D3639907063A6A43 /* Pods_Hyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A39468D39E6452DA303DED /* Pods_Hyber.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		809A13C51C6CA7A900CB3977 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 809A13B01C6CA7A900CB3977 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 809A13B81C6CA7A900CB3977;
+			remoteInfo = GlobalMessageService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00E685DD458B7D6EDC3C17F9 /* Pods_GlobalMessageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobalMessageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34F50E49FFDD345CEDC292A3 /* Pods-Hyber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber/Pods-Hyber.release.xcconfig"; sourceTree = "<group>"; };
+		5F37A2E51B3298786575D826 /* Pods-GlobalMessageService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalMessageService.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalMessageService/Pods-GlobalMessageService.release.xcconfig"; sourceTree = "<group>"; };
+		8001D1F91C7314D300636645 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HyberError.strings; sourceTree = "<group>"; };
+		800960291CEC84B700180283 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
+		8020502E1CA3D95B00B09F69 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		8020502F1CA3D95B00B09F69 /* Hyber.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Hyber.podspec; path = ../Hyber.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		802050301CA3D95B00B09F69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		802050311CA3D95B00B09F69 /* makedoc.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = makedoc.sh; path = ../makedoc.sh; sourceTree = "<group>"; };
+		802050361CA4016800B09F69 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HyberMessageTypes.strings; sourceTree = "<group>"; };
+		802050381CA401D600B09F69 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/HyberError.strings; sourceTree = "<group>"; };
+		802050391CA4052600B09F69 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HyberError.strings; sourceTree = "<group>"; };
+		8020E2891CCE45A700633797 /* HyberInboxControllerRefreshCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerRefreshCell.swift; sourceTree = "<group>"; };
+		8020E28B1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HyberInboxControllerRefreshCell.xib; sourceTree = "<group>"; };
+		802239961CAA5CE9002A7D79 /* HyberResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberResult.swift; sourceTree = "<group>"; };
+		8022399C1CAACF1E002A7D79 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		804B4FB21C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+SubscribersLocation.swift"; sourceTree = "<group>"; };
+		804B4FB41C7DACA50006AA8C /* HyberHelper+GCMToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+GCMToken.swift"; sourceTree = "<group>"; };
+		804B4FDA1C7DD9490006AA8C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		804B4FDC1C7DD94F0006AA8C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		804B4FDE1C7DD9580006AA8C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8083BF5E1CA92915004240A9 /* Hyber+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hyber+Localization.swift"; sourceTree = "<group>"; };
+		8083BF621CA935AF004240A9 /* HyberHelper+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+Validation.swift"; sourceTree = "<group>"; };
+		809A13B91C6CA7A900CB3977 /* Hyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		809A13C31C6CA7A900CB3977 /* HyberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		809A13C81C6CA7A900CB3977 /* HyberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyberTests.swift; sourceTree = "<group>"; };
+		809A13CA1C6CA7A900CB3977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		809A13D61C6CA88F00CB3977 /* NSManagedObject+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Search.swift"; sourceTree = "<group>"; };
+		809A13D71C6CA88F00CB3977 /* NSManagedObjectContext+Save_Clear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Save_Clear.swift"; sourceTree = "<group>"; };
+		809A13D81C6CA88F00CB3977 /* HyberCoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberCoreDataHelper.swift; sourceTree = "<group>"; };
+		809A13D91C6CA88F00CB3977 /* HyberDataInboxFetchedDate+Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberDataInboxFetchedDate+Searchable.swift"; sourceTree = "<group>"; };
+		809A13DA1C6CA88F00CB3977 /* HyberDataInboxMessage+Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberDataInboxMessage+Searchable.swift"; sourceTree = "<group>"; };
+		809A13E21C6CA88F00CB3977 /* NSDate+DayBoundaries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+DayBoundaries.swift"; sourceTree = "<group>"; };
+		809A13E31C6CA88F00CB3977 /* NSFileManager+DirectoryURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+DirectoryURLs.swift"; sourceTree = "<group>"; };
+		809A13E41C6CA88F00CB3977 /* Hyber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hyber.swift; sourceTree = "<group>"; };
+		809A13E51C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberGoogleCloudMessagingHelper.swift; sourceTree = "<group>"; };
+		809A13E61C6CA88F00CB3977 /* HyberHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberHelper.swift; sourceTree = "<group>"; };
+		809A13E71C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+RemoteNotifications.swift"; sourceTree = "<group>"; };
+		809A13E81C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+SubscriberInfo.swift"; sourceTree = "<group>"; };
+		809A13EA1C6CA88F00CB3977 /* HyberError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HyberError.swift; path = ../HyberError.swift; sourceTree = "<group>"; };
+		809A13EB1C6CA88F00CB3977 /* HyberSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberSubscriber.swift; sourceTree = "<group>"; };
+		809A13ED1C6CA88F00CB3977 /* Hyber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hyber.h; sourceTree = "<group>"; };
+		809A13EF1C6CA88F00CB3977 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Hyber/Info.plist; sourceTree = "<group>"; };
+		809A13F11C6CA88F00CB3977 /* Hyber+Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hyber+Log.swift"; sourceTree = "<group>"; };
+		809A13F31C6CA88F00CB3977 /* HyberMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberMessage.swift; sourceTree = "<group>"; };
+		809A13F41C6CA88F00CB3977 /* HyberMessagesFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberMessagesFetcher.swift; sourceTree = "<group>"; };
+		809A13F61C6CA88F00CB3977 /* HyberPushNotification+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberPushNotification+CoreData.swift"; sourceTree = "<group>"; };
+		809A13F71C6CA88F00CB3977 /* HyberPushNotification+LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberPushNotification+LocalNotification.swift"; sourceTree = "<group>"; };
+		809A13F81C6CA88F00CB3977 /* HyberPushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberPushNotification.swift; sourceTree = "<group>"; };
+		809A13FB1C6CA88F00CB3977 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HyberMessageTypes.strings; sourceTree = "<group>"; };
+		809A13FD1C6CA88F00CB3977 /* HyberData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HyberData.xcdatamodel; sourceTree = "<group>"; };
+		809A13FE1C6CA88F00CB3977 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/HyberMessageTypes.strings; sourceTree = "<group>"; };
+		809A14001C6CA88F00CB3977 /* HyberProvider+POST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberProvider+POST.swift"; sourceTree = "<group>"; };
+		809A14011C6CA88F00CB3977 /* HyberProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberProvider.swift; sourceTree = "<group>"; };
+		809A14041C6CA88F00CB3977 /* Hyber+SettingsOnTopLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hyber+SettingsOnTopLevel.swift"; sourceTree = "<group>"; };
+		809A14051C6CA88F00CB3977 /* HyberSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberSettings.swift; sourceTree = "<group>"; };
+		80A984B61C870B2900AF64AD /* HyberMessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberMessageType.swift; sourceTree = "<group>"; };
+		80ADC5831C9048BC006C285D /* Syncronized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syncronized.swift; sourceTree = "<group>"; };
+		80AE62451C7F3E7900FE12D8 /* HyberDataInboxFetchedDate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberDataInboxFetchedDate+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		80AE62461C7F3E7900FE12D8 /* HyberDataInboxFetchedDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberDataInboxFetchedDate.swift; sourceTree = "<group>"; };
+		80AE62471C7F3E7900FE12D8 /* HyberDataInboxSender+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberDataInboxSender+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		80AE62481C7F3E7900FE12D8 /* HyberDataInboxSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberDataInboxSender.swift; sourceTree = "<group>"; };
+		80AE62491C7F3E7900FE12D8 /* HyberDataInboxMessage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberDataInboxMessage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		80AE624A1C7F3E7900FE12D8 /* HyberDataInboxMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberDataInboxMessage.swift; sourceTree = "<group>"; };
+		80AE62511C7F3EF200FE12D8 /* HyberDataInboxSender+Searchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberDataInboxSender+Searchable.swift"; sourceTree = "<group>"; };
+		80C3A6061C75D585007721CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		80C56A9E1CABB68100BDFC17 /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCGLogger.swift; sourceTree = "<group>"; };
+		80C56AA01CABC1E000BDFC17 /* NSURLRequest+cURLPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLRequest+cURLPresentation.swift"; sourceTree = "<group>"; };
+		80D476DC1CCA64AE00B0FEA3 /* HyberInboxCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxCellData.swift; sourceTree = "<group>"; };
+		80D476DD1CCA64AE00B0FEA3 /* HyberInboxCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxCellType.swift; sourceTree = "<group>"; };
+		80D476DF1CCA64AE00B0FEA3 /* Array+EqualByPointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+EqualByPointer.swift"; sourceTree = "<group>"; };
+		80D476E01CCA64AE00B0FEA3 /* CGSize+max.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+max.swift"; sourceTree = "<group>"; };
+		80D476E11CCA64AE00B0FEA3 /* String+AttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+AttributedString.swift"; sourceTree = "<group>"; };
+		80D476E21CCA64AE00B0FEA3 /* UIColor+DarkerLighter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DarkerLighter.swift"; sourceTree = "<group>"; };
+		80D476E31CCA64AE00B0FEA3 /* UIEdgeInsets+Insets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Insets.swift"; sourceTree = "<group>"; };
+		80D476E41CCA64AE00B0FEA3 /* UIFont+Bold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Bold.swift"; sourceTree = "<group>"; };
+		80D476E51CCA64AE00B0FEA3 /* UIImage+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Images.swift"; sourceTree = "<group>"; };
+		80D476E61CCA64AE00B0FEA3 /* UIScrollView+ContentOffsetPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ContentOffsetPosition.swift"; sourceTree = "<group>"; };
+		80D476E71CCA64AE00B0FEA3 /* HyberBubbleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberBubbleLayer.swift; sourceTree = "<group>"; };
+		80D476E81CCA64AE00B0FEA3 /* HyberBubbleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberBubbleTableViewCell.swift; sourceTree = "<group>"; };
+		80D476E91CCA64AE00B0FEA3 /* HyberBubbleTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberBubbleTextView.swift; sourceTree = "<group>"; };
+		80D476EA1CCA64AE00B0FEA3 /* HyberInboxController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxController.swift; sourceTree = "<group>"; };
+		80D476EB1CCA64AE00B0FEA3 /* HyberInboxController+Bars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberInboxController+Bars.swift"; sourceTree = "<group>"; };
+		80D476EC1CCA64AE00B0FEA3 /* HyberInboxController+Configure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberInboxController+Configure.swift"; sourceTree = "<group>"; };
+		80D476ED1CCA64AE00B0FEA3 /* HyberInboxController+MessageFetching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberInboxController+MessageFetching.swift"; sourceTree = "<group>"; };
+		80D476EE1CCA64AE00B0FEA3 /* HyberInboxController+PanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberInboxController+PanGestureRecognizer.swift"; sourceTree = "<group>"; };
+		80D476EF1CCA64AE00B0FEA3 /* HyberInboxController+SearchAndFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberInboxController+SearchAndFilter.swift"; sourceTree = "<group>"; };
+		80D476F01CCA64AE00B0FEA3 /* HyberInboxController+TableViewDataSourceAndDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberInboxController+TableViewDataSourceAndDelegate.swift"; sourceTree = "<group>"; };
+		80D476F11CCA64AE00B0FEA3 /* HyberInboxControllerHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerHeaderCell.swift; sourceTree = "<group>"; };
+		80D476F21CCA64AE00B0FEA3 /* HyberInboxControllerMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerMessageCell.swift; sourceTree = "<group>"; };
+		80D476F31CCA64AE00B0FEA3 /* HyberInboxFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxFilterTableViewController.swift; sourceTree = "<group>"; };
+		80D476F41CCA64AE00B0FEA3 /* HyberInboxViewControllerMessageFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxViewControllerMessageFetcher.swift; sourceTree = "<group>"; };
+		80D476F81CCA64AE00B0FEA3 /* HyberDateTimeLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberDateTimeLabelStyle.swift; sourceTree = "<group>"; };
+		80D476F91CCA64AE00B0FEA3 /* HyberLabelsStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberLabelsStyles.swift; sourceTree = "<group>"; };
+		80D476FA1CCA64AE00B0FEA3 /* HyberTextLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberTextLabelStyle.swift; sourceTree = "<group>"; };
+		80D476FB1CCA64AE00B0FEA3 /* HyberTimeLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberTimeLabelStyle.swift; sourceTree = "<group>"; };
+		80D476FC1CCA64AE00B0FEA3 /* HyberInboxDateTimeLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxDateTimeLabelStyle.swift; sourceTree = "<group>"; };
+		80D476FD1CCA64AE00B0FEA3 /* HyberInboxLabelsStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxLabelsStyles.swift; sourceTree = "<group>"; };
+		80D476FE1CCA64AE00B0FEA3 /* HyberInboxTextLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxTextLabelStyle.swift; sourceTree = "<group>"; };
+		80D476FF1CCA64AE00B0FEA3 /* HyberInboxTimeLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxTimeLabelStyle.swift; sourceTree = "<group>"; };
+		80D477001CCA64AE00B0FEA3 /* LinesAndPoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesAndPoints.swift; sourceTree = "<group>"; };
+		80D477261CCA64EF00B0FEA3 /* HyberInboxControllerHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HyberInboxControllerHeaderCell.xib; sourceTree = "<group>"; };
+		80D477271CCA64EF00B0FEA3 /* HyberInboxControllerMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HyberInboxControllerMessageCell.xib; sourceTree = "<group>"; };
+		80D4772A1CCA650200B0FEA3 /* HyperInboxControllerSendersImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HyperInboxControllerSendersImages.xcassets; sourceTree = "<group>"; };
+		80D4773D1CCA65FB00B0FEA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HyberInboxController.strings; sourceTree = "<group>"; };
+		80D4773F1CCA65FD00B0FEA3 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/HyberInboxController.strings; sourceTree = "<group>"; };
+		80D477401CCA65FE00B0FEA3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/HyberInboxController.strings; sourceTree = "<group>"; };
+		80D8F1D71CCE109900D45AE3 /* HyberError+AnotherTaskInProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+AnotherTaskInProgress.swift"; sourceTree = "<group>"; };
+		80D8F1D91CCE10BA00D45AE3 /* HyberError+Subscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+Subscriber.swift"; sourceTree = "<group>"; };
+		80D8F1DB1CCE10D200D45AE3 /* HyberError+ResultParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+ResultParsing.swift"; sourceTree = "<group>"; };
+		80D8F1DD1CCE10F900D45AE3 /* HyberError+Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+Request.swift"; sourceTree = "<group>"; };
+		80D8F1DF1CCE111300D45AE3 /* HyberError+MessageFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+MessageFetcher.swift"; sourceTree = "<group>"; };
+		80D8F1E11CCE119100D45AE3 /* HyberError+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+CoreData.swift"; sourceTree = "<group>"; };
+		80E213E31C805A7C00AD44F1 /* Chatto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chatto.framework; path = "Pods/../build/Debug-iphoneos/Chatto.framework"; sourceTree = "<group>"; };
+		80E213E51C805A7F00AD44F1 /* ChattoAdditions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChattoAdditions.framework; path = "Pods/../build/Debug-iphoneos/ChattoAdditions.framework"; sourceTree = "<group>"; };
+		80FFF8481CEC4B5D000067FA /* HyberInboxControllerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerStyle.swift; sourceTree = "<group>"; };
+		80FFF84B1CEC4B9C000067FA /* HyberBubbleViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberBubbleViewStyle.swift; sourceTree = "<group>"; };
+		80FFF84E1CEC4BDA000067FA /* HyberInboxBubbleViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxBubbleViewStyle.swift; sourceTree = "<group>"; };
+		80FFF8501CEC4C41000067FA /* HyberMessageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberMessageData.swift; sourceTree = "<group>"; };
+		80FFF8521CEC4D43000067FA /* HyberInboxControllerStyler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerStyler.swift; sourceTree = "<group>"; };
+		80FFF8541CEC61A7000067FA /* SyncronizableOperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncronizableOperationQueue.swift; sourceTree = "<group>"; };
+		80FFF8561CEC61CF000067FA /* SerialOperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialOperationQueue.swift; sourceTree = "<group>"; };
+		80FFF8581CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxViewControllerMessageFetcherResult.swift; sourceTree = "<group>"; };
+		80FFF85A1CEC629D000067FA /* HyberInboxControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerCell.swift; sourceTree = "<group>"; };
+		80FFF85C1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxViewControllerMessageFetcherP2.swift; sourceTree = "<group>"; };
+		C527302DA7BEB6691F8FCB03 /* Pods-Hyber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber/Pods-Hyber.debug.xcconfig"; sourceTree = "<group>"; };
+		DA0E85F11FC3003057B19B88 /* Pods-GlobalMessageService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalMessageService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalMessageService/Pods-GlobalMessageService.debug.xcconfig"; sourceTree = "<group>"; };
+		E3A39468D39E6452DA303DED /* Pods_Hyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		809A13B51C6CA7A900CB3977 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8022399D1CAACF1E002A7D79 /* CoreLocation.framework in Frameworks */,
+				804B4FDF1C7DD9580006AA8C /* UIKit.framework in Frameworks */,
+				804B4FDD1C7DD94F0006AA8C /* CoreData.framework in Frameworks */,
+				804B4FD91C7DD5C30006AA8C /* Foundation.framework in Frameworks */,
+				D5561D17D3639907063A6A43 /* Pods_Hyber.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		809A13C01C6CA7A900CB3977 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				809A13C41C6CA7A900CB3977 /* Hyber.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		802050271CA3D7E400B09F69 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				8020502E1CA3D95B00B09F69 /* README.md */,
+				800960291CEC84B700180283 /* .travis.yml */,
+				8020502F1CA3D95B00B09F69 /* Hyber.podspec */,
+				802050301CA3D95B00B09F69 /* LICENSE */,
+				802050311CA3D95B00B09F69 /* makedoc.sh */,
+			);
+			name = Metadata;
+			sourceTree = SOURCE_ROOT;
+		};
+		802239981CAA6E49002A7D79 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				809A13FA1C6CA88F00CB3977 /* HyberMessageTypes.strings */,
+				8001D1FA1C7314D300636645 /* HyberError.strings */,
+				809A13FC1C6CA88F00CB3977 /* HyberData.xcdatamodeld */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		809A13AF1C6CA7A900CB3977 = {
+			isa = PBXGroup;
+			children = (
+				809A13EF1C6CA88F00CB3977 /* Info.plist */,
+				809A13D31C6CA7F500CB3977 /* Source */,
+				809A13F91C6CA88F00CB3977 /* Resources */,
+				802050271CA3D7E400B09F69 /* Metadata */,
+				809A13C71C6CA7A900CB3977 /* Tests */,
+				809A13BA1C6CA7A900CB3977 /* Products */,
+				EF315B1FD67431C30CA121F7 /* Frameworks */,
+				C5380CCA71FA6C7A10708AFF /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		809A13BA1C6CA7A900CB3977 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				809A13B91C6CA7A900CB3977 /* Hyber.framework */,
+				809A13C31C6CA7A900CB3977 /* HyberTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		809A13C71C6CA7A900CB3977 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				809A13C81C6CA7A900CB3977 /* HyberTests.swift */,
+				809A13CA1C6CA7A900CB3977 /* Info.plist */,
+			);
+			name = Tests;
+			path = ../Tests;
+			sourceTree = "<group>";
+		};
+		809A13D31C6CA7F500CB3977 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				80C56A9C1CABB62E00BDFC17 /* Thirdparties */,
+				80AE625A1C7F64BF00FE12D8 /* Core */,
+				80AE62531C7F4B0600FE12D8 /* Inbox */,
+			);
+			name = Source;
+			path = ../Source;
+			sourceTree = SOURCE_ROOT;
+		};
+		809A13D41C6CA88F00CB3977 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				809A13D51C6CA88F00CB3977 /* CoreData Extensions */,
+				809A13D81C6CA88F00CB3977 /* HyberCoreDataHelper.swift */,
+				809A13D91C6CA88F00CB3977 /* HyberDataInboxFetchedDate+Searchable.swift */,
+				80AE62511C7F3EF200FE12D8 /* HyberDataInboxSender+Searchable.swift */,
+				809A13DA1C6CA88F00CB3977 /* HyberDataInboxMessage+Searchable.swift */,
+				809A13DB1C6CA88F00CB3977 /* Objects */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		809A13D51C6CA88F00CB3977 /* CoreData Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				809A13D61C6CA88F00CB3977 /* NSManagedObject+Search.swift */,
+				809A13D71C6CA88F00CB3977 /* NSManagedObjectContext+Save_Clear.swift */,
+			);
+			path = "CoreData Extensions";
+			sourceTree = "<group>";
+		};
+		809A13DB1C6CA88F00CB3977 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				80AE62451C7F3E7900FE12D8 /* HyberDataInboxFetchedDate+CoreDataProperties.swift */,
+				80AE62461C7F3E7900FE12D8 /* HyberDataInboxFetchedDate.swift */,
+				80AE62471C7F3E7900FE12D8 /* HyberDataInboxSender+CoreDataProperties.swift */,
+				80AE62481C7F3E7900FE12D8 /* HyberDataInboxSender.swift */,
+				80AE62491C7F3E7900FE12D8 /* HyberDataInboxMessage+CoreDataProperties.swift */,
+				80AE624A1C7F3E7900FE12D8 /* HyberDataInboxMessage.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		809A13E01C6CA88F00CB3977 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				80ADC5831C9048BC006C285D /* Syncronized.swift */,
+				809A13E21C6CA88F00CB3977 /* NSDate+DayBoundaries.swift */,
+				809A13E31C6CA88F00CB3977 /* NSFileManager+DirectoryURLs.swift */,
+				80C56AA01CABC1E000BDFC17 /* NSURLRequest+cURLPresentation.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		809A13EC1C6CA88F00CB3977 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				809A13ED1C6CA88F00CB3977 /* Hyber.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		809A13F01C6CA88F00CB3977 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				809A13F11C6CA88F00CB3977 /* Hyber+Log.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		809A13F21C6CA88F00CB3977 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				809A13F31C6CA88F00CB3977 /* HyberMessage.swift */,
+				80FFF8501CEC4C41000067FA /* HyberMessageData.swift */,
+				80A984B61C870B2900AF64AD /* HyberMessageType.swift */,
+				809A13F41C6CA88F00CB3977 /* HyberMessagesFetcher.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		809A13F51C6CA88F00CB3977 /* PushNotification */ = {
+			isa = PBXGroup;
+			children = (
+				809A13F61C6CA88F00CB3977 /* HyberPushNotification+CoreData.swift */,
+				809A13F71C6CA88F00CB3977 /* HyberPushNotification+LocalNotification.swift */,
+				809A13F81C6CA88F00CB3977 /* HyberPushNotification.swift */,
+			);
+			path = PushNotification;
+			sourceTree = "<group>";
+		};
+		809A13F91C6CA88F00CB3977 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				80D477251CCA64C200B0FEA3 /* Inbox */,
+				802239981CAA6E49002A7D79 /* Core */,
+			);
+			name = Resources;
+			path = ../Resources;
+			sourceTree = SOURCE_ROOT;
+		};
+		809A13FF1C6CA88F00CB3977 /* REST Provider */ = {
+			isa = PBXGroup;
+			children = (
+				809A14001C6CA88F00CB3977 /* HyberProvider+POST.swift */,
+				809A14011C6CA88F00CB3977 /* HyberProvider.swift */,
+			);
+			path = "REST Provider";
+			sourceTree = "<group>";
+		};
+		809A14031C6CA88F00CB3977 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				809A14041C6CA88F00CB3977 /* Hyber+SettingsOnTopLevel.swift */,
+				809A14051C6CA88F00CB3977 /* HyberSettings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		80AE62531C7F4B0600FE12D8 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				80D476DB1CCA64AE00B0FEA3 /* Data */,
+				80D476DE1CCA64AE00B0FEA3 /* Extensions */,
+				80D476E71CCA64AE00B0FEA3 /* HyberBubbleLayer.swift */,
+				80D476E81CCA64AE00B0FEA3 /* HyberBubbleTableViewCell.swift */,
+				80FFF84A1CEC4B85000067FA /* Styles */,
+				80D476E91CCA64AE00B0FEA3 /* HyberBubbleTextView.swift */,
+				80D476EA1CCA64AE00B0FEA3 /* HyberInboxController.swift */,
+				80FFF85A1CEC629D000067FA /* HyberInboxControllerCell.swift */,
+				80D476EB1CCA64AE00B0FEA3 /* HyberInboxController+Bars.swift */,
+				80D476EC1CCA64AE00B0FEA3 /* HyberInboxController+Configure.swift */,
+				80D476ED1CCA64AE00B0FEA3 /* HyberInboxController+MessageFetching.swift */,
+				80D476EE1CCA64AE00B0FEA3 /* HyberInboxController+PanGestureRecognizer.swift */,
+				80D476EF1CCA64AE00B0FEA3 /* HyberInboxController+SearchAndFilter.swift */,
+				80D476F01CCA64AE00B0FEA3 /* HyberInboxController+TableViewDataSourceAndDelegate.swift */,
+				80D476F11CCA64AE00B0FEA3 /* HyberInboxControllerHeaderCell.swift */,
+				8020E2891CCE45A700633797 /* HyberInboxControllerRefreshCell.swift */,
+				80D476F21CCA64AE00B0FEA3 /* HyberInboxControllerMessageCell.swift */,
+				80D476F31CCA64AE00B0FEA3 /* HyberInboxFilterTableViewController.swift */,
+				80D476F41CCA64AE00B0FEA3 /* HyberInboxViewControllerMessageFetcher.swift */,
+				80FFF85C1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift */,
+				80FFF8541CEC61A7000067FA /* SyncronizableOperationQueue.swift */,
+				80FFF8581CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift */,
+				80FFF8561CEC61CF000067FA /* SerialOperationQueue.swift */,
+				80D476F61CCA64AE00B0FEA3 /* Label Styles */,
+				80D477001CCA64AE00B0FEA3 /* LinesAndPoints.swift */,
+			);
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+		80AE625A1C7F64BF00FE12D8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				809A13D41C6CA88F00CB3977 /* CoreData */,
+				809A13E01C6CA88F00CB3977 /* Extensions */,
+				809A13E41C6CA88F00CB3977 /* Hyber.swift */,
+				802239961CAA5CE9002A7D79 /* HyberResult.swift */,
+				8083BF5E1CA92915004240A9 /* Hyber+Localization.swift */,
+				809A13E51C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift */,
+				80C56A981CABB22300BDFC17 /* Helper */,
+				80D8F1D61CCE105E00D45AE3 /* Error */,
+				809A13EB1C6CA88F00CB3977 /* HyberSubscriber.swift */,
+				809A13EC1C6CA88F00CB3977 /* Headers */,
+				809A13F01C6CA88F00CB3977 /* Log */,
+				809A13F21C6CA88F00CB3977 /* Message */,
+				809A13F51C6CA88F00CB3977 /* PushNotification */,
+				809A13FF1C6CA88F00CB3977 /* REST Provider */,
+				809A14031C6CA88F00CB3977 /* Settings */,
+				80C56A9B1CABB5A900BDFC17 /* Thirdparties */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		80C56A981CABB22300BDFC17 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				809A13E61C6CA88F00CB3977 /* HyberHelper.swift */,
+				8083BF621CA935AF004240A9 /* HyberHelper+Validation.swift */,
+				809A13E71C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift */,
+				809A13E81C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift */,
+				804B4FB21C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift */,
+				804B4FB41C7DACA50006AA8C /* HyberHelper+GCMToken.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		80C56A9B1CABB5A900BDFC17 /* Thirdparties */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Thirdparties;
+			sourceTree = "<group>";
+		};
+		80C56A9C1CABB62E00BDFC17 /* Thirdparties */ = {
+			isa = PBXGroup;
+			children = (
+				80C56A9D1CABB64800BDFC17 /* Core */,
+			);
+			path = Thirdparties;
+			sourceTree = "<group>";
+		};
+		80C56A9D1CABB64800BDFC17 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				80C56A9E1CABB68100BDFC17 /* XCGLogger.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		80D476DB1CCA64AE00B0FEA3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				80D476DC1CCA64AE00B0FEA3 /* HyberInboxCellData.swift */,
+				80D476DD1CCA64AE00B0FEA3 /* HyberInboxCellType.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		80D476DE1CCA64AE00B0FEA3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				80D476DF1CCA64AE00B0FEA3 /* Array+EqualByPointer.swift */,
+				80D476E01CCA64AE00B0FEA3 /* CGSize+max.swift */,
+				80D476E11CCA64AE00B0FEA3 /* String+AttributedString.swift */,
+				80D476E21CCA64AE00B0FEA3 /* UIColor+DarkerLighter.swift */,
+				80D476E31CCA64AE00B0FEA3 /* UIEdgeInsets+Insets.swift */,
+				80D476E41CCA64AE00B0FEA3 /* UIFont+Bold.swift */,
+				80D476E51CCA64AE00B0FEA3 /* UIImage+Images.swift */,
+				80D476E61CCA64AE00B0FEA3 /* UIScrollView+ContentOffsetPosition.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		80D476F61CCA64AE00B0FEA3 /* Label Styles */ = {
+			isa = PBXGroup;
+			children = (
+				80D476F71CCA64AE00B0FEA3 /* Core */,
+				80D476FC1CCA64AE00B0FEA3 /* HyberInboxDateTimeLabelStyle.swift */,
+				80D476FD1CCA64AE00B0FEA3 /* HyberInboxLabelsStyles.swift */,
+				80D476FE1CCA64AE00B0FEA3 /* HyberInboxTextLabelStyle.swift */,
+				80D476FF1CCA64AE00B0FEA3 /* HyberInboxTimeLabelStyle.swift */,
+			);
+			path = "Label Styles";
+			sourceTree = "<group>";
+		};
+		80D476F71CCA64AE00B0FEA3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				80D476F81CCA64AE00B0FEA3 /* HyberDateTimeLabelStyle.swift */,
+				80D476F91CCA64AE00B0FEA3 /* HyberLabelsStyles.swift */,
+				80D476FA1CCA64AE00B0FEA3 /* HyberTextLabelStyle.swift */,
+				80D476FB1CCA64AE00B0FEA3 /* HyberTimeLabelStyle.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		80D477251CCA64C200B0FEA3 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				80D4772A1CCA650200B0FEA3 /* HyperInboxControllerSendersImages.xcassets */,
+				80D477261CCA64EF00B0FEA3 /* HyberInboxControllerHeaderCell.xib */,
+				8020E28B1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib */,
+				80D477271CCA64EF00B0FEA3 /* HyberInboxControllerMessageCell.xib */,
+				80D4773E1CCA65FB00B0FEA3 /* HyberInboxController.strings */,
+			);
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+		80D8F1D61CCE105E00D45AE3 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				809A13EA1C6CA88F00CB3977 /* HyberError.swift */,
+				80D8F1D71CCE109900D45AE3 /* HyberError+AnotherTaskInProgress.swift */,
+				80D8F1E11CCE119100D45AE3 /* HyberError+CoreData.swift */,
+				80D8F1DF1CCE111300D45AE3 /* HyberError+MessageFetcher.swift */,
+				80D8F1DD1CCE10F900D45AE3 /* HyberError+Request.swift */,
+				80D8F1DB1CCE10D200D45AE3 /* HyberError+ResultParsing.swift */,
+				80D8F1D91CCE10BA00D45AE3 /* HyberError+Subscriber.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		80FFF84A1CEC4B85000067FA /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				80FFF84D1CEC4BC4000067FA /* Model */,
+				80FFF84E1CEC4BDA000067FA /* HyberInboxBubbleViewStyle.swift */,
+				80FFF8521CEC4D43000067FA /* HyberInboxControllerStyler.swift */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		80FFF84D1CEC4BC4000067FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				80FFF8481CEC4B5D000067FA /* HyberInboxControllerStyle.swift */,
+				80FFF84B1CEC4B9C000067FA /* HyberBubbleViewStyle.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C5380CCA71FA6C7A10708AFF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DA0E85F11FC3003057B19B88 /* Pods-GlobalMessageService.debug.xcconfig */,
+				5F37A2E51B3298786575D826 /* Pods-GlobalMessageService.release.xcconfig */,
+				C527302DA7BEB6691F8FCB03 /* Pods-Hyber.debug.xcconfig */,
+				34F50E49FFDD345CEDC292A3 /* Pods-Hyber.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EF315B1FD67431C30CA121F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8022399C1CAACF1E002A7D79 /* CoreLocation.framework */,
+				80E213E51C805A7F00AD44F1 /* ChattoAdditions.framework */,
+				80E213E31C805A7C00AD44F1 /* Chatto.framework */,
+				804B4FDE1C7DD9580006AA8C /* UIKit.framework */,
+				804B4FDC1C7DD94F0006AA8C /* CoreData.framework */,
+				804B4FDA1C7DD9490006AA8C /* MapKit.framework */,
+				80C3A6061C75D585007721CA /* Foundation.framework */,
+				00E685DD458B7D6EDC3C17F9 /* Pods_GlobalMessageService.framework */,
+				E3A39468D39E6452DA303DED /* Pods_Hyber.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		809A13B61C6CA7A900CB3977 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				809A141A1C6CA88F00CB3977 /* Hyber.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		809A13B81C6CA7A900CB3977 /* Hyber */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 809A13CD1C6CA7A900CB3977 /* Build configuration list for PBXNativeTarget "Hyber" */;
+			buildPhases = (
+				E2834D3A031018097307CD8F /* 📦 Check Pods Manifest.lock */,
+				809A13B41C6CA7A900CB3977 /* Sources */,
+				809A13B51C6CA7A900CB3977 /* Frameworks */,
+				809A13B61C6CA7A900CB3977 /* Headers */,
+				809A13B71C6CA7A900CB3977 /* Resources */,
+				806C0DD01C7CBA33001395BA /* ✅ swiftlint by @realm */,
+				279C697C78EC021B5CB72EE0 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hyber;
+			productName = GlobalMessageService;
+			productReference = 809A13B91C6CA7A900CB3977 /* Hyber.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		809A13C21C6CA7A900CB3977 /* HyberTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 809A13D01C6CA7A900CB3977 /* Build configuration list for PBXNativeTarget "HyberTests" */;
+			buildPhases = (
+				809A13BF1C6CA7A900CB3977 /* Sources */,
+				809A13C01C6CA7A900CB3977 /* Frameworks */,
+				809A13C11C6CA7A900CB3977 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				809A13C61C6CA7A900CB3977 /* PBXTargetDependency */,
+			);
+			name = HyberTests;
+			productName = GlobalMessageServiceTests;
+			productReference = 809A13C31C6CA7A900CB3977 /* HyberTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		809A13B01C6CA7A900CB3977 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Global Message Services Worldwide";
+				TargetAttributes = {
+					809A13B81C6CA7A900CB3977 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = DREVRNA23J;
+					};
+					809A13C21C6CA7A900CB3977 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 809A13B31C6CA7A900CB3977 /* Build configuration list for PBXProject "Hyber" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				uk,
+				ru,
+			);
+			mainGroup = 809A13AF1C6CA7A900CB3977;
+			productRefGroup = 809A13BA1C6CA7A900CB3977 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				809A13B81C6CA7A900CB3977 /* Hyber */,
+				809A13C21C6CA7A900CB3977 /* HyberTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		809A13B71C6CA7A900CB3977 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8001D1F81C7314D300636645 /* HyberError.strings in Resources */,
+				80D4773C1CCA65FB00B0FEA3 /* HyberInboxController.strings in Resources */,
+				8009602A1CEC84B700180283 /* .travis.yml in Resources */,
+				809A14231C6CA88F00CB3977 /* HyberMessageTypes.strings in Resources */,
+				80D477291CCA64EF00B0FEA3 /* HyberInboxControllerMessageCell.xib in Resources */,
+				80D4772B1CCA650200B0FEA3 /* HyperInboxControllerSendersImages.xcassets in Resources */,
+				8020E28C1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib in Resources */,
+				80D477281CCA64EF00B0FEA3 /* HyberInboxControllerHeaderCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		809A13C11C6CA7A900CB3977 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		279C697C78EC021B5CB72EE0 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyber/Pods-Hyber-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		806C0DD01C7CBA33001395BA /* ✅ swiftlint by @realm */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "✅ swiftlint by @realm";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n#else\n#    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		E2834D3A031018097307CD8F /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		809A13B41C6CA7A900CB3977 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				809A14241C6CA88F00CB3977 /* HyberData.xcdatamodeld in Sources */,
+				80D4770A1CCA64AE00B0FEA3 /* UIImage+Images.swift in Sources */,
+				804B4FB31C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift in Sources */,
+				809A14111C6CA88F00CB3977 /* NSFileManager+DirectoryURLs.swift in Sources */,
+				80D477041CCA64AE00B0FEA3 /* Array+EqualByPointer.swift in Sources */,
+				809A14181C6CA88F00CB3977 /* HyberError.swift in Sources */,
+				80FFF8531CEC4D43000067FA /* HyberInboxControllerStyler.swift in Sources */,
+				80D8F1DC1CCE10D200D45AE3 /* HyberError+ResultParsing.swift in Sources */,
+				809A14221C6CA88F00CB3977 /* HyberPushNotification.swift in Sources */,
+				809A14291C6CA88F00CB3977 /* HyberSettings.swift in Sources */,
+				80FFF8491CEC4B5D000067FA /* HyberInboxControllerStyle.swift in Sources */,
+				80D477231CCA64AE00B0FEA3 /* LinesAndPoints.swift in Sources */,
+				809A14191C6CA88F00CB3977 /* HyberSubscriber.swift in Sources */,
+				80ADC5841C9048BC006C285D /* Syncronized.swift in Sources */,
+				809A14061C6CA88F00CB3977 /* NSManagedObject+Search.swift in Sources */,
+				80D477181CCA64AE00B0FEA3 /* HyberInboxFilterTableViewController.swift in Sources */,
+				809A14071C6CA88F00CB3977 /* NSManagedObjectContext+Save_Clear.swift in Sources */,
+				802239971CAA5CEA002A7D79 /* HyberResult.swift in Sources */,
+				8083BF631CA935B0004240A9 /* HyberHelper+Validation.swift in Sources */,
+				809A14211C6CA88F00CB3977 /* HyberPushNotification+LocalNotification.swift in Sources */,
+				80D4771B1CCA64AE00B0FEA3 /* HyberDateTimeLabelStyle.swift in Sources */,
+				809A14251C6CA88F00CB3977 /* HyberProvider+POST.swift in Sources */,
+				80AE624C1C7F3E7900FE12D8 /* HyberDataInboxFetchedDate.swift in Sources */,
+				80FFF8551CEC61A7000067FA /* SyncronizableOperationQueue.swift in Sources */,
+				809A14161C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift in Sources */,
+				80A984B71C870B2900AF64AD /* HyberMessageType.swift in Sources */,
+				804B4FB51C7DACA50006AA8C /* HyberHelper+GCMToken.swift in Sources */,
+				80D4770C1CCA64AE00B0FEA3 /* HyberBubbleLayer.swift in Sources */,
+				80C56A9F1CABB68100BDFC17 /* XCGLogger.swift in Sources */,
+				80AE62521C7F3EF200FE12D8 /* HyberDataInboxSender+Searchable.swift in Sources */,
+				80D477151CCA64AE00B0FEA3 /* HyberInboxController+TableViewDataSourceAndDelegate.swift in Sources */,
+				80D477111CCA64AE00B0FEA3 /* HyberInboxController+Configure.swift in Sources */,
+				80D4770F1CCA64AE00B0FEA3 /* HyberInboxController.swift in Sources */,
+				80D477201CCA64AE00B0FEA3 /* HyberInboxLabelsStyles.swift in Sources */,
+				80FFF8511CEC4C41000067FA /* HyberMessageData.swift in Sources */,
+				80FFF85D1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift in Sources */,
+				809A141D1C6CA88F00CB3977 /* Hyber+Log.swift in Sources */,
+				80AE62501C7F3E7900FE12D8 /* HyberDataInboxMessage.swift in Sources */,
+				809A14281C6CA88F00CB3977 /* Hyber+SettingsOnTopLevel.swift in Sources */,
+				80D8F1D81CCE109900D45AE3 /* HyberError+AnotherTaskInProgress.swift in Sources */,
+				80D477101CCA64AE00B0FEA3 /* HyberInboxController+Bars.swift in Sources */,
+				80D4771D1CCA64AE00B0FEA3 /* HyberTextLabelStyle.swift in Sources */,
+				8020E28A1CCE45A700633797 /* HyberInboxControllerRefreshCell.swift in Sources */,
+				80AE624D1C7F3E7900FE12D8 /* HyberDataInboxSender+CoreDataProperties.swift in Sources */,
+				80FFF8571CEC61CF000067FA /* SerialOperationQueue.swift in Sources */,
+				80D8F1DA1CCE10BA00D45AE3 /* HyberError+Subscriber.swift in Sources */,
+				80D477131CCA64AE00B0FEA3 /* HyberInboxController+PanGestureRecognizer.swift in Sources */,
+				80D477031CCA64AE00B0FEA3 /* HyberInboxCellType.swift in Sources */,
+				80D8F1DE1CCE10F900D45AE3 /* HyberError+Request.swift in Sources */,
+				809A140A1C6CA88F00CB3977 /* HyberDataInboxMessage+Searchable.swift in Sources */,
+				809A14151C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift in Sources */,
+				80D477071CCA64AE00B0FEA3 /* UIColor+DarkerLighter.swift in Sources */,
+				80D477161CCA64AE00B0FEA3 /* HyberInboxControllerHeaderCell.swift in Sources */,
+				809A14131C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift in Sources */,
+				80D477221CCA64AE00B0FEA3 /* HyberInboxTimeLabelStyle.swift in Sources */,
+				80D4770E1CCA64AE00B0FEA3 /* HyberBubbleTextView.swift in Sources */,
+				80D8F1E01CCE111300D45AE3 /* HyberError+MessageFetcher.swift in Sources */,
+				80D477081CCA64AE00B0FEA3 /* UIEdgeInsets+Insets.swift in Sources */,
+				80AE624B1C7F3E7900FE12D8 /* HyberDataInboxFetchedDate+CoreDataProperties.swift in Sources */,
+				8083BF5F1CA92915004240A9 /* Hyber+Localization.swift in Sources */,
+				80D477091CCA64AE00B0FEA3 /* UIFont+Bold.swift in Sources */,
+				80FFF84F1CEC4BDA000067FA /* HyberInboxBubbleViewStyle.swift in Sources */,
+				80FFF8591CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift in Sources */,
+				80D477171CCA64AE00B0FEA3 /* HyberInboxControllerMessageCell.swift in Sources */,
+				809A14101C6CA88F00CB3977 /* NSDate+DayBoundaries.swift in Sources */,
+				809A14091C6CA88F00CB3977 /* HyberDataInboxFetchedDate+Searchable.swift in Sources */,
+				80D4771C1CCA64AE00B0FEA3 /* HyberLabelsStyles.swift in Sources */,
+				80D4771E1CCA64AE00B0FEA3 /* HyberTimeLabelStyle.swift in Sources */,
+				80AE624F1C7F3E7900FE12D8 /* HyberDataInboxMessage+CoreDataProperties.swift in Sources */,
+				809A14141C6CA88F00CB3977 /* HyberHelper.swift in Sources */,
+				80D477051CCA64AE00B0FEA3 /* CGSize+max.swift in Sources */,
+				80D477121CCA64AE00B0FEA3 /* HyberInboxController+MessageFetching.swift in Sources */,
+				80D4770B1CCA64AE00B0FEA3 /* UIScrollView+ContentOffsetPosition.swift in Sources */,
+				809A14081C6CA88F00CB3977 /* HyberCoreDataHelper.swift in Sources */,
+				80D4771F1CCA64AE00B0FEA3 /* HyberInboxDateTimeLabelStyle.swift in Sources */,
+				80AE624E1C7F3E7900FE12D8 /* HyberDataInboxSender.swift in Sources */,
+				809A14121C6CA88F00CB3977 /* Hyber.swift in Sources */,
+				80D477061CCA64AE00B0FEA3 /* String+AttributedString.swift in Sources */,
+				809A14261C6CA88F00CB3977 /* HyberProvider.swift in Sources */,
+				80D8F1E21CCE119100D45AE3 /* HyberError+CoreData.swift in Sources */,
+				809A14201C6CA88F00CB3977 /* HyberPushNotification+CoreData.swift in Sources */,
+				80D4770D1CCA64AE00B0FEA3 /* HyberBubbleTableViewCell.swift in Sources */,
+				80FFF85B1CEC629D000067FA /* HyberInboxControllerCell.swift in Sources */,
+				80D477211CCA64AE00B0FEA3 /* HyberInboxTextLabelStyle.swift in Sources */,
+				80C56AA11CABC1E000BDFC17 /* NSURLRequest+cURLPresentation.swift in Sources */,
+				809A141E1C6CA88F00CB3977 /* HyberMessage.swift in Sources */,
+				80D477191CCA64AE00B0FEA3 /* HyberInboxViewControllerMessageFetcher.swift in Sources */,
+				80D477141CCA64AE00B0FEA3 /* HyberInboxController+SearchAndFilter.swift in Sources */,
+				809A141F1C6CA88F00CB3977 /* HyberMessagesFetcher.swift in Sources */,
+				80FFF84C1CEC4B9C000067FA /* HyberBubbleViewStyle.swift in Sources */,
+				80D477021CCA64AE00B0FEA3 /* HyberInboxCellData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		809A13BF1C6CA7A900CB3977 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				809A13C91C6CA7A900CB3977 /* HyberTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		809A13C61C6CA7A900CB3977 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 809A13B81C6CA7A900CB3977 /* Hyber */;
+			targetProxy = 809A13C51C6CA7A900CB3977 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8001D1FA1C7314D300636645 /* HyberError.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8001D1F91C7314D300636645 /* en */,
+				802050381CA401D600B09F69 /* uk */,
+				802050391CA4052600B09F69 /* ru */,
+			);
+			name = HyberError.strings;
+			sourceTree = "<group>";
+		};
+		809A13FA1C6CA88F00CB3977 /* HyberMessageTypes.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				809A13FB1C6CA88F00CB3977 /* en */,
+				809A13FE1C6CA88F00CB3977 /* uk */,
+				802050361CA4016800B09F69 /* ru */,
+			);
+			name = HyberMessageTypes.strings;
+			sourceTree = "<group>";
+		};
+		80D4773E1CCA65FB00B0FEA3 /* HyberInboxController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80D4773D1CCA65FB00B0FEA3 /* en */,
+				80D4773F1CCA65FD00B0FEA3 /* uk */,
+				80D477401CCA65FE00B0FEA3 /* ru */,
+			);
+			name = HyberInboxController.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		809A13CB1C6CA7A900CB3977 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		809A13CC1C6CA7A900CB3977 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		809A13CE1C6CA7A900CB3977 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C527302DA7BEB6691F8FCB03 /* Pods-Hyber.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Build/Products/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = Hyber/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.Hyber";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		809A13CF1C6CA7A900CB3977 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34F50E49FFDD345CEDC292A3 /* Pods-Hyber.release.xcconfig */;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Build/Products/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = Hyber/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.Hyber";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+			};
+			name = Release;
+		};
+		809A13D11C6CA7A900CB3977 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ../Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.HyberTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		809A13D21C6CA7A900CB3977 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ../Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.HyberTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		809A13B31C6CA7A900CB3977 /* Build configuration list for PBXProject "Hyber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				809A13CB1C6CA7A900CB3977 /* Debug */,
+				809A13CC1C6CA7A900CB3977 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		809A13CD1C6CA7A900CB3977 /* Build configuration list for PBXNativeTarget "Hyber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				809A13CE1C6CA7A900CB3977 /* Debug */,
+				809A13CF1C6CA7A900CB3977 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		809A13D01C6CA7A900CB3977 /* Build configuration list for PBXNativeTarget "HyberTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				809A13D11C6CA7A900CB3977 /* Debug */,
+				809A13D21C6CA7A900CB3977 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		809A13FC1C6CA88F00CB3977 /* HyberData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				809A13FD1C6CA88F00CB3977 /* HyberData.xcdatamodel */,
+			);
+			currentVersion = 809A13FD1C6CA88F00CB3977 /* HyberData.xcdatamodel */;
+			path = HyberData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 809A13B01C6CA7A900CB3977 /* Project object */;
+}

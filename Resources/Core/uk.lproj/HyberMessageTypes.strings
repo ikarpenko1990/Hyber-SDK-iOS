@@ -1,0 +1,11 @@
+/* 
+  GMSLocalizable.strings
+  Hyber
+
+  Created by Vitalii Budnik on 2/9/16.
+
+*/
+
+"PUSH" = "Пуш-повідомлення";
+"SMS" = "СМС";
+"VIBER" = "Вайбер";

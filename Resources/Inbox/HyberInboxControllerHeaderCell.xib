@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="81" id="wT1-1V-bwH" customClass="HyberInboxControllerHeaderCell" customModule="Hyber" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wT1-1V-bwH" id="aKs-Ia-ntA">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="1000" text="Text message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVR-DN-PTa">
+                        <rect key="frame" x="107" y="1" width="106" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="1000" text="Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNP-E0-hHW">
+                        <rect key="frame" x="129" y="23" width="62" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="1000" text="Sender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXF-AV-vmK">
+                        <rect key="frame" x="8" y="44" width="55" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aNP-E0-hHW" firstAttribute="centerX" secondItem="aKs-Ia-ntA" secondAttribute="centerX" id="2ke-ki-Icy"/>
+                    <constraint firstAttribute="bottom" secondItem="aNP-E0-hHW" secondAttribute="bottom" constant="1" id="4QG-PK-QCF"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="aNP-E0-hHW" secondAttribute="trailing" id="4Y4-7h-QLo"/>
+                    <constraint firstItem="EXF-AV-vmK" firstAttribute="leading" secondItem="aKs-Ia-ntA" secondAttribute="leadingMargin" id="6ac-ew-ztg"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="iVR-DN-PTa" secondAttribute="trailing" id="Jrq-zW-qOQ"/>
+                    <constraint firstItem="EXF-AV-vmK" firstAttribute="top" secondItem="aNP-E0-hHW" secondAttribute="bottom" id="K8C-je-6zm"/>
+                    <constraint firstItem="aNP-E0-hHW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aKs-Ia-ntA" secondAttribute="leadingMargin" id="KYb-uv-Iz8"/>
+                    <constraint firstItem="iVR-DN-PTa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aKs-Ia-ntA" secondAttribute="leadingMargin" id="OFs-05-f6Y"/>
+                    <constraint firstItem="EXF-AV-vmK" firstAttribute="centerX" secondItem="aKs-Ia-ntA" secondAttribute="centerX" id="VsA-3J-0i7"/>
+                    <constraint firstAttribute="bottom" secondItem="EXF-AV-vmK" secondAttribute="bottom" constant="1" id="Y39-T2-oko"/>
+                    <constraint firstItem="iVR-DN-PTa" firstAttribute="top" secondItem="aKs-Ia-ntA" secondAttribute="top" constant="1" id="fWs-Sn-5uz"/>
+                    <constraint firstItem="aNP-E0-hHW" firstAttribute="top" secondItem="aKs-Ia-ntA" secondAttribute="top" id="lPe-KQ-9Ed"/>
+                    <constraint firstItem="iVR-DN-PTa" firstAttribute="centerX" secondItem="aKs-Ia-ntA" secondAttribute="centerX" id="oYq-Oc-r6u"/>
+                    <constraint firstItem="aNP-E0-hHW" firstAttribute="top" secondItem="iVR-DN-PTa" secondAttribute="bottom" constant="1" id="xu8-R4-uBw"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="EXF-AV-vmK" secondAttribute="trailing" id="yzT-x1-5yi"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="VsA-3J-0i7"/>
+                        <exclude reference="4QG-PK-QCF"/>
+                        <exclude reference="lPe-KQ-9Ed"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="iVR-DN-PTa" firstAttribute="top" secondItem="wT1-1V-bwH" secondAttribute="top" constant="1" id="k34-B3-x35"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="k34-B3-x35"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="messageTypeLabel" destination="iVR-DN-PTa" id="En7-1X-HWi"/>
+                <outlet property="senderTitleLabel" destination="EXF-AV-vmK" id="PaL-9Q-7tb"/>
+                <outlet property="senderTitleLabelLeagingConstraint" destination="6ac-ew-ztg" id="ezi-VV-Afm"/>
+                <outlet property="timeLabel" destination="aNP-E0-hHW" id="af4-ab-5vB"/>
+            </connections>
+            <point key="canvasLocation" x="251" y="386.5"/>
+        </tableViewCell>
+    </objects>
+</document>

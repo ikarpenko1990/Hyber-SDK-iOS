@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+    <entity name="GMSInboxFetchedDate" representedClassName=".GMSInboxFetchedDate" syncable="YES">
+        <attribute name="fetchedDate" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="lastMessageDate" attributeType="Date" defaultDateTimeInterval="-978318000" syncable="YES"/>
+        <attribute name="to" attributeType="Integer 64" indexed="YES" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GMSInboxMessage" inverseName="fetchedDate" inverseEntity="GMSInboxMessage" syncable="YES"/>
+    </entity>
+    <entity name="GMSInboxMessage" representedClassName=".GMSInboxMessage" syncable="YES">
+        <attribute name="alphaName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveredDate" attributeType="Date" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageID" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <relationship name="fetchedDate" maxCount="1" deletionRule="Nullify" destinationEntity="GMSInboxFetchedDate" inverseName="messages" inverseEntity="GMSInboxFetchedDate" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GMSInboxFetchedDate" positionX="-54" positionY="36" width="128" height="105"/>
+        <element name="GMSInboxMessage" positionX="-63" positionY="-18" width="128" height="150"/>
+    </elements>
+</model>
