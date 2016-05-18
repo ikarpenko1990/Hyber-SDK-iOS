@@ -13,7 +13,8 @@ import UIKit
 private extension HyberInboxController {
   
   private func deleteAllMessages(action: UIAlertAction) {
-    fetcher.delete(Array(0..<fetcher.cellData.count)) { result in
+    let delete: Array<Int> = .init(0..<fetcher.cellData.count)
+    fetcher.delete(delete) { result in
       
       self.updateTableView(result, fetchingMessages: false)
       

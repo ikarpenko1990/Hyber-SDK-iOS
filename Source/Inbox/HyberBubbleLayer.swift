@@ -59,9 +59,9 @@ internal class HyberBubbleLayer: CAShapeLayer {
     var controlPoint: CGPoint
     var previousPoint: CGPoint
     
-    point = CGPoint(x: cornerRadius * 1.5, y: 0)
+    point = CGPoint(x: cornerRadius * 1.5, y: 0.0)
     previousPoint = point
-    var path = [LinesAndPonts]()
+    var path: [LinesAndPonts] = []
     
     path.append(.MoveToPoint(point))
     
@@ -106,7 +106,7 @@ internal class HyberBubbleLayer: CAShapeLayer {
     path.append(.LineToPoint(point))
     previousPoint = point
     
-    point = CGPoint(x: cornerRadius * 1.5, y: 0)
+    point = CGPoint(x: cornerRadius * 1.5, y: 0.0)
     controlPoint = CGPoint(x: previousPoint.x, y: point.y)
     path.append(.QuadCurveToPoint(point, controlPoint: controlPoint))
     

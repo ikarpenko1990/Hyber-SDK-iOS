@@ -56,8 +56,10 @@ private extension HyberHelper {
       newUserInfo["data"] = nil
     }
     
-    let notificationsAllowed = (UIApplication.sharedApplication().currentUserNotificationSettings()?.types
-        ?? UIUserNotificationType.None) != UIUserNotificationType.None
+    let notificationsAllowed: Bool =
+      (UIApplication.sharedApplication().currentUserNotificationSettings()?.types
+        ?? UIUserNotificationType.None)
+        != UIUserNotificationType.None
     
     let pushNotification = HyberPushNotification(
       withUserInfo: newUserInfo,
@@ -87,9 +89,7 @@ private extension HyberHelper {
       HyberProvider.sharedInstance.POST(
         .OTTPlatform,
         "deliveryReport",
-        parameters: requestParameters) { result in
-          
-      }
+        parameters: requestParameters)
       
       if let _ = pushNotification.save() {
         UIApplication.sharedApplication().presentLocalNotificationNow(pushNotification.localNotification())

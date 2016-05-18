@@ -45,6 +45,7 @@ public class HyberInboxController: UITableViewController {
    */
   private var _todaysMesagesUpdateInterval: NSTimeInterval = 60
   
+  //swiftlint:disable cyclomatic_complexity
   internal func updateTableView( //swiftlint:disable:this function_body_length
     data: HyberInboxViewControllerMessageFetcherResult,
     fetchingMessages: Bool,
@@ -53,11 +54,12 @@ public class HyberInboxController: UITableViewController {
     animated: Bool = false,
     completionHandler: (() -> Void)? = .None) //swiftlint:disable:this opening_brace
   {
-    let startUpdates = ((data.delete.isEmpty ? 0 : 1)
-      + (data.add.isEmpty ? 0 : 1)
-      + (data.reload.isEmpty ? 0 : 1)
-      + (fetchingMessages == self.fetchingMessages ? 0 : 1)) > 0
-    
+    let startUpdates: Bool =
+      !data.delete.isEmpty
+        || !data.add.isEmpty
+        || !data.reload.isEmpty
+        || fetchingMessages != self.fetchingMessages
+
     var delete: [NSIndexPath]
     var add: [NSIndexPath]
     let reload: [NSIndexPath]
@@ -77,36 +79,63 @@ public class HyberInboxController: UITableViewController {
       reload = data.reload
     }
     if fetchingMessages != self.fetchingMessages && fetchingMessages {
-      add += [NSIndexPath(forRow: 0, inSection: 0)]
+      add.append(NSIndexPath(forRow: 0, inSection: 0))
     }
     
 //    CATransaction.flush()
 //    CATransaction.lock()
 //    UIView.setAnimationsEnabled(false)
     
-    let beforeContentSize = tableView.contentSize
+    let beforeContentSize: CGSize = tableView.contentSize
 //    let beforeContentOffset = tableView.contentOffset
+    
+    let animationDuration: NSTimeInterval
+
+    let deleteRowAnimation: UITableViewRowAnimation
+    let reloadRowAnimation: UITableViewRowAnimation
+    let addRowAnimation: UITableViewRowAnimation
+
+    if animated && !scrollToLastPosition {
+      animationDuration = 0.3
+
+      deleteRowAnimation = .Top
+      reloadRowAnimation = .Automatic
+      addRowAnimation = .Bottom
+      
+    } else {
+      animationDuration = 0.0
+      
+      deleteRowAnimation = .None
+      reloadRowAnimation = .None
+      addRowAnimation = .None
+    }
+    
+    
+    if animationDuration > 0.0 {
+      
+    }
+    
     UIView.setAnimationsEnabled(animated)
     
     UIView.animateWithDuration(
 //      self.tableView,
 //      duration:
-      (animated && !scrollToLastPosition) ? 0.3  : 0.0,
+      animationDuration,
 //      options: [],
       animations: {
-        let animated = animated && !scrollToLastPosition
+//         let animated: Bool = animated && !scrollToLastPosition
 //        if !delete.isEmpty || !reload.isEmpty || !add.isEmpty {
           self.tableView.beginUpdates()
           //    }
           
           if !reload.isEmpty {
-            self.tableView.reloadRowsAtIndexPaths(reload, withRowAnimation: animated ? .Automatic : .None)
+            self.tableView.reloadRowsAtIndexPaths(reload, withRowAnimation: reloadRowAnimation)
           }
           if !delete.isEmpty {
-            self.tableView.deleteRowsAtIndexPaths(delete, withRowAnimation: animated ? .Top : .None)
+            self.tableView.deleteRowsAtIndexPaths(delete, withRowAnimation: deleteRowAnimation)
           }
           if !add.isEmpty {
-            self.tableView.insertRowsAtIndexPaths(add, withRowAnimation: animated ? .Bottom : .None)
+            self.tableView.insertRowsAtIndexPaths(add, withRowAnimation: addRowAnimation)
           }
           
           if fetchingMessages != self.fetchingMessages && fetchingMessages {
@@ -123,7 +152,7 @@ public class HyberInboxController: UITableViewController {
         UIView.animateWithDuration(
 //          self.tableView,
 //          duration:
-          (animated && !scrollToLastPosition) ? 0.3  : 0.0,
+          animationDuration,
 //          options: [],
           animations: {
             
@@ -133,8 +162,8 @@ public class HyberInboxController: UITableViewController {
               self.tableView.beginUpdates()
               self.fetchingMessages = fetchingMessages
               self.tableView.deleteRowsAtIndexPaths(
-                [NSIndexPath(forRow: 0, inSection: 0)],
-                withRowAnimation: animated ? .Top : .None)
+                .init(count: 1, repeatedValue: NSIndexPath(forRow: 0, inSection: 0)),
+                withRowAnimation: deleteRowAnimation)
               self.tableView.endUpdates()
             }
             
@@ -153,13 +182,13 @@ public class HyberInboxController: UITableViewController {
             UIView.animateWithDuration(
 //              self.tableView,
 //              duration: 
-              (animated && !scrollToLastPosition) ? 0.3  : 0.0,
+              animationDuration,
 //              options: [],
               animations: {
                 if scrollToLastPosition && !scrollToBottom {
-                  let afterContentOffset = self.tableView.contentOffset
-                  let afterContentSize = self.tableView.contentSize
-                  let newContentOffset = CGPoint(
+                  let afterContentOffset: CGPoint = self.tableView.contentOffset
+                  let afterContentSize: CGSize = self.tableView.contentSize
+                  let newContentOffset: CGPoint = CGPoint(
                     x: afterContentOffset.x,
                     y: max(afterContentOffset.y, -64.0) + afterContentSize.height - beforeContentSize.height)
                   self.tableView.setContentOffset(newContentOffset, animated: false)
@@ -280,21 +309,6 @@ public class HyberInboxController: UITableViewController {
     }
   }
   
-//  func setFetchingMessages(newValue: Bool, animated: Bool) {
-//    
-//  }
-//  func setFetchingPreviousMessages(newValue: Bool, completionHandler: () -> Void) {
-////    set {
-//
-//    
-//  }
-  //  }
-//  var isRefreshing: Bool = false {
-//    didSet {
-//      
-//    }
-//  }
-  
 }
 
 // MARK: - Lifecycle
@@ -329,9 +343,6 @@ extension HyberInboxController {
 // MARK: - Scrolling
 public extension HyberInboxController {
   
-  
-  
-  
   public override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     guard !decelerate else { return }
     scrollViewDidEndScroll(scrollView)
@@ -359,8 +370,6 @@ public extension HyberInboxController {
       loadPreviousMessages()
     }
     
-//    customRefreshControl?.containingScrollViewDidScroll(scrollView)
-    
   }
   
 }
@@ -384,6 +393,5 @@ extension HyberInboxController: InboxStyleDelegate {
     }
     
   }
-  
   
 }

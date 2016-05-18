@@ -148,7 +148,7 @@ internal extension HyberProvider {
     -> NSURLSessionTask? // swiftlint:disable:this opening_brace
   {
     
-    guard let request = self.request(url, parameters: parameters).value(completion) else {
+    guard let request: NSURLRequest = self.request(url, parameters: parameters).value(completion) else {
       return .None
     }
     
@@ -156,15 +156,17 @@ internal extension HyberProvider {
     
     let dataTask = session.dataTaskWithRequest(request) { [weak self, request] (data, response, error) in
       
-      var output = self?.dataTaskWithRequestResultDebugDescription(request, data, response) ?? []
+      guard let sSelf = self else { completion?(.Failure(HyberError.UnknownError)); return }
       
-      let serializedResult = self?.JSONdataTaskResult(data, response, error, checkStatus: checkStatus)
+      var output = sSelf.dataTaskWithRequestResultDebugDescription(request, data, response) ?? []
+      
+      let serializedResult = sSelf.JSONdataTaskResult(data, response, error, checkStatus: checkStatus)
       guard let
-        json = serializedResult?.value(completion)
+        json = serializedResult.value(completion)
         else {
           output.append("")
           output.append(
-            (serializedResult?.error ?? HyberError.UnknownError).localizedDescription)
+            (serializedResult.error ?? HyberError.UnknownError).localizedDescription)
           
           hyberLog.error(output.joinWithSeparator("\n"))
           return

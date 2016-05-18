@@ -78,8 +78,8 @@ To start using Hyber framework you should provide correct subscriber e-mail & ph
 To add new subscriber you should call
 ```swift
 Hyber.addSubscriber(
-  email: String,
-  phone: Int64?,
+  phone: UInt64,
+  email: String?,
   completionHandler: ((HyberResult<UInt>) -> Void)? = .None)
 ```
 In completion handler result you will get Hyber subscriber ID if success
@@ -88,8 +88,8 @@ In completion handler result you will get Hyber subscriber ID if success
 To edit subscriber information you should call
 ```swift
 Hyber.updateSubscriberInfo(
-  email: String,
-  phone: Int64?,
+  phone: UInt64,
+  email: String?,
   completionHandler: ((HyberResult<Void>) -> Void)? = .None)
 ```
 In completion handler result you will get success `Bool` flag

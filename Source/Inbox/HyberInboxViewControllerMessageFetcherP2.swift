@@ -93,32 +93,32 @@ extension HyberInboxViewControllerMessageFetcher {
     -> HyberInboxViewControllerMessageFetcherResult //swiftlint:disable:this opening_brace
   {
     
-    let oldSet = Set(before)
-    let newSet = Set(after)
+    let oldSet = Set<HyberInboxCellData>(before)
+    let newSet = Set<HyberInboxCellData>(after)
     
-    let allDeletedCellsData = oldSet.subtract(after)
+    let allDeletedCellsData: Set<HyberInboxCellData> = oldSet.subtract(after)
     let deletedCellsData = allDeletedCellsData.filter { (deletedCellData) -> Bool in
-      newSet.indexOf { $0 ~= deletedCellData }  == .None
+      newSet.indexOf { $0 ~= deletedCellData } == .None
     }
     
-    let allAdedCellsData = newSet.subtract(oldSet)
-    let addedCellsData = allAdedCellsData.filter { (addedCellData) -> Bool in
+    let allAdedCellsData: Set<HyberInboxCellData> = newSet.subtract(oldSet)
+    let addedCellsData: [HyberInboxCellData] = allAdedCellsData.filter { (addedCellData) -> Bool in
       oldSet.indexOf { $0 ~= addedCellData } == .None
     }
     
-    let reloadedCellsData = allDeletedCellsData.filter { (deletedCellData) -> Bool in
-      allAdedCellsData.indexOf { $0 ~= deletedCellData }  != .None
+    let reloadedCellsData: [HyberInboxCellData] = allDeletedCellsData.filter { (deletedCellData) -> Bool in
+      allAdedCellsData.indexOf { $0 ~= deletedCellData } != .None
     }
     
-    let deletedIndexPaths = deletedCellsData.map { deletedCellData in
-      return NSIndexPath(forRow: before.indexOf(deletedCellData)!, inSection: 0)
+    let deletedIndexPaths: [NSIndexPath] = deletedCellsData.map {
+      return NSIndexPath(forRow: before.indexOf($0)!, inSection: 0)
       }.sort { $0.row < $1.row }
     
-    let addedIndexPaths = addedCellsData.map { addedCellData in
-      return NSIndexPath(forRow: after.indexOf(addedCellData)!, inSection: 0)
+    let addedIndexPaths: [NSIndexPath] = addedCellsData.map {
+      return NSIndexPath(forRow: after.indexOf($0)!, inSection: 0)
       }.sort { $0.row > $1.row }
     
-    let reloadedIndexPaths = reloadedCellsData.map { reloadCellsData in
+    let reloadedIndexPaths: [NSIndexPath] = reloadedCellsData.map { reloadCellsData -> NSIndexPath in
       return NSIndexPath(forRow: before.indexOf(reloadCellsData)!, inSection: 0)
     }
     

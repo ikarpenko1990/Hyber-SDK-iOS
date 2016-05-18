@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8001D1F81C7314D300636645 /* HyberError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8001D1FA1C7314D300636645 /* HyberError.strings */; };
 		8009602A1CEC84B700180283 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 800960291CEC84B700180283 /* .travis.yml */; };
+		801936471CEC9929008A5A3F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 801936461CEC9929008A5A3F /* .swiftlint.yml */; };
+		801936491CEC993D008A5A3F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 801936481CEC993D008A5A3F /* .gitignore */; };
+		801936581CECAFA1008A5A3F /* Hyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 809A13B91C6CA7A900CB3977 /* Hyber.framework */; };
 		8020E28A1CCE45A700633797 /* HyberInboxControllerRefreshCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020E2891CCE45A700633797 /* HyberInboxControllerRefreshCell.swift */; };
 		8020E28C1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8020E28B1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib */; };
 		802239971CAA5CEA002A7D79 /* HyberResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802239961CAA5CE9002A7D79 /* HyberResult.swift */; };
@@ -20,8 +23,6 @@
 		804B4FDF1C7DD9580006AA8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 804B4FDE1C7DD9580006AA8C /* UIKit.framework */; };
 		8083BF5F1CA92915004240A9 /* Hyber+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083BF5E1CA92915004240A9 /* Hyber+Localization.swift */; };
 		8083BF631CA935B0004240A9 /* HyberHelper+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083BF621CA935AF004240A9 /* HyberHelper+Validation.swift */; };
-		809A13C41C6CA7A900CB3977 /* Hyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 809A13B91C6CA7A900CB3977 /* Hyber.framework */; };
-		809A13C91C6CA7A900CB3977 /* HyberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13C81C6CA7A900CB3977 /* HyberTests.swift */; };
 		809A14061C6CA88F00CB3977 /* NSManagedObject+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13D61C6CA88F00CB3977 /* NSManagedObject+Search.swift */; };
 		809A14071C6CA88F00CB3977 /* NSManagedObjectContext+Save_Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13D71C6CA88F00CB3977 /* NSManagedObjectContext+Save_Clear.swift */; };
 		809A14081C6CA88F00CB3977 /* HyberCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13D81C6CA88F00CB3977 /* HyberCoreDataHelper.swift */; };
@@ -103,6 +104,7 @@
 		80D8F1DE1CCE10F900D45AE3 /* HyberError+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1DD1CCE10F900D45AE3 /* HyberError+Request.swift */; };
 		80D8F1E01CCE111300D45AE3 /* HyberError+MessageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1DF1CCE111300D45AE3 /* HyberError+MessageFetcher.swift */; };
 		80D8F1E21CCE119100D45AE3 /* HyberError+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D8F1E11CCE119100D45AE3 /* HyberError+CoreData.swift */; };
+		80E6FBD81CECB609007F5E5A /* HyberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13C81C6CA7A900CB3977 /* HyberTests.swift */; };
 		80FFF8491CEC4B5D000067FA /* HyberInboxControllerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8481CEC4B5D000067FA /* HyberInboxControllerStyle.swift */; };
 		80FFF84C1CEC4B9C000067FA /* HyberBubbleViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF84B1CEC4B9C000067FA /* HyberBubbleViewStyle.swift */; };
 		80FFF84F1CEC4BDA000067FA /* HyberInboxBubbleViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF84E1CEC4BDA000067FA /* HyberInboxBubbleViewStyle.swift */; };
@@ -113,25 +115,29 @@
 		80FFF8591CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8581CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift */; };
 		80FFF85B1CEC629D000067FA /* HyberInboxControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF85A1CEC629D000067FA /* HyberInboxControllerCell.swift */; };
 		80FFF85D1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF85C1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift */; };
-		D5561D17D3639907063A6A43 /* Pods_Hyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A39468D39E6452DA303DED /* Pods_Hyber.framework */; };
+		9241B4B693AAEEEA8B771BCA /* Pods_HyberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95FD5D4E9CD1D450DCBD0CA3 /* Pods_HyberTests.framework */; };
+		A0903CD9178A55D84F85A7C0 /* Pods_pods_Hyber_Hyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5825E903C63EBC7C8E3DE56 /* Pods_pods_Hyber_Hyber.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		809A13C51C6CA7A900CB3977 /* PBXContainerItemProxy */ = {
+		801936591CECAFA1008A5A3F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 809A13B01C6CA7A900CB3977 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 809A13B81C6CA7A900CB3977;
-			remoteInfo = GlobalMessageService;
+			remoteInfo = Hyber;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E685DD458B7D6EDC3C17F9 /* Pods_GlobalMessageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobalMessageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34F50E49FFDD345CEDC292A3 /* Pods-Hyber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber/Pods-Hyber.release.xcconfig"; sourceTree = "<group>"; };
-		5F37A2E51B3298786575D826 /* Pods-GlobalMessageService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalMessageService.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalMessageService/Pods-GlobalMessageService.release.xcconfig"; sourceTree = "<group>"; };
+		07ECE35025F3B5BD1DB0C4CA /* Pods-pods_Hyber-Hyber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pods_Hyber-Hyber.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pods_Hyber-Hyber/Pods-pods_Hyber-Hyber.debug.xcconfig"; sourceTree = "<group>"; };
+		0C8490ED2A283CB4D8148DE3 /* Pods-HyberTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HyberTests/Pods-HyberTests.release.xcconfig"; sourceTree = "<group>"; };
 		8001D1F91C7314D300636645 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HyberError.strings; sourceTree = "<group>"; };
 		800960291CEC84B700180283 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
+		801936461CEC9929008A5A3F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		801936481CEC993D008A5A3F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
+		801936531CECAFA0008A5A3F /* HyberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		801936601CECB363008A5A3F /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = "Build/Products/Debug-iphonesimulator/XCGLogger/XCGLogger.framework"; sourceTree = "<group>"; };
 		8020502E1CA3D95B00B09F69 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		8020502F1CA3D95B00B09F69 /* Hyber.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Hyber.podspec; path = ../Hyber.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		802050301CA3D95B00B09F69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -151,7 +157,6 @@
 		8083BF5E1CA92915004240A9 /* Hyber+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Hyber+Localization.swift"; sourceTree = "<group>"; };
 		8083BF621CA935AF004240A9 /* HyberHelper+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+Validation.swift"; sourceTree = "<group>"; };
 		809A13B91C6CA7A900CB3977 /* Hyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		809A13C31C6CA7A900CB3977 /* HyberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		809A13C81C6CA7A900CB3977 /* HyberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyberTests.swift; sourceTree = "<group>"; };
 		809A13CA1C6CA7A900CB3977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		809A13D61C6CA88F00CB3977 /* NSManagedObject+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Search.swift"; sourceTree = "<group>"; };
@@ -240,8 +245,6 @@
 		80D8F1DD1CCE10F900D45AE3 /* HyberError+Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+Request.swift"; sourceTree = "<group>"; };
 		80D8F1DF1CCE111300D45AE3 /* HyberError+MessageFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+MessageFetcher.swift"; sourceTree = "<group>"; };
 		80D8F1E11CCE119100D45AE3 /* HyberError+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberError+CoreData.swift"; sourceTree = "<group>"; };
-		80E213E31C805A7C00AD44F1 /* Chatto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chatto.framework; path = "Pods/../build/Debug-iphoneos/Chatto.framework"; sourceTree = "<group>"; };
-		80E213E51C805A7F00AD44F1 /* ChattoAdditions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChattoAdditions.framework; path = "Pods/../build/Debug-iphoneos/ChattoAdditions.framework"; sourceTree = "<group>"; };
 		80FFF8481CEC4B5D000067FA /* HyberInboxControllerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerStyle.swift; sourceTree = "<group>"; };
 		80FFF84B1CEC4B9C000067FA /* HyberBubbleViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberBubbleViewStyle.swift; sourceTree = "<group>"; };
 		80FFF84E1CEC4BDA000067FA /* HyberInboxBubbleViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxBubbleViewStyle.swift; sourceTree = "<group>"; };
@@ -252,12 +255,22 @@
 		80FFF8581CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxViewControllerMessageFetcherResult.swift; sourceTree = "<group>"; };
 		80FFF85A1CEC629D000067FA /* HyberInboxControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerCell.swift; sourceTree = "<group>"; };
 		80FFF85C1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxViewControllerMessageFetcherP2.swift; sourceTree = "<group>"; };
-		C527302DA7BEB6691F8FCB03 /* Pods-Hyber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber/Pods-Hyber.debug.xcconfig"; sourceTree = "<group>"; };
-		DA0E85F11FC3003057B19B88 /* Pods-GlobalMessageService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalMessageService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalMessageService/Pods-GlobalMessageService.debug.xcconfig"; sourceTree = "<group>"; };
-		E3A39468D39E6452DA303DED /* Pods_Hyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95FD5D4E9CD1D450DCBD0CA3 /* Pods_HyberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5825E903C63EBC7C8E3DE56 /* Pods_pods_Hyber_Hyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pods_Hyber_Hyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB6C08F498F62CD99653EF0 /* Pods-HyberTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HyberTests/Pods-HyberTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C69CED7C49ACFC05545BC920 /* Pods-pods_Hyber-Hyber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pods_Hyber-Hyber.release.xcconfig"; path = "Pods/Target Support Files/Pods-pods_Hyber-Hyber/Pods-pods_Hyber-Hyber.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		801936501CECAFA0008A5A3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				801936581CECAFA1008A5A3F /* Hyber.framework in Frameworks */,
+				9241B4B693AAEEEA8B771BCA /* Pods_HyberTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		809A13B51C6CA7A900CB3977 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,15 +279,7 @@
 				804B4FDF1C7DD9580006AA8C /* UIKit.framework in Frameworks */,
 				804B4FDD1C7DD94F0006AA8C /* CoreData.framework in Frameworks */,
 				804B4FD91C7DD5C30006AA8C /* Foundation.framework in Frameworks */,
-				D5561D17D3639907063A6A43 /* Pods_Hyber.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		809A13C01C6CA7A900CB3977 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				809A13C41C6CA7A900CB3977 /* Hyber.framework in Frameworks */,
+				A0903CD9178A55D84F85A7C0 /* Pods_pods_Hyber_Hyber.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +290,8 @@
 			isa = PBXGroup;
 			children = (
 				8020502E1CA3D95B00B09F69 /* README.md */,
+				801936481CEC993D008A5A3F /* .gitignore */,
+				801936461CEC9929008A5A3F /* .swiftlint.yml */,
 				800960291CEC84B700180283 /* .travis.yml */,
 				8020502F1CA3D95B00B09F69 /* Hyber.podspec */,
 				802050301CA3D95B00B09F69 /* LICENSE */,
@@ -313,7 +320,7 @@
 				809A13C71C6CA7A900CB3977 /* Tests */,
 				809A13BA1C6CA7A900CB3977 /* Products */,
 				EF315B1FD67431C30CA121F7 /* Frameworks */,
-				C5380CCA71FA6C7A10708AFF /* Pods */,
+				B58B0091F81B00BAB416227B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -321,7 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				809A13B91C6CA7A900CB3977 /* Hyber.framework */,
-				809A13C31C6CA7A900CB3977 /* HyberTests.xctest */,
+				801936531CECAFA0008A5A3F /* HyberTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -641,13 +648,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		C5380CCA71FA6C7A10708AFF /* Pods */ = {
+		B58B0091F81B00BAB416227B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DA0E85F11FC3003057B19B88 /* Pods-GlobalMessageService.debug.xcconfig */,
-				5F37A2E51B3298786575D826 /* Pods-GlobalMessageService.release.xcconfig */,
-				C527302DA7BEB6691F8FCB03 /* Pods-Hyber.debug.xcconfig */,
-				34F50E49FFDD345CEDC292A3 /* Pods-Hyber.release.xcconfig */,
+				AAB6C08F498F62CD99653EF0 /* Pods-HyberTests.debug.xcconfig */,
+				0C8490ED2A283CB4D8148DE3 /* Pods-HyberTests.release.xcconfig */,
+				07ECE35025F3B5BD1DB0C4CA /* Pods-pods_Hyber-Hyber.debug.xcconfig */,
+				C69CED7C49ACFC05545BC920 /* Pods-pods_Hyber-Hyber.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -655,15 +662,14 @@
 		EF315B1FD67431C30CA121F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				801936601CECB363008A5A3F /* XCGLogger.framework */,
 				8022399C1CAACF1E002A7D79 /* CoreLocation.framework */,
-				80E213E51C805A7F00AD44F1 /* ChattoAdditions.framework */,
-				80E213E31C805A7C00AD44F1 /* Chatto.framework */,
 				804B4FDE1C7DD9580006AA8C /* UIKit.framework */,
 				804B4FDC1C7DD94F0006AA8C /* CoreData.framework */,
 				804B4FDA1C7DD9490006AA8C /* MapKit.framework */,
 				80C3A6061C75D585007721CA /* Foundation.framework */,
-				00E685DD458B7D6EDC3C17F9 /* Pods_GlobalMessageService.framework */,
-				E3A39468D39E6452DA303DED /* Pods_Hyber.framework */,
+				95FD5D4E9CD1D450DCBD0CA3 /* Pods_HyberTests.framework */,
+				A5825E903C63EBC7C8E3DE56 /* Pods_pods_Hyber_Hyber.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -682,44 +688,47 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		801936521CECAFA0008A5A3F /* HyberTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8019365B1CECAFA1008A5A3F /* Build configuration list for PBXNativeTarget "HyberTests" */;
+			buildPhases = (
+				1C8EE442168F25FC6856396E /* 📦 Check Pods Manifest.lock */,
+				8019364F1CECAFA0008A5A3F /* Sources */,
+				801936501CECAFA0008A5A3F /* Frameworks */,
+				801936511CECAFA0008A5A3F /* Resources */,
+				67A737946F13BCB3A207765C /* 📦 Embed Pods Frameworks */,
+				A1483674D12C9BC607C510EE /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8019365A1CECAFA1008A5A3F /* PBXTargetDependency */,
+			);
+			name = HyberTests;
+			productName = HyberTests;
+			productReference = 801936531CECAFA0008A5A3F /* HyberTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		809A13B81C6CA7A900CB3977 /* Hyber */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 809A13CD1C6CA7A900CB3977 /* Build configuration list for PBXNativeTarget "Hyber" */;
 			buildPhases = (
-				E2834D3A031018097307CD8F /* 📦 Check Pods Manifest.lock */,
+				0FDA0BBAC19DE115D3101EE9 /* 📦 Check Pods Manifest.lock */,
 				809A13B41C6CA7A900CB3977 /* Sources */,
 				809A13B51C6CA7A900CB3977 /* Frameworks */,
 				809A13B61C6CA7A900CB3977 /* Headers */,
 				809A13B71C6CA7A900CB3977 /* Resources */,
 				806C0DD01C7CBA33001395BA /* ✅ swiftlint by @realm */,
-				279C697C78EC021B5CB72EE0 /* 📦 Copy Pods Resources */,
+				00A61BC14A00CEDA5CEE1B31 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Hyber;
-			productName = GlobalMessageService;
+			productName = Hyber;
 			productReference = 809A13B91C6CA7A900CB3977 /* Hyber.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		809A13C21C6CA7A900CB3977 /* HyberTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 809A13D01C6CA7A900CB3977 /* Build configuration list for PBXNativeTarget "HyberTests" */;
-			buildPhases = (
-				809A13BF1C6CA7A900CB3977 /* Sources */,
-				809A13C01C6CA7A900CB3977 /* Frameworks */,
-				809A13C11C6CA7A900CB3977 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				809A13C61C6CA7A900CB3977 /* PBXTargetDependency */,
-			);
-			name = HyberTests;
-			productName = GlobalMessageServiceTests;
-			productReference = 809A13C31C6CA7A900CB3977 /* HyberTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -727,16 +736,16 @@
 		809A13B01C6CA7A900CB3977 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Global Message Services Worldwide";
 				TargetAttributes = {
+					801936521CECAFA0008A5A3F = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					809A13B81C6CA7A900CB3977 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = DREVRNA23J;
-					};
-					809A13C21C6CA7A900CB3977 = {
-						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
 			};
@@ -755,16 +764,25 @@
 			projectRoot = "";
 			targets = (
 				809A13B81C6CA7A900CB3977 /* Hyber */,
-				809A13C21C6CA7A900CB3977 /* HyberTests */,
+				801936521CECAFA0008A5A3F /* HyberTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		801936511CECAFA0008A5A3F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		809A13B71C6CA7A900CB3977 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				801936491CEC993D008A5A3F /* .gitignore in Resources */,
+				801936471CEC9929008A5A3F /* .swiftlint.yml in Resources */,
 				8001D1F81C7314D300636645 /* HyberError.strings in Resources */,
 				80D4773C1CCA65FB00B0FEA3 /* HyberInboxController.strings in Resources */,
 				8009602A1CEC84B700180283 /* .travis.yml in Resources */,
@@ -776,17 +794,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		809A13C11C6CA7A900CB3977 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		279C697C78EC021B5CB72EE0 /* 📦 Copy Pods Resources */ = {
+		00A61BC14A00CEDA5CEE1B31 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -798,7 +809,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyber/Pods-Hyber-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pods_Hyber-Hyber/Pods-pods_Hyber-Hyber-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0FDA0BBAC19DE115D3101EE9 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1C8EE442168F25FC6856396E /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		67A737946F13BCB3A207765C /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HyberTests/Pods-HyberTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		806C0DD01C7CBA33001395BA /* ✅ swiftlint by @realm */ = {
@@ -815,24 +871,32 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n#else\n#    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		E2834D3A031018097307CD8F /* 📦 Check Pods Manifest.lock */ = {
+		A1483674D12C9BC607C510EE /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HyberTests/Pods-HyberTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8019364F1CECAFA0008A5A3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80E6FBD81CECB609007F5E5A /* HyberTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		809A13B41C6CA7A900CB3977 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -931,21 +995,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		809A13BF1C6CA7A900CB3977 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				809A13C91C6CA7A900CB3977 /* HyberTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		809A13C61C6CA7A900CB3977 /* PBXTargetDependency */ = {
+		8019365A1CECAFA1008A5A3F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 809A13B81C6CA7A900CB3977 /* Hyber */;
-			targetProxy = 809A13C51C6CA7A900CB3977 /* PBXContainerItemProxy */;
+			targetProxy = 801936591CECAFA1008A5A3F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -983,6 +1039,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8019365C1CECAFA1008A5A3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAB6C08F498F62CD99653EF0 /* Pods-HyberTests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
+				);
+				INFOPLIST_FILE = ../Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.HyberTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8019365D1CECAFA1008A5A3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C8490ED2A283CB4D8148DE3 /* Pods-HyberTests.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
+				);
+				INFOPLIST_FILE = ../Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.HyberTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		809A13CB1C6CA7A900CB3977 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1076,7 +1166,7 @@
 		};
 		809A13CE1C6CA7A900CB3977 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C527302DA7BEB6691F8FCB03 /* Pods-Hyber.debug.xcconfig */;
+			baseConfigurationReference = 07ECE35025F3B5BD1DB0C4CA /* Pods-pods_Hyber-Hyber.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1094,6 +1184,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.Hyber";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SKIP_INSTALL = YES;
@@ -1104,7 +1195,7 @@
 		};
 		809A13CF1C6CA7A900CB3977 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34F50E49FFDD345CEDC292A3 /* Pods-Hyber.release.xcconfig */;
+			baseConfigurationReference = C69CED7C49ACFC05545BC920 /* Pods-pods_Hyber-Hyber.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1122,6 +1213,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.Hyber";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SKIP_INSTALL = YES;
@@ -1129,29 +1221,18 @@
 			};
 			name = Release;
 		};
-		809A13D11C6CA7A900CB3977 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = ../Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.HyberTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		809A13D21C6CA7A900CB3977 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = ../Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.HyberTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8019365B1CECAFA1008A5A3F /* Build configuration list for PBXNativeTarget "HyberTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8019365C1CECAFA1008A5A3F /* Debug */,
+				8019365D1CECAFA1008A5A3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		809A13B31C6CA7A900CB3977 /* Build configuration list for PBXProject "Hyber" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1166,15 +1247,6 @@
 			buildConfigurations = (
 				809A13CE1C6CA7A900CB3977 /* Debug */,
 				809A13CF1C6CA7A900CB3977 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		809A13D01C6CA7A900CB3977 /* Build configuration list for PBXNativeTarget "HyberTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				809A13D11C6CA7A900CB3977 /* Debug */,
-				809A13D21C6CA7A900CB3977 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

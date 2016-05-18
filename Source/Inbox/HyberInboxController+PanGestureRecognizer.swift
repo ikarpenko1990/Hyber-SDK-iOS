@@ -30,8 +30,13 @@ internal extension HyberInboxController {
   @objc func horizontalPanGestureDetected(gestureRecognizer: UIPanGestureRecognizer) {
     if gestureRecognizer.state == .Changed {
       
-      let xOffset = gestureRecognizer.translationInView(self.tableView).x
-      horizontalScrollingOffset = xOffset > 0 ? 0 : xOffset
+      let xOffset: CGFloat = gestureRecognizer.translationInView(self.tableView).x
+      
+      if xOffset > 0 {
+        horizontalScrollingOffset = 0
+      } else {
+        horizontalScrollingOffset = xOffset
+      }
       
     }
     

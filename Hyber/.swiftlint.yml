@@ -1,0 +1,18 @@
+included: # paths to include during linting. `--path` is ignored if present.
+  - ../Source
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+  - ../Source/Thirdparties/Core/XCGLogger.swift
+disabled_rules:
+  - trailing_whitespace
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+  - opening_brace
+  - missing_docs
+  - force_cast
+line_length: 110
+missing_docs: 
+#  - private
+#  - internal
+  - public

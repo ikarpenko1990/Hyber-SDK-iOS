@@ -127,7 +127,7 @@ Pod::Spec.new do |s|
   #   'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
   #   "OTHER_LDFLAGS" => '-ObjC'
   # }
-
+  
   s.pod_target_xcconfig = {
     #'OTHER_LDFLAGS'          => '$(inherited) -ObjC',
     'ENABLE_BITCODE'         => 'NO'
@@ -152,7 +152,7 @@ Pod::Spec.new do |s|
 		inboxvc.dependency 'Hyber/Core'
 
 #inboxvc.dependency 'JSQMessagesViewController', '~> 7.2.0'
-		inboxvc.dependency 'DZNEmptyDataSet', '~> 1.7.3'
+#inboxvc.dependency 'DZNEmptyDataSet', '~> 1.7.3'
     
     inboxvc.frameworks = "QuartzCore"
     

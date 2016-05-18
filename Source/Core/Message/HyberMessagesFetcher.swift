@@ -32,42 +32,40 @@ public final class HyberMessagesFetcher {
   public class func fetchMessages(
     forDate date: NSDate,
     fetch: Bool = true,
-    completionHandler: ((HyberResult<[HyberMessageData]>) -> Void)? = .None) // swiftlint:disable:this line_length
+    completionHandler completion: ((HyberResult<[HyberMessageData]>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
     
-    let completion = completionHandler
-    
-    if !Hyber.authorized {
-      completion?(.Failure(.NotAuthorized))
-    }
+    guard Hyber.authorized else { completion?(.Failure(.NotAuthorized)); return }
     
     if date.timeIntervalSinceReferenceDate > NSDate().timeIntervalSinceReferenceDate {
       completion?(.Success([]))
+      return
     }
     
     let lastFetchedTimeInterval: NSTimeInterval
     
-    let moc = HyberCoreDataHelper.newManagedObjectContext()
+    let moc: NSManagedObjectContext = HyberCoreDataHelper.newManagedObjectContext()
     let gmsMessages: [HyberMessageData]
-    if let fetchedDate = HyberDataInboxFetchedDate.getHyberDataInboxFetchedDate(
-      forDate: date.timeIntervalSinceReferenceDate,
-      inManagedObjectContext: moc) // swiftlint:disable:this opening_brace
+    if let
+      fetchedDate: HyberDataInboxFetchedDate = HyberDataInboxFetchedDate.getHyberDataInboxFetchedDate(
+        forDate: date.timeIntervalSinceReferenceDate,
+        inManagedObjectContext: moc) // swiftlint:disable:this opening_brace
     {
       let messages: [HyberDataInboxMessage]
       // swiftlint:disable empty_count
-      if let fetchedMessages = fetchedDate.messages where fetchedMessages.count > 0 {
-        // swiftlint:enable empty_count
+      if let
+        fetchedMessages: NSSet = fetchedDate.messages
+        where fetchedMessages.count > 0 // swiftlint:enable empty_count
+      {
         messages = (fetchedMessages.allObjects as? [HyberDataInboxMessage])?.filter { !$0.deletionMark } ?? []
       } else {
         messages = []
       }
       gmsMessages = messages
         .filter { !$0.deletionMark }
-        .flatMap { HyberMessage(message: $0) }
+        .flatMap { HyberMessage(message: $0) as? HyberMessageData }
       
-      if fetchedDate.lastMessageDate == date.endOfDay().timeIntervalSinceReferenceDate
-//      && fetchedDate.lastMessageDate != NSDate().endOfDay().timeIntervalSinceReferenceDate
-      {
+      if fetchedDate.lastMessageDate == date.endOfDay().timeIntervalSinceReferenceDate {
         completion?(.Success(gmsMessages))
         return
       }
@@ -77,25 +75,23 @@ public final class HyberMessagesFetcher {
       lastFetchedTimeInterval = date.startOfDay().timeIntervalSinceReferenceDate
     }
     
-    if !fetch {
-      completion?(.Success(gmsMessages))
-      return
-    }
+    guard fetch else { completion?(.Success(gmsMessages)); return }
     
     fetchSMS(forDate: lastFetchedTimeInterval) { result in
+      guard let sms: [HyberMessageData] = result.value(completion) else { return }
       
-      guard let sms: [HyberMessageData] = result.value(completionHandler) else { return }
-      
-      HyberMessagesFetcher.fetchViber(forDate: lastFetchedTimeInterval) { result in
+      self.fetchViber(forDate: lastFetchedTimeInterval) { result in
+        guard let viber: [HyberMessageData] = result.value(completion) else { return }
         
-        guard let viber = result.value(completionHandler) else { return }
-        
-        HyberMessagesFetcher.fetchPushNotifications(
+        self.fetchPushNotifications(
           forDate: lastFetchedTimeInterval) { result in
+            guard let push: [HyberMessageData] = result.value(completion) else { return }
             
-            guard let push = result.value(completionHandler) else { return }
+            var messages: [HyberMessageData] = push
+            messages.appendContentsOf(viber)
+            messages.appendContentsOf(sms)
             
-            completion?(.Success(sms + viber + push))
+            completion?(.Success(messages))
             
         }
       }
