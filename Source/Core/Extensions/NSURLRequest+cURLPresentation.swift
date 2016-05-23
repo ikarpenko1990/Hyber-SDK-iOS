@@ -39,50 +39,17 @@ internal extension NSURLRequest {
   {
     var components: [String] = ["$ curl -i"]
     
-    guard let
-      //        request = self.request,
-      URL = URL//,
-//      host = URL.host
-      else {
-        return "$ curl command could not be created"
-    }
+    guard let URL = URL else { return "$ curl command could not be created" }
     
     if let HTTPMethod = HTTPMethod where HTTPMethod != "GET" {
       components.append(String(format: "-X %@", HTTPMethod))
     }
     
-//    if let credentialStorage = configuration.URLCredentialStorage {
-//      let protectionSpace = NSURLProtectionSpace(
-//        host: host,
-//        port: URL.port?.integerValue ?? 0,
-//        protocol: URL.scheme,
-//        realm: host,
-//        authenticationMethod: NSURLAuthenticationMethodHTTPBasic
-//      )
-//
-//      if let credentials = credentialStorage.credentialsForProtectionSpace(protectionSpace)?.values {
-//        credentials.forEach {
-//          components.append(String(format: "-u %@:%@", $0.user!, $0.password!))
-//        }
-//      }
-//    }
-    
-//    if configuration.HTTPShouldSetCookies {
-//      if let
-//        cookieStorage = configuration.HTTPCookieStorage,
-//        cookies = cookieStorage.cookiesForURL(URL)
-//        where !cookies.isEmpty
-//      {
-//        let string = cookies.reduce("") { $0 + "\($1.name)=\($1.value ?? String());" }
-//        components.append("-b \"\(string.substringToIndex(string.endIndex.predecessor()))\"")
-//      }
-//    }
-    
     if let headerFields = allHTTPHeaderFields {
-      for (field, value) in headerFields {
+      headerFields.forEach { (field, value) in
         switch field {
         case "Cookie":
-          continue
+          return
         default:
           components.append(String(format: "-H \"%@: %@\"", field, value)    )
         }
@@ -90,10 +57,10 @@ internal extension NSURLRequest {
     }
     
     if let additionalHeaders = configuration.HTTPAdditionalHeaders {
-      for (field, value) in additionalHeaders {
+      additionalHeaders.forEach { (field, value) in
         switch field {
         case "Cookie":
-          continue
+          return
         default:
           components.append("-H \"\(field): \(value)\"")
         }
