@@ -42,7 +42,7 @@ extension HyberInboxController {
 extension HyberInboxController {
   
   public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let numberOfRows = fetcher.cellData.count + (fetchingMessages ? 1 : 0)
+    let numberOfRows = cellData.count + (fetchingMessages ? 1 : 0)
     return numberOfRows
   }
   
@@ -63,10 +63,8 @@ extension HyberInboxController {
       object = HyberInboxCellData()
       
     } else {
-      object = fetcher.cellData[indexPath.row - (fetchingMessages ? 1 : 0)]
+      object = cellData[indexPath.row - (fetchingMessages ? 1 : 0)]
     }
-    
-//    let
     
     if object.isMessage {
       let inboxCell = tableView.dequeueReusableCellWithIdentifier(
@@ -76,23 +74,24 @@ extension HyberInboxController {
       inboxCell.inboxCellDelegate = self
       inboxCell.inboxStyle = sharedInboxStyle
       cell = inboxCell
-//      break
+
     } else if object.isHeader {
+      
       let headerCell = tableView.dequeueReusableCellWithIdentifier(
         "com.gms-worldwide.Hyber.HyberInboxControllerHeaderCell",
         forIndexPath: indexPath) as! HyberInboxControllerHeaderCell //swiftlint:disable:this force_cast
       
-//      let messageTypeString: String? = data.showMessageType ? data.message.type.description : .None
       headerCell.setEditingMode(tableView.editing, animated: false)
       headerCell.configure(object)
       headerCell.inboxStyle = sharedInboxStyle
       cell = headerCell
     } else if object.isRefresh {
+      
       let inboxCell = tableView.dequeueReusableCellWithIdentifier(
         "com.gms-worldwide.Hyber.HyberInboxControllerRefreshCell",
         forIndexPath: indexPath) as! HyberInboxControllerRefreshCell //swiftlint:disable:this force_cast
       cell = inboxCell
-//      break
+
     } else {
       
       cell = UITableViewCell()
@@ -110,7 +109,7 @@ extension HyberInboxController {
     if fetchingMessages && indexPath.row == 0 {
       return false
     }
-    return fetcher.cellData[indexPath.row - (fetchingMessages ? 1 : 0)].isMessage
+    return cellData[indexPath.row - (fetchingMessages ? 1 : 0)].isMessage
     
   }
   

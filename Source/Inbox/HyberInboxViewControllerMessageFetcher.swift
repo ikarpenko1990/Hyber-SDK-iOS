@@ -57,17 +57,14 @@ public class HyberInboxViewControllerMessageFetcher {
     completionHandler: ((HyberInboxViewControllerMessageFetcherResult) -> Void)? = .None)
   {
     
-    
     let oldData = self.cellData
-    synchronized_wait({
-      if let filterClosure = filterClosure {
-        self.filteredMessages = self.rawMessages.filter(filterClosure)
-        self.filteredCellData = self.generatedCellDataFrom(self.filteredMessages)
-      }
-      self.filterClosure = filterClosure
-      }, completionBlock: {
-        completionHandlerInMainThread(completionHandler)?(self.diff(oldData, after: self.cellData))
-    })
+    if let filterClosure = filterClosure {
+      self.filteredMessages = self.rawMessages.filter(filterClosure)
+      self.filteredCellData = self.generatedCellDataFrom(self.filteredMessages)
+    }
+    self.filterClosure = filterClosure
+    
+    completionHandlerInMainThread(completionHandler)?(self.diff(oldData, after: self.cellData))
     
   }
   
@@ -179,11 +176,16 @@ public class HyberInboxViewControllerMessageFetcher {
    - Returns: minimum available `NSDate` to fetch earlier messages
    */
   private var minLastFetchedDate: NSDate {
-    let minLastFetchedDate =
-      Hyber.registeredUser?.registrationDate
-        ?? ottPlatformLaunchDate
+    let startTimeInterval =
+      (Hyber.registeredUser?.registrationDate
+        ?? ottPlatformLaunchDate)
+        .timeIntervalSinceReferenceDate
     
-    return minLastFetchedDate
+    let endTimeInterval = NSDate(timeInterval: -7 * 86400, sinceDate: NSDate().startOfDay())
+      .timeIntervalSinceReferenceDate
+    
+    return NSDate(timeIntervalSinceReferenceDate: max(startTimeInterval, endTimeInterval))
+    
   }
   
   /**
@@ -231,7 +233,7 @@ public class HyberInboxViewControllerMessageFetcher {
               if let index = rawData.indexOf({
                 $0.deliveredDate.timeIntervalSinceReferenceDate
                   > message.deliveredDate.timeIntervalSinceReferenceDate }) //swiftlint:disable:this line_length
-
+                
               {                 rawData.insert(message, atIndex: index)
               } else {
                 rawData.append(message)
@@ -245,8 +247,6 @@ public class HyberInboxViewControllerMessageFetcher {
         if sSelf.filtered {
           sSelf.filteredCellData = sSelf.generatedCellDataFrom(sSelf.filteredMessages)
         }
-        
-        
         
         }, completionBlock: { [weak sSelf] in
           
@@ -275,6 +275,7 @@ public class HyberInboxViewControllerMessageFetcher {
   internal func loadPrevious(
     completionHandler: ((HyberInboxViewControllerMessageFetcherResult) -> Void)? = .None) //swiftlint:disable:this line_length
   {
+    
     if fetchingPreviousMessages {
       completionHandlerInMainThread(completionHandler)?(.empty)
       return
@@ -329,12 +330,10 @@ public class HyberInboxViewControllerMessageFetcher {
           return $0.deliveredDate.timeIntervalSinceReferenceDate
             < $1.deliveredDate.timeIntervalSinceReferenceDate
       }
-
-//      var newMessagesCount: Int = 0
-      let oldCellData = sSelf.cellData
-
+      
       sSelf.synchronized {
         
+        let oldCellData = sSelf.cellData
         
         sSelf.executeBlockWithData { (filtered, rawData, cellData) in
           
@@ -344,13 +343,6 @@ public class HyberInboxViewControllerMessageFetcher {
           let firstRawDataMessage = rawData.first
           
           rawData = recievedMessages + rawData
-//          var index = 0
-//          recievedMessages.forEach { (message) in
-//            if !filtered || (filtered && (sSelf.filterClosure?(message) ?? false)) {
-//              rawData.insert(message, atIndex: index)
-//              index += 1
-//            }
-//          }
           
           let newCellData = sSelf.generatedCellDataFrom(recievedMessages)
           
@@ -368,37 +360,16 @@ public class HyberInboxViewControllerMessageFetcher {
             }
           }
           
-//          index = 0
           cellData = newCellData + cellData
-//          newCellData.forEach {
-//            cellData.insert($0, atIndex: index)
-//            index += 1
-//          }
           
           sSelf.lastFetchedDate = sSelf.lastFetchedDate.previousDay()
-          
-//          newMessagesCount = newCellData.count
           
         }
         
         let diff = sSelf.diff(oldCellData, after: sSelf.cellData)
         completionHandlerInMainThread(completionHandler)!(diff)
-      
-        }
-      
-//      let a =
-      
-//      let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
-//      dispatch_after(delay, dispatch_get_main_queue()) {
-//        if newMessagesCount > 0 {
-//          completionHandler()
-//        } else {
-//          sSelf.loadPreviousMessages(completionHandler)
-//        }
-//      }
-      
-      
-      
+        
+      }
       
     }
   }
@@ -459,9 +430,6 @@ public class HyberInboxViewControllerMessageFetcher {
   
   private (set) var timeIntervalForHeaderTimeDisplay: NSTimeInterval = 20.0 * 60.0
   
-  //  typealias g =
-  
-  
   /**
    Remove and return the element at `index`
    - Parameter indecies: indecies of elements to delete
@@ -473,7 +441,7 @@ public class HyberInboxViewControllerMessageFetcher {
   {
     let oldCellData = self.cellData
     
-    self.synchronized({
+    self.synchronized {
       
       let oldData = self.cellData
       
@@ -492,26 +460,32 @@ public class HyberInboxViewControllerMessageFetcher {
           self.filteredMessages.removeAtIndex(index)
         }
         
-        // TODO: Delete message //swiftlint:disable:this todo
-//        message.delete()
+        message?.delete()
         
       }
       
       self.rawCellData = self.generatedCellDataFrom(self.rawMessages)
       self.filteredCellData = self.generatedCellDataFrom(self.filteredMessages)
       
-      }, completionBlock: {
-        let diff = self.diff(oldCellData, after: self.cellData)
-        completionHandlerInMainThread(completionHandler)?(diff)
-      }
-    )
+      let diff = self.diff(oldCellData, after: self.cellData)
+      completionHandlerInMainThread(completionHandler)?(diff)
+      
+    }
+    
+  }
+  
+  func signOut() {
+    setFilterClosure(.None, completionHandler: .None)
+    executeBlockWithData { (filtered, rawData, cellData) in
+      rawData = []
+      cellData = []
+    }
+    self.lastFetchedDate = NSDate(timeInterval: -0.001, sinceDate: NSDate().startOfDay())
   }
   
 }
 
 extension HyberInboxViewControllerMessageFetcher: HyberRemoteNotificationReciever {
-  
-  
   
   public func didReceiveRemoteNotification(
     userInfo: [NSObject : AnyObject],
@@ -520,10 +494,11 @@ extension HyberInboxViewControllerMessageFetcher: HyberRemoteNotificationRecieve
     
     if let pushNotification = pushNotification {
       let message = HyberMessage(pushNotification: pushNotification)
-      let oldCellData = self.cellData
-      synchronized ({ [weak self] in
+      synchronized { [weak self] in
         
         guard let sSelf = self else { return }
+        
+        let oldCellData = sSelf.cellData
         
         sSelf.executeBlockWithData { (filtered, rawData, cellData) in
           
@@ -551,18 +526,12 @@ extension HyberInboxViewControllerMessageFetcher: HyberRemoteNotificationRecieve
           cellData += newCells
         }
         
+        let diff = sSelf.diff(oldCellData, after: sSelf.cellData)
+        dispatch_sync(dispatch_get_main_queue()) {
+          sSelf.delegate?.newMessagesFetched(diff)
+        }
         
-        
-        }, completionBlock: { [weak self] in
-          guard let sSelf = self else { return }
-          let diff = sSelf.diff(oldCellData, after: sSelf.cellData)
-          dispatch_sync(dispatch_get_main_queue()) {
-            sSelf.delegate?.newMessagesFetched(diff)
-          }
-          
-        })
-      
-      
+      }
     }
   }
   

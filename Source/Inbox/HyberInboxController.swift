@@ -68,7 +68,6 @@ public class HyberInboxController: UITableViewController {
       return
     }
     
-//    let before = self.tableView.contentSize
     if self.fetchingMessages {
       delete = data.delete.map { NSIndexPath(forRow: $0.row + 1, inSection: $0.section) }
       add = data.add.map { NSIndexPath(forRow: $0.row + 1, inSection: $0.section) }
@@ -82,12 +81,7 @@ public class HyberInboxController: UITableViewController {
       add.append(NSIndexPath(forRow: 0, inSection: 0))
     }
     
-//    CATransaction.flush()
-//    CATransaction.lock()
-//    UIView.setAnimationsEnabled(false)
-    
     let beforeContentSize: CGSize = tableView.contentSize
-//    let beforeContentOffset = tableView.contentOffset
     
     let animationDuration: NSTimeInterval
 
@@ -114,104 +108,84 @@ public class HyberInboxController: UITableViewController {
     if animationDuration > 0.0 {
       
     }
-    
+
     UIView.setAnimationsEnabled(animated)
     
+    self.cellData = fetcher.cellData
+    
+    let animated: Bool = animated && !scrollToLastPosition
+    if !delete.isEmpty || !reload.isEmpty || !add.isEmpty {
+      self.tableView.beginUpdates()
+      //    }
+      
+      if !reload.isEmpty {
+        self.tableView.reloadRowsAtIndexPaths(reload, withRowAnimation: reloadRowAnimation)
+      }
+      if !delete.isEmpty {
+        self.tableView.deleteRowsAtIndexPaths(delete, withRowAnimation: deleteRowAnimation)
+      }
+      if !add.isEmpty {
+        self.tableView.insertRowsAtIndexPaths(add, withRowAnimation: addRowAnimation)
+      }
+      
+      if fetchingMessages != self.fetchingMessages && fetchingMessages {
+        self.fetchingMessages = fetchingMessages
+      }
+      self.tableView.endUpdates()
+    }
+    
     UIView.animateWithDuration(
-//      self.tableView,
-//      duration:
       animationDuration,
-//      options: [],
       animations: {
-//         let animated: Bool = animated && !scrollToLastPosition
-//        if !delete.isEmpty || !reload.isEmpty || !add.isEmpty {
+        
+        let animated = animated && !scrollToLastPosition
+        
+        if fetchingMessages != self.fetchingMessages && !fetchingMessages {
           self.tableView.beginUpdates()
-          //    }
-          
-          if !reload.isEmpty {
-            self.tableView.reloadRowsAtIndexPaths(reload, withRowAnimation: reloadRowAnimation)
-          }
-          if !delete.isEmpty {
-            self.tableView.deleteRowsAtIndexPaths(delete, withRowAnimation: deleteRowAnimation)
-          }
-          if !add.isEmpty {
-            self.tableView.insertRowsAtIndexPaths(add, withRowAnimation: addRowAnimation)
-          }
-          
-          if fetchingMessages != self.fetchingMessages && fetchingMessages {
-            self.fetchingMessages = fetchingMessages
-          }
-          //    preUpdateHandler?()
-          //    if startUpdates {
+          self.fetchingMessages = fetchingMessages
+          self.tableView.deleteRowsAtIndexPaths(
+            .init(count: 1, repeatedValue: NSIndexPath(forRow: 0, inSection: 0)),
+            withRowAnimation: deleteRowAnimation)
           self.tableView.endUpdates()
-          //    }
-//        }
+        }
+        
+        let rowsInSection = self.tableView.numberOfRowsInSection(0)
+        if scrollToBottom && rowsInSection > 0 {
+          self.tableView.scrollToRowAtIndexPath(
+            NSIndexPath(forRow: rowsInSection - 1, inSection: 0),
+            atScrollPosition: UITableViewScrollPosition.Top,
+            animated: animated)
+        }
+        
+        
       },
       completion: { finished in
         
         UIView.animateWithDuration(
-//          self.tableView,
-//          duration:
           animationDuration,
-//          options: [],
           animations: {
-            
-            let animated = animated && !scrollToLastPosition
-            
-            if fetchingMessages != self.fetchingMessages && !fetchingMessages {
-              self.tableView.beginUpdates()
-              self.fetchingMessages = fetchingMessages
-              self.tableView.deleteRowsAtIndexPaths(
-                .init(count: 1, repeatedValue: NSIndexPath(forRow: 0, inSection: 0)),
-                withRowAnimation: deleteRowAnimation)
-              self.tableView.endUpdates()
+            if scrollToLastPosition && !scrollToBottom {
+              let afterContentOffset: CGPoint = self.tableView.contentOffset
+              let afterContentSize: CGSize = self.tableView.contentSize
+              let newContentOffset: CGPoint = CGPoint(
+                x: afterContentOffset.x,
+                y: max(afterContentOffset.y, -64.0) + afterContentSize.height - beforeContentSize.height)
+              self.tableView.setContentOffset(newContentOffset, animated: false)
             }
-            
-            if scrollToBottom {
-              self.tableView.scrollToRowAtIndexPath(
-                NSIndexPath(forRow: self.tableView.numberOfRowsInSection(0) - 1, inSection: 0),
-                atScrollPosition: UITableViewScrollPosition.Top,
-                animated: animated)
-            }
-            
-
           },
           completion: { finished in
             
-            
-            UIView.animateWithDuration(
-//              self.tableView,
-//              duration: 
-              animationDuration,
-//              options: [],
-              animations: {
-                if scrollToLastPosition && !scrollToBottom {
-                  let afterContentOffset: CGPoint = self.tableView.contentOffset
-                  let afterContentSize: CGSize = self.tableView.contentSize
-                  let newContentOffset: CGPoint = CGPoint(
-                    x: afterContentOffset.x,
-                    y: max(afterContentOffset.y, -64.0) + afterContentSize.height - beforeContentSize.height)
-                  self.tableView.setContentOffset(newContentOffset, animated: false)
-                }
-              },
-              completion: { finished in
-                
-                completionHandler?()
-                
-            })
+            completionHandler?()
             
         })
         
-        
-        
     })
-    
   }
   
   /**
    The table cells that are visible in the table view. (read-only)
    
-   The value of this property is an array containing `UITableViewCell` objects, 
+   The value of this property is an array containing `UITableViewCell` objects,
    each representing a visible cell in the table view.
    */
   var visibleCells: [UITableViewCell] {
@@ -308,6 +282,8 @@ public class HyberInboxController: UITableViewController {
       _fetchingMessages = newValue
     }
   }
+  
+  private (set) var cellData: [HyberInboxCellData] = []
   
 }
 

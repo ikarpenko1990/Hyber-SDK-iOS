@@ -28,7 +28,7 @@ internal extension HyberPushNotification {
     
     guard let
       entity =  NSEntityDescription.entityForName(
-        "HyberDataInboxMessage",
+        "InboxMessage",
         inManagedObjectContext: moc),
       
       coreDataPushNotification = NSManagedObject(
@@ -54,8 +54,6 @@ internal extension HyberPushNotification {
     default:
       return .None
     }
-    
-    
     
   }
   
