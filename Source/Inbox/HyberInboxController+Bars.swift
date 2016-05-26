@@ -13,17 +13,13 @@ import UIKit
 private extension HyberInboxController {
   
   private func deleteAllMessages(action: UIAlertAction) {
-    let delete: Array<Int> = .init(0..<fetcher.cellData.count)
+    let delete: Array<Int> = .init(0..<cellData.count)
     fetcher.delete(delete) { result in
       
       self.updateTableView(result, fetchingMessages: false)
       
       self.changeEditMode()
     }
-//    updateTableView(
-//      result.delete,
-//      add: result.add,
-//      reload: result.reload)
   }
   
   @objc func deleteAllButtonPressed(sender: UIBarButtonItem) {
@@ -46,8 +42,6 @@ private extension HyberInboxController {
     presentViewController(alert, animated: true, completion: .None)
     
   }
-  
-  //  let managedObjectContext = HyberCoreDataHelper.newManagedObjectContext()
   
   @objc func deleteSelectedItemsButtonPressed(sender: UIBarButtonItem) {
     if let indexPaths = tableView.indexPathsForSelectedRows {

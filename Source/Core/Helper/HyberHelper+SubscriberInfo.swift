@@ -19,7 +19,7 @@ internal func completionHandlerInMainThread<T>(completion: (T -> Void)?) -> (T -
       if NSThread.isMainThread() {
         completion(result)
       } else {
-        dispatch_sync(dispatch_get_main_queue()) {
+        dispatch_async(dispatch_get_main_queue()) {
           completion(result)
         }
       }
@@ -333,21 +333,11 @@ public extension Hyber {
     email: String?,
     completionHandler completion: ((HyberResult<UInt64>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
+    
     helper.addSubscriber(
       phone,
       email: email,
       completionHandler: completionHandlerInMainThread(completion))
-    
-//    let moc = HyberCoreDataHelper.newManagedObjectContext()
-//    if let
-//      result = try? moc.getObjectctsOfEntity("InboxMessage"),
-//      messages = result //swiftlint:disable:this opening_brace
-//    {
-//      messages.forEach { (o) in
-//        (o as? HyberDataInboxMessage)?.deletionMark = false
-//      }
-//      moc.saveSafeRecursively()
-//    }
     
   }
   

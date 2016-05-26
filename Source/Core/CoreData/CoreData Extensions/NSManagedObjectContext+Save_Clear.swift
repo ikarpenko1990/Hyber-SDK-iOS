@@ -39,14 +39,18 @@ internal extension NSManagedObjectContext {
         
         let entityDeleteResult = deleteObjectctsOfEntity(entityName, save: false)
         
-        if let _ = entityDeleteResult.value {
+        guard let _ = entityDeleteResult.value else {
           result = entityDeleteResult
           break
         }
       }
     }
     
-    return result ?? .Success()
+    if let result = result {
+      return result
+    }
+    
+    return saveSafeRecursively()
     
   }
   
@@ -62,7 +66,6 @@ internal extension NSManagedObjectContext {
   func getObjectctsOfEntity(entityName: String) throws -> [NSManagedObject]? {
     
     let fetchRequest = NSFetchRequest(entityName: entityName)
-    fetchRequest.includesPropertyValues = false
     
     return try executeFetchRequest(fetchRequest) as? [NSManagedObject]
     
@@ -76,24 +79,35 @@ internal extension NSManagedObjectContext {
    - Returns: `SaveResult`
    */
   func deleteObjectctsOfEntity(entityName: String, save: Bool = true) -> HyberResult<Void> {
+    var result: HyberResult<Void>? = .None
     
-    let results: [NSManagedObject]?
-    do {
-      results = try getObjectctsOfEntity(entityName)
-    } catch {
-      hyberLog.error("executeFetchRequest error: \(error)")
-      return .Failure(.CoreDataError(.FetchError(error as NSError)))
+    performBlockAndWait {
+    
+      let results: [NSManagedObject]?
+      do {
+        results = try self.getObjectctsOfEntity(entityName)
+      } catch {
+        hyberLog.error("executeFetchRequest error: \(error)")
+        result = .Failure(.CoreDataError(.FetchError(error as NSError)))
+        return
+      }
+      
+      guard let fetchedObjects = results else {
+        result = .Failure(.CoreDataError(.FetchError(NSError(
+          domain: "com.gms-worldwide.Hyber",
+          code: 1,
+          userInfo: ["description": "Could not cast Fetch Request result to [NSManagedObject]"]))))
+        return
+      }
+      
+      for object in fetchedObjects {
+        self.deleteObject(object)
+      }
+      
     }
     
-    guard let fetchedObjects = results else {
-      return .Failure(.CoreDataError(.FetchError(NSError(
-        domain: "com.gms-worldwide.Hyber",
-        code: 1,
-        userInfo: ["description": "Could not cast Fetch Request result to [NSManagedObject]"]))))
-    }
-    
-    for object in fetchedObjects {
-      deleteObject(object)
+    if let result = result {
+      return result
     }
     
     if save {

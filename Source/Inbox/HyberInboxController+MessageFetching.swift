@@ -29,11 +29,7 @@ public extension HyberInboxController {
           if sSelf.isVisible == true {
             sSelf.startTimer()
           }
-//          let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
-//          dispatch_after(delay, dispatch_get_main_queue(), {
-            completionHandler?()
-//          })
-          
+            completionHandler?()          
         }
       }
     }
@@ -48,7 +44,7 @@ public extension HyberInboxController {
   func loadPreviousMessages(scrollToBottom: Bool = false, completionHandler: (() -> Void)? = .None) {
     guard fetcher.hasMorePrevious && !fetchingMessages else { return }
     updateTableView(.empty, fetchingMessages: true) { [weak self] in
-//    setFetchingPreviousMessages(true) {  [weak self] in
+
       guard let sSelf = self else { return }
     
       sSelf.fetcher.loadPrevious() { [weak self] (result) in
@@ -80,44 +76,6 @@ public extension HyberInboxController {
       }
       
     }
-    
-//    }
-    
-//      { [weak self] (count) in
-//      guard let sSelf = self where count >= 0 else { return }
-//      
-//      let tableView = sSelf.tableView
-//      
-//      let scrollToBottomAfterUpdates = scrollToBottom || tableView.contentOffsetIsAtBottomPosition
-//      
-//      if count > 0 {
-//        var indexPaths = [NSIndexPath]()
-//        for index in 0..<count {
-//          indexPaths.append(NSIndexPath(forRow: Int(index), inSection: 0))
-//        }
-//        
-//        UIView.performWithoutAnimation {
-//          tableView.beginUpdates()
-//          tableView.insertRowsAtIndexPaths(
-//            indexPaths,
-//            withRowAnimation: .None)
-//          tableView.endUpdates()
-//        }
-//        
-//      }
-//      
-//      if scrollToBottomAfterUpdates {
-//        sSelf.scrollToBottom()
-//      } else if count > 0 {
-//        UIView.performWithoutAnimation {
-//          tableView.scrollToRowAtIndexPath(
-//            NSIndexPath(forRow: count-1, inSection: 0),
-//            atScrollPosition: .Bottom,
-//            animated: false)
-//        }
-//        tableView.flashScrollIndicators()
-//      }
-//    }
   }
   
 }
@@ -159,22 +117,7 @@ extension HyberInboxController: HyberInboxViewControllerMessageFetcherDelegate {
   func newMessagesFetched(diff: HyberInboxViewControllerMessageFetcherResult) {
     
     updateTableView(diff, fetchingMessages: false, scrollToBottom: true, animated: true)
-//    let scrollToBottom = tableView.contentOffsetIsAtBottomPosition
-////    updateTableView(result)
-//    if scrollToBottom {
-//      self.scrollToBottom()
-//    }
     
   }
-  
-//  func inboxViewControllerMessageFetcher(
-//    messageFetcher: HyberInboxViewControllerMessageFetcher,
-//    dataDidChange dataChange: HyberInboxViewControllerMessageFetcherResult,
-//    preUpdateHandler: (() -> Void)? = .None) //swiftlint:disable:this line_length
-//  {
-//    
-//    updateTableView(dataChange, completionHandler: preUpdateHandler)
-//    
-//  }
   
 }

@@ -97,6 +97,7 @@ public extension Hyber {
    - Returns: `true` if sign out successful, `false` otherwise
    */
 	public static func signOut() -> Bool {
+    HyberInboxViewControllerMessageFetcher.sharedInstance.signOut()
     return settings.signOut()
 	}
 	
