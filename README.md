@@ -22,7 +22,7 @@ pre_install do |installer|
   def installer.verify_no_static_framework_transitive_dependencies; end
 end
 
-pod 'Hyber', :git => 'https://github.com/GMSLabs/Hyber-SDK-iOS.git', :tag => '0.1.0'
+pod 'Hyber/Inbox', :git => 'https://github.com/GMSLabs/Hyber-SDK-iOS.git', :tag => '0.1.1'
 ```
 
 Then, run the following command:
@@ -32,7 +32,7 @@ $ pod install
 ```
 
 #### Add files
-Add [```GMSGoogleCloudMessagingDelegate.swift```](https://github.com/GlobalMessageServicesAG/GlobalMessageService-iOS/tree/master/targetFiles/GMSGoogleCloudMessagingDelegate.swift) file to your project
+Add [```GMSGoogleCloudMessagingDelegate.swift```](https://github.com/GMSLabs/Hyber-SDK-iOS/blob/master/targetFiles/GMSGoogleCloudMessagingDelegate.swift) file to your project
 
 #### Configure target
 Disable bitcode (set `ENABLE_BITCODE` to `false`) in build settings for your target. See Google Cloud Messaging [issue](https://github.com/google/gcm/issues/91)
@@ -53,12 +53,12 @@ In  `func application(application: UIApplication, didFinishLaunchingWithOptions 
 
 In  `func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)` add following
 ```swift
-  Hyber.applicationDidRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+  Hyber.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
 ```
 
 In `func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)` add following
 ```swift
-  Hyber.applicationDidReceiveRemoteNotification(userInfo)
+  Hyber.didReceiveRemoteNotification(userInfo)
 
   completionHandler(.NewData)
 ```

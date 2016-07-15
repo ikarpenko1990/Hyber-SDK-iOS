@@ -8,10 +8,9 @@
 
 import Foundation
 import Google.CloudMessaging
-import XCGLogger
-import GlobalMessageService
+import Hyber
 
-class GMSGoogleCloudMessagingDelegate: NSObject, GlobalMessageServiceGoogleCloudMessagingHelper {
+class GMSGoogleCloudMessagingDelegate: NSObject, HyberGoogleCloudMessagingHelper {
   
   static let sharedInstance: GMSGoogleCloudMessagingDelegate = {
     return GMSGoogleCloudMessagingDelegate()
@@ -155,7 +154,7 @@ extension GMSGoogleCloudMessagingDelegate : GGLInstanceIDDelegate {
     
     registeredGCMtoken = registrationToken
     
-    GlobalMessageService.updateRegisteredGCMtoken(registeredGCMtoken)
+    Hyber.updateRegisteredGCMtoken(registeredGCMtoken)
     
   }
   
