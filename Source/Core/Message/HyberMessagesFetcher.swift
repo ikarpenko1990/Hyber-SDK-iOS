@@ -27,7 +27,7 @@ public final class HyberMessagesFetcher {
    - Parameter completionHandler: The code to be executed once the request has finished. (optional). 
   This block takes no parameters. 
   Returns `Result` `<[HyberMessageData], HyberError>`, where `result.value`
-  is always contains `Array<GMSMessage>` if there no error occurred, otherwise see `result.error`
+  is always contains `Array<HyberMessageData>` if there no error occurred, otherwise see `result.error`
    */
   public class func fetchMessages(
     forDate date: NSDate,
@@ -45,7 +45,7 @@ public final class HyberMessagesFetcher {
     let lastFetchedTimeInterval: NSTimeInterval
     
     let moc: NSManagedObjectContext = HyberCoreDataHelper.newManagedObjectContext()
-    let gmsMessages: [HyberMessageData]
+    let hyberMessages: [HyberMessageData]
     if let
       fetchedDate: HyberDataInboxFetchedDate = HyberDataInboxFetchedDate.getHyberDataInboxFetchedDate(
         forDate: date.timeIntervalSinceReferenceDate,
@@ -61,21 +61,21 @@ public final class HyberMessagesFetcher {
       } else {
         messages = []
       }
-      gmsMessages = messages
+      hyberMessages = messages
         .filter { !$0.deletionMark }
         .flatMap { HyberMessage(message: $0) as? HyberMessageData }
       
       if fetchedDate.lastMessageDate == date.endOfDay().timeIntervalSinceReferenceDate {
-        completion?(.Success(gmsMessages))
+        completion?(.Success(hyberMessages))
         return
       }
       lastFetchedTimeInterval = fetchedDate.lastMessageDate
     } else {
-      gmsMessages = []
+      hyberMessages = []
       lastFetchedTimeInterval = date.startOfDay().timeIntervalSinceReferenceDate
     }
     
-    guard fetch else { completion?(.Success(gmsMessages)); return }
+    guard fetch else { completion?(.Success(hyberMessages)); return }
     
     fetchSMS(forDate: lastFetchedTimeInterval) { result in
       guard let sms: [HyberMessageData] = result.value(completion) else { return }
@@ -105,7 +105,7 @@ public final class HyberMessagesFetcher {
    - Parameter completionHandler: The code to be executed once the request has finished. (optional). 
    This block takes no parameters. 
    Returns `Result` `<[HyberMessageData], HyberError>`, where `result.value`
-   is always contains `Array<GMSMessage>` if there no error occurred, otherwise see `result.error`
+   is always contains `Array<HyberMessageData>` if there no error occurred, otherwise see `result.error`
    */
   private class func fetchViber(
     forDate date: NSTimeInterval,
@@ -121,7 +121,7 @@ public final class HyberMessagesFetcher {
    - Parameter completionHandler: The code to be executed once the request has finished. (optional). 
    This block takes no parameters. 
    Returns `Result` `<[HyberMessageData], HyberError>`, where `result.value`
-   is always contains `Array<GMSMessage>` if there no error occurred, otherwise see `result.error`
+   is always contains `Array<HyberMessageData>` if there no error occurred, otherwise see `result.error`
    */
   private class func fetchSMS(
     forDate date: NSTimeInterval,
@@ -137,7 +137,7 @@ public final class HyberMessagesFetcher {
    - Parameter completionHandler: The code to be executed once the request has finished. (optional). 
    This block takes no parameters. 
    Returns `Result` `<[HyberMessageData], HyberError>`, where `result.value`
-   is always contains `Array<GMSMessage>` if there no error occurred, otherwise see `result.error`
+   is always contains `Array<HyberMessageData>` if there no error occurred, otherwise see `result.error`
    */
   private class func fetchPushNotifications(
     forDate date: NSTimeInterval,
@@ -179,7 +179,7 @@ public final class HyberMessagesFetcher {
    - Parameter completionHandler: The code to be executed once the request has finished. (optional). 
    This block takes no parameters. 
    Returns `Result` `<[HyberMessageData], HyberError>`, where `result.value` 
-   is always contains `Array<GMSMessage>` if there no error occurred, otherwise see `result.error`
+   is always contains `Array<HyberMessageData>` if there no error occurred, otherwise see `result.error`
    */
   private class func fetch(
     type: HyberMessageType,
@@ -191,9 +191,9 @@ public final class HyberMessagesFetcher {
       completion(.Failure(error))
     }
     
-    let gmsToken = Hyber.registeredGMStoken
-    if gmsToken <= 0 {
-      errorCompletion(.GMSTokenIsNotSet)
+    let hyberDeviceId = Hyber.hyberDeviceId
+    if hyberDeviceId <= 0 {
+      errorCompletion(.HyberDeviceIdIsNotSet)
       return
     }
     
@@ -209,7 +209,7 @@ public final class HyberMessagesFetcher {
         NSDate(timeIntervalSinceReferenceDate: date).timeIntervalSince1970 * 1000))
     
     let parameters: [String: AnyObject] = [
-      "uniqAppDeviceId": NSNumber(unsignedLongLong: gmsToken),
+      "uniqAppDeviceId": NSNumber(unsignedLongLong: hyberDeviceId),
       "phone": NSNumber(unsignedLongLong: phone),
       "date_utc": NSNumber(unsignedLongLong: timeInterval)
     ]
@@ -240,7 +240,7 @@ public final class HyberMessagesFetcher {
    - Parameter completionHandler: The code to be executed once the request has finished. (optional). 
    This block takes no parameters. 
    Returns `Result` `<[HyberMessageData], HyberError>`, where `result.value`
-   is always contains `Array<GMSMessage>` if there no error occurred, otherwise see `result.error`
+   is always contains `Array<HyberMessageData>` if there no error occurred, otherwise see `result.error`
    - Returns: Closure that fetches messages and saves it to CodeData DB and executes passed 
    `completionHandler` with result
    */
@@ -287,7 +287,7 @@ public final class HyberMessagesFetcher {
    - Parameter completionHandler: The code to be executed once the request has finished. 
    (optional). This block takes no parameters.
    Returns `Result` `<[HyberMessageData], HyberError>`, where `result.value` 
-   is always contains `Array<GMSMessage>` if there no error occurred, otherwise see `result.error`
+   is always contains `Array<HyberMessageData>` if there no error occurred, otherwise see `result.error`
    */
   private class func saveMessages(
     messages: [HyberMessageData],

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AD642E72ECFBF8049BC48DC /* Pods_pods_Hyber_Hyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955373BB2260532F5494F745 /* Pods_pods_Hyber_Hyber.framework */; };
+		3E06FD7A171DB461C6D9A18F /* Pods_HyberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB097178C525EB63500B1994 /* Pods_HyberTests.framework */; };
 		8001D1F81C7314D300636645 /* HyberError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8001D1FA1C7314D300636645 /* HyberError.strings */; };
 		8009602A1CEC84B700180283 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 800960291CEC84B700180283 /* .travis.yml */; };
 		801936471CEC9929008A5A3F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 801936461CEC9929008A5A3F /* .swiftlint.yml */; };
@@ -16,8 +18,9 @@
 		8020E28C1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8020E28B1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib */; };
 		802239971CAA5CEA002A7D79 /* HyberResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802239961CAA5CE9002A7D79 /* HyberResult.swift */; };
 		8022399D1CAACF1E002A7D79 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8022399C1CAACF1E002A7D79 /* CoreLocation.framework */; };
+		803D6F6A1D3FABCF003AEF22 /* HyberFirebaseMessagingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6F691D3FABCF003AEF22 /* HyberFirebaseMessagingHelper.swift */; };
+		803D6F6C1D3FAC52003AEF22 /* HyberHelper+FirebaseMessagingToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6F6B1D3FAC52003AEF22 /* HyberHelper+FirebaseMessagingToken.swift */; };
 		804B4FB31C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804B4FB21C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift */; };
-		804B4FB51C7DACA50006AA8C /* HyberHelper+GCMToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804B4FB41C7DACA50006AA8C /* HyberHelper+GCMToken.swift */; };
 		804B4FD91C7DD5C30006AA8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C3A6061C75D585007721CA /* Foundation.framework */; };
 		804B4FDD1C7DD94F0006AA8C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 804B4FDC1C7DD94F0006AA8C /* CoreData.framework */; };
 		804B4FDF1C7DD9580006AA8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 804B4FDE1C7DD9580006AA8C /* UIKit.framework */; };
@@ -31,7 +34,6 @@
 		809A14101C6CA88F00CB3977 /* NSDate+DayBoundaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E21C6CA88F00CB3977 /* NSDate+DayBoundaries.swift */; };
 		809A14111C6CA88F00CB3977 /* NSFileManager+DirectoryURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E31C6CA88F00CB3977 /* NSFileManager+DirectoryURLs.swift */; };
 		809A14121C6CA88F00CB3977 /* Hyber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E41C6CA88F00CB3977 /* Hyber.swift */; };
-		809A14131C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E51C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift */; };
 		809A14141C6CA88F00CB3977 /* HyberHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E61C6CA88F00CB3977 /* HyberHelper.swift */; };
 		809A14151C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E71C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift */; };
 		809A14161C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A13E81C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift */; };
@@ -115,8 +117,6 @@
 		80FFF8591CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF8581CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift */; };
 		80FFF85B1CEC629D000067FA /* HyberInboxControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF85A1CEC629D000067FA /* HyberInboxControllerCell.swift */; };
 		80FFF85D1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFF85C1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift */; };
-		9241B4B693AAEEEA8B771BCA /* Pods_HyberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95FD5D4E9CD1D450DCBD0CA3 /* Pods_HyberTests.framework */; };
-		A0903CD9178A55D84F85A7C0 /* Pods_pods_Hyber_Hyber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5825E903C63EBC7C8E3DE56 /* Pods_pods_Hyber_Hyber.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,8 +130,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07ECE35025F3B5BD1DB0C4CA /* Pods-pods_Hyber-Hyber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pods_Hyber-Hyber.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pods_Hyber-Hyber/Pods-pods_Hyber-Hyber.debug.xcconfig"; sourceTree = "<group>"; };
-		0C8490ED2A283CB4D8148DE3 /* Pods-HyberTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HyberTests/Pods-HyberTests.release.xcconfig"; sourceTree = "<group>"; };
+		49148E67F42995D2E6963270 /* Pods-pods_Hyber-Hyber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pods_Hyber-Hyber.release.xcconfig"; path = "Pods/Target Support Files/Pods-pods_Hyber-Hyber/Pods-pods_Hyber-Hyber.release.xcconfig"; sourceTree = "<group>"; };
+		79EA9FFB59052B5D9B948ADD /* Pods-pods_Hyber-Hyber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pods_Hyber-Hyber.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pods_Hyber-Hyber/Pods-pods_Hyber-Hyber.debug.xcconfig"; sourceTree = "<group>"; };
 		8001D1F91C7314D300636645 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HyberError.strings; sourceTree = "<group>"; };
 		800960291CEC84B700180283 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
 		801936461CEC9929008A5A3F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -149,8 +149,9 @@
 		8020E28B1CCE45B400633797 /* HyberInboxControllerRefreshCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HyberInboxControllerRefreshCell.xib; sourceTree = "<group>"; };
 		802239961CAA5CE9002A7D79 /* HyberResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberResult.swift; sourceTree = "<group>"; };
 		8022399C1CAACF1E002A7D79 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		803D6F691D3FABCF003AEF22 /* HyberFirebaseMessagingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberFirebaseMessagingHelper.swift; sourceTree = "<group>"; };
+		803D6F6B1D3FAC52003AEF22 /* HyberHelper+FirebaseMessagingToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+FirebaseMessagingToken.swift"; sourceTree = "<group>"; };
 		804B4FB21C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+SubscribersLocation.swift"; sourceTree = "<group>"; };
-		804B4FB41C7DACA50006AA8C /* HyberHelper+GCMToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+GCMToken.swift"; sourceTree = "<group>"; };
 		804B4FDA1C7DD9490006AA8C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		804B4FDC1C7DD94F0006AA8C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		804B4FDE1C7DD9580006AA8C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -167,7 +168,6 @@
 		809A13E21C6CA88F00CB3977 /* NSDate+DayBoundaries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+DayBoundaries.swift"; sourceTree = "<group>"; };
 		809A13E31C6CA88F00CB3977 /* NSFileManager+DirectoryURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+DirectoryURLs.swift"; sourceTree = "<group>"; };
 		809A13E41C6CA88F00CB3977 /* Hyber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hyber.swift; sourceTree = "<group>"; };
-		809A13E51C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberGoogleCloudMessagingHelper.swift; sourceTree = "<group>"; };
 		809A13E61C6CA88F00CB3977 /* HyberHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberHelper.swift; sourceTree = "<group>"; };
 		809A13E71C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+RemoteNotifications.swift"; sourceTree = "<group>"; };
 		809A13E81C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HyberHelper+SubscriberInfo.swift"; sourceTree = "<group>"; };
@@ -255,10 +255,10 @@
 		80FFF8581CEC6208000067FA /* HyberInboxViewControllerMessageFetcherResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxViewControllerMessageFetcherResult.swift; sourceTree = "<group>"; };
 		80FFF85A1CEC629D000067FA /* HyberInboxControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxControllerCell.swift; sourceTree = "<group>"; };
 		80FFF85C1CEC691E000067FA /* HyberInboxViewControllerMessageFetcherP2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberInboxViewControllerMessageFetcherP2.swift; sourceTree = "<group>"; };
-		95FD5D4E9CD1D450DCBD0CA3 /* Pods_HyberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5825E903C63EBC7C8E3DE56 /* Pods_pods_Hyber_Hyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pods_Hyber_Hyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAB6C08F498F62CD99653EF0 /* Pods-HyberTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HyberTests/Pods-HyberTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C69CED7C49ACFC05545BC920 /* Pods-pods_Hyber-Hyber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pods_Hyber-Hyber.release.xcconfig"; path = "Pods/Target Support Files/Pods-pods_Hyber-Hyber/Pods-pods_Hyber-Hyber.release.xcconfig"; sourceTree = "<group>"; };
+		955373BB2260532F5494F745 /* Pods_pods_Hyber_Hyber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pods_Hyber_Hyber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6D53A4D7AFFF3F5951A4D99 /* Pods-HyberTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HyberTests/Pods-HyberTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E909BC60ADDEE35884124BDA /* Pods-HyberTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HyberTests/Pods-HyberTests.release.xcconfig"; sourceTree = "<group>"; };
+		EB097178C525EB63500B1994 /* Pods_HyberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,7 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				801936581CECAFA1008A5A3F /* Hyber.framework in Frameworks */,
-				9241B4B693AAEEEA8B771BCA /* Pods_HyberTests.framework in Frameworks */,
+				3E06FD7A171DB461C6D9A18F /* Pods_HyberTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,7 +279,7 @@
 				804B4FDF1C7DD9580006AA8C /* UIKit.framework in Frameworks */,
 				804B4FDD1C7DD94F0006AA8C /* CoreData.framework in Frameworks */,
 				804B4FD91C7DD5C30006AA8C /* Foundation.framework in Frameworks */,
-				A0903CD9178A55D84F85A7C0 /* Pods_pods_Hyber_Hyber.framework in Frameworks */,
+				2AD642E72ECFBF8049BC48DC /* Pods_pods_Hyber_Hyber.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +320,7 @@
 				809A13C71C6CA7A900CB3977 /* Tests */,
 				809A13BA1C6CA7A900CB3977 /* Products */,
 				EF315B1FD67431C30CA121F7 /* Frameworks */,
-				B58B0091F81B00BAB416227B /* Pods */,
+				ACDEF650C927D8F26DAAF628 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -505,7 +505,7 @@
 				809A13E41C6CA88F00CB3977 /* Hyber.swift */,
 				802239961CAA5CE9002A7D79 /* HyberResult.swift */,
 				8083BF5E1CA92915004240A9 /* Hyber+Localization.swift */,
-				809A13E51C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift */,
+				803D6F691D3FABCF003AEF22 /* HyberFirebaseMessagingHelper.swift */,
 				80C56A981CABB22300BDFC17 /* Helper */,
 				80D8F1D61CCE105E00D45AE3 /* Error */,
 				809A13EB1C6CA88F00CB3977 /* HyberSubscriber.swift */,
@@ -528,7 +528,7 @@
 				809A13E71C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift */,
 				809A13E81C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift */,
 				804B4FB21C7DABCC0006AA8C /* HyberHelper+SubscribersLocation.swift */,
-				804B4FB41C7DACA50006AA8C /* HyberHelper+GCMToken.swift */,
+				803D6F6B1D3FAC52003AEF22 /* HyberHelper+FirebaseMessagingToken.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -648,13 +648,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		B58B0091F81B00BAB416227B /* Pods */ = {
+		ACDEF650C927D8F26DAAF628 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AAB6C08F498F62CD99653EF0 /* Pods-HyberTests.debug.xcconfig */,
-				0C8490ED2A283CB4D8148DE3 /* Pods-HyberTests.release.xcconfig */,
-				07ECE35025F3B5BD1DB0C4CA /* Pods-pods_Hyber-Hyber.debug.xcconfig */,
-				C69CED7C49ACFC05545BC920 /* Pods-pods_Hyber-Hyber.release.xcconfig */,
+				B6D53A4D7AFFF3F5951A4D99 /* Pods-HyberTests.debug.xcconfig */,
+				E909BC60ADDEE35884124BDA /* Pods-HyberTests.release.xcconfig */,
+				79EA9FFB59052B5D9B948ADD /* Pods-pods_Hyber-Hyber.debug.xcconfig */,
+				49148E67F42995D2E6963270 /* Pods-pods_Hyber-Hyber.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -668,8 +668,8 @@
 				804B4FDC1C7DD94F0006AA8C /* CoreData.framework */,
 				804B4FDA1C7DD9490006AA8C /* MapKit.framework */,
 				80C3A6061C75D585007721CA /* Foundation.framework */,
-				95FD5D4E9CD1D450DCBD0CA3 /* Pods_HyberTests.framework */,
-				A5825E903C63EBC7C8E3DE56 /* Pods_pods_Hyber_Hyber.framework */,
+				EB097178C525EB63500B1994 /* Pods_HyberTests.framework */,
+				955373BB2260532F5494F745 /* Pods_pods_Hyber_Hyber.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -692,12 +692,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8019365B1CECAFA1008A5A3F /* Build configuration list for PBXNativeTarget "HyberTests" */;
 			buildPhases = (
-				1C8EE442168F25FC6856396E /* 📦 Check Pods Manifest.lock */,
+				1C8EE442168F25FC6856396E /* [CP] Check Pods Manifest.lock */,
 				8019364F1CECAFA0008A5A3F /* Sources */,
 				801936501CECAFA0008A5A3F /* Frameworks */,
 				801936511CECAFA0008A5A3F /* Resources */,
-				67A737946F13BCB3A207765C /* 📦 Embed Pods Frameworks */,
-				A1483674D12C9BC607C510EE /* 📦 Copy Pods Resources */,
+				67A737946F13BCB3A207765C /* [CP] Embed Pods Frameworks */,
+				A1483674D12C9BC607C510EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -713,13 +713,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 809A13CD1C6CA7A900CB3977 /* Build configuration list for PBXNativeTarget "Hyber" */;
 			buildPhases = (
-				0FDA0BBAC19DE115D3101EE9 /* 📦 Check Pods Manifest.lock */,
+				0FDA0BBAC19DE115D3101EE9 /* [CP] Check Pods Manifest.lock */,
 				809A13B41C6CA7A900CB3977 /* Sources */,
 				809A13B51C6CA7A900CB3977 /* Frameworks */,
 				809A13B61C6CA7A900CB3977 /* Headers */,
 				809A13B71C6CA7A900CB3977 /* Resources */,
 				806C0DD01C7CBA33001395BA /* ✅ swiftlint by @realm */,
-				00A61BC14A00CEDA5CEE1B31 /* 📦 Copy Pods Resources */,
+				00A61BC14A00CEDA5CEE1B31 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -742,10 +742,14 @@
 				TargetAttributes = {
 					801936521CECAFA0008A5A3F = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = DREVRNA23J;
+						DevelopmentTeamName = "global message services ukraine llc";
+						LastSwiftMigration = 0800;
 					};
 					809A13B81C6CA7A900CB3977 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = DREVRNA23J;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -797,14 +801,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00A61BC14A00CEDA5CEE1B31 /* 📦 Copy Pods Resources */ = {
+		00A61BC14A00CEDA5CEE1B31 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,14 +816,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pods_Hyber-Hyber/Pods-pods_Hyber-Hyber-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0FDA0BBAC19DE115D3101EE9 /* 📦 Check Pods Manifest.lock */ = {
+		0FDA0BBAC19DE115D3101EE9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -827,14 +831,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		1C8EE442168F25FC6856396E /* 📦 Check Pods Manifest.lock */ = {
+		1C8EE442168F25FC6856396E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,14 +846,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		67A737946F13BCB3A207765C /* 📦 Embed Pods Frameworks */ = {
+		67A737946F13BCB3A207765C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -871,14 +875,14 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n#else\n#    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		A1483674D12C9BC607C510EE /* 📦 Copy Pods Resources */ = {
+		A1483674D12C9BC607C510EE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -917,6 +921,7 @@
 				80ADC5841C9048BC006C285D /* Syncronized.swift in Sources */,
 				809A14061C6CA88F00CB3977 /* NSManagedObject+Search.swift in Sources */,
 				80D477181CCA64AE00B0FEA3 /* HyberInboxFilterTableViewController.swift in Sources */,
+				803D6F6C1D3FAC52003AEF22 /* HyberHelper+FirebaseMessagingToken.swift in Sources */,
 				809A14071C6CA88F00CB3977 /* NSManagedObjectContext+Save_Clear.swift in Sources */,
 				802239971CAA5CEA002A7D79 /* HyberResult.swift in Sources */,
 				8083BF631CA935B0004240A9 /* HyberHelper+Validation.swift in Sources */,
@@ -927,7 +932,6 @@
 				80FFF8551CEC61A7000067FA /* SyncronizableOperationQueue.swift in Sources */,
 				809A14161C6CA88F00CB3977 /* HyberHelper+SubscriberInfo.swift in Sources */,
 				80A984B71C870B2900AF64AD /* HyberMessageType.swift in Sources */,
-				804B4FB51C7DACA50006AA8C /* HyberHelper+GCMToken.swift in Sources */,
 				80D4770C1CCA64AE00B0FEA3 /* HyberBubbleLayer.swift in Sources */,
 				80C56A9F1CABB68100BDFC17 /* XCGLogger.swift in Sources */,
 				80AE62521C7F3EF200FE12D8 /* HyberDataInboxSender+Searchable.swift in Sources */,
@@ -954,7 +958,6 @@
 				809A14151C6CA88F00CB3977 /* HyberHelper+RemoteNotifications.swift in Sources */,
 				80D477071CCA64AE00B0FEA3 /* UIColor+DarkerLighter.swift in Sources */,
 				80D477161CCA64AE00B0FEA3 /* HyberInboxControllerHeaderCell.swift in Sources */,
-				809A14131C6CA88F00CB3977 /* HyberGoogleCloudMessagingHelper.swift in Sources */,
 				80D477221CCA64AE00B0FEA3 /* HyberInboxTimeLabelStyle.swift in Sources */,
 				80D4770E1CCA64AE00B0FEA3 /* HyberBubbleTextView.swift in Sources */,
 				80D8F1E01CCE111300D45AE3 /* HyberError+MessageFetcher.swift in Sources */,
@@ -979,6 +982,7 @@
 				80AE624E1C7F3E7900FE12D8 /* HyberDataInboxSender.swift in Sources */,
 				809A14121C6CA88F00CB3977 /* Hyber.swift in Sources */,
 				80D477061CCA64AE00B0FEA3 /* String+AttributedString.swift in Sources */,
+				803D6F6A1D3FABCF003AEF22 /* HyberFirebaseMessagingHelper.swift in Sources */,
 				809A14261C6CA88F00CB3977 /* HyberProvider.swift in Sources */,
 				80D8F1E21CCE119100D45AE3 /* HyberError+CoreData.swift in Sources */,
 				809A14201C6CA88F00CB3977 /* HyberPushNotification+CoreData.swift in Sources */,
@@ -1041,7 +1045,7 @@
 /* Begin XCBuildConfiguration section */
 		8019365C1CECAFA1008A5A3F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAB6C08F498F62CD99653EF0 /* Pods-HyberTests.debug.xcconfig */;
+			baseConfigurationReference = B6D53A4D7AFFF3F5951A4D99 /* Pods-HyberTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1049,16 +1053,16 @@
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = ../Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.HyberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		8019365D1CECAFA1008A5A3F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C8490ED2A283CB4D8148DE3 /* Pods-HyberTests.release.xcconfig */;
+			baseConfigurationReference = E909BC60ADDEE35884124BDA /* Pods-HyberTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1066,10 +1070,10 @@
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = ../Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.HyberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -1166,7 +1170,7 @@
 		};
 		809A13CE1C6CA7A900CB3977 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07ECE35025F3B5BD1DB0C4CA /* Pods-pods_Hyber-Hyber.debug.xcconfig */;
+			baseConfigurationReference = 79EA9FFB59052B5D9B948ADD /* Pods-pods_Hyber-Hyber.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1182,7 +1186,6 @@
 				);
 				INFOPLIST_FILE = Hyber/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.Hyber";
@@ -1190,12 +1193,13 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		809A13CF1C6CA7A900CB3977 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C69CED7C49ACFC05545BC920 /* Pods-pods_Hyber-Hyber.release.xcconfig */;
+			baseConfigurationReference = 49148E67F42995D2E6963270 /* Pods-pods_Hyber-Hyber.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1211,13 +1215,13 @@
 				);
 				INFOPLIST_FILE = Hyber/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gms-worldwide.Hyber";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

@@ -122,8 +122,20 @@ public class HyberInboxViewControllerMessageFetcher {
   /// Private initializer
   private init() {
     Hyber.helper.internalRemoteNotificationsDelegate = self
-    NSFileManager.defaultManager()
+		NSNotificationCenter.defaultCenter()
+			.addObserver(self,
+			             selector: #selector(hyberDidSignOut(_:)),
+			             name: kHyberDidSignOut,
+			             object: .None)
   }
+	
+	deinit {
+		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
+	
+	@objc func hyberDidSignOut(notification: NSNotification) {
+		self.signOut()
+	}
   
   /// Earliest fetched date
   private var lastFetchedDate = NSDate(timeInterval: -0.001, sinceDate: NSDate().startOfDay())

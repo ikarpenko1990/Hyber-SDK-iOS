@@ -23,11 +23,8 @@ internal class HyberHelper {
   
   /// A pointer to currently running updateSubscriberInfo `Request`. (internal)
   internal var updateSubscriberInfoTask: NSURLSessionTask? = .None
-  
-  /// A pointer to currently running updateGCMToken `Request`. (internal)
-  //internal var updateGCMTokenTask: Request? = .None
-  
-  /// A pointer to current settings `GMSSettings`. (internal)
+	
+  /// A pointer to current settings `HyberSettings`. (internal)
   internal lazy var settings: HyberSettings = {
     HyberSettings.currentSettings
   }()
@@ -60,23 +57,20 @@ public extension Hyber {
    Registers framework with passed application key and `HyberGoogleCloudMessagingHelper` 
    with `senderID`
    - Parameter applicationKey: `String` with yours application key
-   - Parameter googleCloudMessagingHelper: An instance of `HyberGoogleCloudMessagingHelper`, 
+   - Parameter firebaseMessagingHelper: An instance of `HyberFirebaseMessagingHelper`,
    to be configured with SenderID, that provedes receiving of push-notifications on a device
-   - Parameter googleCloudMessagingSenderID: Yours Google Cloud Messaging SenderID 
-   (project number in Google Developer Console)
    */
   public static func register(
     applicationKey applicationKey: String,
-    googleCloudMessagingHelper: HyberGoogleCloudMessagingHelper,
-    andGoogleCloudMessagingSenderID googleCloudMessagingSenderID: String) // swiftlint:disable:this line_length
+    firebaseMessagingHelper: HyberFirebaseMessagingHelper) // swiftlint:disable:this line_length
   {
     
     helper.applicationKey = applicationKey
-    
-    googleCloudMessagingHelper.configure(withSenderID: googleCloudMessagingSenderID)
-    
-    Hyber.googleCloudMessagingHelper = googleCloudMessagingHelper
-    
+		
+    Hyber.firebaseMessagingHelper = firebaseMessagingHelper
+		
+		firebaseMessagingHelper.configureFirebaseMessaging()
+		
   }
   
 }

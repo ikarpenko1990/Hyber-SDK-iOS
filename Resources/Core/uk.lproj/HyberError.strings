@@ -25,12 +25,12 @@
 
 "AnotherTaskInProgress.AddSubscriber" = "Виконується інший запит: реєстрація абонента";
 "AnotherTaskInProgress.UpdateSubscriber" = "Виконується інший запит: оновлення інформації абонента";
-"AnotherTaskInProgress.UpdateGCMToken" = "Виконується інший запит: отримання токену Global Message Service";
+"AnotherTaskInProgress.UpdateFirebaseMessagingToken" = "Виконується інший запит: отримання токену Firebase Messaging Service";
 
 "CoreData.SaveError" = "Помилка при збереженні даних: %@";
 "CoreData.FetchError" = "Fetch error: %@";
 
-"HyberError.GMSTokenIsNotSet" = "Не встановлене значення токена Global Message Service";
-"HyberError.GCMTokenIsNotSet" = "Немає токена Google Cloud Messaging";
+"HyberError.HyberDeviceIdIsNotSet" = "Не встановлене значення Hyber ID пристрою";
+"HyberError.FirebaseMessagingTokenIsNotSet" = "Немає токена Firebase Messaging";
 "HyberError.NoPhoneOrEmailPassed" = "Потрібно вказати електронну адресу чи телефон";
 "HyberError.UnknownError" = "Невідома помилка";

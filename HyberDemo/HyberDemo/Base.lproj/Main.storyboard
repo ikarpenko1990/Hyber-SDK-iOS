@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HyberDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bi0-Wm-cYd">
+                                <rect key="frame" x="20" y="20" width="168" height="30"/>
+                                <state key="normal" title="Register for notifications"/>
+                                <connections>
+                                    <action selector="registerForNotificationsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ccM-Cw-cVF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4F-Ve-RAL">
+                                <rect key="frame" x="20" y="58" width="112" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMb-lC-EHm">
+                                <rect key="frame" x="140" y="92" width="105" height="30"/>
+                                <state key="normal" title="Add subscriber"/>
+                                <connections>
+                                    <action selector="addSubscriberPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kn9-bH-jUb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77S-4n-Mgl">
+                                <rect key="frame" x="527" y="550" width="53" height="30"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="refreshPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XSa-4a-pba"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="APNs token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVY-Az-oeL">
+                                <rect key="frame" x="20" y="210" width="90" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Firebase Token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4l-3W-qc2">
+                                <rect key="frame" x="20" y="135" width="116" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hyber token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZt-fY-iET">
+                                <rect key="frame" x="20" y="173" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="64F-iU-h7x">
+                                <rect key="frame" x="140" y="54" width="440" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="z75-XG-Z7s"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FEO-en-nrV">
+                                <rect key="frame" x="144" y="130" width="436" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="alC-nM-VEv"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Gy-Ib-k2o">
+                                <rect key="frame" x="122" y="168" width="458" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="tQA-ha-7x2"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l0B-9q-c6h">
+                                <rect key="frame" x="118" y="206" width="462" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="gjb-xq-8tg"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fh-I6-ceU">
+                                <rect key="frame" x="20" y="550" width="106" height="30"/>
+                                <state key="normal" title="Hyber. Sign out"/>
+                                <connections>
+                                    <action selector="hyberSignOutPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zGo-AI-hCD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8fh-I6-ceU" secondAttribute="bottom" constant="20" id="9el-a3-I6m"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="77S-4n-Mgl" secondAttribute="trailing" id="Afg-N7-KIe"/>
+                            <constraint firstItem="cMb-lC-EHm" firstAttribute="leading" secondItem="64F-iU-h7x" secondAttribute="leading" id="B12-xJ-dgl"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="8fh-I6-ceU" secondAttribute="leading" id="C1N-b5-eH3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FEO-en-nrV" secondAttribute="trailing" id="DWq-cZ-eTj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4Gy-Ib-k2o" secondAttribute="trailing" id="IJ7-e1-cKN"/>
+                            <constraint firstItem="64F-iU-h7x" firstAttribute="centerY" secondItem="e4F-Ve-RAL" secondAttribute="centerY" id="JCU-V9-yI2"/>
+                            <constraint firstItem="l0B-9q-c6h" firstAttribute="top" secondItem="4Gy-Ib-k2o" secondAttribute="bottom" constant="8" id="KDX-zm-L9Z"/>
+                            <constraint firstItem="e4F-Ve-RAL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="PVh-ky-S2T"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="64F-iU-h7x" secondAttribute="trailing" id="TUc-x9-mdE"/>
+                            <constraint firstItem="vZt-fY-iET" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Tz3-Dv-mch"/>
+                            <constraint firstItem="RVY-Az-oeL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="VQB-IC-DNw"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Bi0-Wm-cYd" secondAttribute="leading" id="b2Y-uE-uqL"/>
+                            <constraint firstItem="vZt-fY-iET" firstAttribute="centerY" secondItem="4Gy-Ib-k2o" secondAttribute="centerY" id="bL3-g3-cgQ"/>
+                            <constraint firstItem="cMb-lC-EHm" firstAttribute="top" secondItem="64F-iU-h7x" secondAttribute="bottom" constant="8" id="dpf-c9-B0l"/>
+                            <constraint firstItem="Bi0-Wm-cYd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="dxh-cR-R5g"/>
+                            <constraint firstItem="M4l-3W-qc2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lHN-Y0-SBB"/>
+                            <constraint firstItem="64F-iU-h7x" firstAttribute="top" secondItem="Bi0-Wm-cYd" secondAttribute="bottom" constant="4" id="mgd-U7-G8m"/>
+                            <constraint firstItem="FEO-en-nrV" firstAttribute="leading" secondItem="M4l-3W-qc2" secondAttribute="trailing" constant="8" id="nF4-n0-KPv"/>
+                            <constraint firstItem="M4l-3W-qc2" firstAttribute="centerY" secondItem="FEO-en-nrV" secondAttribute="centerY" id="oDf-XX-kE5"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="64F-iU-h7x" secondAttribute="leading" id="qLG-ny-FqB"/>
+                            <constraint firstItem="4Gy-Ib-k2o" firstAttribute="leading" secondItem="vZt-fY-iET" secondAttribute="trailing" constant="8" id="qTg-qk-HRz"/>
+                            <constraint firstItem="64F-iU-h7x" firstAttribute="leading" secondItem="e4F-Ve-RAL" secondAttribute="trailing" constant="8" id="quH-F1-q7n"/>
+                            <constraint firstItem="FEO-en-nrV" firstAttribute="top" secondItem="cMb-lC-EHm" secondAttribute="bottom" constant="8" id="rIW-ka-B9d"/>
+                            <constraint firstItem="l0B-9q-c6h" firstAttribute="leading" secondItem="RVY-Az-oeL" secondAttribute="trailing" constant="8" id="smm-Hn-Wlb"/>
+                            <constraint firstItem="RVY-Az-oeL" firstAttribute="centerY" secondItem="l0B-9q-c6h" secondAttribute="centerY" id="uRu-l6-ks2"/>
+                            <constraint firstItem="4Gy-Ib-k2o" firstAttribute="top" secondItem="FEO-en-nrV" secondAttribute="bottom" constant="8" id="vmw-f5-aer"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="77S-4n-Mgl" secondAttribute="bottom" constant="20" id="wBj-23-K4l"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="l0B-9q-c6h" secondAttribute="trailing" id="ydl-gq-cvr"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="qLG-ny-FqB"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="DDt-mG-Y0h" appends="YES" id="0FP-QV-njA"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="apnsDeviceTokenTextField" destination="l0B-9q-c6h" id="yQc-ue-rId"/>
+                        <outlet property="firebaseMessagingTokenTextField" destination="FEO-en-nrV" id="Cis-c3-L7F"/>
+                        <outlet property="hyberTokenTextField" destination="4Gy-Ib-k2o" id="vhG-gN-4ic"/>
+                        <outlet property="phoneNumberTextField" destination="64F-iU-h7x" id="NLX-Sf-7U6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="DDt-mG-Y0h">
+                    <connections>
+                        <action selector="recognizedTapGetsure:" destination="BYZ-38-t0r" id="Zqd-n0-fJX"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+        </scene>
+    </scenes>
+</document>

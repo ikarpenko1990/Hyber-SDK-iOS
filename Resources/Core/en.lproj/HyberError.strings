@@ -25,12 +25,12 @@
 
 "AnotherTaskInProgress.AddSubscriber" = "Another task in progress: add subscriber";
 "AnotherTaskInProgress.UpdateSubscriber" = "Another task in progress: update subscriber info";
-"AnotherTaskInProgress.UpdateGCMToken" = "Another task in progress: update Global Message Service token";
+"AnotherTaskInProgress.UpdateFirebaseMessagingToken" = "Another task in progress: update Firebase Messaging token";
 
 "CoreData.SaveError" = "Save error: %@";
 "CoreData.FetchError" = "Fetch error: %@";
 
-"HyberError.GMSTokenIsNotSet" = "Global Message Service token is not set";
-"HyberError.GCMTokenIsNotSet" = "No Google Cloud Messaging token";
+"HyberError.HyberDeviceIdIsNotSet" = "Hyber deivce ID is not set";
+"HyberError.FirebaseMessagingTokenIsNotSet" = "No Firebase Messaging token";
 "HyberError.NoPhoneOrEmailPassed" = "No phone or e-mail passed";
 "HyberError.UnknownError" = "Unknown error";
