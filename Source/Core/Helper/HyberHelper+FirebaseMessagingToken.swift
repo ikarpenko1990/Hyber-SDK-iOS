@@ -1,5 +1,5 @@
 //
-//  HyberHelper+GCMToken.swift
+//  HyberHelper+FirebaseMessagingToken.swift
 //  Hyber
 //
 //  Created by Vitalii Budnik on 2/24/16.
@@ -13,39 +13,38 @@ import UIKit
 private extension HyberHelper {
   
   /**
-   Updates Google Cloud Messaging token on Global Message Services servers
+   Updates Firebase Messaging token on Global Message Services servers
    
-   - parameter token: `String?` containing Google Cloud Messaging token
+   - parameter firebaseMessagingToken: `String?` containing Firebase Messaging token
    - parameter completionHandler: The code to be executed once the request has finished. (optional).
    This block takes no parameters. Returns `Result``<Void, HyberError>`,
    where `result.error` contains `HyberError` if any error occurred
    */
-  private func updateGCMToken(
-    token: String?,
+  private func updateFirebaseMessagingToken(
+    firebaseMessagingToken: String?,
     completionHandler completion: ((HyberResult<Void>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
     
-    if !canPreformAction(true, completion) {
+		Hyber.firebaseMessagingToken = firebaseMessagingToken
+		
+		if !canPreformAction(true, completion) {
       return
     }
-    
-    Hyber.registeredGCMtoken = token
-    
+		
     let errorCompletion: (HyberError) -> Void = { error in
-      //self.updateGCMTokenTask = .None
       completion?(.Failure(error))
     }
     
-    guard let gcmToken = token else {
-      errorCompletion(.GCMTokenIsNotSet)
+    guard let firebaseMessagingToken = firebaseMessagingToken else {
+      errorCompletion(.FirebaseMessagingTokenIsNotSet)
       return
     }
     
     let device = UIDevice.currentDevice()
     
     let requestParameters: [String: AnyObject] = [
-      "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.registeredGMStoken),
-      "gcmTokenId"     : gcmToken,
+      "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.hyberDeviceId),
+      "gcmTokenId"     : firebaseMessagingToken,
       "device_type"    : device.systemName,
       "device_version" : device.systemVersion
     ]
@@ -69,20 +68,20 @@ private extension HyberHelper {
 public extension Hyber {
   
   /**
-   Updates Google Cloud Messaging token on Global Message Services servers
+   Updates Firebase Messaging token on Global Message Services servers
    
-   - parameter token: `String?` containing Google Cloud Messaging token
+   - parameter token: `String?` containing Firebase Messaging token
    - parameter completionHandler: The code to be executed once the request has finished. (optional).
    This block takes no parameters. Returns `Result``<Void, HyberError>`,
    where `result.error` contains `HyberError` if any error occurred
    */
-  public static func updateGCMToken(
-    token: String?,
+  public static func updateFirebaseMessagingToken(
+    firebaseMessagingToken: String?,
     completionHandler completion: ((HyberResult<Void>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
     
-    helper.updateGCMToken(
-      token,
+    helper.updateFirebaseMessagingToken(
+      firebaseMessagingToken,
       completionHandler: completionHandlerInMainThread(completion))
     
   }

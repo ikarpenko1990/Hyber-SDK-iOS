@@ -100,7 +100,7 @@ public class HyberInboxControllerMessageCell: HyberInboxControllerCell {
           var x: CGFloat = 0.0
           var xx: CGFloat = 0.0
           let currentLayer = self.timeLabel.layer.presentationLayer()
-          if let currentLayer = currentLayer as? CALayer {
+          if let currentLayer = currentLayer {
             x = round(currentLayer.frame.maxX - (self.bounds.width + self.timeLabelMaxOffset))
             xx = currentLayer.frame.origin.x
           }

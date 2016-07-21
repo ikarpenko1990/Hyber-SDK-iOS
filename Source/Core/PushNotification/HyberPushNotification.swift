@@ -32,9 +32,9 @@ public struct HyberPushNotification {
   public let hyberMessageID: UInt64
   
   /**
-   `String` Google Cloud Messaging message identifier
+   `String` Firebase Messaging message identifier
    */
-  public let gcmMessageID: String?
+  public let firebaseMessageID: String?
   
   /**
    `String` representing sender. Can be `nil`
@@ -130,7 +130,7 @@ public struct HyberPushNotification {
    - Parameter withNotificationInfo: `[NSObject : AnyObject]` with modified payload, 
    where `"data"` dictionary shifted to root
    - Parameter hyberMessageID: `UInt64` Hyber message identifier
-   - Parameter gcmMessageID: `String` Google Cloud Messaging message identifier. Can be `nil`
+   - Parameter firebaseMessageID: `String` Firebase Messaging message identifier. Can be `nil`
    - Parameter sender: `String` representing senders name. Can be `nil`
    - Parameter notificationsAllowed: `Bool` that indicates user allowed alert- or sound-notifications 
    for this application is Settings
@@ -138,7 +138,7 @@ public struct HyberPushNotification {
   private init(
     withNotificationInfo notifictionInfo: [String : AnyObject],
     hyberMessageID: UInt64,
-    gcmMessageID: String?,
+    firebaseMessageID: String?,
     sender: String,
     notificationsAllowed: Bool = true) // swiftlint:disable:this opening_brace
   {
@@ -146,7 +146,7 @@ public struct HyberPushNotification {
     let tmpSound: String
     
     self.hyberMessageID       = hyberMessageID
-    self.gcmMessageID         = gcmMessageID
+    self.firebaseMessageID    = firebaseMessageID
     
     self.sender               = sender
     
@@ -249,39 +249,52 @@ public struct HyberPushNotification {
     
     let hyberMessageID = HyberPushNotification.getHyberMessageID(withUserInfo: userInfo)
     
-    let gcmMessageID: String?
-    if let _gcmMessageID = userInfo["gcm.message_id"] as? String {
+    let firebaseMessageID: String?
+    if let _firebaseMessageID = userInfo["gcm.message_id"] as? String {
       
-      gcmMessageID = _gcmMessageID
+      firebaseMessageID = _firebaseMessageID
       
       if hyberMessageID == 0 {
-        hyberLog.debug("recieved message from GCM, that was not sended by GSM (no msg_gms_uniq_id key)")
+        hyberLog.debug("recieved message from Firebase Messaging, that was not sended by Global Messaging Service (no msg_gms_uniq_id key)")
       }
       
     } else {
       
       hyberLog.verbose("No Google, no cry")
       
-      gcmMessageID = .None
+      firebaseMessageID = .None
       
     }
-    
-    guard let
-      notifictionString = userInfo["notification"] as? String,
-      notifictionData = notifictionString.dataUsingEncoding(NSUTF8StringEncoding),
-      json = try? NSJSONSerialization.JSONObjectWithData(
-        notifictionData,
-        options: NSJSONReadingOptions.AllowFragments),
-      notifictionInfo = json as? [String: NSObject]
-      else {
-        hyberLog.error("no 'notification' data ")
-        return nil
-    }
-    
+		
+		let notificationInfo: [String: NSObject]
+		
+		if let
+			notificationString = userInfo["notification"] as? String,
+			notificationData = notificationString.dataUsingEncoding(NSUTF8StringEncoding),
+			json = try? NSJSONSerialization.JSONObjectWithData(
+				notificationData,
+				options: NSJSONReadingOptions.AllowFragments),
+			jsonNotificationInfo = json as? [String: NSObject]
+		{
+			
+			notificationInfo = jsonNotificationInfo
+			
+		} else if let aps = userInfo["aps"] as? [String: NSObject] {
+			
+			hyberLog.warning("no 'notification' data, using 'aps' instead")
+			notificationInfo = aps
+			
+		} else {
+			
+			hyberLog.error("no 'notification' or 'aps' data ")
+			return nil
+			
+		}
+		
     self = HyberPushNotification(
-      withNotificationInfo: notifictionInfo,
+      withNotificationInfo: notificationInfo,
       hyberMessageID: hyberMessageID,
-      gcmMessageID: gcmMessageID,
+      firebaseMessageID: firebaseMessageID,
       sender: userInfo["alpha"] as? String ?? HyberDataInboxSender.unknownSenderNameString,
       notificationsAllowed: notificationsAllowed)
     

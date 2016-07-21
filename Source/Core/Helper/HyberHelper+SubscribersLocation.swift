@@ -42,7 +42,7 @@ private extension HyberHelper {
       else { return }
     
     let requestParameters: [String: AnyObject] = [
-      "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.registeredGMStoken),
+      "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.hyberDeviceId),
       "latitude": location?.coordinate.latitude ?? NSNull(),
       "longitude": location?.coordinate.longitude ?? NSNull(),
     ]

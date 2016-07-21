@@ -79,11 +79,15 @@ internal extension HyberProvider {
 	
   /// `NSURL` to Mobile Plaform (subscribers info) REST API
 	static let mobilePlatformURL  = NSURL(
-//    string: "http://10.12.8.1:8080/MobilePlatform/sdk_api/")!
-    string: "https://mobile-test.gms-worldwide.com/MobilePlatform/sdk_api/")!
+//		string: "http://10.12.8.1:8080/MobilePlatform/sdk_api/"
+		string: "https://mobile-test.gms-worldwide.com/MobilePlatform/sdk_api/"
+//		string: "https://ottnew.gms-worldwide.com/OTTBulkPlatform/ott/sdk_api/"
+		)!
   
   /// `NSURL` to OTTBulk Plaform (delivery reports, message fetching) REST API
   static let ottBulkPlatformURL = NSURL(
-//    string: "http://10.12.8.1:8080/OTTBulkPlatform/ott/sdk_api/")!
-    string: "https://mobile-test.gms-worldwide.com/OTTBulkDr/ott/sdk_api/")!
+//		string: "http://10.12.8.1:8080/OTTBulkPlatform/ott/sdk_api/"
+		string: "https://mobile-test.gms-worldwide.com/OTTBulkDr/ott/sdk_api/"
+//		string: "https://ottnew.gms-worldwide.com/OTTBulkDr/ott/sdk_api/"
+		)!
 }

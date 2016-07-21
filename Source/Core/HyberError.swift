@@ -29,8 +29,8 @@ Contains `HyberError.AnotherTaskInProgress`
 `HyberError.MessageFetcher`
  - CoreDataError: Error occurred when saving data. Contains
  `HyberError.CoreData`
- - GMSTokenIsNotSet: Global Message Service token is not set
- - GCMTokenIsNotSet: Google Cloud Messaging token is not set
+ - HyberDeviceIdIsNotSet: Hyber deivce ID is not set
+ - FirebaseMessagingTokenIsNotSet: Firebase Messaging token is not set
  - NoPhoneOrEmailPassed: No phone or e-mail is passed
  - UnknownError: An unknown error occurred
  */
@@ -54,11 +54,11 @@ public enum HyberError: ErrorType {
   /// Error occurred when saving data. Contains `HyberError.CoreData`
   case CoreDataError(CoreData)
   
-  /// Global Message Service token is not set
-  case GMSTokenIsNotSet
+  /// Hyber deivce ID is not set
+  case HyberDeviceIdIsNotSet
   
-  /// Google Cloud Messaging token is not set
-  case GCMTokenIsNotSet
+  /// Firebase Messaging token is not set
+  case FirebaseMessagingTokenIsNotSet
   
   /// An unknown error occurred
   case NotAuthorized

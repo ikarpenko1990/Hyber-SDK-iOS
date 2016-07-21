@@ -16,7 +16,6 @@ public extension HyberError {
    
    - AddSubscriber: Adding new subscriber
    - UpdateSubscriber: Updating subscriber's info
-   - UpdateGCMToken: Updating Google Cloud Messaging token
    */
   public enum AnotherTaskInProgress: ErrorType, CustomLocalizedDescriptionConvertible {
     
@@ -25,9 +24,6 @@ public extension HyberError {
     
     /// Updating subscriber's info
     case UpdateSubscriber
-    
-    /// Updating Google Cloud Messaging token
-    //    case UpdateGCMToken
     
     /// A string containing the localized **template** of the object. (read-only)
     internal var localizedTemplate: String {

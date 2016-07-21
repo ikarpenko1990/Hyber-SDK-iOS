@@ -46,7 +46,7 @@ extension UIImage {
     UIGraphicsBeginImageContextWithOptions(size, false, 1)
     imageLayer.renderInContext(UIGraphicsGetCurrentContext()!)
     
-    let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+    let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     return image
   }

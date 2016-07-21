@@ -44,22 +44,20 @@ internal class HyberSettings: NSObject {
     }
 	}
   
-  /// Google Cloud Messaging device token
-	var gcmToken: String? {
+  /// Firebase Messaging device token
+	var firebaseMessagingToken: String? {
 		didSet {
-      hyberLog.info("gcmToken=\(gcmToken)")
-      if gcmToken != oldValue {
+      hyberLog.info("firebaseMessagingToken=\(firebaseMessagingToken)")
+      if firebaseMessagingToken != oldValue {
         save()
-        let gcmToken = self.gcmToken
-        Hyber.updateGCMToken(gcmToken)
       }
     }
 	}
   
   /// Global Message Services device token
-	var gmsToken: UInt64 {
+	var hyberDeviceId: UInt64 {
 		didSet {
-      if gmsToken != oldValue {
+      if hyberDeviceId != oldValue {
         save()
       }
     }
@@ -71,7 +69,7 @@ internal class HyberSettings: NSObject {
       if authorized != oldValue {
         save()
         
-        Hyber.allowRecievePush(gcmToken != .None && authorized)
+        Hyber.allowRecievePush(firebaseMessagingToken != .None && authorized)
         
       }
     }
@@ -80,9 +78,9 @@ internal class HyberSettings: NSObject {
   // Private initializer
 	private override init() {
 		//user = .None
-		gcmToken = .None
+		firebaseMessagingToken = .None
 		apnsToken = .None
-		gmsToken = 0
+		hyberDeviceId = 0
     authorized = false
 		super.init()
 	}
@@ -107,7 +105,8 @@ internal class HyberSettings: NSObject {
     
     user = .None
     authorized = false
-    
+    hyberDeviceId = 0
+		
     let errorOccurred: Bool
     let eraseDataResult = HyberCoreDataHelper.managedObjectContext
       .deleteObjectctsOfAllEntities()
@@ -117,27 +116,30 @@ internal class HyberSettings: NSObject {
     default:
       errorOccurred = false
     }
-    
+		
+		hyberLog.info("Sign out")
+		NSNotificationCenter.defaultCenter().postNotificationName(kHyberDidSignOut, object: self)
+		
     return !errorOccurred
     
 	}
 	
   override var description: String {
-		return "apnsToken: \(apnsToken)\ngcmToken: \(gcmToken)\ngmsToken: \(gmsToken)\nuser: \(user)"
+		return "apnsToken: \(apnsToken)\nfirebaseMessagingToken: \(firebaseMessagingToken)\nhyberDeviceId: \(hyberDeviceId)\nuser: \(user)"
 	}
 	
   // MARK: NSCoding
   @objc required init?(coder aDecoder: NSCoder) { // swiftlint:disable:this missing_docs
     
-    let gmsTokenNumber = aDecoder.decodeObjectForKey("gmsToken") as? NSNumber
+    let hyberDeviceIdNumber = aDecoder.decodeObjectForKey("hyberDeviceId") as? NSNumber
     
     _user      = HyberSubscriber(
       withDictionary: aDecoder.decodeObjectForKey("user") as? [String: AnyObject])
     
-    apnsToken  = aDecoder.decodeObjectForKey("apnsToken") as? String
-    gcmToken   = aDecoder.decodeObjectForKey("gcmToken")  as? String
-    gmsToken   = gmsTokenNumber?.unsignedLongLongValue ?? 0
-    authorized = aDecoder.decodeBoolForKey  ("authorized")
+		apnsToken              = aDecoder.decodeObjectForKey("apnsToken") as? String
+    firebaseMessagingToken = aDecoder.decodeObjectForKey("firebaseMessagingToken")  as? String
+    hyberDeviceId          = hyberDeviceIdNumber?.unsignedLongLongValue ?? 0
+    authorized             = aDecoder.decodeBoolForKey  ("authorized")
     
   }
   
@@ -146,13 +148,13 @@ internal class HyberSettings: NSObject {
       aCoder.encodeObject(userDict, forKey: "user")
     }
     
-    let gmsTokenNumber = NSNumber(unsignedLongLong: gmsToken)
+    let hyberDeviceIdNumber = NSNumber(unsignedLongLong: hyberDeviceId)
     
     // swiftlint:disable comma
-    aCoder.encodeObject(gcmToken,       forKey: "gcmToken")
-    aCoder.encodeObject(apnsToken,      forKey: "apnsToken")
-    aCoder.encodeObject(gmsTokenNumber, forKey: "gmsToken")
-    aCoder.encodeBool  (authorized,     forKey: "authorized")
+		aCoder.encodeObject(firebaseMessagingToken, forKey: "firebaseMessagingToken")
+    aCoder.encodeObject(apnsToken,              forKey: "apnsToken")
+    aCoder.encodeObject(hyberDeviceIdNumber,    forKey: "hyberDeviceId")
+    aCoder.encodeBool  (authorized,             forKey: "authorized")
     // swiftlint:enable comma
     
   }
@@ -180,6 +182,8 @@ internal class HyberSettings: NSObject {
   private static var filePath: String? = {
     return NSFileManager.libraryDirectoryURL?.URLByAppendingPathComponent("hyberConfig.plist").path
   }()
-  
-  
+	
 }
+
+/// Hyber did sign out notification name
+internal let kHyberDidSignOut = "com.gms-worldwide.Hyber.DidSignOut"
