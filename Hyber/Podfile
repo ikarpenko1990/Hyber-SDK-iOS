@@ -3,7 +3,7 @@ use_frameworks!
 
 
 abstract_target 'pods_Hyber' do
-    pod 'Google/CloudMessaging'
+    pod 'Firebase/Messaging'
     
     target 'Hyber'
     target 'HyberTests' do

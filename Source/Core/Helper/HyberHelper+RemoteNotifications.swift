@@ -70,10 +70,9 @@ private extension HyberHelper {
       pushNotification: pushNotification)
     
     if let pushNotification = pushNotification//,
-      //gmsMessageID = pushNotification.gmsMessageID
       where pushNotification.hyberMessageID != 0
         && notificationsAllowed
-        && settings.gmsToken > 0 // swiftlint:disable:this opening_brace
+        && settings.hyberDeviceId > 0 // swiftlint:disable:this opening_brace
     {
       if !settings.authorized {
         Hyber.allowRecievePush(false)
@@ -81,7 +80,7 @@ private extension HyberHelper {
       }
       
       let requestParameters: [String : AnyObject] = [
-        "uniqAppDeviceId": NSNumber(unsignedLongLong: settings.gmsToken),
+        "uniqAppDeviceId": NSNumber(unsignedLongLong: settings.hyberDeviceId),
         "msg_gms_uniq_id": NSNumber(unsignedLongLong: pushNotification.hyberMessageID),
         "status": 1
       ]
@@ -95,23 +94,19 @@ private extension HyberHelper {
         UIApplication.sharedApplication().presentLocalNotificationNow(pushNotification.localNotification())
       }
       
-      //Hyber.googleCloudMessagingHelper?.didReceiveRemoteNotification(userInfo)
-      
-      //return pushNotification
-      
-    }
+     }
     
     
     
-    if let _ = pushNotification?.gcmMessageID {
+    if pushNotification?.firebaseMessageID != .None {
       
-      Hyber.googleCloudMessagingHelper?.didReceiveRemoteNotification(userInfo)
-      hyberLog.verbose("recieved message that was sended by GSM")
+      Hyber.firebaseMessagingHelper?.didReceiveRemoteNotification(userInfo)
+      hyberLog.verbose("recieved message that was sended by Firebase Messaging")
       return pushNotification
       
     } else {
       
-      hyberLog.verbose("recieved message from someone, that was not sended by GSM or GMS.")
+      hyberLog.verbose("recieved message from someone, that was not sended by Firebase Messaging or Global Message Services.")
       return .None
       
     }
@@ -161,7 +156,7 @@ public extension Hyber {
     
     helper.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
     
-    googleCloudMessagingHelper?.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+    firebaseMessagingHelper?.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
     
   }
   
@@ -185,11 +180,7 @@ public extension Hyber {
     -> HyberPushNotification? // swiftlint:disable:this opening_brace
   {
     
-    let pushNotification = helper.didReceiveRemoteNotification(userInfo)
-    
-    googleCloudMessagingHelper?.didReceiveRemoteNotification(userInfo)
-
-    return pushNotification
+    return helper.didReceiveRemoteNotification(userInfo)
     
   }
   

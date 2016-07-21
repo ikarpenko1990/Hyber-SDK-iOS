@@ -133,7 +133,7 @@ internal class HyberBubbleLayer: CAShapeLayer {
     
     let thePath = CGPathCreateMutable()
     
-    CGContextSetFillColorWithColor(ctx, fillColor)
+    CGContextSetFillColorWithColor(ctx, fillColor!)
     
     path.forEach { $0.draw(thePath, inContext: ctx) }
     

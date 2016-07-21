@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
 	s.name         = "Hyber"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "Global Message Services APNs reciever"
 
   # This description is used to generate tags and improve search results.
@@ -135,15 +135,15 @@ Pod::Spec.new do |s|
 	}
 
 	s.default_subspec = 'Core'
-  s.subspec 'Core' do |core|
-    core.resources = 'Resources/Core/*.*'
+	s.subspec 'Core' do |core|
+		core.resources = 'Resources/Core/*.*'
 		core.source_files = 'Source/Core/**/*.{swift,h}', 'Source/Thirdparties/Core/**/*.{swift,h}'
-		core.dependency 'Google/CloudMessaging'
-
-    core.public_header_files = 'Source/Core/Headers/*.h'
+		core.dependency 'Firebase/Messaging'
+		
+		core.public_header_files = 'Source/Core/Headers/*.h'
 
 		core.frameworks = "Foundation", "CoreData", "UIKit", "CoreLocation"
-  end
+	end
 
 	s.subspec 'Inbox' do |inboxvc|
     inboxvc.resources = 'Resources/Inbox/**/*.*'

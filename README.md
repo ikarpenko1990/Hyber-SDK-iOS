@@ -32,7 +32,7 @@ $ pod install
 ```
 
 #### Add files
-Add [```GMSGoogleCloudMessagingDelegate.swift```](https://github.com/GMSLabs/Hyber-SDK-iOS/blob/master/targetFiles/GMSGoogleCloudMessagingDelegate.swift) file to your project
+Add [```HyberFirebaseMessagingDelegate.swift```][HyberFirebaseMessagingDelegateLink] file to your project
 
 #### Configure target
 Disable bitcode (set `ENABLE_BITCODE` to `false`) in build settings for your target. See Google Cloud Messaging [issue](https://github.com/google/gcm/issues/91)
@@ -47,8 +47,7 @@ In  `func application(application: UIApplication, didFinishLaunchingWithOptions 
 ```swift
   Hyber.register(
     applicationKey: "Your Global Message Service Key",
-    googleCloudMessagingHelper: GMSGoogleCloudMessagingDelegate.sharedInstance,
-    andGoogleCloudMessagingSenderID: "Your Google Cloud Messaging Sender ID")
+    firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
 ```
 
 In  `func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)` add following
@@ -69,6 +68,8 @@ In `func application(application: UIApplication, didReceiveRemoteNotification us
 Configure push-notifications in [Certificates, Identifiers & Profiles](https://developer.apple.com/account/ios/certificate/certificateList.action) section of Apple Developer Member Center ([manual](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW6))
 ##### Registering for Remote Notifications
 Register your application to receive remote push-notifications ([manual](https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW2))
+
+Don't forget add Push Notifications for your target (see `Capabilities` tab). And add turn on `Background Modes`, whith `Remote Notifications` flag ON)
 
 ### Usage
 To start using Hyber framework you should provide correct subscriber e-mail & phone (optionally)
@@ -101,14 +102,14 @@ Hyber.updateSubscriberLocation(
   completionHandler: ((HyberResult<Void>) -> Void)? = .None)
 ```
 
-Update subscriber's changed Google cloud messages token
+Update subscriber's changed Firebase Messaging token (managed by `HyberFirebaseMessagingDelegate`)
 ```swift
-Hyber.updateGCMToken(
+Hyber.updateFirebaseMessagingToken(
   token: String?,
   completionHandler: ((HyberResult<Void>) -> Void)? = .None)
 ```
 
-Update subscriber can receive push-notifications flag
+Update subscriber can receive push-notifications flag (managed by `HyberFirebaseMessagingDelegate`)
 ```swift
 Hyber.allowRecievePush(
   allowPush: Bool,
@@ -136,19 +137,19 @@ Hyber.fetchMessages(forDate: someDate) { result in
 #### Hyber application key
 Contact [Global Message Services](http://www.gms-worldwide.com/en/kontakty.html)
 
-#### Google Cloud Messaging (push-notifications)
-[Enable Google Cloud Messaging API](https://console.developers.google.com/apis/api/googlecloudmessaging/) for you project
-
-[Enable Google services](https://developers.google.com/mobile/add?platform=ios) for your app
-
-#### Google Cloud Messaging Sender ID
-Google Cloud Messaging Sender ID is your Project number that you can get in [Google Developer Console](https://console.developers.google.com/)
+#### Firebase Messaging (push-notifications)
+Create new project in [Firebase console](https://firebase.google.com/console/).
+Add iOS aaplication into your project.
+Enable Cloud Messaging API for you project in  Go to project Settings, switch to Cloud Messaging tab. Upload APNs certificates ([Manual](https://firebase.google.com/docs/cloud-messaging/ios/certs)).
+Than download `GoogleService-Info.plist` from `General` tab (Firebase console, project settings).
+Add this file to yours application project.
 
 ### License
 [MIT][LICENSE]
-[LICENSE]: LICENSE
 
 #### 3rdparties
 [XCGLogger](https://github.com/DaveWoodCom/XCGLogger) by [Dave Wood](https://twitter.com/DaveWoodX). [MIT license](https://github.com/DaveWoodCom/XCGLogger/blob/master/LICENSE.txt)
 
-[Google Cloud Messaging](https://github.com/google/gcm/blob/master/LICENSE)
+[Firebase Messaging](https://github.com/google/gcm/blob/master/LICENSE)
+[LICENSE]: LICENSE
+[HyberFirebaseMessagingDelegateLink]: targetFiles/HyberFirebaseMessagingDelegate.swift

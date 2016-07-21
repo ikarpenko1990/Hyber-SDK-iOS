@@ -13,12 +13,12 @@ internal extension HyberHelper {
   /**
    Checks if there no mutually exclusive tasks
    
-   - parameter checkGMStoken: `Bool` indicates to check Global Message Services device token is set, or not
+   - parameter checkHyberDeviceId: `Bool` indicates to check Global Message Services device token is set, or not
    - parameter completion: closure to execute, if checks not passed
    - returns: `true` if all checks passed, `false` otherwise
    */
   internal func canPreformAction<T>(
-    checkGMStoken: Bool,
+    checkHyberDeviceId: Bool,
     _ completion: ((HyberResult<T>) -> Void)? = .None)
     -> Bool // swiftlint:disable:this opening_brace
   {
@@ -39,9 +39,9 @@ internal extension HyberHelper {
       return false
     }
     
-    if checkGMStoken && Hyber.registeredGMStoken <= 0 {
-      hyberLog.error(HyberError.GMSTokenIsNotSet.localizedDescription)
-      completion?(.Failure(.GMSTokenIsNotSet))
+    if checkHyberDeviceId && Hyber.hyberDeviceId <= 0 {
+      hyberLog.error(HyberError.HyberDeviceIdIsNotSet.localizedDescription)
+      completion?(.Failure(.HyberDeviceIdIsNotSet))
       return false
     }
     

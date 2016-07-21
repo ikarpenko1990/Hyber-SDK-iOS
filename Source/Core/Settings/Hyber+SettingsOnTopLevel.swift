@@ -10,7 +10,7 @@ import Foundation
 
 private extension Hyber {
   
-  /// A pointer to current settings GMSSettings
+  /// A pointer to current settings `HyberSettings`
   private static let settings = helper.settings
   
 }
@@ -42,7 +42,7 @@ public extension Hyber {
   }
   
   /// Subscriber's phone number
-	internal static var registeredUserPhone: UInt64? {
+	public internal (set) static var registeredUserPhone: UInt64? {
     set {
       guard let newValue = newValue else { return }
       registeredUser?.phone = newValue
@@ -52,23 +52,23 @@ public extension Hyber {
     }
   }
 	
-  /// Google Cloud Messaging device token
-	internal static var registeredGCMtoken: String? {
+  /// Firebase Messaging device token
+	internal static var firebaseMessagingToken: String? {
 		set {
-			settings.gcmToken = newValue
+			settings.firebaseMessagingToken = newValue
 		}
 		get {
-			return settings.gcmToken
+			return settings.firebaseMessagingToken
 		}
 	}
 	
   /// Global Message Services device token
-	internal static var registeredGMStoken: UInt64 {
+	public internal (set) static var hyberDeviceId: UInt64 {
 		set {
-			settings.gmsToken = newValue
+			settings.hyberDeviceId = newValue
 		}
 		get {
-			return settings.gmsToken
+			return settings.hyberDeviceId
 		}
 	}
 	
@@ -83,7 +83,7 @@ public extension Hyber {
 	}
 	
   /// Apple push-notification device token, represented as String
-	internal static var apnsToken: String? {
+	public internal (set) static var apnsToken: String? {
 		set {
 			settings.apnsToken = newValue
 		}
@@ -97,15 +97,8 @@ public extension Hyber {
    - Returns: `true` if sign out successful, `false` otherwise
    */
 	public static func signOut() -> Bool {
-    HyberInboxViewControllerMessageFetcher.sharedInstance.signOut()
-    return settings.signOut()
-	}
-	
-  /// Updates registered Google Message Service device token
-  /// - Parameter gcmToken: `String` with new Google Message Service device token
-	public static func updateRegisteredGCMtoken(gcmToken: String?) {
 		
-		registeredGCMtoken = gcmToken
+    return settings.signOut()
 		
 	}
 	

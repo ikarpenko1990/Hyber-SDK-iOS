@@ -76,7 +76,7 @@ private extension HyberHelper {
     }
     
     let requestParameters: [String: AnyObject] = [
-      "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.registeredGMStoken),
+      "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.hyberDeviceId),
       "phone": NSNumber(unsignedLongLong: phone),
       "email": email.isEmpty ? NSNull() : email
     ]
@@ -124,17 +124,10 @@ private extension HyberHelper {
       return
     }
     
-    let gcmToken = Hyber.registeredGCMtoken ?? ""
+    let firebaseMessagingToken = Hyber.firebaseMessagingToken ?? ""
     
     let device = UIDevice.currentDevice()
-    
-//    let phoneNSNumber: NSNumber?
-//    if let phone = phone {
-//      phoneNSNumber = NSNumber(longLong: phone)
-//    } else {
-//      phoneNSNumber = .None
-//    }
-    
+        
     let email = email ?? ""
     
     if !validatePhone(phone, email: email, completionHandler: completion) {
@@ -145,7 +138,7 @@ private extension HyberHelper {
       "uniqAppDeviceId": NSNull(),
       "phone": NSNumber(unsignedLongLong: phone),
       "email": email.isEmpty ? NSNull() : email,
-      "gcmTokenId":  gcmToken.isEmpty ? NSNull() : gcmToken,
+      "gcmTokenId":  firebaseMessagingToken.isEmpty ? NSNull() : firebaseMessagingToken,
       "device_type": device.systemName,
       "device_version": device.systemVersion
     ]
@@ -165,17 +158,17 @@ private extension HyberHelper {
           return
         }
         
-        guard let newGMSDeviceID = uniqAppDeviceId as? Double else {
+        guard let newHyberDeviceId = uniqAppDeviceId as? Double else {
           completion?(.Failure(.SubscriberError(.AppDeviceIdWrondType)))
           return
         }
         
-        if newGMSDeviceID <= 0 {
+        if newHyberDeviceId <= 0 {
           completion?(.Failure(.SubscriberError(.AppDeviceIdLessOrEqualZero)))
           return
         }
         
-        Hyber.registeredGMStoken = UInt64(newGMSDeviceID)
+        Hyber.hyberDeviceId = UInt64(newHyberDeviceId)
         Hyber.registeredUser = HyberSubscriber(phone: phone, email: email)
         Hyber.authorized = true
         
@@ -202,14 +195,14 @@ private extension HyberHelper {
       return
     }
     
-    let gmsToken = NSNumber(unsignedLongLong: Hyber.registeredGMStoken)
+    let hyberDeviceId = NSNumber(unsignedLongLong: Hyber.hyberDeviceId)
     
     HyberProvider.sharedInstance.POST(
       "get_profile",
-      parameters: ["uniqAppDeviceId":gmsToken]) { result in
+      parameters: ["uniqAppDeviceId": hyberDeviceId]) { result in
         
         guard let json = result.value else {
-          completion?(.Success(Hyber.registeredGMStoken))
+          completion?(.Success(Hyber.hyberDeviceId))
           return
         }
         
@@ -221,7 +214,7 @@ private extension HyberHelper {
           Hyber.helper.settings.save()
         }
         
-        completion?(.Success(Hyber.registeredGMStoken))
+        completion?(.Success(Hyber.hyberDeviceId))
     }
   }
   
@@ -269,13 +262,13 @@ private extension HyberHelper {
       completion?(.Failure(error))
     }
     
-    if Hyber.registeredGMStoken <= 0 {
-      errorCompletion(.GMSTokenIsNotSet)
+    if Hyber.hyberDeviceId <= 0 {
+      errorCompletion(.HyberDeviceIdIsNotSet)
       return
     }
     
     let requestParameters: [String: AnyObject] = [
-      "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.registeredGMStoken),
+      "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.hyberDeviceId),
       "push_allowed": NSNumber(int: allowPush ? 1 : 0)
     ]
     

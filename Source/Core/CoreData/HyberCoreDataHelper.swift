@@ -1,6 +1,6 @@
 //
 //  HyberCoreDataHelper.swift
-//  GMS Worldwide App
+//  Hyber
 //
 //  Created by Vitalii Budnik on 1/25/16.
 //  Copyright © 2016 Global Message Services AG. All rights reserved.
@@ -87,7 +87,7 @@ public final class HyberCoreDataHelper {
   /// Application library directory `NSURL`
   private lazy var applicationLibraryDirectory: NSURL = {
     // The directory the application uses to store the Core Data store file. 
-    // This code uses a directory named "com.gms-worldwide.GMS_Worldwide" in the application's 
+    // This code uses a directory named "com.gms-worldwide.Hyber" in the application's 
     // documents Application Support directory.
     let urls = NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask)
     return urls[urls.count-1]
