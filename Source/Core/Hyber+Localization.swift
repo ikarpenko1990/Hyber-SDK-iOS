@@ -17,19 +17,35 @@ public extension Hyber {
   internal static var currentLocale: NSLocale = NSLocale(
     localeIdentifier: NSLocale.preferredLanguages().first!)
   
-  /**
+	/**
+	Localizes `Hyber.bundle`
+	
+	- Parameter language: New language `String`
+	- Parameter dontCheckCurentLocale: New language `String`
+	*/
+	static func localize(language: String) {
+		
+		hyberLog.info("Localize")
+		
+		localize(language, dontCheckCurentLocale: false)
+		
+	}
+	
+	/**
    Localizes `Hyber.bundle`
    
-   - parameter language: New language `String`
+	- Parameter language: New language `String`
+	- Parameter dontCheckCurentLocale: pass `true` to reload bundle, even if language didn't actually changed, `false` otherwise
    */
-  static func localize(language: String) {
-    
-    if language == currentLocale.localeIdentifier {
+	internal static func localize(language: String, dontCheckCurentLocale: Bool) {
+		
+    if dontCheckCurentLocale == false
+			&& language == currentLocale.localeIdentifier {
       return
     }
     
     let localizedBudnle = localizedBundle(NSBundle(forClass: Hyber.self), language: language)
-    
+		
     Hyber.bundle = localizedBudnle
     
     currentLocale = NSLocale(localeIdentifier: language)

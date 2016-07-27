@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//import GoogleCloudMessaging
+import UIKit
 
 /**
  Global Message Service Helper.
@@ -53,23 +53,56 @@ public extension Hyber {
     }
   }
   
-  /**
-   Registers framework with passed application key and `HyberGoogleCloudMessagingHelper` 
-   with `senderID`
-   - Parameter applicationKey: `String` with yours application key
-   - Parameter firebaseMessagingHelper: An instance of `HyberFirebaseMessagingHelper`,
-   to be configured with SenderID, that provedes receiving of push-notifications on a device
-   */
+	/**
+	Registers framework with passed application key and `HyberGoogleCloudMessagingHelper`
+	with `senderID`
+	- Parameter applicationKey: `String` with yours application key
+	- Parameter firebaseMessagingHelper: An instance of `HyberFirebaseMessagingHelper`,
+	to be configured with SenderID, that provedes receiving of push-notifications on a device
+	- Parameter launchOptions:
+	A dictionary indicating the reason the app was launched (if any). The contents of this dictionary may be empty in situations where the user launched the app directly.
+	Default value: `nil`.
+	- Returns: `HyberPushNotification` if remote or local notification was found in passed `launchOptions` parameter
+	*/
   public static func register(
     applicationKey applicationKey: String,
-    firebaseMessagingHelper: HyberFirebaseMessagingHelper) // swiftlint:disable:this line_length
+    firebaseMessagingHelper: HyberFirebaseMessagingHelper,
+    launchOptions: [NSObject: AnyObject]? = .None) -> HyberPushNotification? // swiftlint:disable:this line_length
   {
-    
+		
+		Hyber.consoleLogLevel = .Info
+		hyberLog.logAppDetails()
+		Hyber.fileLogLevel = .Verbose
+		
+		hyberLog.info("Registration")
+		
     helper.applicationKey = applicationKey
 		
     Hyber.firebaseMessagingHelper = firebaseMessagingHelper
 		
 		firebaseMessagingHelper.configureFirebaseMessaging()
+		
+		localize(NSLocale.preferredLanguages().first ?? "en",
+		         dontCheckCurentLocale: true)
+		
+		guard let launchOptions = launchOptions else { return .None }
+		
+		let pushNotification: HyberPushNotification?
+		if let remoteNotification = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
+			
+			pushNotification = HyberPushNotification(userInfo: remoteNotification,
+			                                         isRemoteNotification: true)
+			
+		} else if let localNotification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] as? [NSObject : AnyObject] {
+			
+			pushNotification = HyberPushNotification(userInfo: localNotification,
+			                                         isRemoteNotification: false)
+			
+		} else {
+			pushNotification = .None
+		}
+		
+		return pushNotification
 		
   }
   

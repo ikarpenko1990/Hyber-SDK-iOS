@@ -20,6 +20,7 @@ internal extension Hyber {
 	/// Current subscriber information
 	static var registeredUser: HyberSubscriber? {
 		set {
+			hyberLog.verbose("New registered user: \(registeredUser)")
 			settings.user = newValue
 		}
 		get {
@@ -53,7 +54,7 @@ public extension Hyber {
   }
 	
   /// Firebase Messaging device token
-	internal static var firebaseMessagingToken: String? {
+	public internal (set) static var firebaseMessagingToken: String? {
 		set {
 			settings.firebaseMessagingToken = newValue
 		}
@@ -98,8 +99,42 @@ public extension Hyber {
    */
 	public static func signOut() -> Bool {
 		
+		hyberLog.info("Sign out")
+		
     return settings.signOut()
 		
 	}
+	
+}
+
+/// Log
+extension Hyber {
+	
+	/**
+	Console log level.
+	Default: `.Verbose` with `DEBUG` mode on, '.Info' otherwise
+	*/
+	public static var consoleLogLevel: HyberXCGLoggerLogLevel {
+		set {
+			settings.consoleLogLevel = newValue
+		}
+		get {
+			return settings.consoleLogLevel
+		}
+	}
+	
+	/**
+	File log level
+	Default: `.Verbose`
+	*/
+	public static var fileLogLevel: HyberXCGLoggerLogLevel {
+		set {
+			settings.fileLogLevel = newValue
+		}
+		get {
+			return settings.fileLogLevel
+		}
+	}
+
 	
 }

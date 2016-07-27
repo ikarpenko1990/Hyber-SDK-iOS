@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 /**
  Settings of `Hyber` framework
@@ -38,6 +39,7 @@ internal class HyberSettings: NSObject {
   /// Apple push-notification device token, represented as `String`
 	var apnsToken: String? {
 		didSet {
+			hyberLog.verbose("apnsToken: \(apnsToken)")
       if apnsToken != oldValue {
         save()
       }
@@ -47,7 +49,7 @@ internal class HyberSettings: NSObject {
   /// Firebase Messaging device token
 	var firebaseMessagingToken: String? {
 		didSet {
-      hyberLog.info("firebaseMessagingToken=\(firebaseMessagingToken)")
+      hyberLog.verbose("firebaseMessagingToken: \(firebaseMessagingToken)")
       if firebaseMessagingToken != oldValue {
         save()
       }
@@ -57,6 +59,7 @@ internal class HyberSettings: NSObject {
   /// Global Message Services device token
 	var hyberDeviceId: UInt64 {
 		didSet {
+			hyberLog.verbose("hyberDeviceId: \(hyberDeviceId)")
       if hyberDeviceId != oldValue {
         save()
       }
@@ -66,6 +69,7 @@ internal class HyberSettings: NSObject {
   /// Flag indicates if subscriber athorized or not
 	var authorized: Bool {
 		didSet {
+			hyberLog.verbose("authorized: \(authorized)")
       if authorized != oldValue {
         save()
         
@@ -117,7 +121,6 @@ internal class HyberSettings: NSObject {
       errorOccurred = false
     }
 		
-		hyberLog.info("Sign out")
 		NSNotificationCenter.defaultCenter().postNotificationName(kHyberDidSignOut, object: self)
 		
     return !errorOccurred
@@ -133,14 +136,13 @@ internal class HyberSettings: NSObject {
     
     let hyberDeviceIdNumber = aDecoder.decodeObjectForKey("hyberDeviceId") as? NSNumber
     
-    _user      = HyberSubscriber(
+    _user                  = HyberSubscriber(
       withDictionary: aDecoder.decodeObjectForKey("user") as? [String: AnyObject])
     
 		apnsToken              = aDecoder.decodeObjectForKey("apnsToken") as? String
     firebaseMessagingToken = aDecoder.decodeObjectForKey("firebaseMessagingToken")  as? String
     hyberDeviceId          = hyberDeviceIdNumber?.unsignedLongLongValue ?? 0
     authorized             = aDecoder.decodeBoolForKey  ("authorized")
-    
   }
   
   @objc func encodeWithCoder(aCoder: NSCoder) { // swiftlint:disable:this missing_docs
@@ -151,10 +153,10 @@ internal class HyberSettings: NSObject {
     let hyberDeviceIdNumber = NSNumber(unsignedLongLong: hyberDeviceId)
     
     // swiftlint:disable comma
-		aCoder.encodeObject(firebaseMessagingToken, forKey: "firebaseMessagingToken")
-    aCoder.encodeObject(apnsToken,              forKey: "apnsToken")
-    aCoder.encodeObject(hyberDeviceIdNumber,    forKey: "hyberDeviceId")
-    aCoder.encodeBool  (authorized,             forKey: "authorized")
+		aCoder.encodeObject (firebaseMessagingToken,          forKey: "firebaseMessagingToken")
+    aCoder.encodeObject (apnsToken,                       forKey: "apnsToken")
+    aCoder.encodeObject (hyberDeviceIdNumber,             forKey: "hyberDeviceId")
+    aCoder.encodeBool   (authorized,                      forKey: "authorized")
     // swiftlint:enable comma
     
   }
@@ -182,6 +184,71 @@ internal class HyberSettings: NSObject {
   private static var filePath: String? = {
     return NSFileManager.libraryDirectoryURL?.URLByAppendingPathComponent("hyberConfig.plist").path
   }()
+	
+	/**
+		Console log level.
+		Default: `.Info`
+	*/
+	var consoleLogLevel: HyberXCGLoggerLogLevel = .Info {
+		didSet {
+			
+			hyberLog.verbose("consoleLogLevel: \(consoleLogLevel)")
+			
+			hyberLog.removeLogDestination(XCGLogger.Constants.baseConsoleLogDestinationIdentifier)
+			
+			let standardConsoleLogDestination: XCGConsoleLogDestination = XCGConsoleLogDestination(owner: hyberLog, identifier: XCGLogger.Constants.baseConsoleLogDestinationIdentifier)
+			
+			standardConsoleLogDestination.showLogIdentifier = false
+			standardConsoleLogDestination.showFunctionName = true
+			standardConsoleLogDestination.showThreadName = true
+			standardConsoleLogDestination.showLogLevel = true
+			standardConsoleLogDestination.showFileName = true
+			standardConsoleLogDestination.showLineNumber = true
+			standardConsoleLogDestination.showDate = false
+			standardConsoleLogDestination.outputLogLevel = fileLogLevel
+			
+			standardConsoleLogDestination.xcodeColors = consoleLogColors
+			
+			hyberLog.addLogDestination(standardConsoleLogDestination)
+			
+		}
+	}
+	
+	/**
+		File log level
+		Default: `.Verbose`
+	*/
+	var fileLogLevel: HyberXCGLoggerLogLevel = .Verbose {
+		didSet {
+			
+			hyberLog.verbose("fileLogLevel: \(fileLogLevel)")
+			
+			hyberLog.removeLogDestination(XCGLogger.Constants.baseFileLogDestinationIdentifier)
+			
+			let standardFileLogDestination: XCGFileLogDestination = XCGFileLogDestination(owner: hyberLog, writeToFile: true, identifier: XCGLogger.Constants.baseFileLogDestinationIdentifier)
+			
+			standardFileLogDestination.showLogIdentifier = false
+			standardFileLogDestination.showFunctionName = true
+			standardFileLogDestination.showThreadName = true
+			standardFileLogDestination.showLogLevel = true
+			standardFileLogDestination.showFileName = true
+			standardFileLogDestination.showLineNumber = true
+			standardFileLogDestination.showDate = true
+			standardFileLogDestination.outputLogLevel = fileLogLevel
+			
+			hyberLog.addLogDestination(standardFileLogDestination)
+			
+		}
+	}
+	
+	let consoleLogColors: [HyberXCGLoggerLogLevel: XCGLogger.XcodeColor] = [
+		.Verbose: .lightGrey,
+		.Debug: .darkGrey,
+		.Info: .darkGreen,
+		.Warning: XCGLogger.XcodeColor(fg: UIColor.orangeColor()),
+		.Error: XCGLogger.XcodeColor(fg: UIColor.redColor()),
+		.Severe: XCGLogger.XcodeColor(fg: UIColor.whiteColor(), bg: UIColor.redColor())
+	]
 	
 }
 

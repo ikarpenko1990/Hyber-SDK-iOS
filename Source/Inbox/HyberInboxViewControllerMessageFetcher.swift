@@ -499,54 +499,53 @@ public class HyberInboxViewControllerMessageFetcher {
 
 extension HyberInboxViewControllerMessageFetcher: HyberRemoteNotificationReciever {
   
-  public func didReceiveRemoteNotification(
-    userInfo: [NSObject : AnyObject],
-    pushNotification: HyberPushNotification?) // swiftlint:disable:this opening_brace
-  {
-    
-    if let pushNotification = pushNotification {
-      let message = HyberMessage(pushNotification: pushNotification)
-      synchronized { [weak self] in
-        
-        guard let sSelf = self else { return }
-        
-        let oldCellData = sSelf.cellData
-        
-        sSelf.executeBlockWithData { (filtered, rawData, cellData) in
-          
-          if filtered && !(sSelf.filterClosure?(message) ?? true) {
-            return
-          }
-          
-          let lastMessage = rawData.last
-          
-          var newCells: [HyberInboxCellData]
-          if let lastMessage = lastMessage where rawData.count > 1 {
-            newCells = sSelf.cellDataFor(
-              rawData[rawData.count - 2],
-              currentMessage: lastMessage,
-              nextMessage: message)
-              .filter { $0.isMessage }
-            cellData.removeLast()
-          } else {
-            newCells = []
-          }
-          
-          newCells += sSelf.cellDataFor(lastMessage, currentMessage: message, nextMessage: .None)
-          
-          rawData.append(message)
-          cellData += newCells
-        }
-        
-        let diff = sSelf.diff(oldCellData, after: sSelf.cellData)
-        dispatch_sync(dispatch_get_main_queue()) {
-          sSelf.delegate?.newMessagesFetched(diff)
-        }
-        
-      }
-    }
-  }
-  
+	public func didReceiveRemoteNotification(
+		userInfo: [NSObject : AnyObject],
+		pushNotification: HyberPushNotification) // swiftlint:disable:this opening_brace
+	{
+		
+		let message = HyberMessage(pushNotification: pushNotification)
+		synchronized { [weak self] in
+			
+			guard let sSelf = self else { return }
+			
+			let oldCellData = sSelf.cellData
+			
+			sSelf.executeBlockWithData { (filtered, rawData, cellData) in
+				
+				if filtered && !(sSelf.filterClosure?(message) ?? true) {
+					return
+				}
+				
+				let lastMessage = rawData.last
+				
+				var newCells: [HyberInboxCellData]
+				if let lastMessage = lastMessage where rawData.count > 1 {
+					newCells = sSelf.cellDataFor(
+						rawData[rawData.count - 2],
+						currentMessage: lastMessage,
+						nextMessage: message)
+						.filter { $0.isMessage }
+					cellData.removeLast()
+				} else {
+					newCells = []
+				}
+				
+				newCells += sSelf.cellDataFor(lastMessage, currentMessage: message, nextMessage: .None)
+				
+				rawData.append(message)
+				cellData += newCells
+			}
+			
+			let diff = sSelf.diff(oldCellData, after: sSelf.cellData)
+			dispatch_sync(dispatch_get_main_queue()) {
+				sSelf.delegate?.newMessagesFetched(diff)
+			}
+			
+		}
+		
+	}
+	
 }
 //swiftlint:enable opening_brace
 //swiftlint:enable type_body_length

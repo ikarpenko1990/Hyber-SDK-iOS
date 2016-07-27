@@ -28,7 +28,7 @@ public protocol HyberRemoteNotificationReciever: class {
    */
   func didReceiveRemoteNotification(
     userInfo: [NSObject : AnyObject],
-    pushNotification:HyberPushNotification?) // swiftlint:disable:this colon
+    pushNotification:HyberPushNotification) // swiftlint:disable:this colon
   // swiftlint:enable line_length
 }
 
@@ -40,79 +40,85 @@ private extension HyberHelper {
    - Returns: `HyberPushNotification` if notifications allowed, user authorized, 
    notification in correct format and saved into Inbox. Otherwise returns `nil`
    */
-  func didReceiveRemoteNotification(
-    userInfo: [NSObject : AnyObject])
-    -> HyberPushNotification? // swiftlint:disable:this opening_brace
-  {
-    
-    hyberLog.verbose("userInfo: \(userInfo.description)")
-    
-    var newUserInfo: [NSObject : AnyObject] = userInfo ?? [NSObject : AnyObject]()
-    
-    if let dataDictionary = newUserInfo["data"] as? [String : AnyObject] {
-      for (key, value) in dataDictionary {
-        newUserInfo[key] = value
-      }
-      newUserInfo["data"] = nil
-    }
-    
-    let notificationsAllowed: Bool =
-      (UIApplication.sharedApplication().currentUserNotificationSettings()?.types
-        ?? UIUserNotificationType.None)
-        != UIUserNotificationType.None
-    
-    let pushNotification = HyberPushNotification(
-      withUserInfo: newUserInfo,
-      notificationsAllowed: notificationsAllowed)
-    
-    internalRemoteNotificationsDelegate?.didReceiveRemoteNotification(
-      userInfo,
-      pushNotification: pushNotification)
-    
-    if let pushNotification = pushNotification//,
-      where pushNotification.hyberMessageID != 0
-        && notificationsAllowed
-        && settings.hyberDeviceId > 0 // swiftlint:disable:this opening_brace
-    {
-      if !settings.authorized {
-        Hyber.allowRecievePush(false)
-        return .None
-      }
-      
-      let requestParameters: [String : AnyObject] = [
-        "uniqAppDeviceId": NSNumber(unsignedLongLong: settings.hyberDeviceId),
-        "msg_gms_uniq_id": NSNumber(unsignedLongLong: pushNotification.hyberMessageID),
-        "status": 1
-      ]
-      
-      HyberProvider.sharedInstance.POST(
-        .OTTPlatform,
-        "deliveryReport",
-        parameters: requestParameters)
-      
-      if let _ = pushNotification.save() {
-        UIApplication.sharedApplication().presentLocalNotificationNow(pushNotification.localNotification())
-      }
-      
-     }
-    
-    
-    
-    if pushNotification?.firebaseMessageID != .None {
-      
-      Hyber.firebaseMessagingHelper?.didReceiveRemoteNotification(userInfo)
-      hyberLog.verbose("recieved message that was sended by Firebase Messaging")
-      return pushNotification
-      
-    } else {
-      
-      hyberLog.verbose("recieved message from someone, that was not sended by Firebase Messaging or Global Message Services.")
-      return .None
-      
-    }
-    
-  }
-  
+	func didReceiveRemoteNotification(
+		userInfo: [NSObject : AnyObject])
+		-> HyberPushNotification? // swiftlint:disable:this opening_brace
+	{
+		
+		hyberLog.verbose("userInfo: \(userInfo.description)")
+		
+		guard let pushNotification = HyberPushNotification(
+			userInfo: userInfo,
+			isRemoteNotification: true)
+			else {
+				
+				hyberLog.error("Recieved push-noficication can't be mapped to `HyberPushNotification`")
+				
+				return .None
+				
+		}
+		
+		internalRemoteNotificationsDelegate?.didReceiveRemoteNotification(
+			userInfo,
+			pushNotification: pushNotification)
+		
+		var showLocalNotification: Bool =
+			UIApplication.sharedApplication().applicationState != .Active
+			&& pushNotification.notificationsAllowed
+			&& pushNotification.showLocalNotification
+		
+		if pushNotification.hyberMessageID != 0
+			&& settings.hyberDeviceId > 0
+		{
+			
+			hyberLog.verbose("Recieved message that was sended by Global Message Services")
+			
+			let requestParameters: [String : AnyObject] = [
+				"uniqAppDeviceId": NSNumber(unsignedLongLong: settings.hyberDeviceId),
+				"msg_gms_uniq_id": NSNumber(unsignedLongLong: pushNotification.hyberMessageID),
+				"status": 1
+			]
+			
+			hyberLog.verbose("Sending delivery report")
+			
+			HyberProvider.sharedInstance.POST(
+				.OTTPlatform,
+				"deliveryReport",
+				parameters: requestParameters)
+			
+			showLocalNotification = showLocalNotification && pushNotification.save() != .None
+			
+		}
+		
+		if showLocalNotification {
+			UIApplication.sharedApplication()
+				.presentLocalNotificationNow(pushNotification.localNotification())
+		}
+		
+		if pushNotification.firebaseMessageID != .None {
+			
+			Hyber.firebaseMessagingHelper?.didReceiveRemoteNotification(userInfo)
+			
+			if pushNotification.hyberMessageID == 0 {
+				hyberLog.verbose("Recieved message that was sended by Firebase Messaging, but not from Global Message Services")
+			}
+			
+		} else if pushNotification.hyberMessageID == 0 {
+			
+			hyberLog.warning("Unknown sender for recieved message")
+			
+		} else {
+			
+			hyberLog.verbose("Recieved message that was sended by Global Message Services via APNs")
+			
+		}
+		
+		hyberLog.debug("Recieved push-notification")
+		
+		return pushNotification
+		
+	}
+	
   /// Handles registration for push-notification receiving
   /// - Parameter deviceToken: registered remote Apple Push-notifications device doken
   func didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {
@@ -153,7 +159,9 @@ public extension Hyber {
   public static func didRegisterForRemoteNotificationsWithDeviceToken(
     deviceToken: NSData) // swiftlint:disable:this opening_brace
   {
-    
+		
+		hyberLog.info("New apns token came")
+		
     helper.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
     
     firebaseMessagingHelper?.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
@@ -179,7 +187,9 @@ public extension Hyber {
     userInfo: [NSObject : AnyObject])
     -> HyberPushNotification? // swiftlint:disable:this opening_brace
   {
-    
+		
+		hyberLog.info("Push notification")
+		
     return helper.didReceiveRemoteNotification(userInfo)
     
   }

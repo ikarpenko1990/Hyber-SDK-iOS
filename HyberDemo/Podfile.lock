@@ -33,7 +33,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Hyber:
-    :path: "../Hyber.podspec"
+    :path: ../Hyber.podspec
 
 SPEC CHECKSUMS:
   Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3

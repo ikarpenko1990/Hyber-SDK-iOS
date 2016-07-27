@@ -40,17 +40,47 @@ import Foundation
 
 // swiftlint:disable
 
+// MARK: - Enums
+public enum HyberXCGLoggerLogLevel: Int, Comparable, CustomStringConvertible {
+	case Verbose
+	case Debug
+	case Info
+	case Warning
+	case Error
+	case Severe
+	case None
+	
+	public var description: String {
+		switch self {
+		case .Verbose:
+			return "Verbose"
+		case .Debug:
+			return "Debug"
+		case .Info:
+			return "Info"
+		case .Warning:
+			return "Warning"
+		case .Error:
+			return "Error"
+		case .Severe:
+			return "Severe"
+		case .None:
+			return "None"
+		}
+	}
+}
+
 // MARK: - XCGLogDetails
 // - Data structure to hold all info about a log message, passed to log destination classes
-private struct XCGLogDetails {
-  var logLevel: XCGLogger.LogLevel
+internal struct XCGLogDetails {
+  var logLevel: HyberXCGLoggerLogLevel
   var date: NSDate
   var logMessage: String
   var functionName: String
   var fileName: String
   var lineNumber: Int
   
-  init(logLevel: XCGLogger.LogLevel, date: NSDate, logMessage: String, functionName: String, fileName: String, lineNumber: Int) {
+  init(logLevel: HyberXCGLoggerLogLevel, date: NSDate, logMessage: String, functionName: String, fileName: String, lineNumber: Int) {
     self.logLevel = logLevel
     self.date = date
     self.logMessage = logMessage
@@ -62,23 +92,23 @@ private struct XCGLogDetails {
 
 // MARK: - XCGLogDestinationProtocol
 // - Protocol for output classes to conform to
-private protocol XCGLogDestinationProtocol: CustomDebugStringConvertible {
+internal protocol XCGLogDestinationProtocol: CustomDebugStringConvertible {
   var owner: XCGLogger {get set}
   var identifier: String {get set}
-  var outputLogLevel: XCGLogger.LogLevel {get set}
+  var outputLogLevel: HyberXCGLoggerLogLevel {get set}
   
   func processLogDetails(logDetails: XCGLogDetails)
   func processInternalLogDetails(logDetails: XCGLogDetails) // Same as processLogDetails but should omit function/file/line info
-  func isEnabledForLogLevel(logLevel: XCGLogger.LogLevel) -> Bool
+  func isEnabledForLogLevel(logLevel: HyberXCGLoggerLogLevel) -> Bool
 }
 
 // MARK: - XCGBaseLogDestination
 // - A base class log destination that doesn't actually output the log anywhere and is intented to be subclassed
-private class XCGBaseLogDestination: XCGLogDestinationProtocol, CustomDebugStringConvertible {
+internal class XCGBaseLogDestination: XCGLogDestinationProtocol, CustomDebugStringConvertible {
   // MARK: - Properties
   var owner: XCGLogger
   var identifier: String
-  var outputLogLevel: XCGLogger.LogLevel = .Debug
+  var outputLogLevel: HyberXCGLoggerLogLevel = .Debug
   
   var showLogIdentifier: Bool = false
   var showFunctionName: Bool = true
@@ -177,7 +207,7 @@ private class XCGBaseLogDestination: XCGLogDestinationProtocol, CustomDebugStrin
   }
   
   // MARK: - Misc methods
-  func isEnabledForLogLevel (logLevel: XCGLogger.LogLevel) -> Bool {
+  func isEnabledForLogLevel (logLevel: HyberXCGLoggerLogLevel) -> Bool {
     return logLevel >= self.outputLogLevel
   }
   
@@ -190,10 +220,10 @@ private class XCGBaseLogDestination: XCGLogDestinationProtocol, CustomDebugStrin
 
 // MARK: - XCGConsoleLogDestination
 // - A standard log destination that outputs log details to the console
-private class XCGConsoleLogDestination: XCGBaseLogDestination {
+internal class XCGConsoleLogDestination: XCGBaseLogDestination {
   // MARK: - Properties
   var logQueue: dispatch_queue_t? = nil
-  var xcodeColors: [XCGLogger.LogLevel: XCGLogger.XcodeColor]? = nil
+  var xcodeColors: [HyberXCGLoggerLogLevel: XCGLogger.XcodeColor]? = nil
   
   // MARK: - Misc Methods
   override func output(logDetails: XCGLogDetails, text: String) {
@@ -206,8 +236,9 @@ private class XCGConsoleLogDestination: XCGBaseLogDestination {
       else {
         adjustedText = text
       }
-      
-      print("\(adjustedText)")
+			
+      NSLog("%@", adjustedText)
+			
     }
     
     if let logQueue = logQueue {
@@ -224,7 +255,7 @@ private class XCGConsoleLogDestination: XCGBaseLogDestination {
 private class XCGNSLogDestination: XCGBaseLogDestination {
   // MARK: - Properties
   var logQueue: dispatch_queue_t? = nil
-  var xcodeColors: [XCGLogger.LogLevel: XCGLogger.XcodeColor]? = nil
+  var xcodeColors: [HyberXCGLoggerLogLevel: XCGLogger.XcodeColor]? = nil
   
   override var showDate: Bool {
     get {
@@ -261,7 +292,7 @@ private class XCGNSLogDestination: XCGBaseLogDestination {
 
 // MARK: - XCGFileLogDestination
 // - A standard log destination that outputs log details to a file
-private class XCGFileLogDestination: XCGBaseLogDestination {
+internal class XCGFileLogDestination: XCGBaseLogDestination {
   // MARK: - Properties
   var logQueue: dispatch_queue_t? = nil
   private var writeToFileURL: NSURL? = nil {
@@ -347,7 +378,7 @@ private class XCGFileLogDestination: XCGBaseLogDestination {
 // - The main logging class
 internal class XCGLogger: CustomDebugStringConvertible {
   // MARK: - Constants
-  private struct Constants {
+  internal struct Constants {
     static let defaultInstanceIdentifier = "com.cerebralgardens.xcglogger.defaultInstance"
     static let baseConsoleLogDestinationIdentifier = "com.cerebralgardens.xcglogger.logdestination.console"
     static let nslogDestinationIdentifier = "com.cerebralgardens.xcglogger.logdestination.console.nslog"
@@ -357,36 +388,6 @@ internal class XCGLogger: CustomDebugStringConvertible {
     static let versionString = "3.3"
   }
   private typealias constants = Constants // Preserve backwards compatibility: Constants should be capitalized since it's a type
-  
-  // MARK: - Enums
-  enum LogLevel: Int, Comparable, CustomStringConvertible {
-    case Verbose
-    case Debug
-    case Info
-    case Warning
-    case Error
-    case Severe
-    case None
-    
-    var description: String {
-      switch self {
-      case .Verbose:
-        return "Verbose"
-      case .Debug:
-        return "Debug"
-      case .Info:
-        return "Info"
-      case .Warning:
-        return "Warning"
-      case .Error:
-        return "Error"
-      case .Severe:
-        return "Severe"
-      case .None:
-        return "None"
-      }
-    }
-  }
   
   struct XcodeColor {
     static let escape = "\u{001b}["
@@ -507,7 +508,7 @@ internal class XCGLogger: CustomDebugStringConvertible {
   
   // MARK: - Properties (Options)
   var identifier: String = ""
-  var outputLogLevel: LogLevel = .Debug {
+  var outputLogLevel: HyberXCGLoggerLogLevel = .Debug {
     didSet {
       for index in 0 ..< logDestinations.count {
         logDestinations[index].outputLogLevel = outputLogLevel
@@ -516,7 +517,7 @@ internal class XCGLogger: CustomDebugStringConvertible {
   }
   
   var xcodeColorsEnabled: Bool = false
-  var xcodeColors: [XCGLogger.LogLevel: XCGLogger.XcodeColor] = [
+  var xcodeColors: [HyberXCGLoggerLogLevel: XCGLogger.XcodeColor] = [
     .Verbose: .lightGrey,
     .Debug: .darkGrey,
     .Info: .blue,
@@ -580,11 +581,11 @@ internal class XCGLogger: CustomDebugStringConvertible {
   }
   
   // MARK: - Setup methods
-  class func setup(logLevel: LogLevel = .Debug, showLogIdentifier: Bool = false, showFunctionName: Bool = true, showThreadName: Bool = false, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showDate: Bool = true, writeToFile: AnyObject? = nil, fileLogLevel: LogLevel? = nil) {
+  class func setup(logLevel: HyberXCGLoggerLogLevel = .Debug, showLogIdentifier: Bool = false, showFunctionName: Bool = true, showThreadName: Bool = false, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showDate: Bool = true, writeToFile: AnyObject? = nil, fileLogLevel: HyberXCGLoggerLogLevel? = nil) {
     defaultInstance().setup(logLevel, showLogIdentifier: showLogIdentifier, showFunctionName: showFunctionName, showThreadName: showThreadName, showLogLevel: showLogLevel, showFileNames: showFileNames, showLineNumbers: showLineNumbers, showDate: showDate, writeToFile: writeToFile)
   }
   
-  func setup(logLevel: LogLevel = .Debug, showLogIdentifier: Bool = false, showFunctionName: Bool = true, showThreadName: Bool = false, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showDate: Bool = true, writeToFile: AnyObject? = nil, fileLogLevel: LogLevel? = nil) {
+  func setup(logLevel: HyberXCGLoggerLogLevel = .Debug, showLogIdentifier: Bool = false, showFunctionName: Bool = true, showThreadName: Bool = false, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showDate: Bool = true, writeToFile: AnyObject? = nil, fileLogLevel: HyberXCGLoggerLogLevel? = nil) {
     outputLogLevel = logLevel;
     
     if let standardConsoleLogDestination = logDestination(XCGLogger.Constants.baseConsoleLogDestinationIdentifier) as? XCGConsoleLogDestination {
@@ -618,19 +619,19 @@ internal class XCGLogger: CustomDebugStringConvertible {
   }
   
   // MARK: - Logging methods
-  class func logln(@autoclosure closure: () -> String?, logLevel: LogLevel = .Debug, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+  class func logln(@autoclosure closure: () -> String?, logLevel: HyberXCGLoggerLogLevel = .Debug, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.defaultInstance().logln(logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, closure: closure)
   }
   
-  class func logln(logLevel: LogLevel = .Debug, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, @noescape closure: () -> String?) {
+  class func logln(logLevel: HyberXCGLoggerLogLevel = .Debug, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, @noescape closure: () -> String?) {
     self.defaultInstance().logln(logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, closure: closure)
   }
   
-  func logln(@autoclosure closure: () -> String?, logLevel: LogLevel = .Debug, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+  func logln(@autoclosure closure: () -> String?, logLevel: HyberXCGLoggerLogLevel = .Debug, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logln(logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, closure: closure)
   }
   
-  func logln(logLevel: LogLevel = .Debug, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, @noescape closure: () -> String?) {
+  func logln(logLevel: HyberXCGLoggerLogLevel = .Debug, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, @noescape closure: () -> String?) {
     var logDetails: XCGLogDetails? = nil
     for logDestination in self.logDestinations {
       if (logDestination.isEnabledForLogLevel(logLevel)) {
@@ -648,11 +649,11 @@ internal class XCGLogger: CustomDebugStringConvertible {
     }
   }
   
-  class func exec(logLevel: LogLevel = .Debug, closure: () -> () = {}) {
+  class func exec(logLevel: HyberXCGLoggerLogLevel = .Debug, closure: () -> () = {}) {
     self.defaultInstance().exec(logLevel, closure: closure)
   }
   
-  func exec(logLevel: LogLevel = .Debug, closure: () -> () = {}) {
+  func exec(logLevel: HyberXCGLoggerLogLevel = .Debug, closure: () -> () = {}) {
     if (!isEnabledForLogLevel(logLevel)) {
       return
     }
@@ -660,7 +661,7 @@ internal class XCGLogger: CustomDebugStringConvertible {
     closure()
   }
   
-  private func logAppDetails(selectedLogDestination: XCGLogDestinationProtocol? = nil) {
+  internal func logAppDetails(selectedLogDestination: XCGLogDestinationProtocol? = nil) {
     let date = NSDate()
     
     var buildString = ""
@@ -796,60 +797,60 @@ internal class XCGLogger: CustomDebugStringConvertible {
   // MARK: - Exec Methods
   // MARK: * Verbose
   class func verboseExec(closure: () -> () = {}) {
-    self.defaultInstance().exec(XCGLogger.LogLevel.Verbose, closure: closure)
+    self.defaultInstance().exec(HyberXCGLoggerLogLevel.Verbose, closure: closure)
   }
   
   func verboseExec(closure: () -> () = {}) {
-    self.exec(XCGLogger.LogLevel.Verbose, closure: closure)
+    self.exec(HyberXCGLoggerLogLevel.Verbose, closure: closure)
   }
   
   // MARK: * Debug
   class func debugExec(closure: () -> () = {}) {
-    self.defaultInstance().exec(XCGLogger.LogLevel.Debug, closure: closure)
+    self.defaultInstance().exec(HyberXCGLoggerLogLevel.Debug, closure: closure)
   }
   
   func debugExec(closure: () -> () = {}) {
-    self.exec(XCGLogger.LogLevel.Debug, closure: closure)
+    self.exec(HyberXCGLoggerLogLevel.Debug, closure: closure)
   }
   
   // MARK: * Info
   class func infoExec(closure: () -> () = {}) {
-    self.defaultInstance().exec(XCGLogger.LogLevel.Info, closure: closure)
+    self.defaultInstance().exec(HyberXCGLoggerLogLevel.Info, closure: closure)
   }
   
   func infoExec(closure: () -> () = {}) {
-    self.exec(XCGLogger.LogLevel.Info, closure: closure)
+    self.exec(HyberXCGLoggerLogLevel.Info, closure: closure)
   }
   
   // MARK: * Warning
   class func warningExec(closure: () -> () = {}) {
-    self.defaultInstance().exec(XCGLogger.LogLevel.Warning, closure: closure)
+    self.defaultInstance().exec(HyberXCGLoggerLogLevel.Warning, closure: closure)
   }
   
   func warningExec(closure: () -> () = {}) {
-    self.exec(XCGLogger.LogLevel.Warning, closure: closure)
+    self.exec(HyberXCGLoggerLogLevel.Warning, closure: closure)
   }
   
   // MARK: * Error
   class func errorExec(closure: () -> () = {}) {
-    self.defaultInstance().exec(XCGLogger.LogLevel.Error, closure: closure)
+    self.defaultInstance().exec(HyberXCGLoggerLogLevel.Error, closure: closure)
   }
   
   func errorExec(closure: () -> () = {}) {
-    self.exec(XCGLogger.LogLevel.Error, closure: closure)
+    self.exec(HyberXCGLoggerLogLevel.Error, closure: closure)
   }
   
   // MARK: * Severe
   class func severeExec(closure: () -> () = {}) {
-    self.defaultInstance().exec(XCGLogger.LogLevel.Severe, closure: closure)
+    self.defaultInstance().exec(HyberXCGLoggerLogLevel.Severe, closure: closure)
   }
   
   func severeExec(closure: () -> () = {}) {
-    self.exec(XCGLogger.LogLevel.Severe, closure: closure)
+    self.exec(HyberXCGLoggerLogLevel.Severe, closure: closure)
   }
   
   // MARK: - Misc methods
-  func isEnabledForLogLevel (logLevel: XCGLogger.LogLevel) -> Bool {
+  func isEnabledForLogLevel (logLevel: HyberXCGLoggerLogLevel) -> Bool {
     return logLevel >= self.outputLogLevel
   }
   
@@ -863,7 +864,7 @@ internal class XCGLogger: CustomDebugStringConvertible {
     return nil
   }
   
-  private func addLogDestination(logDestination: XCGLogDestinationProtocol) -> Bool {
+  internal func addLogDestination(logDestination: XCGLogDestinationProtocol) -> Bool {
     let existingLogDestination: XCGLogDestinationProtocol? = self.logDestination(logDestination.identifier)
     if existingLogDestination != nil {
       return false
@@ -882,7 +883,7 @@ internal class XCGLogger: CustomDebugStringConvertible {
   }
   
   // MARK: - Private methods
-  private func _logln(logMessage: String, logLevel: LogLevel = .Debug) {
+  private func _logln(logMessage: String, logLevel: HyberXCGLoggerLogLevel = .Debug) {
     
     var logDetails: XCGLogDetails? = nil
     for logDestination in self.logDestinations {
@@ -909,8 +910,8 @@ internal class XCGLogger: CustomDebugStringConvertible {
   }
 }
 
-// Implement Comparable for XCGLogger.LogLevel
-func < (lhs:XCGLogger.LogLevel, rhs:XCGLogger.LogLevel) -> Bool {
+// Implement Comparable for HyberXCGLoggerLogLevel
+public func < (lhs:HyberXCGLoggerLogLevel, rhs:HyberXCGLoggerLogLevel) -> Bool {
   return lhs.rawValue < rhs.rawValue
 }
 

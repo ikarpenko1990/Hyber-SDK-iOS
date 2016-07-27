@@ -17,8 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		
-		Hyber.register(applicationKey: "sww34cc290454561bd913f64685e54cm",
-		               firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
+		let remoteNotification = Hyber.register(applicationKey: "sww34cc290454561bd913f64685e54cm",
+		               firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance,
+		               launchOptions: launchOptions)
+		
+		print(remoteNotification)
+		
+		Hyber.consoleLogLevel = .Verbose
 		
 		application.registerForRemoteNotifications()
 		
@@ -35,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		Hyber.didReceiveRemoteNotification(userInfo)
 		
-		completionHandler(.NoData)
+		completionHandler(.NewData)
 		
 	}
 

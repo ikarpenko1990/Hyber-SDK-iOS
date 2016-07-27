@@ -31,7 +31,7 @@ public extension HyberError {
       return Hyber.bundle.localizedStringForKey(
         "AnotherTaskInProgress.\(enumPresentation)",
         value: .None,
-        table: "HyberErrors")
+        table: "HyberError")
     }
     
     /// A string containing the localized description of the object. (read-only)

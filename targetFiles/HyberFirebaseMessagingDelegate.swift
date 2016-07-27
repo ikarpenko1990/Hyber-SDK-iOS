@@ -109,11 +109,19 @@ extension HyberFirebaseMessagingDelegate {
 	}
   
   func didReceiveRemoteNotification(userInfo: [NSObject: AnyObject]) {
+		
+		print("HyberFirebaseMessagingDelegate recieved push-notification")
+		
     FIRMessaging.messaging().appDidReceiveMessage(userInfo)
+		
   }
   
   func didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {
+		
+		print("HyberFirebaseMessagingDelegate recieved apns token")
+		
     self.deviceToken = deviceToken
+		
   }
   
 }
