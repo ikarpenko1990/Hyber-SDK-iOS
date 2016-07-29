@@ -66,12 +66,14 @@ private extension HyberHelper {
   {
     
     if !canPreformAction(true, completion) {
+			hyberLog.error("Can't update subscriber info")
       return
     }
     
     let email = email ?? ""
     
     if !validatePhone(phone, email: email, completionHandler: completion) {
+			hyberLog.error("Phone or e-mail not valid")
       return
     }
     
@@ -80,24 +82,33 @@ private extension HyberHelper {
       "phone": NSNumber(unsignedLongLong: phone),
       "email": email.isEmpty ? NSNull() : email
     ]
-    
+		
+		hyberLog.verbose("Sending new subscriber's info")
+		
     updateSubscriberInfoTask = HyberProvider.sharedInstance.POST(
       "lib_update_phone_email",
-      parameters: requestParameters) { result in
-        
+      parameters: requestParameters) { [weak self] result in
+				
+				let errorCompletion: (HyberError) -> Void = { [weak self] error in
+					self?.updateSubscriberInfoTask = .None
+					hyberLog.error("updateSubscriberInfo.response: " + error.localizedDescription)
+					completion?(.Failure(error))
+				}
+				
         if Hyber.registeredUser?.phone != phone {
           HyberCoreDataHelper.managedObjectContext.deleteObjectctsOfAllEntities()
         }
         
         guard let _: [String: AnyObject] = result.value else {
-          self.updateSubscriberInfoTask = .None
-          completion?(.Failure(result.error ?? .UnknownError))
+          errorCompletion(result.error ?? .UnknownError)
           return
         }
-        
+				
         Hyber.registeredUser = HyberSubscriber(phone: phone, email: email)
         
-        self.updateSubscriberInfoTask = .None
+        self?.updateSubscriberInfoTask = .None
+				
+				hyberLog.debug("New subscriber's info sended")
 
         completion?(.Success())
         
@@ -121,6 +132,7 @@ private extension HyberHelper {
   {
     
     if !canPreformAction(completion) {
+			hyberLog.error("Can't add subscriber")
       return
     }
     
@@ -131,6 +143,7 @@ private extension HyberHelper {
     let email = email ?? ""
     
     if !validatePhone(phone, email: email, completionHandler: completion) {
+			hyberLog.error("Phone or e-mail not valid")
       return
     }
     
@@ -142,39 +155,49 @@ private extension HyberHelper {
       "device_type": device.systemName,
       "device_version": device.systemVersion
     ]
-    
+		
+		hyberLog.verbose("Adding new subscriber")
+		
     addSubscriberTask = HyberProvider.sharedInstance.POST(
       "lib_add_abonent",
-      parameters: requestParameters) { result in
-        
+      parameters: requestParameters) { [weak self] result in
+				
+				let errorCompletion: (HyberError) -> Void = { [weak self] error in
+					self?.addSubscriberTask = .None
+					hyberLog.error("addSubscriber.response: " + error.localizedDescription)
+					completion?(.Failure(error))
+				}
+				
         guard let json: [String: AnyObject] = result.value else {
-          self.addSubscriberTask = .None
-          completion?(.Failure(result.error ?? .UnknownError))
+					errorCompletion(result.error ?? .UnknownError)
           return
         }
         
         guard let uniqAppDeviceId = json["uniqAppDeviceId"] else {
-          completion?(.Failure(.SubscriberError(.NoAppDeviceId)))
+          errorCompletion(.SubscriberError(.NoAppDeviceId))
           return
         }
         
         guard let newHyberDeviceId = uniqAppDeviceId as? Double else {
-          completion?(.Failure(.SubscriberError(.AppDeviceIdWrondType)))
+          errorCompletion(.SubscriberError(.AppDeviceIdWrondType))
           return
         }
         
         if newHyberDeviceId <= 0 {
-          completion?(.Failure(.SubscriberError(.AppDeviceIdLessOrEqualZero)))
+          errorCompletion(.SubscriberError(.AppDeviceIdLessOrEqualZero))
           return
         }
-        
+				
+				hyberLog.debug("New subscriber added")
+				
         Hyber.hyberDeviceId = UInt64(newHyberDeviceId)
         Hyber.registeredUser = HyberSubscriber(phone: phone, email: email)
-        Hyber.authorized = true
-        
-        self.addSubscriberTask = .None
-        
-        self.getSubscribersProfile(completionHandler: completion)
+				
+				self?.addSubscriberTask = .None
+
+				Hyber.authorized = true
+				
+        self?.getSubscribersProfile(completionHandler: completion)
         
     }
     
@@ -192,20 +215,26 @@ private extension HyberHelper {
     completionHandler completion: ((HyberResult<UInt64>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
     if !canPreformAction(true, completion) {
+			hyberLog.error("Can't get subscriber's profile")
       return
     }
     
     let hyberDeviceId = NSNumber(unsignedLongLong: Hyber.hyberDeviceId)
-    
+		
+		hyberLog.verbose("Getting subscribers info")
+		
     HyberProvider.sharedInstance.POST(
       "get_profile",
       parameters: ["uniqAppDeviceId": hyberDeviceId]) { result in
         
         guard let json = result.value else {
+					hyberLog.debug("little err: \"\(result.error)\" occurred, but it's okey")
           completion?(.Success(Hyber.hyberDeviceId))
           return
         }
-        
+				
+				hyberLog.debug("Subscribers profile recieved")
+				
         if let createdDate = json["created_date"] as? Double {
           var user = Hyber.registeredUser
           user?.registrationDate = NSDate(
@@ -255,10 +284,12 @@ private extension HyberHelper {
   {
     
     if !canPreformAction(completion) {
+			hyberLog.error("Can't change allowRecievePush flag")
       return
     }
     
     let errorCompletion: (HyberError) -> Void = { error in
+			hyberLog.error("allowRecievePush: " + error.localizedDescription)
       completion?(.Failure(error))
     }
     
@@ -271,16 +302,22 @@ private extension HyberHelper {
       "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.hyberDeviceId),
       "push_allowed": NSNumber(int: allowPush ? 1 : 0)
     ]
+		
+		hyberLog.verbose("Sending allowRecievePush: \(allowPush)")
     
     let _ = HyberProvider.sharedInstance.POST(
       "lib_alow_recieve_push",
       parameters: requestParameters) { response in
         
         if response.isFailure(completion) {
-          hyberLog.error((response.error ?? HyberError.UnknownError).localizedDescription)
+					let error = response.error ?? HyberError.UnknownError
+          hyberLog.error("allowRecievePush.response: " + error.localizedDescription)
+					completion?(.Failure(error))
           return
         }
-        
+				
+				hyberLog.debug("allowRecievePush setted")
+				
         completion?(.Success())
     }
     
@@ -304,7 +341,9 @@ public extension Hyber {
     allowPush: Bool,
     completionHandler completion: ((HyberResult<Void>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
-    
+		
+		hyberLog.info("Allow push")
+		
     helper.allowRecievePush(
       allowPush,
       completionHandler: completionHandlerInMainThread(completion))
@@ -326,7 +365,9 @@ public extension Hyber {
     email: String?,
     completionHandler completion: ((HyberResult<UInt64>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
-    
+		
+		hyberLog.info("Registering new subscriber")
+		
     helper.addSubscriber(
       phone,
       email: email,
@@ -348,6 +389,8 @@ public extension Hyber {
     email: String?,
     completionHandler completion: ((HyberResult<Void>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
+		
+		hyberLog.info("Updating Subscriber's info")
     
     helper.updateSubscriberInfo(
       phone: phone,

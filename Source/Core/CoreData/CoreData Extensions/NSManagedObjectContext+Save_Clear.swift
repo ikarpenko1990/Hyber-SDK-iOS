@@ -87,7 +87,7 @@ internal extension NSManagedObjectContext {
       do {
         results = try self.getObjectctsOfEntity(entityName)
       } catch {
-        hyberLog.error("executeFetchRequest error: \(error)")
+        hyberLog.error("executeFetchRequest: \(error)")
         result = .Failure(.CoreDataError(.FetchError(error as NSError)))
         return
       }

@@ -93,7 +93,7 @@ class ViewController: UIViewController {
 	}
 	
 	internal func refreshData() {
-		firebaseMessagingTokenTextField.text = HyberFirebaseMessagingDelegate.sharedInstance.firebaseMessagingToken
+		firebaseMessagingTokenTextField.text = HyberFirebaseMessagingDelegate.sharedInstance.firebaseMessagingToken ?? Hyber.firebaseMessagingToken
 		hyberTokenTextField.text = Hyber.hyberDeviceId > 0 ? "\(Hyber.hyberDeviceId)" : .None
 		apnsDeviceTokenTextField.text = Hyber.apnsToken
 		
@@ -126,6 +126,15 @@ class ViewController: UIViewController {
 		
 	}
 	
+	@IBAction func hyberVerifyButtonPressed(sender: UIButton) {
+		
+		if Hyber.verify() {
+			print("Ok")
+		} else {
+			print("Something went wrong")
+		}
+		
+	}
 }
 
 extension ViewController: UITextFieldDelegate {

@@ -188,6 +188,7 @@ public final class HyberMessagesFetcher {
   {
     
     let errorCompletion: (HyberError) -> Void = { error in
+			hyberLog.error("fetch: " + error.localizedDescription)
       completion(.Failure(error))
     }
     
@@ -254,7 +255,9 @@ public final class HyberMessagesFetcher {
     return { response in
       
       guard let fullJSON: [String : AnyObject] = response.value(completion) else {
-        hyberLog.error((response.error ?? HyberError.UnknownError).localizedDescription)
+				let error = response.error ?? HyberError.UnknownError
+        hyberLog.error("messagesFetchHandler.response: " + error.localizedDescription)
+				completion(.Failure(error))
         return
       }
       

@@ -1,5 +1,5 @@
 //
-//  HyberErrors.swift
+//  HyberError.swift
 //  Hyber
 //
 //  Created by Vitalii Budnik on 12/10/15.
@@ -98,7 +98,7 @@ public enum HyberError: ErrorType {
     return Hyber.bundle.localizedStringForKey(
       "HyberError.\(enumPresentation)",
       value: .None,
-      table: "HyberErrors")
+      table: "HyberError")
   }
   
   /// A string containing the localized description of the object. (read-only)

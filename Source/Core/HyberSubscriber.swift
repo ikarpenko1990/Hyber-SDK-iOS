@@ -79,9 +79,9 @@ internal extension HyberSubscriber {
 		if let email = email {
 			result["email"] = email
 		}
-//		if let phone = phone {
-			result["phone"] = NSNumber(unsignedLongLong: phone)
-//		}
+		
+		result["phone"] = NSNumber(unsignedLongLong: phone)
+		
     if let registrationDate = registrationDate {
       result["registrationDate"] = NSNumber(double: registrationDate.timeIntervalSinceReferenceDate)
     }

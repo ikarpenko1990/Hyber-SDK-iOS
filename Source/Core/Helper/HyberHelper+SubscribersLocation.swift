@@ -33,27 +33,37 @@ private extension HyberHelper {
   {
     
     if !canPreformAction(true, completion) {
+			hyberLog.error("Can't update subscriber's location")
       return
     }
     
     let timestamp = location?.timestamp ?? NSDate()
     guard timestamp.timeIntervalSinceDate(HyberHelper.lastUpdateLocation)
       >= HyberHelper.updateInterval
-      else { return }
+      else {
+				hyberLog.info("Location update interval too small. Less than \(HyberHelper.updateInterval)")
+				return
+		}
     
     let requestParameters: [String: AnyObject] = [
       "uniqAppDeviceId": NSNumber(unsignedLongLong: Hyber.hyberDeviceId),
       "latitude": location?.coordinate.latitude ?? NSNull(),
       "longitude": location?.coordinate.longitude ?? NSNull(),
     ]
+		
+		hyberLog.info("Sending location")
     
     HyberProvider.sharedInstance.POST("location", parameters: requestParameters) { response in
       
       guard !response.isFailure(completion) else {
-        hyberLog.error((response.error ?? HyberError.UnknownError).localizedDescription)
+				let error = response.error ?? .UnknownError
+        hyberLog.error("updateSubscriberLocation.response: " + error.localizedDescription)
+				completion?(.Failure(error))
         return
       }
-      
+			
+			hyberLog.debug("Location sended")
+			
       completion?(.Success())
       HyberHelper.lastUpdateLocation = timestamp
     }
@@ -76,7 +86,9 @@ public extension Hyber {
     location: CLLocation?,
     completionHandler completion: ((HyberResult<Void>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
-    
+		
+		hyberLog.info("Updating location")
+		
     helper.updateSubscriberLocation(
       location,
       completionHandler: completionHandlerInMainThread(completion))

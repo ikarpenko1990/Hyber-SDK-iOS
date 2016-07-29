@@ -24,14 +24,20 @@ private extension HyberHelper {
     firebaseMessagingToken: String?,
     completionHandler completion: ((HyberResult<Void>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
-    
+		guard Hyber.firebaseMessagingToken != .None || firebaseMessagingToken != .None else {
+			hyberLog.info("Saved firebase messaging token was nil, and a new one is nil too.")
+			return
+		}
+		
 		Hyber.firebaseMessagingToken = firebaseMessagingToken
 		
 		if !canPreformAction(true, completion) {
+			hyberLog.error("Can't update firebase messaging token")
       return
     }
 		
     let errorCompletion: (HyberError) -> Void = { error in
+			hyberLog.error("updateFirebaseMessagingToken " + error.localizedDescription)
       completion?(.Failure(error))
     }
     
@@ -48,14 +54,20 @@ private extension HyberHelper {
       "device_type"    : device.systemName,
       "device_version" : device.systemVersion
     ]
-    
+		
+		hyberLog.verbose("Sending firebase token")
+		
     HyberProvider.sharedInstance.POST("lib_update_token", parameters: requestParameters) { response in
       
       if response.isFailure(completion) {
-        hyberLog.error((response.error ?? HyberError.UnknownError).localizedDescription)
+				let error = response.error ?? .UnknownError
+        hyberLog.error(error.localizedDescription)
+				completion?(.Failure(error))
         return
       }
-      
+			
+			hyberLog.debug("Firebase token sended")
+			
       Hyber.allowRecievePush(self.settings.authorized) { response in
         completion?(response)
       }
@@ -79,7 +91,9 @@ public extension Hyber {
     firebaseMessagingToken: String?,
     completionHandler completion: ((HyberResult<Void>) -> Void)? = .None) // swiftlint:disable:this line_length
   {
-    
+		
+    hyberLog.info("New firebase token came")
+		
     helper.updateFirebaseMessagingToken(
       firebaseMessagingToken,
       completionHandler: completionHandlerInMainThread(completion))

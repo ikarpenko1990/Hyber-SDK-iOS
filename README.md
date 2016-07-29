@@ -22,7 +22,7 @@ pre_install do |installer|
   def installer.verify_no_static_framework_transitive_dependencies; end
 end
 
-pod 'Hyber/Inbox', :git => 'https://github.com/GMSLabs/Hyber-SDK-iOS.git', :tag => '0.1.1'
+pod 'Hyber/Inbox', :git => 'https://github.com/GMSLabs/Hyber-SDK-iOS.git', :tag => '0.1.2'
 ```
 
 Then, run the following command:
@@ -47,8 +47,10 @@ In  `func application(application: UIApplication, didFinishLaunchingWithOptions 
 ```swift
   Hyber.register(
     applicationKey: "Your Global Message Service Key",
-    firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
+    firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance,
+    launchOptions: launchOptions)
 ```
+This method returns `HyberPushNotification` if remote or local notification was found in passed `launchOptions` parameter, `nil` otherwise, so you can use if like this: `let pushNotification = Hyber.register(...)`
 
 In  `func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)` add following
 ```swift

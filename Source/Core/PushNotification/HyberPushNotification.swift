@@ -124,23 +124,37 @@ public struct HyberPushNotification {
    Push-notification's delivered `NSDate`
    */
   public let deliveredDate: NSDate
-  
-  /**
-   Initalizes `HyberPushNotification` with
-   - Parameter withNotificationInfo: `[NSObject : AnyObject]` with modified payload, 
-   where `"data"` dictionary shifted to root
-   - Parameter hyberMessageID: `UInt64` Hyber message identifier
-   - Parameter firebaseMessageID: `String` Firebase Messaging message identifier. Can be `nil`
-   - Parameter sender: `String` representing senders name. Can be `nil`
-   - Parameter notificationsAllowed: `Bool` that indicates user allowed alert- or sound-notifications 
-   for this application is Settings
-   */
+	
+	/**
+		`Bool` that indicates show local notification to user, or not
+		`true` - show local notification, `false` - otherwise.
+	*/
+	internal let showLocalNotification: Bool
+	
+	/**
+	`Bool` that indicates that this is remote notification,
+	`false` if this is local notification
+	*/
+	public let isRemoteNotification: Bool
+	
+	/**
+	Initalizes `HyberPushNotification` with
+	- Parameter withNotificationInfo: `[NSObject : AnyObject]` with modified payload,
+	where `"data"` dictionary shifted to root
+	- Parameter isRemoteNotification: pass `true` this is remote notification,
+	`false` if this is local notification
+	- Parameter hyberMessageID: `UInt64` Hyber message identifier
+	- Parameter firebaseMessageID: `String` Firebase Messaging message identifier. Can be `nil`
+	- Parameter sender: `String` representing senders name. Can be `nil`
+	- Parameter showLocalNotification: `Bool` that indicates show local notification to user, or not
+	*/
   private init(
     withNotificationInfo notifictionInfo: [String : AnyObject],
+    isRemoteNotification: Bool,
     hyberMessageID: UInt64,
     firebaseMessageID: String?,
     sender: String,
-    notificationsAllowed: Bool = true) // swiftlint:disable:this opening_brace
+    showLocalNotification: Bool = true) // swiftlint:disable:this opening_brace
   {
     
     let tmpSound: String
@@ -150,7 +164,7 @@ public struct HyberPushNotification {
     
     self.sender               = sender
     
-    self.notificationsAllowed = notificationsAllowed
+    self.notificationsAllowed = UIUserNotificationSettings.userNotificationsAllowed()
     
     
     tmpSound = notifictionInfo["sound"] as? String ?? UILocalNotificationDefaultSoundName
@@ -190,7 +204,11 @@ public struct HyberPushNotification {
     }
     
     deliveredDate = NSDate()
-    
+		
+		self.showLocalNotification = showLocalNotification
+		
+		self.isRemoteNotification = isRemoteNotification
+		
   }
   
   /**
@@ -205,48 +223,62 @@ public struct HyberPushNotification {
     withUserInfo userInfo: [NSObject : AnyObject])
     -> UInt64  // swiftlint:disable:this opnening_brace
   {
-    
-    let hyberMessageID: UInt64
-    if let incomeMessageID = userInfo["msg_gms_uniq_id"] {
-      if let incomeMessageID = incomeMessageID as? String {
-        if let incomeMessageIDFromString = HyberPushNotification.numberFormatter
-          .numberFromString(incomeMessageID)?.unsignedLongLongValue {
-          
-          hyberMessageID = incomeMessageIDFromString
-        } else {
-          hyberLog.error("String incomeMessageID not convertible to UInt64")
-          
-          hyberMessageID = 0
-        }
-      } else if let incomeMessageID = incomeMessageID as? Double {
-        
-        hyberMessageID = UInt64(incomeMessageID)
-        
-      } else {
-        hyberLog.error("unexpected userInfo[\"uniqAppDeviceId\"] type: \(incomeMessageID.dynamicType)")
-        
-        hyberMessageID = 0
-      }
-    } else {
-      hyberMessageID = 0
-    }
-    
-    return hyberMessageID
+		
+		guard let data = userInfo.jsonFor(key: "data") else {
+			hyberLog.warning("Can't get hyberMessageID. No \"data\" section in  userInfo")
+			return 0
+		}
+		
+		guard let incomeMessageID = data["msg_gms_uniq_id"] else {
+			hyberLog.warning("Can't get hyberMessageID. No \"msg_gms_uniq_id\" key in userInfo[\"data\"] section")
+			return 0
+		}
+		
+		let hyberMessageID: UInt64
+		
+		if let incomeMessageID = incomeMessageID as? String {
+			if let incomeMessageIDFromString = HyberPushNotification.numberFormatter
+				.numberFromString(incomeMessageID)?.unsignedLongLongValue {
+				
+				hyberMessageID = incomeMessageIDFromString
+			} else {
+				hyberLog.warning("Can't get hyberMessageID. String incomeMessageID not convertible to UInt64")
+				
+				hyberMessageID = 0
+			}
+		} else if let incomeMessageID = incomeMessageID as? Double {
+			
+			hyberMessageID = UInt64(incomeMessageID)
+			
+		} else {
+			hyberLog.warning("Can't get hyberMessageID. Unexpected userInfo[\"data\"][\"msg_gms_uniq_id\"] type: \(incomeMessageID.dynamicType). Expected `String` or `Double` (aka `UInt64`)")
+			
+			hyberMessageID = 0
+		}
+		
+		if hyberMessageID != 0 {
+			hyberLog.verbose("Recieved message with hyberMessageID: \(hyberMessageID)")
+		}
+		
+		return hyberMessageID
   }
-  
+	
   // swiftlint:disable valid_docs
-  
-  /**
-   Initalizes `HyberPushNotification` with push-notification payload
-   - Parameter withNotificationInfo: `[NSObject : AnyObject]` with modified payload, 
-   where `"data"` dictionary shifted to root
-   - Parameter notificationsAllowed: `Bool` that indicates user allowed alert- or sound-notifications 
-   for this application is Settings
-   - Returns: Initalizated `struct` if sucessfully parsed `userInfo` parameter, otherwise returns `nil`
-   */
-  internal init?(withUserInfo userInfo: [NSObject : AnyObject], notificationsAllowed: Bool = true) {
+	
+	/**
+	Initalizes `HyberPushNotification` with push-notification payload
+	- Parameter userInfo: `[NSObject : AnyObject]` with modified payload,
+	where `"data"` dictionary shifted to root
+	- Parameter isRemoteNotification: pass `true` this is remote notification,
+	`false` if this is local notification
+	- Returns: Initalizated `struct` if sucessfully parsed `userInfo` parameter, otherwise returns `nil`
+	*/
+	internal init?(
+		userInfo: [NSObject : AnyObject],
+		isRemoteNotification: Bool)
+	{
     // swiftlint:enable valid_docs
-    
+		
     let hyberMessageID = HyberPushNotification.getHyberMessageID(withUserInfo: userInfo)
     
     let firebaseMessageID: String?
@@ -260,43 +292,98 @@ public struct HyberPushNotification {
       
     } else {
       
-      hyberLog.verbose("No Google, no cry")
+      hyberLog.verbose("No gcm.message_id, no cry")
       
       firebaseMessageID = .None
       
     }
 		
-		let notificationInfo: [String: NSObject]
+		let notificationInfo: [String: AnyObject]
+		
+		let dataSection = userInfo.jsonFor(key: "data")
+		
+		let showLocalNotification: Bool
 		
 		if let
-			notificationString = userInfo["notification"] as? String,
-			notificationData = notificationString.dataUsingEncoding(NSUTF8StringEncoding),
-			json = try? NSJSONSerialization.JSONObjectWithData(
-				notificationData,
-				options: NSJSONReadingOptions.AllowFragments),
-			jsonNotificationInfo = json as? [String: NSObject]
+			dataSection = dataSection,
+			jsonNotificationInfo = dataSection.jsonFor(key: "notification")
 		{
 			
 			notificationInfo = jsonNotificationInfo
 			
-		} else if let aps = userInfo["aps"] as? [String: NSObject] {
+			showLocalNotification = true
+			
+		} else if let aps = userInfo.jsonFor(key: "aps") {
 			
 			hyberLog.warning("no 'notification' data, using 'aps' instead")
+			
 			notificationInfo = aps
+			
+			showLocalNotification = false
 			
 		} else {
 			
-			hyberLog.error("no 'notification' or 'aps' data ")
+			hyberLog.error("no userInfo[\"data\"][\"notification\"] or userInfo[\"aps\"] data ")
 			return nil
 			
 		}
 		
     self = HyberPushNotification(
       withNotificationInfo: notificationInfo,
+      isRemoteNotification: isRemoteNotification,
       hyberMessageID: hyberMessageID,
       firebaseMessageID: firebaseMessageID,
-      sender: userInfo["alpha"] as? String ?? HyberDataInboxSender.unknownSenderNameString,
-      notificationsAllowed: notificationsAllowed)
-    
+      sender: dataSection?["alpha"] as? String ?? HyberDataInboxSender.unknownSenderNameString,
+			showLocalNotification: showLocalNotification)
+		
   }
+}
+
+private extension Dictionary {
+	
+	func jsonFor(key key: Key) -> [String: AnyObject]? {
+		
+		guard let value: Value = self[key] else {
+			return .None
+		}
+		
+		if let json = value as? [String: AnyObject] {
+			return json
+		}
+		
+		guard let stringValue = value as? String else {
+			return .None
+		}
+		
+		guard let
+			data = stringValue.dataUsingEncoding(NSUTF8StringEncoding),
+			
+			serializedObject = try? NSJSONSerialization.JSONObjectWithData(
+				data,
+				options: NSJSONReadingOptions.AllowFragments),
+			
+			json = serializedObject as? [String: AnyObject]
+			
+			else {
+				return .None
+		}
+		
+		return json
+		
+	}
+	
+}
+
+private extension UIUserNotificationSettings {
+	
+	static func userNotificationsAllowed() -> Bool {
+		
+		let userNotificationsAllowed: Bool = (UIApplication.sharedApplication().currentUserNotificationSettings()?.types
+			?? UIUserNotificationType.None)
+			!= UIUserNotificationType.None
+		
+		return userNotificationsAllowed
+		
+	}
+	
 }
