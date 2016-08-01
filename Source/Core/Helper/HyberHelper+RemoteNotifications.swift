@@ -36,7 +36,7 @@ private extension HyberHelper {
   
   /**
    Handles receiving of push-notification
-   - Parameter userInfo: Recieved pushnotification payload dictionary
+   - Parameter userInfo: Recieved push notification payload dictionary
    - Returns: `HyberPushNotification` if notifications allowed, user authorized, 
    notification in correct format and saved into Inbox. Otherwise returns `nil`
    */
