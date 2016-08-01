@@ -139,8 +139,7 @@ public struct HyberPushNotification {
 	
 	/**
 	Initalizes `HyberPushNotification` with
-	- Parameter withNotificationInfo: `[NSObject : AnyObject]` with modified payload,
-	where `"data"` dictionary shifted to root
+	- Parameter withNotificationInfo: Recieved push notification payload dictionary
 	- Parameter isRemoteNotification: pass `true` this is remote notification,
 	`false` if this is local notification
 	- Parameter hyberMessageID: `UInt64` Hyber message identifier
@@ -149,7 +148,7 @@ public struct HyberPushNotification {
 	- Parameter showLocalNotification: `Bool` that indicates show local notification to user, or not
 	*/
   private init(
-    withNotificationInfo notifictionInfo: [String : AnyObject],
+    withNotificationInfo notificationInfo: [String : AnyObject],
     isRemoteNotification: Bool,
     hyberMessageID: UInt64,
     firebaseMessageID: String?,
@@ -167,15 +166,15 @@ public struct HyberPushNotification {
     self.notificationsAllowed = UIUserNotificationSettings.userNotificationsAllowed()
     
     
-    tmpSound = notifictionInfo["sound"] as? String ?? UILocalNotificationDefaultSoundName
+    tmpSound = notificationInfo["sound"] as? String ?? UILocalNotificationDefaultSoundName
     
-    contentAvailable = (notifictionInfo["content-available"] as? Int ?? 0) == 1 ? true : false
+    contentAvailable = (notificationInfo["content-available"] as? Int ?? 0) == 1 ? true : false
     
-    category = notifictionInfo["category"] as? String
+    category = notificationInfo["category"] as? String
     sound    = tmpSound == "default" ? UILocalNotificationDefaultSoundName : tmpSound
-    bage     = notifictionInfo["bage"] as? Int ?? 0
+    bage     = notificationInfo["bage"] as? Int ?? 0
     
-    if let alert = notifictionInfo["alert"] as? [String: AnyObject] {
+    if let alert = notificationInfo["alert"] as? [String: AnyObject] {
       
       body                       = alert["body"] as? String
       
@@ -190,16 +189,16 @@ public struct HyberPushNotification {
       
     } else {
       
-      body                       = notifictionInfo["alert"] as? String ?? notifictionInfo["body"] as? String
+      body                       = notificationInfo["alert"] as? String ?? notificationInfo["body"] as? String
       
-      title                      = notifictionInfo["title"] as? String
+      title                      = notificationInfo["title"] as? String
       
-      titleLocalizationKey       = notifictionInfo["title-loc-key"] as? String
-      titleLocalizationArguments = notifictionInfo["title-loc-args"] as? [String]
-      actionLocalizationKey      = notifictionInfo["action-loc-key"] as? String
-      localizationKey            = notifictionInfo["loc-key"] as? String
-      localizationArguments      = notifictionInfo["loc-args"] as? [String]
-      launchImage                = notifictionInfo["launch-image"] as? String
+      titleLocalizationKey       = notificationInfo["title-loc-key"] as? String
+      titleLocalizationArguments = notificationInfo["title-loc-args"] as? [String]
+      actionLocalizationKey      = notificationInfo["action-loc-key"] as? String
+      localizationKey            = notificationInfo["loc-key"] as? String
+      localizationArguments      = notificationInfo["loc-args"] as? [String]
+      launchImage                = notificationInfo["launch-image"] as? String
       
     }
     
@@ -214,8 +213,7 @@ public struct HyberPushNotification {
   /**
    Returns `UInt64` Hyber message identifier, stored in push-notification payload.
    Can return `0`
-   - Parameter withUserInfo: `[NSObject : AnyObject]` with modified payload, where `"data"` dictionary 
-   shifted to root
+   - Parameter withUserInfo: Recieved push notification payload dictionary
    - Returns: `UInt64` with Hyber message identifier. Can be `0` if key not found,
    or can't be typecasted
    */
@@ -224,10 +222,7 @@ public struct HyberPushNotification {
     -> UInt64  // swiftlint:disable:this opnening_brace
   {
 		
-		guard let data = userInfo.jsonFor(key: "data") else {
-			hyberLog.warning("Can't get hyberMessageID. No \"data\" section in  userInfo")
-			return 0
-		}
+		let data = userInfo.jsonFor(key: "data") ?? userInfo
 		
 		guard let incomeMessageID = data["msg_gms_uniq_id"] else {
 			hyberLog.warning("Can't get hyberMessageID. No \"msg_gms_uniq_id\" key in userInfo[\"data\"] section")
@@ -267,8 +262,7 @@ public struct HyberPushNotification {
 	
 	/**
 	Initalizes `HyberPushNotification` with push-notification payload
-	- Parameter userInfo: `[NSObject : AnyObject]` with modified payload,
-	where `"data"` dictionary shifted to root
+	- Parameter userInfo: Recieved push notification payload dictionary
 	- Parameter isRemoteNotification: pass `true` this is remote notification,
 	`false` if this is local notification
 	- Returns: Initalizated `struct` if sucessfully parsed `userInfo` parameter, otherwise returns `nil`
@@ -298,18 +292,23 @@ public struct HyberPushNotification {
       
     }
 		
-		let notificationInfo: [String: AnyObject]
+		var notificationInfo: [String: AnyObject]
 		
-		let dataSection = userInfo.jsonFor(key: "data")
+		let dataSection = userInfo.jsonFor(key: "data") ?? userInfo
 		
 		let showLocalNotification: Bool
 		
 		if let
-			dataSection = dataSection,
 			jsonNotificationInfo = dataSection.jsonFor(key: "notification")
 		{
 			
 			notificationInfo = jsonNotificationInfo
+			
+			if let aps = jsonNotificationInfo["aps"] as? [String : AnyObject] {
+				aps.forEach { (keyValue: (String, AnyObject)) in
+					notificationInfo[keyValue.0] = keyValue.1
+				}
+			}
 			
 			showLocalNotification = true
 			
@@ -323,7 +322,7 @@ public struct HyberPushNotification {
 			
 		} else {
 			
-			hyberLog.error("no userInfo[\"data\"][\"notification\"] or userInfo[\"aps\"] data ")
+			hyberLog.error("no userInfo[\"notification\"] or userInfo[\"aps\"] data ")
 			return nil
 			
 		}
@@ -333,7 +332,7 @@ public struct HyberPushNotification {
       isRemoteNotification: isRemoteNotification,
       hyberMessageID: hyberMessageID,
       firebaseMessageID: firebaseMessageID,
-      sender: dataSection?["alpha"] as? String ?? HyberDataInboxSender.unknownSenderNameString,
+      sender: dataSection["alpha"] as? String ?? HyberDataInboxSender.unknownSenderNameString,
 			showLocalNotification: showLocalNotification)
 		
   }
