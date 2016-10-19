@@ -166,7 +166,7 @@ internal class HyberSettings: NSObject {
    */
   internal static var currentSettings: HyberSettings = {
     if let settingsFilePath = filePath
-      where NSFileManager.defaultManager().fileExistsAtPath(settingsFilePath) // swiftlint:disable:this line_length
+       where NSFileManager.defaultManager().fileExistsAtPath(settingsFilePath) // swiftlint:disable:this line_length
     {
       if let settings = NSKeyedUnarchiver
         .unarchiveObjectWithFile(settingsFilePath) as? HyberSettings // swiftlint:disable:this line_length
@@ -182,7 +182,7 @@ internal class HyberSettings: NSObject {
    Settings filepath
    */
   private static var filePath: String? = {
-    return NSFileManager.libraryDirectoryURL?.URLByAppendingPathComponent("hyberConfig.plist").path
+    return NSFileManager.libraryDirectoryURL?.URLByAppendingPathComponent("hyberConfig.plist")!.path
   }()
 	
 	/**

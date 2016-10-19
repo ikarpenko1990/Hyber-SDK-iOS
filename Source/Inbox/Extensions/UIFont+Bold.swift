@@ -15,7 +15,7 @@ internal extension UIFont {
     
     let fontDescriptor = self.fontDescriptor()
     let boldFontDescriptor = fontDescriptor.fontDescriptorWithSymbolicTraits(.TraitBold)
-    let boldFont = UIFont(descriptor: boldFontDescriptor, size: fontDescriptor.pointSize)
+    let boldFont = UIFont(descriptor: boldFontDescriptor!, size: fontDescriptor.pointSize)
     return boldFont
     
   }
