@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		
-		let remoteNotification = Hyber.register(applicationKey: "sww34cc290454561bd913f64685e54cm",
+		let remoteNotification = Hyber.register(applicationKey: "sww34cc290454561bd913f64685edemo",
 		               firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance,
 		               launchOptions: launchOptions)
 		
