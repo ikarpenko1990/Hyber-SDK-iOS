@@ -1,6 +1,6 @@
-[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://swift.org/)
+[![Swift 2.3](https://img.shields.io/badge/Swift-2.3-orange.svg?style=flat)](https://swift.org/)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](https://swift.org/)
-[![Build Status](https://travis-ci.org/GMSLabs/Hyber-SDK-iOS.svg?branch=master)](https://travis-ci.org/GMSLabs/Hyber-SDK-iOS)
+[![Build Status](https://travis-ci.org/Incuube/Hyber-SDK-iOS.svg?branch=master)](https://travis-ci.org/Incuube/Hyber-SDK-iOS)
 
 ### Installation
 
