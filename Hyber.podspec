@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
 	s.name         = "Hyber"
-  s.version      = "0.1.2"
+  s.version      = "1.0.0"
   s.summary      = "Global Message Services APNs reciever"
 
   # This description is used to generate tags and improve search results.
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
   #
 
   s.source = {
-    :git => 'https://github.com/GMSLabs/Hyber-SDK-iOS.git',
+    :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git',
     :tag => s.version.to_s
   }
 
