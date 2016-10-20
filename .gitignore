@@ -36,3 +36,5 @@ playground.xcworkspace
 # Carthage/Checkouts
 
 Carthage/Build
+
+.gitkeep
