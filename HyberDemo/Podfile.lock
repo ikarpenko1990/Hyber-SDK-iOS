@@ -23,9 +23,9 @@ PODS:
   - GoogleSymbolUtilities (1.1.1)
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
-  - Hyber/Core (0.1.2):
+  - Hyber/Core (1.0.0):
     - Firebase/Messaging
-  - Hyber/Inbox (0.1.2):
+  - Hyber/Inbox (1.0.0):
     - Hyber/Core
 
 DEPENDENCIES:
@@ -44,8 +44,8 @@ SPEC CHECKSUMS:
   GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
-  Hyber: 98d34c14efb85c1e56b9743e81641c6d2de2f9be
+  Hyber: b39e78490f490f3e2dca9f0b96815583cc4797c9
 
-PODFILE CHECKSUM: 16c1f273ee12cf59947924a432354e92a5c6052c
+PODFILE CHECKSUM: 45827e9f4d14e637462eed1106217aeaafdeb7fd
 
 COCOAPODS: 1.1.0.rc.3

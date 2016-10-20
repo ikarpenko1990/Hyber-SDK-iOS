@@ -22,7 +22,16 @@ pre_install do |installer|
   def installer.verify_no_static_framework_transitive_dependencies; end
 end
 
-pod 'Hyber/Inbox', :git => 'https://github.com/GMSLabs/Hyber-SDK-iOS.git', :tag => '0.1.2'
+pod 'Hyber/Inbox', :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => '1.0.0'
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '2.3'
+    end
+  end
+end
+
 ```
 
 Then, run the following command:
