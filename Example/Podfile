@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Hyber_Example' do
+  pod 'Hyber', :path => '../'
+
+  target 'Hyber_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

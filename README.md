@@ -5,6 +5,15 @@
 
 [![Build Status][travis-build-status-svg]][travis-build-status-link]
 
+## Installation
+
+Hyber is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'Hyber'
+```
+
 [release-svg]: http://github-release-version.herokuapp.com/github/Incuube/Hyber-SDK-iOS/release.svg
 [release-link]: https://github.com/Incuube/Hyber-SDK-iOS/releases/latest
 
