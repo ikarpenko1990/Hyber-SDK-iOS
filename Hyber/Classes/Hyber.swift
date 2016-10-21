@@ -11,4 +11,9 @@ public final class Hyber {
     /// Private initializer
     private init() {}
     
+    func initSDK() {
+        print("Init SDK")
+    }
+    
 }
+

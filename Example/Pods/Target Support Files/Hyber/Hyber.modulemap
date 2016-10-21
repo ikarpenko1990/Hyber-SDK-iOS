@@ -1,6 +1,0 @@
-framework module Hyber {
-  umbrella header "Hyber-umbrella.h"
-
-  export *
-  module * { export * }
-}
