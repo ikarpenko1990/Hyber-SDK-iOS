@@ -9,11 +9,10 @@ import Foundation
 public final class Hyber {
     
     /// Private initializer
-    private init() {}
+    private init() {
     
-    func initSDK() {
-        print("Init SDK")
     }
+    
     
 }
 
