@@ -10,7 +10,7 @@
 		12012369973727D264399DED36392070 /* Pods-Hyber_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E17EBB64A44BAD12C26CBD94242E32F /* Pods-Hyber_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		408617A0C557D040E948A252D249BB75 /* Hyber-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 69967B41DBAA32788FA6C7C1DD4C5C3D /* Hyber-dummy.m */; };
 		418B733CB55FF81E30E0212D71BDE79D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		5024DEAD4B185DF6F4FC872AD8CC938F /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CFC26657C7F49B46D2B411E29E4CB7 /* ReplaceMe.swift */; };
+		5024DEAD4B185DF6F4FC872AD8CC938F /* Hyber.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CFC26657C7F49B46D2B411E29E4CB7 /* Hyber.swift */; };
 		59D4CA09EDABA1204F5AD02EAD0D0B37 /* Pods-Hyber_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 176028ABE60B7B3D30157399AA1C8C47 /* Pods-Hyber_Tests-dummy.m */; };
 		983965ADF895326EA240065523E4A4CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		B94C888104F81AA8A2CC576BB05B7CBE /* Pods-Hyber_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 34D11FC95B2772E02264405741577E43 /* Pods-Hyber_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,7 +51,7 @@
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AAB17FF2E871213A1BA07B98EF523CF4 /* Pods-Hyber_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hyber_Example-resources.sh"; sourceTree = "<group>"; };
 		AF38F7370A90C2EA0DD4570CA019D8BA /* Pods_Hyber_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2CFC26657C7F49B46D2B411E29E4CB7 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
+		B2CFC26657C7F49B46D2B411E29E4CB7 /* Hyber.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Hyber.swift; path = Hyber/Classes/Hyber.swift; sourceTree = "<group>"; };
 		C2B6F2A9613B60CD1C067953D95008D9 /* Pods-Hyber_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Hyber_Example.modulemap"; sourceTree = "<group>"; };
 		C7EEBD6B660B9B049C6615AE986A0ECC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9FBD2927AD723899B4B6D883CBC3D1A /* Hyber-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Hyber-prefix.pch"; sourceTree = "<group>"; };
@@ -92,14 +92,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2598188C2A377F35D3B915DC6E821E03 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				B2CFC26657C7F49B46D2B411E29E4CB7 /* ReplaceMe.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +116,14 @@
 			);
 			name = "Pods-Hyber_Example";
 			path = "Target Support Files/Pods-Hyber_Example";
+			sourceTree = "<group>";
+		};
+		76E268C51DB8EAFC006B7249 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B2CFC26657C7F49B46D2B411E29E4CB7 /* Hyber.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		7B9686CB730D7AAE57DBC1AD32498A2F /* Targets Support Files */ = {
@@ -174,14 +174,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B42ACBF3B92F91C1C9E014620B70531F /* Hyber */ = {
-			isa = PBXGroup;
-			children = (
-				2598188C2A377F35D3B915DC6E821E03 /* Classes */,
-			);
-			path = Hyber;
-			sourceTree = "<group>";
-		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,7 +193,7 @@
 		C93A7E6BF738550BB900C63A2DF1CB11 /* Hyber */ = {
 			isa = PBXGroup;
 			children = (
-				B42ACBF3B92F91C1C9E014620B70531F /* Hyber */,
+				76E268C51DB8EAFC006B7249 /* Core */,
 				DA19A4493770FEE4595038153A05DE49 /* Support Files */,
 			);
 			name = Hyber;
@@ -354,7 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				408617A0C557D040E948A252D249BB75 /* Hyber-dummy.m in Sources */,
-				5024DEAD4B185DF6F4FC872AD8CC938F /* ReplaceMe.swift in Sources */,
+				5024DEAD4B185DF6F4FC872AD8CC938F /* Hyber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
