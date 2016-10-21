@@ -10,6 +10,10 @@ import UIKit
 import Hyber
 
 class ViewController: UIViewController {
+    @IBAction func registerBtn(_ sender: AnyObject) {
+        Hyber.registration()
+
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
