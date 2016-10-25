@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 public extension HyberPushNotification {
     
     /**
@@ -21,6 +22,7 @@ public extension HyberPushNotification {
         localNotification.timeZone = NSTimeZone.default
         localNotification.alertBody = body
         
+                
         if #available(iOS 8.2, *) {
             localNotification.alertTitle = title
         }
