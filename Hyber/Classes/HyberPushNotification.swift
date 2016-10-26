@@ -282,9 +282,9 @@ public struct HyberPushNotification {
         } else {
             
             print("No gcm.message_id")
-            
+
             firebaseMessageID = .none
-            
+
         }
     
         var notificationInfo: [String: AnyObject]

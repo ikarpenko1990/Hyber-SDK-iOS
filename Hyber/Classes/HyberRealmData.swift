@@ -15,11 +15,11 @@ import Realm
 public class HyberRealmData: RLMObject {
     let uiRealm = try! Realm()
     
-    var storedData : Results<DataList>!
+    var storedData : Results<User>!
     
     public func readData(){
         
-        storedData = uiRealm.objects(DataList.self)
+        storedData = uiRealm.objects(User.self)
         print("Stored data: \(storedData)")
     }
 
@@ -29,7 +29,7 @@ public class HyberRealmData: RLMObject {
     }
     
     public func saveData(){
-            let newStoredData = DataList()
+            let newStoredData = User()
             try! uiRealm.write{
                 
                 uiRealm.add(newStoredData)
