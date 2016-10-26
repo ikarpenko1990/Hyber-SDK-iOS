@@ -10,28 +10,28 @@
 import Foundation
 import Alamofire
 import CoreData
+import RealmSwift
 
 internal class HyberHelper_Alamofire {
  
-    
 }
 
 
 public extension Hyber{
-
     
-    public static func registration() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    public static func registration(phoneId: String, hyberToken: String) -> Void //HyberPushNotification? //  swiftlint:disable:this line_length
+
     {
         
         let headers = [
              "Content-Type": "application/json",
              "X-Hyber-SDK-Version:": "2.0",
-             "X-Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
+             "X-Hyber-Client-API-Key": hyberToken,
              "X-Hyber-IOS-Bundle-Id": "com.gmsu.hyber.test",
-             "X-Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)"
+             "X-Hyber-Installation-Id": kUUID,
              ]
         let phoneData = [
-            "userPhone":"380937431520",
+            "userPhone": phoneId,
             "osType": "\(kOSType)",
             "osVersion": kOSVersion,
             "deviceType": "\(kDeviceType)",
@@ -48,19 +48,19 @@ public extension Hyber{
    
         Alamofire.upload(jsonData, to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
             debugPrint(response)
-
-        }
-
+            }
+        
     }
+
     
+    public func updateInfo() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
     
-    public static func updateInfo() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
     {
         
         let headers = [
             "Hyber-SDK-Version:": "2.0",
             "Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
-            "Hyber-App-Fingerprint": "com.gmsu.Hyber",
+            "Hyber-IOS-Bundle-Id": "com.gmsu.Hyber",
             "Hyber-Installation-Id": "\(kUUID)"
         ]
         let phoneData = [
@@ -87,10 +87,10 @@ public extension Hyber{
     {
         
         let headers = [
-            "Hyber-SDK-Version:": "2.0",
-            "Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
-            "Hyber-App-Fingerprint": "com.gmsu.Hyber",
-            "Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)"
+            "X-Hyber-SDK-Version:": "2.0",
+            "X-Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
+            "X-Hyber-IOS-Bundle-Id": "com.gmsu.Hyber",
+            "X-Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)"
         ]
         let phoneData = ["refreshToken":"+380937431520"]
         
@@ -104,32 +104,40 @@ public extension Hyber{
     }
     
     
-    public static func getUserInfo() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    public func getUserInfo() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    
     {
-        
         let headers = [
-            "Hyber-SDK-Version:": "2.0",
-            "Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
-            "Hyber-App-Fingerprint": "com.gmsu.Hyber",
-            "Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
-            "Hyber-Auth-Token": "heretokengms"
+            "X-Hyber-SDK-Version:": "2.0",
+            "X-Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
+            "X-Hyber-App-Fingerprint": "com.gmsu.Hyber",
+            "X-Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
+            "X-Hyber-Auth-Token": "heretokengms"
         ]
         
-        Alamofire.upload( to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
-            debugPrint(response)
-            
+        Alamofire.request(kGetUserData, method: .get, parameters: headers, encoding: JSONEncoding.default)
+            .downloadProgress(queue: DispatchQueue.main) { progress in
+                print("Progress: \(progress.fractionCompleted)")
+            }
+            .validate { request, response, data in
+                // Custom evaluation closure now includes data (allows you to parse data to dig out error messages if necessary)
+                return .success
+            }
+            .responseJSON { response in
+                debugPrint(response)
         }
+
     }
-    
+
     public static func getMessageHistory() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
     {
         
         let headers = [
-            "Hyber-SDK-Version:": "2.0",
-            "Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
-            "Hyber-App-Fingerprint": "com.gmsu.Hyber",
-            "Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
-            "Hyber-Auth-Token": "heretokengms"
+            "X-Hyber-SDK-Version:": "2.0",
+            "X-Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
+            "X-Hyber-IOS-Bundle-Id": "com.gmsu.Hyber",
+            "X-Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
+            "X-Hyber-Auth-Token": "heretokengms"
         ]
         
         Alamofire.upload( to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
@@ -143,11 +151,11 @@ public extension Hyber{
     {
         
         let headers = [
-            "Hyber-SDK-Version:": "2.0",
-            "Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
-            "Hyber-App-Fingerprint": "com.gmsu.Hyber",
-            "Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
-            "Hyber-Auth-Token": "heretokengms"
+            "X-Hyber-SDK-Version:": "2.0",
+            "X-Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
+            "X-Hyber-IOS-Bundle-Id": "com.gmsu.Hyber",
+            "X-Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
+            "X-Hyber-Auth-Token": "heretokengms"
         ]
         
         Alamofire.upload(jsonData, to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
@@ -161,11 +169,11 @@ public extension Hyber{
     {
         
         let headers = [
-            "Hyber-SDK-Version:": "2.0",
-            "Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
-            "Hyber-App-Fingerprint": "com.gmsu.Hyber",
-            "Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
-            "Hyber-Auth-Token": "heretokengms"
+            "X-Hyber-SDK-Version:": "2.0",
+            "X-Hyber-Client-API-Key": "e5eb9bd59ca57000e189f9340bc285d2",
+            "X-Hyber-IOS-Bundle-Id": "com.gmsu.Hyber",
+            "X-Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
+            "X-Hyber-Auth-Token": "heretokengms"
         ]
         
         print("Upload JSON: \(decoded)")

@@ -18,13 +18,14 @@ let kSendMsg = "https://mobile.hyber.im/api/v1/user/me"
 let kGetMsgHistory = "https://mobile.hyber.im/api/v1/message/history"
 let kGetFreshMsg = "https://mobile.hyber.im/api/v1/message/fresh"
 let kSendMsgCallback = "https://mobile.hyber.im/api/v1/message/fresh"
-
 //Device Info
 let kOSType = "IOS"
 let kOSVersion = UIDevice.current.systemVersion
 let kDeviceType = "\(UIDevice.current.modelType)"
 let kDeviceName = UIDevice.current.modelName
 let kUUID = UIDevice.current.identifierForVendor!.uuidString
+let kBundleID = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
+
 
 
 public extension UIDevice {
@@ -110,4 +111,10 @@ public extension UIDevice {
         }
     }
     
+}
+
+extension Bundle {
+    class func mainInfoDictionary(key: CFString) -> String? {
+        return self.main.infoDictionary?[key as String] as? String
+    }
 }
