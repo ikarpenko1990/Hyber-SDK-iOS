@@ -122,8 +122,7 @@ extension HyberFirebaseMessagingDelegate {
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                          fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
             
-            print("Message ID: \(userInfo["gcm.message_id"]!)")
-            
+            HyberLogger.info("Get new Notification: \(userInfo["gcm.message_id"]!)")
             // Print full message.
             print("%@", userInfo)
         }
@@ -170,7 +169,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        HyberLogger.info("Get new Notification: \(userInfo["gcm.message_id"]!)")
         
         // Print full message.
         print("%@", userInfo)

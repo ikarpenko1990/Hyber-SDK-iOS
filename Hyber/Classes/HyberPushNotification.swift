@@ -271,21 +271,23 @@ public struct HyberPushNotification {
         let hyberMessageID = HyberPushNotification.getHyberMessageID(withUserInfo: userInfo)
         
         let firebaseMessageID: String?
-        if let _firebaseMessageID = userInfo["gcm.message_id"] as? String {
-            
-            firebaseMessageID = _firebaseMessageID
+// Hyber Notification not configured in RESTAPI
 
-            if hyberMessageID == 0 {
-                print("recieved message from Firebase Messaging, that was not sended by Global Messaging Service (no msg_gms_uniq_id key)")
-            }
-            
-        } else {
-            
-            print("No gcm.message_id")
+//        if let _firebaseMessageID = userInfo["gcm.message_id"] as? String {
+//            
+//            firebaseMessageID = _firebaseMessageID
+//
+//            if hyberMessageID == 0 {
+//                print("recieved message from Firebase Messaging, that was not sended by Global Messaging Service (no msg_gms_uniq_id key)")
+//            }
+//            
+//        } else {
+//            
+//            print("No gcm.message_id")
 
             firebaseMessageID = .none
 
-        }
+//        }
     
         var notificationInfo: [String: AnyObject]
         
@@ -371,10 +373,10 @@ private extension Dictionary {
 private extension UIUserNotificationSettings {
     
     static func userNotificationsAllowed() -> Bool {
-        
-        let userNotificationsAllowed: Bool = (UIApplication.shared.currentUserNotificationSettings?.types
-            ?? UIUserNotificationType.none)
-            != UIUserNotificationType.none
+// Hyber Notification not configured
+//        let userNotificationsAllowed: Bool = (UIApplication.shared.currentUserNotificationSettings?.types
+//            ?? UIUserNotificationType.none)
+//            != UIUserNotificationType.none
         
         return userNotificationsAllowed()
         
