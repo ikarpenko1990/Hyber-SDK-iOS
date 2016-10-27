@@ -14,13 +14,15 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBAction func registerBtn(_ sender: AnyObject) {
         registerForRemoteNotification()
         Hyber.registration(phoneId: "380937431520", hyberToken: "testtocken")
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
