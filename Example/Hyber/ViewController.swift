@@ -14,12 +14,13 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBAction func registerBtn(_ sender: AnyObject) {
         registerForRemoteNotification()
         Hyber.registration(phoneId: "380937431520", hyberToken: "testtocken")
-        
+        //test HyberLogger
+        HyberLogger.trace("Button pressed")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     

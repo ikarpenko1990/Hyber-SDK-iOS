@@ -14,6 +14,23 @@ it, simply add the following line to your Podfile:
 pod 'Hyber'
 ```
 
+## Use logger
+By default logger enabled
+- Disable `HyberLogger` by setting `enabled` to `false`:
+
+```swift
+HyberLogger.enabled = false
+```
+By default HyberLogger print all messages
+- Define a minimum level of severity to only print the messages with a greater or equal severity:
+
+```swift
+HyberLogger.minLevel = .warning
+```
+
+> The severity levels are `trace`, `debug`, `info`, `warning`, and `error`.
+
+
 [release-svg]: http://github-release-version.herokuapp.com/github/Incuube/Hyber-SDK-iOS/release.svg
 [release-link]: https://github.com/Incuube/Hyber-SDK-iOS/releases/latest
 

@@ -8,11 +8,10 @@ import Foundation
 
 public final class Hyber {
     
-    /// Private initializer
+// Private initializer
     private init() {
-    
+        
     }
- 
     
 }
 

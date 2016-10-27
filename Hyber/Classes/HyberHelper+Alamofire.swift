@@ -27,7 +27,7 @@ public extension Hyber{
              "Content-Type": "application/json",
              "X-Hyber-SDK-Version:": "2.0",
              "X-Hyber-Client-API-Key": hyberToken,
-             "X-Hyber-IOS-Bundle-Id": "com.gmsu.hyber.test",
+             "X-Hyber-IOS-Bundle-Id": kBundleID!,
              "X-Hyber-Installation-Id": kUUID,
              ]
         let phoneData = [
@@ -43,15 +43,16 @@ public extension Hyber{
         let jsonHeader = try! JSONSerialization.data(withJSONObject: headers, options: .prettyPrinted)
         let decoded = try! JSONSerialization.jsonObject(with: jsonData, options: [])
         let decodeHeaders = try! JSONSerialization.jsonObject(with: jsonHeader, options: [])
-        print("Header: \(decodeHeaders)")
-        print("Upload JSON: \(decoded)")
-   
+        HyberLogger.info("Header: \(decodeHeaders)")
+        HyberLogger.info("Upload JSON: \(decoded)")
+        
         Alamofire.upload(jsonData, to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
             debugPrint(response)
-            }
+            
+        }
         
     }
-
+    
     
     public func updateInfo() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
     
@@ -140,10 +141,14 @@ public extension Hyber{
             "X-Hyber-Auth-Token": "heretokengms"
         ]
         
-        Alamofire.upload( to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
+        let phoneData = ["refreshToken":"+380937431520"]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: phoneData, options: .prettyPrinted)
+        Alamofire.upload(jsonData, to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
             debugPrint(response)
             
         }
+
     }
     
     
@@ -157,7 +162,9 @@ public extension Hyber{
             "X-Hyber-Installation-Id": "\(UIDevice.current.identifierForVendor!.uuidString)",
             "X-Hyber-Auth-Token": "heretokengms"
         ]
+        let phoneData = ["refreshToken":"+380937431520"]
         
+        let jsonData = try! JSONSerialization.data(withJSONObject: phoneData, options: .prettyPrinted)
         Alamofire.upload(jsonData, to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
             debugPrint(response)
             
@@ -176,7 +183,9 @@ public extension Hyber{
             "X-Hyber-Auth-Token": "heretokengms"
         ]
         
-        print("Upload JSON: \(decoded)")
+        let phoneData = ["refreshToken":"+380937431520"]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: phoneData, options: .prettyPrinted)
         Alamofire.upload(jsonData, to: kRegUrl, method: .post, headers: headers).response { response in // method defaults to `.post`
             debugPrint(response)
             
