@@ -19,7 +19,6 @@ class Message:  Object {
     dynamic var buttonAction = ""
     dynamic var time = Double()
     dynamic var partner = ""
-    let userId = User()
 
     
 }

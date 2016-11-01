@@ -9,42 +9,30 @@
 import UIKit
 import Hyber
 import UserNotifications
+import Firebase
 
-class ViewController: UIViewController, UNUserNotificationCenterDelegate {
+class ViewController: UIViewController {
     @IBAction func registerBtn(_ sender: AnyObject) {
-        registerForRemoteNotification()
-        Hyber.registration(phoneId: "380937431520", hyberToken: "testtocken")
-        //test HyberLogger
-        HyberLogger.trace("Button pressed")
-    }
-
+        HyberFirebaseMessagingDelegate.sharedInstance.registerForRemoteNotification()
+       // Hyber.registration(phoneId: "380937431520", hyberToken: "testtocken")
+       // Hyber.testDeliveredData()
+        HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
+        
+        }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+   
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
    
-    func registerForRemoteNotification() {
-        if #available(iOS 10.0, *) {
-            let center  = UNUserNotificationCenter.current()
-            center.delegate = self
-            center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
-                if error == nil{
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
-        }
-            
-        else {
-            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
-            UIApplication.shared.registerForRemoteNotifications()
-        }
-    }
-
+   
     
 }

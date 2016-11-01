@@ -13,6 +13,9 @@ import Realm
 /*Initialize realm */
 
 public class HyberRealmData: RLMObject {
+    
+ 
+    
     let uiRealm = try! Realm()
     
     var storedData : Results<User>!
@@ -41,3 +44,5 @@ public class HyberRealmData: RLMObject {
         
     
     }
+
+

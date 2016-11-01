@@ -44,6 +44,9 @@ TODO: Add long description of the pod here.
   s.dependency 'RealmSwift', '2.0.2'
   s.dependency 'RxSwift', '3.0.0-rc.1'
   s.dependency 'RxCocoa', '3.0.0-rc.1'
+  s.dependency 'ObjectMapper', '~> 2.1.0'
+  s.dependency 'AlamofireObjectMapper', '~> 4.0'
+  s.dependency 'SwiftyJSON', '3.1.1'
 
 
 end

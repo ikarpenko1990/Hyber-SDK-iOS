@@ -8,8 +8,10 @@
 
 import UIKit
 import Hyber
-import Firebase
 import UserNotifications
+import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,11 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        
-        // Add observer for InstanceID token refresh callback.
-        return true
+      
+                      return true
     }
     
+        
 }
-

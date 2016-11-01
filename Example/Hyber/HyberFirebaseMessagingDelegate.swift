@@ -12,50 +12,39 @@ import Hyber
 import UserNotifications
 //HyberFirebaseHelper wiil be initialized with new RESTAPI
 
-class HyberFirebaseMessagingDelegate: NSObject, UNUserNotificationCenterDelegate {
-    
+class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper, UNUserNotificationCenterDelegate {
+
     static let sharedInstance: HyberFirebaseMessagingDelegate = {
         return HyberFirebaseMessagingDelegate()
     }()
     
-        private override init() {
-            super.init()
-//            addApplicationDidObservers()
-            
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(self.tokenRefreshNotification),
-                                                   name: .firInstanceIDTokenRefresh,
-                                                   object: nil)
-
-
+    private override init() {
+        super.init()
+        addApplicationDidObservers()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.onFirebaseMessagingTokenRefresh),
+                                               name: .firInstanceIDTokenRefresh,
+                                               object: nil)
+        
     }
     
-    func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
+  public  func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
         let firebaseMessagingToken = FIRInstanceID.instanceID().token()
         
         self.firebaseMessagingToken = firebaseMessagingToken
-        
+        print(self.firebaseMessagingToken! as String)
 //        Hyber.updateFirebaseMessagingToken(firebaseMessagingToken, completionHandler: .none)
         
     }
     
-    
     deinit {
-//        removeObservers()
+        removeObservers()
     }
-
     
-    func getNotification() {
-        configureFirebaseMessaging()
-        connectToFirebaseMessaging()
-
-        let token = FIRInstanceID.instanceID().token()!
-        print("TokenFirebase: \(token)")
-    }
-    // old version IOS <10
-   var deviceToken: NSData? = .none {
+     var deviceToken: NSData? = .none {
         didSet {
-           
+            
             guard let deviceToken = deviceToken else { return }
             
             var changed = true
@@ -66,23 +55,15 @@ class HyberFirebaseMessagingDelegate: NSObject, UNUserNotificationCenterDelegate
             if changed {
                 
                 #if DEBUG
-                    FIRInstanceID.instanceID().setAPNSToken(deviceToken as Data, type: .sandbox)
+                    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .sandbox)
                 #else
-                    FIRInstanceID.instanceID().setAPNSToken(deviceToken  as Data, type: .prod)
+                    FIRInstanceID.instanceID().setAPNSToken(deviceToken as Data, type: .prod)
                 #endif
-                
                 connectToFirebaseMessaging()
                 
             }
         }
     }
-    
-    func configureFirebaseMessaging() {
-        if FIRApp.defaultApp() == .none {
-            FIRApp.configure()
-        }
-    }
-
     
      func connectToFirebaseMessaging() {
         
@@ -97,16 +78,32 @@ class HyberFirebaseMessagingDelegate: NSObject, UNUserNotificationCenterDelegate
             }
             
             self.onFirebaseMessagingTokenRefresh(notification: .none)
+            
         }
         
     }
+    // register for recive Notification
+    func registerForRemoteNotification() {
+        if #available(iOS 10.0, *) {
+            let center  = UNUserNotificationCenter.current()
+            center.delegate = self
+            center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
+                if error == nil{
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
+            
+        else {
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+
     
-    private (set) lazy var firebaseMessagingToken: String? = .none
+    var firebaseMessagingToken: String? = .none
     
     private lazy var registrationOptions = [String: AnyObject]()
-    
-    private var retryFetchTokenInterval: TimeInterval = 1
-    
     
 }
 
@@ -114,44 +111,33 @@ class HyberFirebaseMessagingDelegate: NSObject, UNUserNotificationCenterDelegate
 extension HyberFirebaseMessagingDelegate {
     
     
-    func tokenRefreshNotification(_ notification: Notification) {
+    func didEnterBackground() {
+        FIRMessaging.messaging().disconnect()
+    }
+    
+    func didBecomeActive() {
+        connectToFirebaseMessaging()
+    }
+    
+    func configureFirebaseMessaging() {
+        if FIRApp.defaultApp() == .none {
+            FIRApp.configure()
+        }
+    }
+    
+    public func didReceiveRemoteNotification(userInfo:  [NSObject : AnyObject],
+                                             fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        FIRMessaging.messaging().appDidReceiveMessage(userInfo)
+
+        // Print full message.
+        print(userInfo)
+    }
+    
+    func didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {
         
-        if let refreshedToken = FIRInstanceID.instanceID().token() {
-            print("InstanceID token: \(refreshedToken)")
-        }
-        func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-            
-            HyberLogger.info("Get new Notification: \(userInfo["gcm.message_id"]!)")
-            // Print full message.
-            print("%@", userInfo)
-        }
+        print("HyberFirebaseMessagingDelegate recieved apns token")
         
-        func tokenRefreshNotification(_ notification: Notification) {
-            if let refreshedToken = FIRInstanceID.instanceID().token() {
-                print("InstanceID token: \(refreshedToken)")
-            }
-            
-            connectToFcm()
-        }
-        func connectToFcm() {
-            FIRMessaging.messaging().connect { (error) in
-                if (error != nil) {
-                    print("Unable to connect with FCM. \(error)")
-                } else {
-                    print("Connected to FCM.")
-                }
-            }
-        }
-        
-        func applicationDidBecomeActive(_ application: UIApplication) {
-            connectToFcm()
-        }
-        
-        func applicationDidEnterBackground(_ application: UIApplication) {
-            FIRMessaging.messaging().disconnect()
-            print("Disconnected from FCM.")
-        }
+        self.deviceToken = deviceToken
         
     }
     
@@ -162,25 +148,22 @@ extension HyberFirebaseMessagingDelegate {
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
-    
     // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         // Print message ID.
-        HyberLogger.info("Get new Notification: \(userInfo["gcm.message_id"]!)")
+        print("Message ID: \(userInfo["gcm.message_id"]!)")
         
         // Print full message.
-        print("%@", userInfo)
+        print("Full message %@", userInfo)
     }
-    
-    //Called to let your app know which action was selected by the user for a given notification.
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("User Info = ",response.notification.request.content.userInfo)
-        completionHandler()
-    }
-    
 }
 
+extension AppDelegate : FIRMessagingDelegate {
+    // Receive data message on iOS 10 devices.
+    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+        print("%@", remoteMessage.appData)
+    }
+}

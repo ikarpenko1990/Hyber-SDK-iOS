@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.0.1)
+  - AlamofireObjectMapper (4.0.0):
+    - Alamofire (~> 4.0)
+    - ObjectMapper (~> 2.0)
   - Firebase (3.7.1):
     - Firebase/Core (= 3.7.1)
   - Firebase/Core (3.7.1):
@@ -33,11 +36,15 @@ PODS:
     - GoogleSymbolUtilities (~> 1.1)
   - Hyber (0.1.0):
     - Alamofire (~> 4.0.1)
+    - AlamofireObjectMapper (~> 4.0)
     - Firebase (= 3.7.1)
     - Firebase/Messaging (= 3.7.1)
+    - ObjectMapper (~> 2.1.0)
     - RealmSwift (= 2.0.2)
     - RxCocoa (= 3.0.0-rc.1)
     - RxSwift (= 3.0.0-rc.1)
+    - SwiftyJSON (= 3.1.1)
+  - ObjectMapper (2.1.0)
   - Realm (2.0.2):
     - Realm/Headers (= 2.0.2)
   - Realm/Headers (2.0.2)
@@ -46,16 +53,18 @@ PODS:
   - RxCocoa (3.0.0-rc.1):
     - RxSwift (~> 3.0.0-rc.1)
   - RxSwift (3.0.0-rc.1)
+  - SwiftyJSON (3.1.1)
 
 DEPENDENCIES:
   - Hyber (from `../`)
 
 EXTERNAL SOURCES:
   Hyber:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  AlamofireObjectMapper: 9faa3ce5a240efda1b209009a2d6e1e949227abc
   Firebase: be473484f0d515e72ffd04acf22f981773c23e58
   FirebaseAnalytics: 0533a00b681e08fd0b2cd0444b7ddf0ef9fd7a1a
   FirebaseCore: 5a885548bbc5f0c410b04f8e9ac9d73ff1221907
@@ -65,11 +74,13 @@ SPEC CHECKSUMS:
   GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
-  Hyber: a113489684e5902e1eb2e4d13aa2223f2dd5c644
+  Hyber: e9f4a0043dc08cccd420f174ba429c7c43da809c
+  ObjectMapper: e5e0f8aef8590fc2ddcde7f27eddb255863ee6e9
   Realm: 0f5a194af0b7e6158b83db41b4ee1a00be7ddf1a
   RealmSwift: 0eb5070d851cba7c66e841ca756d83609dc78bc8
   RxCocoa: e72a074a7f38896ec0382d096df5f58df10115c7
   RxSwift: d7a3819dd71789c473e3cbf1a0c02d58b2692739
+  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
 PODFILE CHECKSUM: acd3aadafe3119730378b244cd3eda180dd30079
 

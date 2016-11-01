@@ -10,7 +10,7 @@ import CoreData
 
 
 //API
-let kRegUrl = "https://mobile.hyber.im/api/v1/user/register "
+let kRegUrl = "https://mobile.hyber.im/api/v1/user/register"
 let kUpdateUrl = "https://mobile.hyber.im/api/v1/user/update"
 let kRefreshToken = "https://mobile.hyber.im/api/v1/user/refresh_token"
 let kGetUserData = "https://mobile.hyber.im/api/v1/user/me"

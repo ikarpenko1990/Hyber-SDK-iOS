@@ -52,7 +52,8 @@ public protocol HyberFirebaseMessagingHelper: class {
     /**
      Tells to `GCMService`, that remote message received
      */
-    func didReceiveRemoteNotification(userInfo: [NSObject: AnyObject])
+    func didReceiveRemoteNotification(userInfo: [NSObject : AnyObject],
+                                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
     
     /**
      APNs token recieved from `AppDelegate func application(application: UIApplication,
