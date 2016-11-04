@@ -8,22 +8,40 @@
 
 import UIKit
 import Hyber
-import Firebase
 import UserNotifications
+import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
+import SwiftyJSON
+
+
+var notificationJson: JSON = []
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        
-        // Add observer for InstanceID token refresh callback.
+        HyberFirebaseMessagingDelegate.sharedInstance.registerForRemoteNotification()
+        HyberFirebaseMessagingDelegate.sharedInstance.connectToFirebaseMessaging()
+        HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
         return true
     }
     
-}
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        notificationJson = JSON(userInfo)
+        // Print full message.
+        print("Print JSON: %@", notificationJson)
+        
+          
+    }
 
+}

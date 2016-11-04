@@ -9,42 +9,46 @@
 import UIKit
 import Hyber
 import UserNotifications
+import Firebase
 
-class ViewController: UIViewController, UNUserNotificationCenterDelegate {
+class ViewController: UIViewController {
     @IBAction func registerBtn(_ sender: AnyObject) {
-        registerForRemoteNotification()
-        Hyber.registration(phoneId: "380937431520", hyberToken: "testtocken")
-        //test HyberLogger
-        HyberLogger.trace("Button pressed")
+        Hyber.registration(phoneId: "380937431520", hyberToken: "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3")
+//        Hyber.testDeliveredData()
+        }
+    
+    @IBAction func deviceInfoAction(_ sender: Any) {
+    
+        Hyber.updateDevice(fcmToken:"fkrNxuho7a8:APA91bFcE2Qe73jVuLOILTLq0Lfc76z_Z9f5PX_BVjHFATa2R07ZTd4OR5l75lY3j6jnGD0WD2wnixieSv2hX5Pp9Tzs6LOcir5mlAxwURU-n5fBbiGaxs_E-s1V3KJAnKHZSmCsMPAg")
+        
     }
-
+    
+    @IBAction func deleteDeviceAction(_ sender: Any) {
+        Hyber.deleteDevice(deviceId: "27")
+    }
+    
+    @IBAction func getMessageAction(_ sender: Any) {
+        Hyber.getMessageList()
+        print("button pressed")
+    }
+    @IBAction func refreshToken(_ sender: Any) {
+        Hyber.refreshAuthToken()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        let specimens = try! Realm().objects(Messages.self)
+//        print(specimens)
+
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
    
-    func registerForRemoteNotification() {
-        if #available(iOS 10.0, *) {
-            let center  = UNUserNotificationCenter.current()
-            center.delegate = self
-            center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
-                if error == nil{
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
-        }
-            
-        else {
-            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
-            UIApplication.shared.registerForRemoteNotifications()
-        }
-    }
-
+   
     
 }

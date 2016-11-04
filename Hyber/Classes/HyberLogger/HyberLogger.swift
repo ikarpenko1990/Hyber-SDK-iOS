@@ -22,6 +22,7 @@ public extension Hyber {
 private let benchmarker = Benchmarker()
 
 public enum Level {
+    
     case trace, debug, info, warning, error
     
     var description: String {
@@ -49,6 +50,9 @@ public func <(x: Level, y: Level) -> Bool {
 }
 
 open class Logger {
+    
+    public let listener = Notification.Name("LoggerListener")
+
     public var enabled: Bool = true
     
     public var formatter: Formatter {
