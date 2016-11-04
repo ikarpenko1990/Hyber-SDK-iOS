@@ -8,23 +8,26 @@
 
 import CoreData
 
+let baseUrlDev = "http://185.46.89.20/mobile-abonents"
+let baseUrlProd = ""
+let baseURL = ""
 
 //API
-let kRegUrl = "https://mobile.hyber.im/api/v1/user/register"
-let kUpdateUrl = "https://mobile.hyber.im/api/v1/user/update"
-let kRefreshToken = "https://mobile.hyber.im/api/v1/user/refresh_token"
-let kGetUserData = "https://mobile.hyber.im/api/v1/user/me"
-let kSendMsg = "https://mobile.hyber.im/api/v1/user/me"
-let kGetMsgHistory = "https://mobile.hyber.im/api/v1/message/history"
-let kGetFreshMsg = "https://mobile.hyber.im/api/v1/message/fresh"
-let kSendMsgCallback = "https://mobile.hyber.im/api/v1/message/fresh"
+let kRegUrl = "/api/v1/user/registration"
+let kUpdateUrl = "/api/v1/user/update"
+let kRefreshToken = "/api/v1/user/refresh_token"
+let kGetDeviceInfo = "/api/v1/device/me"
+let kSendMsgDr = "/api/v1/message/dr"
+let kGetMsgHistory = "/api/v1/message/history"
+let kSendMsgCallback = "/api/v1/message/callback"
+let kDeleteDevice = "/api/v1/device/delete"
 //Device Info
-let kOSType = "IOS"
+let kOSType = "iPhone OS"
 let kOSVersion = UIDevice.current.systemVersion
 let kDeviceType = "\(UIDevice.current.modelType)"
 let kDeviceName = UIDevice.current.modelName
 let kUUID = UIDevice.current.identifierForVendor!.uuidString
-let kBundleID = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
+let kBundleID = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String
 
 
 
@@ -81,31 +84,31 @@ public extension UIDevice {
         }
         
         switch identifier {
-        case "iPod5,1":                                 return "iPod"
-        case "iPod7,1":                                 return "iPod"
-        case "iPhone3,1", "iPhone3,2", "iPhone3,3":     return "iPhone"
-        case "iPhone4,1":                               return "iPhone"
-        case "iPhone5,1", "iPhone5,2":                  return "iPhone"
-        case "iPhone5,3", "iPhone5,4":                  return "iPhone"
-        case "iPhone6,1", "iPhone6,2":                  return "iPhone"
-        case "iPhone7,2":                               return "iPhone"
-        case "iPhone7,1":                               return "iPhone"
-        case "iPhone8,1":                               return "iPhone"
-        case "iPhone8,2":                               return "iPhone"
-        case "iPhone9,1", "iPhone9,3":                  return "iPhone"
-        case "iPhone9,2", "iPhone9,4":                  return "iPhone"
-        case "iPhone8,4":                               return "iPhone"
-        case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":return "iPad"
-        case "iPad3,1", "iPad3,2", "iPad3,3":           return "iPad"
-        case "iPad3,4", "iPad3,5", "iPad3,6":           return "iPad"
-        case "iPad4,1", "iPad4,2", "iPad4,3":           return "iPad"
-        case "iPad5,3", "iPad5,4":                      return "iPad"
-        case "iPad2,5", "iPad2,6", "iPad2,7":           return "iPad"
-        case "iPad4,4", "iPad4,5", "iPad4,6":           return "iPad"
-        case "iPad4,7", "iPad4,8", "iPad4,9":           return "iPad"
-        case "iPad5,1", "iPad5,2":                      return "iPad"
-        case "iPad6,3", "iPad6,4", "iPad6,7", "iPad6,8":return "iPad"
-        case "AppleTV5,3":                              return "Apple TV"
+        case "iPod5,1":                                 return "phone"
+        case "iPod7,1":                                 return "phone"
+        case "iPhone3,1", "iPhone3,2", "iPhone3,3":     return "phone"
+        case "iPhone4,1":                               return "phone"
+        case "iPhone5,1", "iPhone5,2":                  return "phone"
+        case "iPhone5,3", "iPhone5,4":                  return "phone"
+        case "iPhone6,1", "iPhone6,2":                  return "phone"
+        case "iPhone7,2":                               return "phone"
+        case "iPhone7,1":                               return "phone"
+        case "iPhone8,1":                               return "phone"
+        case "iPhone8,2":                               return "phone"
+        case "iPhone9,1", "iPhone9,3":                  return "phone"
+        case "iPhone9,2", "iPhone9,4":                  return "phone"
+        case "iPhone8,4":                               return "phone"
+        case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":return "tablet"
+        case "iPad3,1", "iPad3,2", "iPad3,3":           return "tablet"
+        case "iPad3,4", "iPad3,5", "iPad3,6":           return "tablet"
+        case "iPad4,1", "iPad4,2", "iPad4,3":           return "tablet"
+        case "iPad5,3", "iPad5,4":                      return "tablet"
+        case "iPad2,5", "iPad2,6", "iPad2,7":           return "tablet"
+        case "iPad4,4", "iPad4,5", "iPad4,6":           return "tablet"
+        case "iPad4,7", "iPad4,8", "iPad4,9":           return "tablet"
+        case "iPad5,1", "iPad5,2":                      return "tablet"
+        case "iPad6,3", "iPad6,4", "iPad6,7", "iPad6,8":return "tablet"
+        case "AppleTV5,3":                              return "tablet"
         case "i386", "x86_64":                          return "Simulator"
         default:                                        return identifier
         }

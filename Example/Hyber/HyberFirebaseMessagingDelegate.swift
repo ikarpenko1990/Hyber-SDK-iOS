@@ -12,7 +12,7 @@ import Hyber
 import UserNotifications
 //HyberFirebaseHelper wiil be initialized with new RESTAPI
 
-class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper, UNUserNotificationCenterDelegate {
+ class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper, UNUserNotificationCenterDelegate {
 
     static let sharedInstance: HyberFirebaseMessagingDelegate = {
         return HyberFirebaseMessagingDelegate()
@@ -31,8 +31,12 @@ class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper, UN
     
   public  func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
         let firebaseMessagingToken = FIRInstanceID.instanceID().token()
-        
+        let kToken = UserDefaults.standard
+        kToken.set(firebaseMessagingToken, forKey: "token")
+        kToken.synchronize()
         self.firebaseMessagingToken = firebaseMessagingToken
+        Hyber.updateDevice(fcmToken:self.firebaseMessagingToken! as String)
+
         print(self.firebaseMessagingToken! as String)
 //        Hyber.updateFirebaseMessagingToken(firebaseMessagingToken, completionHandler: .none)
         
@@ -135,9 +139,10 @@ extension HyberFirebaseMessagingDelegate {
     
     func didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {
         
-        print("HyberFirebaseMessagingDelegate recieved apns token")
+      
         
         self.deviceToken = deviceToken
+        print("Device token: \(deviceToken)")
         
     }
     

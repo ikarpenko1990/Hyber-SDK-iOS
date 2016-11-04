@@ -8,41 +8,86 @@
 
 import UIKit
 import RealmSwift
-import Realm
+import SwiftyJSON
 
 /*Initialize realm */
-
-public class HyberRealmData: RLMObject {
+public extension Hyber{
     
- 
+  public  static let urealm : Realm = {
+//    var config = Realm.Configuration()
+//    let path = Bundle.main.url(forResource: "Hyber", withExtension: "realm")  
+//    config.fileURL = path
+//    
+//    Realm.Configuration.defaultConfiguration = config
+//    
+//    HyberLogger.debug(Realm.Configuration.defaultConfiguration.fileURL!)
+        return try! Realm()
+    }()
     
-    let uiRealm = try! Realm()
-    
-    var storedData : Results<User>!
-    
-    public func readData(){
-        
-        storedData = uiRealm.objects(User.self)
-        print("Stored data: \(storedData)")
-    }
-
-    
-    func bundleURL(_ name: String) -> URL? {
-        return Bundle.main.url(forResource: name, withExtension: "realm")
-    }
-    
-    public func saveData(){
-            let newStoredData = User()
-            try! uiRealm.write{
+    public func addUser(jsonArray: [String:AnyObject]) {
+        do {
+            try Hyber.urealm.write {
                 
-                uiRealm.add(newStoredData)
-           
+                let newUser = User()
+                
+                Hyber.urealm.add(newUser, update: true)
             }
+            
+        } catch {
+            HyberLogger.info("registration failed: \(error), please insert correct data")
+        }
+    }
+    
+    
+    
+    public func fetchMessages (messageArray: [String: AnyObject]) {
         
-        print("Saved data: \(newStoredData)")
+        do {
+            try Hyber.urealm.write {
+                
+                let newMessage = Message()
+                
+                Hyber.urealm.add(newMessage, update: false)
+                
+            }
+            
+        } catch {
+            HyberLogger.info("Message fetching error: \(error)")
         }
         
-    
     }
-
-
+    
+    public func refreshSerrion(sessionArray:[String:AnyObject]) {
+        do {
+            try Hyber.urealm.write {
+                
+                let newSession = Session()
+                
+                Hyber.urealm.add(newSession, update: false)
+                
+            }
+            
+        } catch {
+            HyberLogger.info("Refresh tocken failed: \(error)")
+        }
+    }
+    
+    //reading methods
+    public func readMessages() {
+        let  Messages = Hyber.urealm.objects(Message)
+        HyberLogger.debug("Message list: " , Messages)
+        
+    }
+    
+    public func getUser() {
+        let  Users = Hyber.urealm.objects(User)
+        HyberLogger.debug("Users: ",Users)
+        
+    }
+    public func getToken() {
+        let userToken  = Hyber.urealm.objects(Session)
+        HyberLogger.info("Token: ", userToken)
+    }
+    
+   
+}

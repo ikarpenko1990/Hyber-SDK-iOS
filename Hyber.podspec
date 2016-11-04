@@ -41,7 +41,7 @@ TODO: Add long description of the pod here.
   s.dependency 'Alamofire', '~> 4.0.1'
   s.dependency 'Firebase', '3.7.1'
   s.dependency 'Firebase/Messaging', '3.7.1'
-  s.dependency 'RealmSwift', '2.0.2'
+  s.dependency 'RealmSwift', '2.0.3'
   s.dependency 'RxSwift', '3.0.0-rc.1'
   s.dependency 'RxCocoa', '3.0.0-rc.1'
   s.dependency 'ObjectMapper', '~> 2.1.0'

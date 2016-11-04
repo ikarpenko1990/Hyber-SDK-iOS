@@ -1,4 +1,5 @@
 import Foundation
+import RealmSwift
 
 /**
  Main `Hyber.framework` facade class
@@ -10,8 +11,7 @@ public final class Hyber {
     
 // Private initializer
     private init() {
-        
-    }
+           }
     
 }
 
