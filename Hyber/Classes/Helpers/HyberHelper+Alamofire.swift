@@ -13,583 +13,251 @@ import CoreData
 import Realm
 import RealmSwift
 import SwiftyJSON
+import ObjectMapper
 import AlamofireObjectMapper
 import RxSwift
 
-public extension Hyber{
-    
-    public static func registration(phoneId: String, hyberToken: String) -> Void {
-        
+public extension Hyber {
+  
+
+    public static func registration(phoneId: String) ->  Void {
+        let disposeBag = DisposeBag()
+
         let headers = [
             "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": hyberToken,
-            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-Client-API-Key":kHyberClientAPIKey!,
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
+            "sdkVersion":"2.1.0"
+
             ]
+        
         let phoneData: Parameters = [
             "userPhone": phoneId,
             "osType": kOSType,
             "osVersion": kOSVersion,
             "deviceType": kDeviceType,
             "deviceName": kDeviceName,
-            "sdkVersion": "2.0.0"
+            "fcmToken": kFCM,
+            "sdkVersion":"2.1.0"
             
-        ]
-       let registraion = request(.post, baseUrlDev + kRegUrl, parameters: phoneData, encoding:  JSONEncoding.prettyPrinted, headers: headers)
-        .flatMap {
-            $0
-                .validate(statusCode: 200 ..< 200)
-                .validate(contentType: ["application/json"])
-                            .rx.progress()
-        }
-        .observeOn(MainScheduler.instance)
-        .subscribe { print($0) }
-
-    
-    }
-   
-    //for test without server but with delivered DATA
-    public static func  testDeliveredData() -> Void
-    {
-        let userw = List<User>()
-
-        Alamofire.request("http://test/responce.json").responseJSON {(response: DataResponse<Any>) in
-           debugPrint(response)
-            switch(response.result) {
-            
-            case .success:
-                guard response.result.isSuccess,
-                let value = response.result.value else {
-                    HyberLogger.error("Can't get data")
-                    return
-                }
-                
-                let json = JSON(value)
-                print(json)
-                
- 
-                break
-                
-            case .failure:
-                
-                if let statusCode = response.response?.statusCode {
-                    if statusCode == 1131 {
-                        
-                    }
-                }
-                HyberLogger.debug(response.response?.statusCode)
-                
-                break
-            }
-        }
-        print(kBundleID!, kUUID,kOSType,kOSVersion,kDeviceType,kDeviceName)
-    }
-    
-    
-    
-    public static func updateDevice(fcmToken: String) -> Void //HyberPushNotification?  swiftlint:disable:this line_length
-    {
-    
-        let headers = [
-            "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3",
-            "X-Hyber-IOS-Bundle-Id":"\(kBundleID!)",
-            "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token":"4a2a1f73-f714-4b89-b5b1-64d08b54c973"
         ]
         
+        Networking.registerRequest(parameters: phoneData, headers: headers)
+            .subscribe(onNext: { DataResponse  in
+                let json = JSON(DataResponse)
+                updateDevice()
+            }, onError: { print("Error", $0)},
+               onCompleted: { HyberLogger.debug("Register new subscriber", json)},
+               onDisposed:  { HyberLogger.debug("disposed")}
+         )
+        
+    }
+
+
+
+    public static func updateDevice() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    {
+        let disposeBag = DisposeBag()
+
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
+        
+        let headers = [
+            "Content-Type": "application/json",
+            "X-Hyber-Client-API-Key":kHyberClientAPIKey!,
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-Installation-Id": kUUID,
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
+        ]
         let phoneData: Parameters = [
-            "fcmToken": fcmToken,
+            "fcmToken": kFCM,
+            "priority": 0,
             "osType": kOSType,
             "osVersion": kOSVersion,
             "deviceType": kDeviceType,
             "deviceName": kDeviceName,
-            "sdkVersion":"2.1.0"
+            "modelName": kDeviceName,
             ] as [String : Any]
-        print(phoneData)
-        Alamofire.request( baseUrlDev + kUpdateUrl, method: .post, parameters:phoneData, encoding: JSONEncoding.default, headers: headers).responseJSON {(response: DataResponse<Any>) in
-            
-            switch(response.result) {
-            case .success(_):
-                if let data = response.result.value{
-                    HyberLogger.debug(response.result.value)
-                    
-                }
-                break
                 
-            case .failure(_):
-                if let statusCode = response.response?.statusCode {
-                    if statusCode == 2100 {
-                        HyberLogger.debug("2100, Headers format in api request is wrong")
-                    }
-                    if statusCode == 2101 {
-                        HyberLogger.debug("2101, Json format in api request is wrong")
-                    }
-                    if statusCode == 2110 {
-                        HyberLogger.debug("2101,The client api key used in the request is incorrect")
-                    }
-                    if statusCode == 2112 {
-                        HyberLogger.debug("2112,The iOS Bundle Id used in the request is incorrect")
-                    }
-                    if statusCode == 2113 {
-                        HyberLogger.debug("2113,The Installation Id used in the request is incorrect")
-                    }
-                    if statusCode == 2120 {
-                        HyberLogger.debug("2120,Unspecified error when checking client settings")
-                    }
-                    if statusCode == 2121 {
-                        HyberLogger.debug("2121,Not configured settings for the client application")
-                    }
-                    if statusCode == 2122 {
-                        HyberLogger.debug("2122,History of messages is disabled for the client")
-                    }
-                    if statusCode == 2123 {
-                        HyberLogger.debug("2123,Bidirectional answer for messages is disabled for the client")
-                    }
-                    if statusCode == 2132 {
-                        HyberLogger.debug("2132,The user credentials used in the request is incorrect")
-                    }
-                    if statusCode == 2133 {
-                        HyberLogger.debug("2133,The access token used in the request is incorrect")
-                    }
-                    if statusCode == 2134 {
-                        HyberLogger.debug("2134,The access token used in the request is expired")
-                    }
-                    if statusCode == 2135 {
-                        HyberLogger.debug("2135,The refresh token used in the request is incorrect or not exists")
-                    }
-                    if statusCode == 2141 {
-                        HyberLogger.debug("2141,Device not found")
-                    }
-                    if statusCode == 2142 {
-                        HyberLogger.debug("2142,Not correct message id")
-                    }
-                    else {
-                        HyberLogger.debug("Unknown Error")
-                    }
-                }
-                
-                break
-            }
-        }
-        
+        Networking.updateDeviceRequest(parameters: phoneData, headers: headers)
+            .subscribe(onNext: { json in
+                let json = JSON(json)
+                print(json)
+            },onError: { print("Error", $0)},
+              onCompleted: { HyberLogger.debug("Device updated")},
+              onDisposed:  { HyberLogger.debug("disposed")})
     }
     
-    public static func refreshAuthToken() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+     public static func refreshAuthToken() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
     {
-        
-        
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
+        var refreshToken: String = realm.objects(Session.self).first!.mRefreshToken!
         
         let headers = [
             "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3",
-            "X-Hyber-IOS-Bundle-Id":"\(kBundleID!)",
+            "X-Hyber-Client-API-Key":kHyberClientAPIKey!,
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token":"4a2a1f73-f714-4b89-b5b1-64d08b54c973"
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
         ]
-        
-        Alamofire.request( baseUrlDev + kRefreshToken, method: .post,  encoding: JSONEncoding.default, headers: headers).responseJSON {(response: DataResponse<Any>) in
-            
-            switch(response.result) {
-            case .success(_):
-                if let data = response.result.value{
-                    HyberLogger.debug(response.result.value)
-                    
-                }
-                break
-                
-            case .failure(_):
-                if let statusCode = response.response?.statusCode {
-                    if statusCode == 2100 {
-                        HyberLogger.debug("2100, Headers format in api request is wrong")
-                    }
-                    if statusCode == 2101 {
-                        HyberLogger.debug("2101, Json format in api request is wrong")
-                    }
-                    if statusCode == 2110 {
-                        HyberLogger.debug("2101,The client api key used in the request is incorrect")
-                    }
-                    if statusCode == 2112 {
-                        HyberLogger.debug("2112,The iOS Bundle Id used in the request is incorrect")
-                    }
-                    if statusCode == 2113 {
-                        HyberLogger.debug("2113,The Installation Id used in the request is incorrect")
-                    }
-                    if statusCode == 2120 {
-                        HyberLogger.debug("2120,Unspecified error when checking client settings")
-                    }
-                    if statusCode == 2121 {
-                        HyberLogger.debug("2121,Not configured settings for the client application")
-                    }
-                    if statusCode == 2122 {
-                        HyberLogger.debug("2122,History of messages is disabled for the client")
-                    }
-                    if statusCode == 2123 {
-                        HyberLogger.debug("2123,Bidirectional answer for messages is disabled for the client")
-                    }
-                    if statusCode == 2132 {
-                        HyberLogger.debug("2132,The user credentials used in the request is incorrect")
-                    }
-                    if statusCode == 2133 {
-                        HyberLogger.debug("2133,The access token used in the request is incorrect")
-                    }
-                    if statusCode == 2134 {
-                        HyberLogger.debug("2134,The access token used in the request is expired")
-                    }
-                    if statusCode == 2135 {
-                        HyberLogger.debug("2135,The refresh token used in the request is incorrect or not exists")
-                    }
-                    if statusCode == 2141 {
-                        HyberLogger.debug("2141,Device not found")
-                    }
-                    if statusCode == 2142 {
-                        HyberLogger.debug("2142,Not correct message id")
-                    }
-                    else {
-                        HyberLogger.debug("Unknown Error")
-                    }
-                }
-                
-                break
-            }
-        }
-        
+        let parameters: Parameters = [
+            "refreshToken":refreshToken
+        ]
+        Networking.refreshAuthTokenRequest(parameters: parameters, headers:headers)
+            .subscribe(onNext: { json in
+                let json = JSON(json)
+                print(json)
+            },onError: { print("Error", $0)},
+              onCompleted: { HyberLogger.debug("Device updated")},
+              onDisposed:  { HyberLogger.debug("disposed")})
     }
     
-    public static func getDeviceInfo() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
-    {
-        
-        let headers = [
-            "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3",
-            "X-Hyber-IOS-Bundle-Id":"\(kBundleID!)",
-            "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token":"4a2a1f73-f714-4b89-b5b1-64d08b54c973"
-        ]
-        
-        Alamofire.request( baseUrlDev + kGetDeviceInfo, method: .post,  encoding: JSONEncoding.default, headers: headers).responseJSON {(response: DataResponse<Any>) in
-            
-            switch(response.result) {
-            case .success(_):
-                if let data = response.result.value{
-                    HyberLogger.debug(response.result.value)
-                    
-                }
-                break
-                
-            case .failure(_):
-                if let statusCode = response.response?.statusCode {
-                    if statusCode == 2100 {
-                        HyberLogger.debug("2100, Headers format in api request is wrong")
-                    }
-                    if statusCode == 2101 {
-                        HyberLogger.debug("2101, Json format in api request is wrong")
-                    }
-                    if statusCode == 2110 {
-                        HyberLogger.debug("2101,The client api key used in the request is incorrect")
-                    }
-                    if statusCode == 2112 {
-                        HyberLogger.debug("2112,The iOS Bundle Id used in the request is incorrect")
-                    }
-                    if statusCode == 2113 {
-                        HyberLogger.debug("2113,The Installation Id used in the request is incorrect")
-                    }
-                    if statusCode == 2120 {
-                        HyberLogger.debug("2120,Unspecified error when checking client settings")
-                    }
-                    if statusCode == 2121 {
-                        HyberLogger.debug("2121,Not configured settings for the client application")
-                    }
-                    if statusCode == 2122 {
-                        HyberLogger.debug("2122,History of messages is disabled for the client")
-                    }
-                    if statusCode == 2123 {
-                        HyberLogger.debug("2123,Bidirectional answer for messages is disabled for the client")
-                    }
-                    if statusCode == 2132 {
-                        HyberLogger.debug("2132,The user credentials used in the request is incorrect")
-                    }
-                    if statusCode == 2133 {
-                        HyberLogger.debug("2133,The access token used in the request is incorrect")
-                    }
-                    if statusCode == 2134 {
-                        HyberLogger.debug("2134,The access token used in the request is expired")
-                    }
-                    if statusCode == 2135 {
-                        HyberLogger.debug("2135,The refresh token used in the request is incorrect or not exists")
-                    }
-                    if statusCode == 2141 {
-                        HyberLogger.debug("2141,Device not found")
-                    }
-                    if statusCode == 2142 {
-                        HyberLogger.debug("2142,Not correct message id")
-                    }
-                    else {
-                        HyberLogger.debug("Unknown Error")
-                    }
-                }
-                
-                break
-            }
-        }
-        
-    }
     
     public static func getMessageList() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
     {
-//       let timestamp = NSDate().timeIntervalSince1970
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
+   
         var timestamp: TimeInterval{
             return NSDate().timeIntervalSince1970
         }
         
         let headers = [
             "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3",
-            "X-Hyber-IOS-Bundle-Id":"\(kBundleID!)",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token":"4a2a1f73-f714-4b89-b5b1-64d08b54c973"
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
         ]
         let params:Parameters = [
             "startDate":timestamp
         ]
-        
-        Alamofire.request( baseUrlDev + kGetMsgHistory, method: .post, parameters:params, encoding: JSONEncoding.default, headers: headers).responseJSON {(response: DataResponse<Any>) in
-            
-            switch(response.result) {
-            case .success(_):
-                if let data = response.result.value{
-                    HyberLogger.debug(response.result.value)
-                    
-                }
-                break
-                
-            case .failure(_):
-                if let statusCode = response.response?.statusCode {
-                    if statusCode == 2100 {
-                        HyberLogger.debug("2100, Headers format in api request is wrong")
-                    }
-                    if statusCode == 2101 {
-                        HyberLogger.debug("2101, Json format in api request is wrong")
-                    }
-                    if statusCode == 2110 {
-                        HyberLogger.debug("2101,The client api key used in the request is incorrect")
-                    }
-                    if statusCode == 2112 {
-                        HyberLogger.debug("2112,The iOS Bundle Id used in the request is incorrect")
-                    }
-                    if statusCode == 2113 {
-                        HyberLogger.debug("2113,The Installation Id used in the request is incorrect")
-                    }
-                    if statusCode == 2120 {
-                        HyberLogger.debug("2120,Unspecified error when checking client settings")
-                    }
-                    if statusCode == 2121 {
-                        HyberLogger.debug("2121,Not configured settings for the client application")
-                    }
-                    if statusCode == 2122 {
-                        HyberLogger.debug("2122,History of messages is disabled for the client")
-                    }
-                    if statusCode == 2123 {
-                        HyberLogger.debug("2123,Bidirectional answer for messages is disabled for the client")
-                    }
-                    if statusCode == 2132 {
-                        HyberLogger.debug("2132,The user credentials used in the request is incorrect")
-                    }
-                    if statusCode == 2133 {
-                        HyberLogger.debug("2133,The access token used in the request is incorrect")
-                    }
-                    if statusCode == 2134 {
-                        HyberLogger.debug("2134,The access token used in the request is expired")
-                    }
-                    if statusCode == 2135 {
-                        HyberLogger.debug("2135,The refresh token used in the request is incorrect or not exists")
-                    }
-                    if statusCode == 2141 {
-                        HyberLogger.debug("2141,Device not found")
-                    }
-                    if statusCode == 2142 {
-                        HyberLogger.debug("2142,Not correct message id")
-                    }
-                    else {
-                        HyberLogger.debug("Unknown Error")
-                    }
-                }
-                
-                break
-            }
-        }
-        
+        Networking.getMessagesRequest(parameters: params, headers: headers)
+            .subscribe(onNext: { json in
+                let json = JSON(json)
+                print(json)
+            }, onError: { print("Error", $0)},
+               onCompleted: { HyberLogger.debug("Device updated")},
+               onDisposed:  { HyberLogger.debug("disposed")})
     }
 
    
 
-    public static func deleteDevice(deviceId: String) -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    
+    static func sentDeliveredStatus(messageId: String?) -> Void
     {
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
+        var date = NSDate()
+        var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
+        
+        let authToken = Session()
+        let headers = [
+            "Content-Type": "application/json",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-Installation-Id": kUUID,
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
+        ]
+        
+        
+        let params = [
+            "messageId": messageId!,
+            "recivedAt": timestamp
+            ] as [String : Any]
+        let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+
+        HyberLogger.debug("JSON", params)
+        Networking.sentDeliveredStatus(parameters: params, headers: headers)
+            .subscribe(onNext: { json in
+                HyberLogger.debug("Done")
+            },onError: { print("Error", $0)},
+              onCompleted: { HyberLogger.debug("Device updated")},
+              onDisposed:  { HyberLogger.debug("disposed")})
+    }
+    /*** Next API release**/
+    public static func sendMessageCallback(messageId: Int ,message: String?) -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    {
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
         
         let headers = [
             "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3",
-            "X-Hyber-IOS-Bundle-Id":"\(kBundleID!)",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token":"deb9f874-ba38-4d8d-a3a4-b4465584420b"
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
+        ]
+        let params: Parameters = [
+            "messageId": messageId,
+            "answer":message]
+        
+    }
+
+    public static func deleteDevice(deviceId: String) -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    {
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
+        
+        let headers = [
+            "Content-Type": "application/json",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-Installation-Id": kUUID,
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
         ]
         
         let params:Parameters = [
             "deviceId": deviceId
         ]
         
-        Alamofire.request( baseUrlDev + kDeleteDevice, method: .post, parameters:params,  encoding: JSONEncoding.default, headers: headers).responseJSON {(response: DataResponse<Any>) in
-            
-            switch(response.result) {
-            case .success(_):
-                if let data = response.result.value{
-                    HyberLogger.debug(response.result.value)
-                    
-                }
-                break
-                
-            case .failure(_):
-                if let statusCode = response.response?.statusCode {
-                    if statusCode == 2100 {
-                        HyberLogger.debug("2100, Headers format in api request is wrong")
-                    }
-                    if statusCode == 2101 {
-                        HyberLogger.debug("2101, Json format in api request is wrong")
-                    }
-                    if statusCode == 2110 {
-                        HyberLogger.debug("2101,The client api key used in the request is incorrect")
-                    }
-                    if statusCode == 2112 {
-                        HyberLogger.debug("2112,The iOS Bundle Id used in the request is incorrect")
-                    }
-                    if statusCode == 2113 {
-                        HyberLogger.debug("2113,The Installation Id used in the request is incorrect")
-                    }
-                    if statusCode == 2120 {
-                        HyberLogger.debug("2120,Unspecified error when checking client settings")
-                    }
-                    if statusCode == 2121 {
-                        HyberLogger.debug("2121,Not configured settings for the client application")
-                    }
-                    if statusCode == 2122 {
-                        HyberLogger.debug("2122,History of messages is disabled for the client")
-                    }
-                    if statusCode == 2123 {
-                        HyberLogger.debug("2123,Bidirectional answer for messages is disabled for the client")
-                    }
-                    if statusCode == 2132 {
-                        HyberLogger.debug("2132,The user credentials used in the request is incorrect")
-                    }
-                    if statusCode == 2133 {
-                        HyberLogger.debug("2133,The access token used in the request is incorrect")
-                    }
-                    if statusCode == 2134 {
-                        HyberLogger.debug("2134,The access token used in the request is expired")
-                    }
-                    if statusCode == 2135 {
-                        HyberLogger.debug("2135,The refresh token used in the request is incorrect or not exists")
-                    }
-                    if statusCode == 2141 {
-                        HyberLogger.debug("2141,Device not found")
-                    }
-                    if statusCode == 2142 {
-                        HyberLogger.debug("2142,Not correct message id")
-                    }
-                    else {
-                        HyberLogger.debug("Unknown Error")
-                    }
-                }
-                
-                break
-            }
-        }
-
-
+        Networking.deleteDevice(parameters: params, headers: headers)
+            .subscribe(onNext: { json in
+                let json = JSON(json)
+                print(json)
+            }, onError: { print("Error", $0)
+            })
     }
     
-    public static func sendMessageCallback(messageId: Int ,message: String?) -> Void //HyberPushNotification?  swiftlint:disable:this line_length
-    {
+    public static func getDeviceInfo() -> Void {
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
         
         let headers = [
             "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3",
-            "X-Hyber-IOS-Bundle-Id":"\(kBundleID!)",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token":"4a2a1f73-f714-4b89-b5b1-64d08b54c973"
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
         ]
-
+        print(headers)
         
-        let params: Parameters = [
-            "messageId": messageId,
-            "answer":message]
-        
-        Alamofire.request( baseUrlDev + kSendMsgCallback, method: .post, parameters:params,  encoding: JSONEncoding.default, headers: headers).responseJSON {(response: DataResponse<Any>) in
-            
-            switch(response.result) {
-            case .success(_):
-                if let data = response.result.value{
-                    HyberLogger.debug(response.result.value)
-                    
-                }
-                break
-                
-            case .failure(_):
-                if let statusCode = response.response?.statusCode {
-                    if statusCode == 2100 {
-                        HyberLogger.debug("2100, Headers format in api request is wrong")
-                    }
-                    if statusCode == 2101 {
-                        HyberLogger.debug("2101, Json format in api request is wrong")
-                    }
-                    if statusCode == 2110 {
-                        HyberLogger.debug("2101,The client api key used in the request is incorrect")
-                    }
-                    if statusCode == 2112 {
-                        HyberLogger.debug("2112,The iOS Bundle Id used in the request is incorrect")
-                    }
-                    if statusCode == 2113 {
-                        HyberLogger.debug("2113,The Installation Id used in the request is incorrect")
-                    }
-                    if statusCode == 2120 {
-                        HyberLogger.debug("2120,Unspecified error when checking client settings")
-                    }
-                    if statusCode == 2121 {
-                        HyberLogger.debug("2121,Not configured settings for the client application")
-                    }
-                    if statusCode == 2122 {
-                        HyberLogger.debug("2122,History of messages is disabled for the client")
-                    }
-                    if statusCode == 2123 {
-                        HyberLogger.debug("2123,Bidirectional answer for messages is disabled for the client")
-                    }
-                    if statusCode == 2132 {
-                        HyberLogger.debug("2132,The user credentials used in the request is incorrect")
-                    }
-                    if statusCode == 2133 {
-                        HyberLogger.debug("2133,The access token used in the request is incorrect")
-                    }
-                    if statusCode == 2134 {
-                        HyberLogger.debug("2134,The access token used in the request is expired")
-                    }
-                    if statusCode == 2135 {
-                        HyberLogger.debug("2135,The refresh token used in the request is incorrect or not exists")
-                    }
-                    if statusCode == 2141 {
-                        HyberLogger.debug("2141,Device not found")
-                    }
-                    if statusCode == 2142 {
-                        HyberLogger.debug("2142,Not correct message id")
-                    }
-                    else {
-                        HyberLogger.debug("Unknown Error")
-                    }
-                }
-                
-                break
-            }
-        }
-    
+        Networking.getDeviceInfoRequest(parameters: nil, headers: headers)
+            .subscribe(onNext: { json in
+                let json = JSON(json)
+                print(json)
+            }, onError: { print("Error", $0)
+            })
     }
+
+    
     
 }
 

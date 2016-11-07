@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -18,75 +18,64 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wuu-Yf-dZG">
-                                <rect key="frame" x="119" y="79" width="83" height="30"/>
-                                <state key="normal" title="Registration"/>
-                                <connections>
-                                    <action selector="registerBtn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="igB-re-bnE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cp7-16-jdT">
-                                <rect key="frame" x="101" y="130" width="119" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the phone number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76S-Is-bnA">
+                                <rect key="frame" x="48" y="202" width="319" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hyber_white" translatesAutoresizingMaskIntoConstraints="NO" id="sj8-RN-Ce6">
+                                <rect key="frame" x="166" y="45" width="83" height="37"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="119" id="Abf-QN-Ppt"/>
+                                    <constraint firstAttribute="height" constant="37" id="2XG-z0-Oak"/>
                                 </constraints>
-                                <state key="normal" title="getDeviceInfo"/>
-                                <connections>
-                                    <action selector="deviceInfoAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="GSD-WC-SJi"/>
-                                    <action selector="registerBtn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="HSC-zO-tOg"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITn-Tf-LuQ">
-                                <rect key="frame" x="114" y="180" width="92" height="30"/>
-                                <state key="normal" title="Devete device"/>
-                                <connections>
-                                    <action selector="deleteDeviceAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wmk-4N-iHQ"/>
-                                    <action selector="registerBtn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kcG-lI-HgJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adz-cD-dNu">
-                                <rect key="frame" x="114" y="225" width="102" height="30"/>
-                                <state key="normal" title="Get Message History"/>
-                                <connections>
-                                    <action selector="getMessageAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="GuF-82-5Ut"/>
-                                    <action selector="registerBtn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="73n-6t-Oor"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ul-4s-7vK">
-                                <rect key="frame" x="116.5" y="271" width="96" height="30"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J06-7j-W4N">
+                                <rect key="frame" x="122" y="261" width="170" height="60"/>
+                                <color key="backgroundColor" red="0.80731683969497681" green="0.38100218772888184" blue="0.7640388011932373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="qvY-1d-Eas"/>
+                                    <constraint firstAttribute="height" constant="60" id="Ede-iQ-RFL"/>
+                                    <constraint firstAttribute="width" constant="170" id="mnq-aO-gRA"/>
                                 </constraints>
-                                <state key="normal" title="update token"/>
+                                <state key="normal" title="Registration">
+                                    <color key="titleColor" red="1" green="0.93684009732148732" blue="0.97666205788949212" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="refreshToken:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vGK-cF-GiQ"/>
-                                    <action selector="registerBtn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Slx-7G-x73"/>
+                                    <action selector="registerBtn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5MZ-wq-mtq"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Wuu-Yf-dZG" firstAttribute="centerX" secondItem="Cp7-16-jdT" secondAttribute="centerX" id="3ra-eh-tum"/>
-                            <constraint firstItem="ITn-Tf-LuQ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="98" id="96t-uV-shs"/>
-                            <constraint firstItem="Adz-cD-dNu" firstAttribute="top" secondItem="ITn-Tf-LuQ" secondAttribute="bottom" constant="15" id="Bet-ta-3h7"/>
-                            <constraint firstItem="Adz-cD-dNu" firstAttribute="centerX" secondItem="5ul-4s-7vK" secondAttribute="centerX" id="IsM-F0-GdO"/>
-                            <constraint firstItem="ITn-Tf-LuQ" firstAttribute="top" secondItem="Cp7-16-jdT" secondAttribute="bottom" constant="20" id="Jzw-iM-wPF"/>
-                            <constraint firstItem="Cp7-16-jdT" firstAttribute="centerX" secondItem="ITn-Tf-LuQ" secondAttribute="centerX" id="KMz-Lc-gfb"/>
-                            <constraint firstItem="ITn-Tf-LuQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ShN-wa-xm2"/>
-                            <constraint firstItem="Cp7-16-jdT" firstAttribute="top" secondItem="Wuu-Yf-dZG" secondAttribute="bottom" constant="21" id="XDI-T4-oeV"/>
-                            <constraint firstItem="5ul-4s-7vK" firstAttribute="top" secondItem="Adz-cD-dNu" secondAttribute="bottom" constant="16" id="h59-QB-hx8"/>
-                            <constraint firstItem="ITn-Tf-LuQ" firstAttribute="leading" secondItem="Adz-cD-dNu" secondAttribute="leading" id="rHI-Lv-vXi"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Adz-cD-dNu" secondAttribute="trailing" constant="88" id="u9Q-6m-W8A"/>
-                            <constraint firstItem="Wuu-Yf-dZG" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="59" id="ysl-zO-cPV"/>
+                            <constraint firstItem="76S-Is-bnA" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="202" id="8vo-hj-VFT"/>
+                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" id="E1O-3O-rGc"/>
+                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="25" id="Y1a-un-cMX"/>
+                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="dFl-Wz-pwB"/>
+                            <constraint firstItem="J06-7j-W4N" firstAttribute="top" secondItem="76S-Is-bnA" secondAttribute="bottom" constant="29" id="vkr-2c-1yI"/>
+                            <constraint firstItem="76S-Is-bnA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="28" id="yjH-Iu-jz7"/>
+                            <constraint firstItem="J06-7j-W4N" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" id="zMT-ZB-Alw"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="numberTextFiled" destination="76S-Is-bnA" id="RSF-ZE-1M0"/>
+                        <outlet property="registrationBtn" destination="J06-7j-W4N" id="Ztg-mE-5lr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="nCk-8y-BoW">
+                    <connections>
+                        <action selector="tabGestureAction:" destination="vXZ-lx-hvc" id="SL4-nc-DhL"/>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="v6a-lF-OrG"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="200.80000000000001" y="147.97601199400302"/>
+            <point key="canvasLocation" x="198.55072463768118" y="146.73913043478262"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="hyber_white" width="83" height="20"/>
+    </resources>
 </document>
