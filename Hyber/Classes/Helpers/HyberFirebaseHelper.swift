@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NotificationCenter
 
 public extension Hyber {
     /// An instance of `HyberFirebaseMessagingHelper`
@@ -24,7 +25,7 @@ public extension Hyber {
 	- Note:
 	[https://firebase.google.com/docs/cloud-messaging/ios/client](https://firebase.google.com/docs/cloud-messaging/ios/client)
  */
-public protocol HyberFirebaseMessagingHelper: class {
+public protocol HyberFirebaseMessagingHelper: class  {
     
    
     func configureFirebaseMessaging()
@@ -52,8 +53,8 @@ public protocol HyberFirebaseMessagingHelper: class {
     /**
      Tells to `GCMService`, that remote message received
      */
-    func didReceiveRemoteNotification(userInfo: [NSObject : AnyObject],
-                                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+    func didReceiveRemoteNotification(userInfo: [AnyHashable: Any])
+    
     
     /**
      APNs token recieved from `AppDelegate func application(application: UIApplication,

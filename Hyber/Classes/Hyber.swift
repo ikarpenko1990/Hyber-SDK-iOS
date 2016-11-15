@@ -9,9 +9,7 @@ import RealmSwift
 
 public final class Hyber {
     
-// Private initializer
-    private init() {
-           }
+    private init() {}
     
 }
 

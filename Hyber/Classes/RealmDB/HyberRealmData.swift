@@ -10,45 +10,58 @@ import UIKit
 import RealmSwift
 import SwiftyJSON
 
-/*Initialize realm */
-public extension Hyber{
+class RealmData {
     
   public  static let urealm : Realm = {
-//    var config = Realm.Configuration()
-//    let path = Bundle.main.url(forResource: "Hyber", withExtension: "realm")  
-//    config.fileURL = path
-//    
-//    Realm.Configuration.defaultConfiguration = config
-//    
-//    HyberLogger.debug(Realm.Configuration.defaultConfiguration.fileURL!)
         return try! Realm()
     }()
+   
+    func setDefaultRealmForUser(username: String) {
+        var config = Realm.Configuration()
+        
+        // Use the default directory, but replace the filename with the username
+        config.fileURL = config.fileURL!.deletingLastPathComponent()
+            .appendingPathComponent("\(username).realm")
+        
+        // Set this as the configuration used for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+    }
     
-    public func addUser(jsonArray: [String:AnyObject]) {
-        do {
-            try Hyber.urealm.write {
+    func createUpdateUser(rUser: User)  {
+            do {
                 
-                let newUser = User()
+                try RealmData.urealm.write {
+                    RealmData.urealm.add(rUser)
+                HyberLogger.info("UserData saved!")
+                }
                 
-                Hyber.urealm.add(newUser, update: true)
+            } catch let error as NSError {
+                HyberLogger.error("Error creating Listing DB: \(error.userInfo)")
             }
-            
-        } catch {
-            HyberLogger.info("registration failed: \(error), please insert correct data")
-        }
+        
     }
     
     
     
-    public func fetchMessages (messageArray: [String: AnyObject]) {
+    public func fetchMessages (messages: [String:AnyObject]) {
+        
         
         do {
-            try Hyber.urealm.write {
-                
-                let newMessage = Message()
-                
-                Hyber.urealm.add(newMessage, update: false)
-                
+            let newMessages = Message()
+            newMessages.mUser = User()
+            newMessages.mId = messages["messageId"]?.string
+            newMessages.mTitle = messages["from"]?.string
+            newMessages.mBody = messages["text"]?.string
+            newMessages.mDate = messages["date"]?.string
+            newMessages.mButtonText = messages["caption"]?.string
+            newMessages.mButtonUrl = messages["action"]?.string
+            newMessages.mImageUrl = messages["img"]?.string
+            newMessages.isRead = false
+            newMessages.isReported = false
+
+            try RealmData.urealm.write {
+                RealmData.urealm.add(newMessages, update: true)
+                    HyberLogger.info("UserData saved!")
             }
             
         } catch {
@@ -57,37 +70,46 @@ public extension Hyber{
         
     }
     
-    public func refreshSerrion(sessionArray:[String:AnyObject]) {
-        do {
-            try Hyber.urealm.write {
-                
-                let newSession = Session()
-                
-                Hyber.urealm.add(newSession, update: false)
-                
-            }
+    public func saveSession(sessionData newSession: [String:AnyObject]?) {
+        do{
+            let session = Session()
+            session.mToken = newSession?["authToken"]?.string
+            session.mRefreshToken = newSession?["refreshToken"]?.string
+            session.mExpirationDate = newSession?["expirationDate"]?.string
+            session.mExpired = false
             
-        } catch {
-            HyberLogger.info("Refresh tocken failed: \(error)")
+            try RealmData.urealm.write {
+                RealmData.urealm.add(session, update: true)
+            }
+        }
+        catch let err as NSError {
+             HyberLogger.debug("Message list: " + err.localizedDescription)
+        }
+    
+    }
+    
+    public func saveDeviceinfo(saveToken: String ) {
+        let device = Device()
+        device.modelName = kDeviceName
+        device.installationId = kUUID
+        device.osType = kOSType
+        device.deviceType = kDeviceType
+        device.deviceName = kDeviceName
+        device.fcmToken = saveToken
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(device , update: true)
         }
     }
+
     
     //reading methods
-    public func readMessages() {
-        let  Messages = Hyber.urealm.objects(Message)
-        HyberLogger.debug("Message list: " , Messages)
-        
+    public func getMessageList() ->Results<Message> {
+        return RealmData.urealm.objects(Message)
     }
     
-    public func getUser() {
-        let  Users = Hyber.urealm.objects(User)
-        HyberLogger.debug("Users: ",Users)
-        
-    }
-    public func getToken() {
-        let userToken  = Hyber.urealm.objects(Session)
-        HyberLogger.info("Token: ", userToken)
+    public func getUsers() -> Results<User> {
+        return RealmData.urealm.objects(User)
     }
     
-   
 }

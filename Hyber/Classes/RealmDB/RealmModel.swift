@@ -44,12 +44,6 @@ class Message: Object, Mappable {
 
 }
 
-class Generic<T: NSObject> {
-    func create() -> T {
-        return T()
-    }
-}
-
 class Session: Object, Mappable {
   dynamic var mUserId: String?
   dynamic var mUser: User?
@@ -77,11 +71,10 @@ class Session: Object, Mappable {
 
     
     func mapping(map: Map) {
-        mUserId <- map["userId"]
-        mToken <- map["userPhone"]
-        mRefreshToken <- map["createdAt"]
-        mExpirationDate <- map["createdAt"]
-        mExpired <- map["createdAt"]
+        mUserId <- map["userPhone"]
+        mToken <- map["authToken"]
+        mRefreshToken <- map["refreshToken"]
+        mExpirationDate <- map["expirationDate"]
 
         
     }
@@ -90,7 +83,7 @@ class Session: Object, Mappable {
 
 class User: Object, Mappable {
   dynamic var mId: String?
-  dynamic var mPhone = 0
+  var mPhone: Int?
   dynamic var isActive = false
 
   override static func primaryKey() -> String? {
@@ -117,3 +110,48 @@ class User: Object, Mappable {
  
 }
 
+
+class Device: Object, Mappable {
+    
+    dynamic var installationId = ""
+    dynamic var osType = ""
+    dynamic var fcmToken: String?
+    dynamic var osVersion = ""
+    dynamic var deviceType = ""
+    dynamic var deviceName = ""
+    dynamic var modelName = ""
+    dynamic var createdAt: String?
+    dynamic var updatedAt: String?
+    dynamic var deviceId: String?
+    let userId = User()
+    
+    override static func primaryKey() -> String? {
+        return "deviceId"
+    }
+    
+    override static func indexedProperties() -> [String] {
+        return [
+        "deviceId"
+        ]
+    }
+    
+    convenience required init?(map: Map) {
+        self.init()
+        mapping(map: map)
+    }
+    
+    func mapping(map: Map) {
+        deviceId              <- map["deviceId"]
+        installationId        <- map["installId"]
+        fcmToken              <- map["fcmTken"]
+        osType                <- map["osType"]
+        osVersion             <- map["osVersion"]
+        deviceType            <- map["deviceType"]
+        deviceName            <- map["devicaName"]
+        modelName             <- map["modelName"]
+        createdAt             <- map["createdAt"]
+        updatedAt             <- map["updatedAt"]
+
+    }
+    
+}

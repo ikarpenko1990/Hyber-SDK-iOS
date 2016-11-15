@@ -1,7 +1,9 @@
-"language": "objective-c",
-"os": "osx",
-"osx_image": "xcode8",
-"env": "scheme='Siesta iOS' platform='iOS Simulator,OS=10.0,name=iPhone SE'",
-"group": "stable",
-"dist": "osx"
-"podfile": "./Example/Podfile"
+language: objective-c,
+os: osx,
+osx_image: xcode8,
+env: scheme='Siesta iOS' platform='iOS Simulator,OS=10.0,name=iPhone SE',
+group: stable,
+dist: osx,
+xcode_workspace: ../Example/Hyber.xcworkspace
+xcode_scheme: Hyber-Example
+podfile: ./Example/Podfile

@@ -12,7 +12,7 @@ import Hyber
 import UserNotifications
 //HyberFirebaseHelper wiil be initialized with new RESTAPI
 
- class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper, UNUserNotificationCenterDelegate {
+ class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper {
 
     static let sharedInstance: HyberFirebaseMessagingDelegate = {
         return HyberFirebaseMessagingDelegate()
@@ -31,15 +31,9 @@ import UserNotifications
     
   public  func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
         let firebaseMessagingToken = FIRInstanceID.instanceID().token()
-        let kToken = UserDefaults.standard
-        kToken.set(firebaseMessagingToken, forKey: "token")
-        kToken.synchronize()
+    
         self.firebaseMessagingToken = firebaseMessagingToken
-        Hyber.updateDevice(fcmToken:self.firebaseMessagingToken! as String)
-
-        print(self.firebaseMessagingToken! as String)
-//        Hyber.updateFirebaseMessagingToken(firebaseMessagingToken, completionHandler: .none)
-        
+        Hyber.saveToken(fcmToken:self.firebaseMessagingToken! as String)
     }
     
     deinit {
@@ -54,6 +48,7 @@ import UserNotifications
             var changed = true
             if let oldValue = oldValue {
                 changed = !deviceToken.isEqual(to: oldValue as Data)
+                self.onFirebaseMessagingTokenRefresh(notification: .none)
             }
             
             if changed {
@@ -88,6 +83,8 @@ import UserNotifications
     }
     // register for recive Notification
     func registerForRemoteNotification() {
+     
+        
         if #available(iOS 10.0, *) {
             let center  = UNUserNotificationCenter.current()
             center.delegate = self
@@ -114,6 +111,7 @@ import UserNotifications
 //MARK: ApplicationDelegate
 extension HyberFirebaseMessagingDelegate {
     
+
     
     func didEnterBackground() {
         FIRMessaging.messaging().disconnect()
@@ -127,19 +125,15 @@ extension HyberFirebaseMessagingDelegate {
         if FIRApp.defaultApp() == .none {
             FIRApp.configure()
         }
+        connectToFirebaseMessaging()
     }
     
-    public func didReceiveRemoteNotification(userInfo:  [NSObject : AnyObject],
-                                             fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    func didReceiveRemoteNotification(userInfo: [AnyHashable: Any]) {
         FIRMessaging.messaging().appDidReceiveMessage(userInfo)
-
-        // Print full message.
-        print(userInfo)
     }
     
     func didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {
         
-      
         
         self.deviceToken = deviceToken
         print("Device token: \(deviceToken)")
@@ -151,22 +145,16 @@ extension HyberFirebaseMessagingDelegate {
 /** [START ios_10_message_handling]
  You must assign your delegate object to the UNUserNotificationCenter object no later before your app finishes launching. For example, in an iOS app, you must assign it in the application(_:willFinishLaunchingWithOptions:) or application(_:didFinishLaunchingWithOptions:) method.*/
 @available(iOS 10, *)
-extension AppDelegate : UNUserNotificationCenterDelegate {
-    
+extension HyberFirebaseMessagingDelegate : UNUserNotificationCenterDelegate {
     // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
-        
-        // Print full message.
-        print("Full message %@", userInfo)
+        //Hyber.didReceiveRemoteNotification(userInfo: notification.request.content.userInfo)
     }
 }
 
-extension AppDelegate : FIRMessagingDelegate {
+extension HyberFirebaseMessagingDelegate : FIRMessagingDelegate {
     // Receive data message on iOS 10 devices.
     func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
         print("%@", remoteMessage.appData)
