@@ -49,10 +49,9 @@ class RealmData {
         do {
             let newMessages = Message()
             newMessages.mUser = User()
-            newMessages.mId = messages["messageId"]?.string
+            newMessages.messageId = messages["messageId"]?.string
             newMessages.mTitle = messages["from"]?.string
             newMessages.mBody = messages["text"]?.string
-            newMessages.mDate = messages["date"]?.string
             newMessages.mButtonText = messages["caption"]?.string
             newMessages.mButtonUrl = messages["action"]?.string
             newMessages.mImageUrl = messages["img"]?.string
@@ -104,7 +103,7 @@ class RealmData {
 
     
     //reading methods
-    public func getMessageList() ->Results<Message> {
+    public func getMessagesList() ->Results<Message> {
         return RealmData.urealm.objects(Message)
     }
     

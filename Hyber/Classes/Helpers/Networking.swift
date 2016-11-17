@@ -80,7 +80,7 @@ class Networking: NSObject{
         }        
     }
     
- 
+    
     
     class func refreshAuthTokenRequest(parameters: [String: Any]?, headers: [String:String] )  -> Observable<Any> {
         return request(.post, kRefreshToken , parameters: parameters, encoding: JSONEncoding.prettyPrinted, headers: headers)
@@ -115,9 +115,8 @@ class Networking: NSObject{
  
     
     class func getMessagesRequest(parameters: [String: Any]?, headers: [String:String] )  -> Observable<Any> {
-        return request(.post,  kGetMsgHistory , parameters: parameters, encoding: JSONEncoding.prettyPrinted, headers: headers)
+        return request(.get,  "http://eweb.in.ua/msg.json" , parameters: nil, encoding: JSONEncoding.default, headers: nil)
             .subscribeOn(MainScheduler.asyncInstance)
-            .observeOn(MainScheduler.instance)
             .flatMap {response ->Observable<Any> in
                 return response.validate(statusCode: 200..<300)
                     .validate(contentType: ["application/json","text/json"])
@@ -126,13 +125,33 @@ class Networking: NSObject{
             .map {json in
                 let data = json
                 let validJson = JSON(data)
-                let message = validJson["messages"]
+                let message = validJson["messages"].arrayValue
                 let error = validJson["error"]
                     if error != nil{
                         responseError(error: error)
                     }
-                let newMessages = Message()
-                    HyberLogger.info(validJson)
+//                    let mappble = Mapper<Message>().map(JSONObject: message)
+                if let jsonArray =  message as? NSArray {
+                    if let messageArray = jsonArray as? NSDictionary{
+                        
+                        let newMessages = Message()
+                        newMessages.isReported = true
+                        newMessages.messageId = messageArray["messageId"] as? String
+                        newMessages.mTitle = messageArray["from"] as? String
+                        newMessages.mPartner = messageArray["partner"] as? String
+                        newMessages.mBody = messageArray["text"] as? String
+                        newMessages.mImageUrl = messageArray["img"] as? String
+                        newMessages.mButtonUrl = messageArray["action"] as? String
+                        newMessages.mButtonText = messageArray["caption"] as? String
+                        let realm = try! Realm()
+                        try realm.write {
+                            realm.add(newMessages, update: true)
+                        }
+
+                        }
+                    }
+                
+                HyberLogger.info(validJson)
             return validJson
         }
     }
@@ -203,4 +222,5 @@ class Networking: NSObject{
                 return validJson
         }
     }
+    
 }

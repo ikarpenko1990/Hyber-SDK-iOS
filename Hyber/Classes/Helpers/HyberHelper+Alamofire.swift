@@ -4,7 +4,7 @@
 //
 //  Created by Taras on 10/21/16.
 // 
-// Api Requests
+//  Api Requests
 // 
 
 import Foundation
@@ -19,8 +19,9 @@ import RxSwift
 
 public extension Hyber {
   
+    typealias CompletionHandler = (_ success:Bool) -> Void
 
-    public static func registration(phoneId: String) ->  Void {
+    public static func registration(phoneId: String, completionHandler: @escaping CompletionHandler) {
         let disposeBag = DisposeBag()
 
         let headers = [
@@ -47,9 +48,15 @@ public extension Hyber {
         Networking.registerRequest(parameters: phoneData, headers: headers)
             .subscribe(onNext: { DataResponse  in
                 let json = JSON(DataResponse)
+                let flag = true // true if download succeed,false otherwise
+                completionHandler(flag)
+
                 updateDevice()
-            }, onError: { print("Error", $0)},
-               onCompleted: { HyberLogger.debug("Register new subscriber", json)},
+            }, onError: { print("Error", $0)
+                let flag = false // false if download succeed,false otherwise
+                completionHandler(flag)
+            },
+               onCompleted: { HyberLogger.debug("Register new subscriber")},
                onDisposed:  { HyberLogger.debug("disposed")}
          )
         
@@ -57,8 +64,8 @@ public extension Hyber {
 
 
 
-    public static func updateDevice() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
-    {
+    public static func updateDevice()  -> Void
+        {
         let disposeBag = DisposeBag()
 
         let realm = try! Realm()
@@ -84,15 +91,14 @@ public extension Hyber {
             ] as [String : Any]
                 
         Networking.updateDeviceRequest(parameters: phoneData, headers: headers)
-            .subscribe(onNext: { json in
+            .subscribe(onNext: {json in
                 let json = JSON(json)
-                print(json)
             },onError: { print("Error", $0)},
               onCompleted: { HyberLogger.debug("Device updated")},
               onDisposed:  { HyberLogger.debug("disposed")})
     }
     
-     public static func refreshAuthToken() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+     public static func refreshAuthToken() -> Void
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
@@ -115,19 +121,18 @@ public extension Hyber {
                 let json = JSON(json)
                 print(json)
             },onError: { print("Error", $0)},
-              onCompleted: { HyberLogger.debug("Device updated")},
+              onCompleted: { HyberLogger.debug("Token refreshed")},
               onDisposed:  { HyberLogger.debug("disposed")})
     }
     
     
-    public static func getMessageList() -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    public static func getMessageList(completionHandler: @escaping CompletionHandler) -> Void
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
    
-        var timestamp: TimeInterval{
-            return NSDate().timeIntervalSince1970
-        }
+        var date = NSDate()
+        var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
         
         let headers = [
             "Content-Type": "application/json",
@@ -141,12 +146,18 @@ public extension Hyber {
         let params:Parameters = [
             "startDate":timestamp
         ]
+        
         Networking.getMessagesRequest(parameters: params, headers: headers)
             .subscribe(onNext: { json in
                 let json = JSON(json)
-                print(json)
+                let flag = true
+                completionHandler(flag)
+                
             }, onError: { print("Error", $0)},
-               onCompleted: { HyberLogger.debug("Device updated")},
+               onCompleted: { HyberLogger.debug("Messages loaded")
+                let flag = false
+                completionHandler(flag)
+            },
                onDisposed:  { HyberLogger.debug("disposed")})
     }
 
@@ -183,11 +194,11 @@ public extension Hyber {
             .subscribe(onNext: { json in
                 HyberLogger.debug("Done")
             },onError: { print("Error", $0)},
-              onCompleted: { HyberLogger.debug("Device updated")},
+              onCompleted: { HyberLogger.debug("Delivered")},
               onDisposed:  { HyberLogger.debug("disposed")})
     }
     /*** Next API release**/
-    public static func sendMessageCallback(messageId: Int ,message: String?) -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    public static func sendMessageCallback(messageId: Int ,message: String?) -> Void
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
@@ -207,7 +218,7 @@ public extension Hyber {
         
     }
 
-    public static func deleteDevice(deviceId: String) -> Void //HyberPushNotification?  swiftlint:disable:this line_length
+    public static func deleteDevice(deviceId: String) -> Void
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!

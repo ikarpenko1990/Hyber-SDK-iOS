@@ -2,6 +2,7 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
+
 class Message: Object, Mappable {
   dynamic var mId: String?
   dynamic var messageId: String?
@@ -28,14 +29,17 @@ class Message: Object, Mappable {
     
     func mapping(map: Map) {
         messageId <- map["messageId"]
-        mPartner <- map["userPhone"]
-        mTitle <- map["title"]
-        mBody <- map["body"]
-        mDate <- map["time"]
-        mImageUrl <- map["url"]
-        mButtonUrl <- map["url"]
-        mButtonText <- map["text"]
-      
+        mPartner <- map["partner"]
+        mTitle <- map["from"]
+        mBody <- map["text"]
+        mDate <- map["drTime"]
+        mButtonUrl <- map["action"]
+        mButtonText <- map["caption"]
+        isReported <- map["drTime"]
+        mUser <- map["to"]
+        mImageUrl <- map["img"]
+        
+
 
 
     }
