@@ -115,7 +115,7 @@ class Networking: NSObject{
  
     
     class func getMessagesRequest(parameters: [String: Any]?, headers: [String:String] )  -> Observable<Any> {
-        return request(.get,  "http://eweb.in.ua/msg.json" , parameters: nil, encoding: JSONEncoding.default, headers: nil)
+        return request(.get, kGetMsgHistory , parameters: nil, encoding: JSONEncoding.default, headers: nil)
             .subscribeOn(MainScheduler.asyncInstance)
             .flatMap {response ->Observable<Any> in
                 return response.validate(statusCode: 200..<300)
