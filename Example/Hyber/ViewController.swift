@@ -13,21 +13,35 @@ import Firebase
 
 class ViewController: UIViewController  {
     @IBOutlet weak var registrationBtn: UIButton!
-    @IBAction func registerBtn(_ sender: AnyObject) {
-        Hyber.registration(phoneId: numberTextFiled.text!)
+    @IBAction func registetrationAction(_ sender: UIButton) {
+        Hyber.registration(phoneId: numberTextFiled.text!, completionHandler: { (success) -> Void in
+            if success {
+                let alert = UIAlertController(title: "Alert", message: "User succesfull registred!", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else { //catch errors here
+                let alert = UIAlertController(title: "Alert", message: "Please input correct phone number", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
         
-        let alert = UIAlertController(title: "Alert", message: "User succesfull registred!", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
         
-        }
-    
+
+    }
+        
+    @IBAction func updateAction(_ sender: Any) {
+        
+        Hyber.updateDevice()
+    }
     @IBOutlet weak var numberTextFiled: UITextField!
     
     @IBAction func tabGestureAction(_ sender: Any) {
-        resignFirstResponder()
+        numberTextFiled.resignFirstResponder()
     }
 
+    @IBAction func fetchMessageAction(_ sender: Any) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         buttonDesign()
@@ -62,10 +76,19 @@ class ViewController: UIViewController  {
 extension ViewController: UITextFieldDelegate {
     
     internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        resignFirstResponder()
+        textField.resignFirstResponder()
         return true
     }
     
+   internal func textField(_ shouldChangeCharactersIntextField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+        
+    {
+        let numberOnly = NSCharacterSet.init(charactersIn: "0123456789")
+        let stringFromTextField = NSCharacterSet.init(charactersIn: string)
+        let strValid = numberOnly.isSuperset(of: stringFromTextField as CharacterSet)
+        
+        return strValid
+    }
 }
 
 extension UIColor {
@@ -80,4 +103,5 @@ extension UIColor {
     convenience init(netHex:Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
+
 }
