@@ -22,10 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        HyberFirebaseMessagingDelegate.sharedInstance.registerForRemoteNotification()
         HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
         Hyber.initialise(clientApiKey:"b5a5b6f4-5af7-11e6-8b77-86f30ca893d3", firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
         return true
+        
     }
    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],

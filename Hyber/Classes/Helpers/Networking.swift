@@ -115,8 +115,9 @@ class Networking: NSObject{
  
     
     class func getMessagesRequest(parameters: [String: Any]?, headers: [String:String] )  -> Observable<Any> {
-        return request(.get, kGetMsgHistory , parameters: nil, encoding: JSONEncoding.default, headers: nil)
-            .subscribeOn(MainScheduler.asyncInstance)
+        return request(.post, kGetMsgHistory , parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+          .subscribeOn(MainScheduler.asyncInstance)
+            .observeOn(MainScheduler.asyncInstance)
             .flatMap {response ->Observable<Any> in
                 return response.validate(statusCode: 200..<300)
                     .validate(contentType: ["application/json","text/json"])
@@ -125,51 +126,74 @@ class Networking: NSObject{
             .map {json in
                 let data = json
                 let validJson = JSON(data)
-                let message = validJson["messages"].arrayValue
+                let message = validJson["messages"].arrayObject
                 let error = validJson["error"]
                     if error != nil{
                         responseError(error: error)
-                    }
-//                    let mappble = Mapper<Message>().map(JSONObject: message)
-                if let jsonArray =  message as? NSArray {
-                    if let messageArray = jsonArray as? NSDictionary{
+                }
+                let realm = try! Realm()
+                let messages = List<Message>()
+                
+                if let jsonArray =  message as? [[String:Any]] {
+                    for  messagesArray in jsonArray {
                         
                         let newMessages = Message()
-                        newMessages.isReported = true
-                        newMessages.messageId = messageArray["messageId"] as? String
-                        newMessages.mTitle = messageArray["from"] as? String
-                        newMessages.mPartner = messageArray["partner"] as? String
-                        newMessages.mBody = messageArray["text"] as? String
-                        newMessages.mImageUrl = messageArray["img"] as? String
-                        newMessages.mButtonUrl = messageArray["action"] as? String
-                        newMessages.mButtonText = messageArray["caption"] as? String
-                        let realm = try! Realm()
-                        try realm.write {
-                            realm.add(newMessages, update: true)
-                        }
-
-                        }
-                    }
-                
-                HyberLogger.info(validJson)
+                        
+                        newMessages.messageId = messagesArray["messageId"] as? String
+                        newMessages.mTitle = messagesArray["from"] as? String
+                        newMessages.mPartner = messagesArray["partner"] as? String
+                        newMessages.mBody = messagesArray["text"] as? String
+                        newMessages.mDate = ((messagesArray["drTime"] as? Double)! * 0.001) //need fix type
+                            if messagesArray["drTime"] != nil {
+                                newMessages.isReported = true
+                            }
+                       
+                            if let optionsArray = messagesArray["options"] as? [String:Any] {
+                                newMessages.mImageUrl = optionsArray["img"] as? String
+                                newMessages.mButtonUrl = optionsArray["action"] as? String
+                                newMessages.mButtonText = optionsArray["caption"] as? String
+                            }
+                        
+                        messages.append(newMessages)
+                            try! realm.write {
+                                realm.add(newMessages, update:true)
+                            }
+                       
+                      }
+                }
+                print(validJson)
             return validJson
         }
     }
     
 
     
-    class func sentDeliveredStatus(parameters: [String: Any], headers: [String:String] )  -> Observable<Any> {
-        return request(.post, kSendMsgDr , parameters: parameters, encoding: JSONEncoding.prettyPrinted, headers: headers)
+    class func sentDeliveredStatus(parameters: [String: Any]? = nil, headers: [String:String] )  -> Observable<Any> {
+        
+        return request(.post, kSendMsgDr , parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .subscribeOn(MainScheduler.asyncInstance)
             .observeOn(MainScheduler.instance)
             .flatMap {response ->Observable<Any> in
                 return response.validate(statusCode: 200..<300)
                     .validate(contentType: ["application/json","text/json"])
                     .rx.json()
-                
             }
         print("Sented delivery rate")
         }
+   
+    class func sentBiderectionalMessage(parameters: [String: Any]? = nil, headers: [String:String] )  -> Observable<Any> {
+        return request(.post, kSendMsgCallback , parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .subscribeOn(MainScheduler.asyncInstance)
+            .observeOn(MainScheduler.instance)
+            .flatMap {response ->Observable<Any> in
+                return response.validate(statusCode: 200..<300)
+                    .validate(contentType: ["application/json","text/json"])
+                    .rx.json()
+        }
+            .map{_ in 
+                HyberLogger.debug(HTTPURLResponse())
+            }
+    }
     
     class func responseError(error: JSON) {
             if error["code"] == 2133{

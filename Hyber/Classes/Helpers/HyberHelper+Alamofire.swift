@@ -26,12 +26,11 @@ public extension Hyber {
 
         let headers = [
             "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key":kHyberClientAPIKey!,
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
 //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
             "sdkVersion":"2.1.0"
-
             ]
         
         let phoneData: Parameters = [
@@ -56,26 +55,137 @@ public extension Hyber {
                 let flag = false // false if download succeed,false otherwise
                 completionHandler(flag)
             },
-               onCompleted: { HyberLogger.debug("Register new subscriber")},
-               onDisposed:  { HyberLogger.debug("disposed")}
-         )
+               onCompleted: { HyberLogger.debug("Register new subscriber")
+            },
+               onDisposed:  { HyberLogger.debug("disposed")
+            })
         
     }
 
 
-
-    public static func updateDevice()  -> Void
-        {
-        let disposeBag = DisposeBag()
-
+    
+    
+    
+    public static func getMessageList(completionHandler: @escaping CompletionHandler) -> Void
+    {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
+        if token == nil {
+            HyberLogger.info("Please reregister user for using SDK")
+        } else {
+        var date = NSDate()
+        var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
         
         let headers = [
             "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key":kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-Installation-Id": kUUID,
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
+        ]
+        let params:Parameters = [
+            "startDate":timestamp
+        ]
+        
+        Networking.getMessagesRequest(parameters: params, headers: headers)
+            .subscribe(onNext: { json in
+                let json = JSON(json)
+                let flag = true
+                    completionHandler(flag)
+               try! realm.write {
+                
+//                    let list = List<Message>()
+                    var results = realm.objects(Message.self).sorted(byProperty: "mDate",  ascending: false)
+                    var realmSort = results.value(forKey: "mDate") as! Array<Double>
+                    let anotherCorrectSwiftSort = realmSort.sorted{$0 > $1}
+                    print(anotherCorrectSwiftSort)
+                }
+                
+
+                HyberLogger.debug("Messages loaded")
+
+            }, onError: { let flag = false
+                completionHandler(flag)
+                HyberLogger.debug("Error", $0)
+            })
+        }
+    }
+
+   
+
+    
+    public static func sendMessageCallback(messageId: String ,message: String?, completionHandler: @escaping CompletionHandler) -> Void
+   
+    {
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
+        if token == nil {
+            HyberLogger.info("Please reregister user for using SDK")
+        } else {
+        let headers = [
+            "Content-Type": "application/json",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-Installation-Id": kUUID,
+            "X-Hyber-Auth-Token": token,
+            "sdkVersion":"2.1.0"
+        ]
+        let params: [String: Any] = [
+            "messageId": messageId,
+            "text":message!]
+        
+            let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            // here "jsonData" is the dictionary encoded in JSON data
+            
+            let decoded = try! JSONSerialization.jsonObject(with: jsonData, options: [])
+            // here "decoded" is of type `Any`, decoded from JSON data
+            
+            // you can now cast it with the right type
+            if let dictFromJSON = decoded as? NSArray {
+                // use dictFromJSON
+                print(dictFromJSON)
+            }
+       
+
+        Networking.sentBiderectionalMessage(parameters: decoded as! [String : Any], headers: headers)
+            .subscribe(onNext: {json in
+                let json = JSON(json)
+                let flag = true
+                completionHandler(flag)
+            },
+            onError: { HyberLogger.debug("Error", $0)
+                let flag = false
+                completionHandler(flag)},
+              onCompleted: { HyberLogger.debug("Message sented")
+            })
+    }
+    
+    }
+    
+    
+}
+
+extension Hyber{
+    
+    
+    static func updateDevice()  -> Void
+    {
+        let disposeBag = DisposeBag()
+        
+        let realm = try! Realm()
+        var token: String = realm.objects(Session.self).first!.mToken!
+            if token == nil {
+            HyberLogger.info("Please reregister user for using SDK")
+            } else {
+                
+        let headers = [
+            "Content-Type": "application/json",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -89,26 +199,30 @@ public extension Hyber {
             "deviceName": kDeviceName,
             "modelName": kDeviceName,
             ] as [String : Any]
-                
+        
         Networking.updateDeviceRequest(parameters: phoneData, headers: headers)
             .subscribe(onNext: {json in
                 let json = JSON(json)
-            },onError: { print("Error", $0)},
-              onCompleted: { HyberLogger.debug("Device updated")},
-              onDisposed:  { HyberLogger.debug("disposed")})
+            },onError: { HyberLogger.debug("Error", $0)},
+              onCompleted: { HyberLogger.debug("Device updated")
+            })
+        }
     }
+
     
-     public static func refreshAuthToken() -> Void
+    static func refreshAuthToken() -> Void
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
         var refreshToken: String = realm.objects(Session.self).first!.mRefreshToken!
-        
+        if token == nil {
+            HyberLogger.info("Please reregister user for using SDK")
+        } else {
         let headers = [
             "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key":kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -120,54 +234,22 @@ public extension Hyber {
             .subscribe(onNext: { json in
                 let json = JSON(json)
                 print(json)
-            },onError: { print("Error", $0)},
-              onCompleted: { HyberLogger.debug("Token refreshed")},
-              onDisposed:  { HyberLogger.debug("disposed")})
-    }
-    
-    
-    public static func getMessageList(completionHandler: @escaping CompletionHandler) -> Void
-    {
-        let realm = try! Realm()
-        var token: String = realm.objects(Session.self).first!.mToken!
-   
-        var date = NSDate()
-        var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
-        
-        let headers = [
-            "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token": token,
-            "sdkVersion":"2.1.0"
-        ]
-        let params:Parameters = [
-            "startDate":timestamp
-        ]
-        
-        Networking.getMessagesRequest(parameters: params, headers: headers)
-            .subscribe(onNext: { json in
-                let json = JSON(json)
-                let flag = true
-                completionHandler(flag)
-                
-            }, onError: { print("Error", $0)},
-               onCompleted: { HyberLogger.debug("Messages loaded")
-                let flag = false
-                completionHandler(flag)
             },
-               onDisposed:  { HyberLogger.debug("disposed")})
+              onError: { HyberLogger.debug("Error", $0)
+            },
+              onCompleted: { HyberLogger.debug("Token refreshed")
+            })
+        }
     }
-
-   
 
     
     static func sentDeliveredStatus(messageId: String?) -> Void
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
+        if token == nil {
+            HyberLogger.info("Please reregister user for using SDK")
+        } else {
         var date = NSDate()
         var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
         
@@ -175,59 +257,61 @@ public extension Hyber {
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
         ]
         
         
-        let params = [
+        let params:[String: Any] = [
             "messageId": messageId!,
-            "recivedAt": timestamp
+            "receivedAt": timestamp
             ] as [String : Any]
-        let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+      
+            let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            
+            let decoded = try! JSONSerialization.jsonObject(with: jsonData, options:[])
 
-        HyberLogger.debug("JSON", params)
-        Networking.sentDeliveredStatus(parameters: params, headers: headers)
-            .subscribe(onNext: { json in
-                HyberLogger.debug("Done")
-            },onError: { print("Error", $0)},
-              onCompleted: { HyberLogger.debug("Delivered")},
-              onDisposed:  { HyberLogger.debug("disposed")})
+            if let dictFromJSON = decoded as? [String:String] {
+                print(dictFromJSON)
+        }
+       
+        HyberLogger.debug("JSON", decoded)
+        Networking.sentDeliveredStatus(parameters: decoded as! [String : Any], headers: headers)
+            .subscribe(onNext: { _ in
+                let updateStatus = Message(value: ["messageId": messageId!, "isReported": true, "mDate": timestamp])
+                HyberLogger.debug("Delivered")
+            
+            },
+              onError: { print("Error", $0)
+            },
+              onCompleted: {
+            
+            })
+            try! realm.write {
+                realm.create(Message.self, value: ["messageId": messageId!, "isReported": true, "mDate": timestamp], update: true)
+                
+            }
+
+        }
     }
+
     /*** Next API release**/
-    public static func sendMessageCallback(messageId: Int ,message: String?) -> Void
-    {
-        let realm = try! Realm()
-        var token: String = realm.objects(Session.self).first!.mToken!
-        
-        let headers = [
-            "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token": token,
-            "sdkVersion":"2.1.0"
-        ]
-        let params: Parameters = [
-            "messageId": messageId,
-            "answer":message]
-        
-    }
 
-    public static func deleteDevice(deviceId: String) -> Void
+    static func deleteDevice(deviceId: String) -> Void
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
-        
+            if token == nil {
+            HyberLogger.info("Please reregister user for using SDK")
+            } else {
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -241,19 +325,24 @@ public extension Hyber {
             .subscribe(onNext: { json in
                 let json = JSON(json)
                 print(json)
-            }, onError: { print("Error", $0)
+            },
+                onError: { HyberLogger.debug("Error", $0)
             })
+        }
     }
+
     
-    public static func getDeviceInfo() -> Void {
+    static func getDeviceInfo() -> Void {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
-        
+            if token == nil {
+                HyberLogger.info("Please reregister user for using SDK")
+            } else {
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint":"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
+            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -264,12 +353,12 @@ public extension Hyber {
             .subscribe(onNext: { json in
                 let json = JSON(json)
                 print(json)
-            }, onError: { print("Error", $0)
+            },
+                onError: { HyberLogger.debug("Error", $0)
             })
     }
+    }
 
-    
-    
 }
 
 
