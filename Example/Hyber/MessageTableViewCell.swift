@@ -15,6 +15,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var photoLabel: UIImageView!
+   
     
     
     override func awakeFromNib() {

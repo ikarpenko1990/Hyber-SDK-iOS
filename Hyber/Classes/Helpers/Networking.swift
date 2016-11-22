@@ -156,7 +156,7 @@ class Networking: NSObject{
                         
                         messages.append(newMessages)
                             try! realm.write {
-                                realm.add(newMessages, update:true)
+                                realm.add(newMessages, update: true)
                             }
                        
                       }
@@ -177,8 +177,9 @@ class Networking: NSObject{
                 return response.validate(statusCode: 200..<300)
                     .validate(contentType: ["application/json","text/json"])
                     .rx.json()
+                 print("Sented delivery rate")
             }
-        print("Sented delivery rate")
+       
         }
    
     class func sentBiderectionalMessage(parameters: [String: Any]? = nil, headers: [String:String] )  -> Observable<Any> {

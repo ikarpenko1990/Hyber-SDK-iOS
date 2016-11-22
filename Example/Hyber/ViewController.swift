@@ -12,55 +12,48 @@ import UserNotifications
 import Firebase
 
 class ViewController: UIViewController  {
+    let defaults = UserDefaults.standard
     @IBOutlet weak var registrationBtn: UIButton!
-    @IBOutlet weak var messageBtn: UIButton!
     @IBAction func registetrationAction(_ sender: UIButton) {
         Hyber.registration(phoneId: numberTextFiled.text!, completionHandler: { (success) -> Void in
             if success {
-                let alert = UIAlertController(title: "Alert", message: "User succesfull registred!", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            } else { //catch errors here
+                self.defaults.set("1", forKey: "startScreen")
+                self.defaults.synchronize()
+                // go to message view controller
+                self.dismiss(animated: true, completion: nil)
+            } else {
                 let alert = UIAlertController(title: "Alert", message: "Please input correct phone number", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
         })
         
-        
 
     }
-        
-    @IBAction func updateAction(_ sender: Any) {
-        
-    }
+    
     @IBOutlet weak var numberTextFiled: UITextField!
     
     @IBAction func tabGestureAction(_ sender: Any) {
         numberTextFiled.resignFirstResponder()
     }
 
-    @IBAction func fetchMessageAction(_ sender: Any) {
-    }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         buttonDesign()
         setUpBackground()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+            view.addGestureRecognizer(tap)
     }
-    
-   
+       
     func buttonDesign() {
         registrationBtn.layer.cornerRadius = 20
-        messageBtn.layer.cornerRadius = 20
-    
-        
     }
     
     func dismissKeyboard() {
         view.endEditing(true)
     }
+    
     
     func setUpBackground() {
         let gradient: CAGradientLayer = CAGradientLayer()

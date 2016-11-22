@@ -8,13 +8,13 @@
 
 import UIKit
 import Hyber
-import Realm
 import RealmSwift
 import SwiftyJSON
 
 class MessageTableViewController: UITableViewController {
     let realm = try! Realm()
     var lists : Results<Message>!
+    let defaults = UserDefaults.standard
 
     
     var isEditingMode = false
@@ -23,11 +23,10 @@ class MessageTableViewController: UITableViewController {
    
     
     @IBAction func editAction(_ sender: Any) {
-
+            self.defaults.set("2", forKey: "startScreen")
+            self.defaults.synchronize()
     }
     
-    @IBAction func refreshAction(_ sender: Any) {
-    }
     
     func handleRefresh(_ refreshControl: UIRefreshControl) {
      
@@ -48,7 +47,6 @@ class MessageTableViewController: UITableViewController {
         lists = realm.objects(Message.self)
         self.messageListsTableView.setEditing(false, animated: true)
         self.messageListsTableView.reloadData()
-       
     }
     
     override func updateViewConstraints() {
@@ -59,12 +57,19 @@ class MessageTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
+        
+            let token = realm.addNotificationBlock { notification, realm in
+                self.readTasksAndUpdateUI()
+            }
+        // later
         readTasksAndUpdateUI()
+        token.stop()
     }
     
   
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstScreen()
         readTasksAndUpdateUI()
         self.messageListsTableView.es_addPullToRefresh {
             [weak self] in
@@ -82,6 +87,17 @@ class MessageTableViewController: UITableViewController {
         }
     }
     
+    func firstScreen() {
+        if defaults.string(forKey: "startScreen") == nil {
+            if let vc3 = self.storyboard?.instantiateViewController(withIdentifier: "login") as? ViewController {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController!.present(vc3, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -96,8 +112,6 @@ class MessageTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? MessageTableViewCell
         let list = lists[indexPath.row]
-        _ = realm.objects(Message.self).sorted(byProperty: "mDate",  ascending: false)
-
         cell?.titleLabel.text = list.value(forKey: "mTitle") as! String?
         cell?.textBodyLabel.text = list.value(forKey: "mBody") as! String?
         cell?.typeLabel.text = list.value(forKey: "mPartner") as! String?
@@ -112,17 +126,49 @@ class MessageTableViewController: UITableViewController {
                     cell?.timeLabel.text = dateString
                 }
             }
-            //incomplete
-//            if let img = list.value(forKey: "mImageUrl") as! String? {
-//                let url = NSURL(string: img)
-//                let imageView = UIImageView()
-//                imageView.downloadedFrom(link: img)
-//                
-//                cell?.addSubview(imageView)
-//            }
-        
+        let img = list.value(forKey: "mImageUrl") as! String?
+        cell?.photoLabel?.downloadedFrom(link: img!)
+        let midX = self.view.bounds.width / 7
+        if list.value(forKey: "mButtonText")  != nil {
+            let title = list.value(forKey: "mButtonText")
+            let button = UIButton()
+            button.frame = CGRectMake(midX, 340 , 240, 32)
+            button.layer.cornerRadius = 5
+            button.backgroundColor = UIColor.darkGray
+            button.setTitle(title as! String?, for: UIControlState.normal)
+            cell?.addSubview(button)
+        }
         
         return cell!
+    }
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRow(at: indexPath as IndexPath)
+        if cell !=  nil {
+            let list = lists[indexPath.row]
+            if list.value(forKey: "mButtonUrl") != nil {
+                let link = list.value(forKey: "mButtonText") as! String?
+                if let url = URL(string: link!) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:])
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+            }
+            print ("You selected cell number: \(indexPath.row)!")
+        }
+    }
+
+ 
+    
+    
+    func linkButton(_ sender: Any) {
+       print("Button pressed")
+    }
+
+    func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+        return CGRect(x: x, y: y, width: width, height: height)
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -142,6 +188,21 @@ class MessageTableViewController: UITableViewController {
     func getErrorAlert() {
         let alertController = UIAlertController(title: "Network error", message: "Please turn on your internet connection", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in }
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func goToUrlAlert(link: String? ) {
+        let alertController = UIAlertController(title: "Open safari?", message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+            if let url = URL(string: link!) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:])
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        }
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -176,7 +237,7 @@ class MessageTableViewController: UITableViewController {
     
 }
 
-
+//MARK: Extention for downloading images
 extension UIImageView {
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode
@@ -192,8 +253,15 @@ extension UIImageView {
             }
             }.resume()
     }
+    
     func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
         downloadedFrom(url: url, contentMode: mode)
+    }
+}
+
+extension CGRect {
+    init(_ x:CGFloat, _ y:CGFloat, _ w:CGFloat, _ h:CGFloat) {
+        self.init(x:x, y:y, width:w, height:h)
     }
 }

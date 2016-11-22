@@ -66,14 +66,13 @@ public extension Hyber {
     public static func didReceiveRemoteNotification(
         userInfo: [AnyHashable : Any])
     {
+        
         let validJson = JSON(userInfo)
         let fcmMsgID = validJson["gcm.message_id"].rawString()
         let messageString = validJson["message"].rawString()
         if let data = messageString?.data(using: String.Encoding.utf8) {
             var json = JSON(data: data)
             let hyberMsgID = json["mess_id"].rawString()
-            print(json)
-            print(hyberMsgID!)
             let realm = try! Realm()
             let messages = List<Message>()
             let newMessages = Message()
@@ -90,7 +89,7 @@ public extension Hyber {
             
             messages.append(newMessages)
             try! realm.write {
-                    realm.add(newMessages)
+                realm.add(newMessages, update: true)
             }
         
             if hyberMsgID != "null" {
