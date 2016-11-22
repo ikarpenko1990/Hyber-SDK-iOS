@@ -9,110 +9,191 @@
 import UIKit
 import Hyber
 import Realm
+import RealmSwift
 import SwiftyJSON
+
 class MessageTableViewController: UITableViewController {
+    let realm = try! Realm()
+    var lists : Results<Message>!
+
     
-   override func viewDidAppear(_ animated: Bool) {
-        super.viewDidLoad()
-    Hyber.getMessageList(completionHandler: { (success) -> Void in
-        if success {
-            print("parsed")
-        } else {
-            print("catch errors here")
-        }
-    })
+    var isEditingMode = false
+    //MARK: Actions 
+    @IBOutlet weak var messageListsTableView: UITableView!
+   
+    
+    @IBAction func editAction(_ sender: Any) {
 
     }
     
     @IBAction func refreshAction(_ sender: Any) {
+    }
+    
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+     
         Hyber.getMessageList(completionHandler: { (success) -> Void in
-           
+            
             if success {
-                print("success")
+                self.messageListsTableView.reloadData()
             } else {
-                print("catch errors here")
+                self.getErrorAlert()
             }
         })
-
+        self.messageListsTableView.reloadData()
+        refreshControl.endRefreshing()
     }
+    
+    //Mark: Main function
+    func readTasksAndUpdateUI() {
+        lists = realm.objects(Message.self)
+        self.messageListsTableView.setEditing(false, animated: true)
+        self.messageListsTableView.reloadData()
+       
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        readTasksAndUpdateUI()
+    }
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        readTasksAndUpdateUI()
+    }
+    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 2
-    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
- 
-
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        
-        } else if editingStyle == .insert {
+        readTasksAndUpdateUI()
+        self.messageListsTableView.es_addPullToRefresh {
+            [weak self] in
+            Hyber.getMessageList(completionHandler: { (success) -> Void in
+                
+                if success {
+                    self?.messageListsTableView.reloadData()
+                    self?.messageListsTableView.es_stopPullToRefresh(completion: true)
+                } else {
+                    self?.getErrorAlert()
+                     self?.messageListsTableView.es_stopPullToRefresh(completion: false)
+                }
+            })
 
         }
     }
     
+    // MARK: - Table view data source
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        if let listsTasks = lists{
+            return listsTasks.count
+        } 
+        return 0
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? MessageTableViewCell
+        let list = lists[indexPath.row]
+        _ = realm.objects(Message.self).sorted(byProperty: "mDate",  ascending: false)
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+        cell?.titleLabel.text = list.value(forKey: "mTitle") as! String?
+        cell?.textBodyLabel.text = list.value(forKey: "mBody") as! String?
+        cell?.typeLabel.text = list.value(forKey: "mPartner") as! String?
+        cell?.statusLabel.text = "reported"
+        cell?.statusLabel.textColor = UIColor.green
+            if list.value(forKey: "mDate") != nil {
+                if let date = list.value(forKey: "mDate") as! Double? {
+                    let dateformatter = DateFormatter()
+                    dateformatter.dateStyle = DateFormatter.Style.short
+                    dateformatter.timeStyle = DateFormatter.Style.short
+                    let dateString = dateformatter.string(from: NSDate(timeIntervalSince1970: TimeInterval(date)) as Date)
+                    cell?.timeLabel.text = dateString
+                }
+            }
+            //incomplete
+//            if let img = list.value(forKey: "mImageUrl") as! String? {
+//                let url = NSURL(string: img)
+//                let imageView = UIImageView()
+//                imageView.downloadedFrom(link: img)
+//                
+//                cell?.addSubview(imageView)
+//            }
+        
+        
+        return cell!
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let answerAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive,  title: "Answer") { (deleteAction, indexPath) -> Void in
+            
+            let listToAnswer = self.lists[indexPath.row]
+            let messageId = listToAnswer.value(forKey: "messageId") as? String
+            self.sentAnswerAlert(messageId: messageId)
+            
+            }
+        return [answerAction]
     }
-    */
+    
+    
+    // MARK: - Allerts
+    
+    func getErrorAlert() {
+        let alertController = UIAlertController(title: "Network error", message: "Please turn on your internet connection", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in }
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func sentAnswerAlert(messageId: String?) {
+        let alertController = UIAlertController(title: "Answer", message: "Please input your message", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Sent", style: .default) { (_) in
+            if let field = alertController.textFields![0] as? UITextField {
+                Hyber.sendMessageCallback(messageId: messageId!, message: field.text, completionHandler: { (success) -> Void in
+                    if success {
+                        self.messageListsTableView.reloadData()
+                    } else {
+                        self.getErrorAlert()
+                    }
+                })
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "write something awsome for us 😊 "
+        }
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
 
+    
+    }
+    
+}
+
+
+extension UIImageView {
+    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { () -> Void in
+                self.image = image
+            }
+            }.resume()
+    }
+    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+        guard let url = URL(string: link) else { return }
+        downloadedFrom(url: url, contentMode: mode)
+    }
 }

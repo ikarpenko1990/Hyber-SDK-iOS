@@ -18,9 +18,9 @@ let kFCM = UserDefaults.standard.string(forKey: "fcmToken")
 let kRegUrl = baseUrlDev + "/mobile-abonents/register/device"
 let kUpdateUrl = baseUrlDev + "/mobile-abonents/update/device"
 let kRefreshToken = baseUrlDev + "/mobile-abonents/refreshtoken/device"
-let kSendMsgDr = baseUrlDev + "/push-dr-receiver/sdk_api/dr"
+let kSendMsgDr = "http://185.46.89.20/push-dr-receiver/sdk_api/dr"
 let kGetMsgHistory = baseUrlDev + "/mobile-abonents/messages/history"
-let kSendMsgCallback = baseUrlDev + "/push-callback-receiver/api/callback"
+let kSendMsgCallback = "http://185.46.89.20/push-callback-receiver/api/callback"
 
 //** Features relise **//
 let kDeleteDevice = baseUrlDev + "/mobile-abonents/api/v1/device/delete"

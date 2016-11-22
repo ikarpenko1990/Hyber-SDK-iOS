@@ -16,60 +16,7 @@ class RealmData {
         return try! Realm()
     }()
    
-    func setDefaultRealmForUser(username: String) {
-        var config = Realm.Configuration()
-        
-        // Use the default directory, but replace the filename with the username
-        config.fileURL = config.fileURL!.deletingLastPathComponent()
-            .appendingPathComponent("\(username).realm")
-        
-        // Set this as the configuration used for the default Realm
-        Realm.Configuration.defaultConfiguration = config
-    }
-    
-    func createUpdateUser(rUser: User)  {
-            do {
-                
-                try RealmData.urealm.write {
-                    RealmData.urealm.add(rUser)
-                HyberLogger.info("UserData saved!")
-                }
-                
-            } catch let error as NSError {
-                HyberLogger.error("Error creating Listing DB: \(error.userInfo)")
-            }
-        
-    }
-    
-    
-    
-    public func fetchMessages (messages: [String:AnyObject]) {
-        
-        
-        do {
-            let newMessages = Message()
-            newMessages.mUser = User()
-            newMessages.messageId = messages["messageId"]?.string
-            newMessages.mTitle = messages["from"]?.string
-            newMessages.mBody = messages["text"]?.string
-            newMessages.mButtonText = messages["caption"]?.string
-            newMessages.mButtonUrl = messages["action"]?.string
-            newMessages.mImageUrl = messages["img"]?.string
-            newMessages.isRead = false
-            newMessages.isReported = false
-
-            try RealmData.urealm.write {
-                RealmData.urealm.add(newMessages, update: true)
-                    HyberLogger.info("UserData saved!")
-            }
-            
-        } catch {
-            HyberLogger.info("Message fetching error: \(error)")
-        }
-        
-    }
-    
-    public func saveSession(sessionData newSession: [String:AnyObject]?) {
+     func saveSession(sessionData newSession: [String:AnyObject]?) {
         do{
             let session = Session()
             session.mToken = newSession?["authToken"]?.string
@@ -87,7 +34,7 @@ class RealmData {
     
     }
     
-    public func saveDeviceinfo(saveToken: String ) {
+     func saveDeviceinfo(saveToken: String ) {
         let device = Device()
         device.modelName = kDeviceName
         device.installationId = kUUID
@@ -102,13 +49,22 @@ class RealmData {
     }
 
     
-    //reading methods
-    public func getMessagesList() ->Results<Message> {
-        return RealmData.urealm.objects(Message)
+}
+
+extension Results {
+    func toArray<T>(ofType: T.Type) -> [T] {
+        var array = [T]()
+        for i in 0 ..< count {
+            if let result = self[i] as? T {
+                array.append(result)
+            }
+        }
+        
+        return array
     }
     
-    public func getUsers() -> Results<User> {
-        return RealmData.urealm.objects(User)
-    }
     
 }
+
+
+

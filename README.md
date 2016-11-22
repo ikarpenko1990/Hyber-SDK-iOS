@@ -96,16 +96,16 @@ In completion handler result you will get Hyber subscriber ID if success
 
 
 #### Get delivered messages
-To fetch delivered messages call
+To get delivered messages call 
+Import RealmSwift to your header
+
+
 ```swift
- Hyber.getMessageList(completionHandler: { (success) -> Void in
-           
-           if success {
-            
-            } else {
-             //Catch error here
-            }
-        })
+import RealmSwift
+
+ var lists : Results<Message>! //RealmObject
+ let array = Array(lists) //NSArray Object
+ //Do anything with array
 
 ```
 
@@ -124,9 +124,18 @@ Add this file to yours application project.
 ### License
 [MIT][LICENSE]
 
+#### 3rdparties
+[Firebase Messaging](https://github.com/google/gcm/blob/master/LICENSE)
+[RXSwift](http://reactivex.io/intro.html)
+[RealmSwift](https://realm.io/)
+[Alamofire](https://github.com/Alamofire/Alamofire/blob/master/LICENSE)
+
+
 
 [release-svg]: http://github-release-version.herokuapp.com/github/Incuube/Hyber-SDK-iOS/release.svg
 [release-link]: https://github.com/Incuube/Hyber-SDK-iOS/releases/latest
 
 [travis-build-status-svg]: https://travis-ci.org/Incuube/Hyber-SDK-iOS.svg?branch=swift-3.0
 [travis-build-status-link]: https://travis-ci.org/Incuube/Hyber-SDK-iOS
+
+[HyberFirebaseMessagingDelegateLink]: https://github.com/Incuube/Hyber-SDK-iOS/blob/swift-3.0/Example/Hyber/HyberFirebaseMessagingDelegate.swift

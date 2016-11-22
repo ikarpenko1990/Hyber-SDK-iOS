@@ -3,31 +3,31 @@ import RealmSwift
 import ObjectMapper
 
 
-class Message: Object, Mappable {
+public class Message: Object, Mappable {
   dynamic var mId: String?
   dynamic var messageId: String?
   dynamic var mUser: User?
   dynamic var mPartner: String?
   dynamic var mTitle: String?
   dynamic var mBody: String?
-  dynamic var mDate: String?
+  dynamic var mDate: Double = 0.0
   dynamic var mImageUrl: String?
   dynamic var mButtonUrl: String?
   dynamic var mButtonText: String?
-  var isRead = false
+  dynamic var isRead = false
   dynamic var isReported = false
 
-  override static func primaryKey() -> String? {
-    return "mId"
+  override public static func primaryKey() -> String? {
+    return "messageId"
   }
     
-    convenience required init?(map: Map) {
+    convenience required public init?(map: Map) {
         self.init()
         
         mapping(map: map)
     }
     
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         messageId <- map["messageId"]
         mPartner <- map["partner"]
         mTitle <- map["from"]

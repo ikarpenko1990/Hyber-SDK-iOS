@@ -13,6 +13,7 @@ import Firebase
 
 class ViewController: UIViewController  {
     @IBOutlet weak var registrationBtn: UIButton!
+    @IBOutlet weak var messageBtn: UIButton!
     @IBAction func registetrationAction(_ sender: UIButton) {
         Hyber.registration(phoneId: numberTextFiled.text!, completionHandler: { (success) -> Void in
             if success {
@@ -32,7 +33,6 @@ class ViewController: UIViewController  {
         
     @IBAction func updateAction(_ sender: Any) {
         
-        Hyber.updateDevice()
     }
     @IBOutlet weak var numberTextFiled: UITextField!
     
@@ -46,14 +46,22 @@ class ViewController: UIViewController  {
         super.viewDidLoad()
         buttonDesign()
         setUpBackground()
-
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
     }
     
    
     func buttonDesign() {
         registrationBtn.layer.cornerRadius = 20
+        messageBtn.layer.cornerRadius = 20
+    
         
     }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     func setUpBackground() {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [UIColor.init(red: 87, green: 115, blue: 249).cgColor,

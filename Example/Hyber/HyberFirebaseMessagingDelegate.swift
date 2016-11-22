@@ -125,6 +125,7 @@ extension HyberFirebaseMessagingDelegate {
         if FIRApp.defaultApp() == .none {
             FIRApp.configure()
         }
+        registerForRemoteNotification()
         connectToFirebaseMessaging()
     }
     
@@ -150,7 +151,7 @@ extension HyberFirebaseMessagingDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        //Hyber.didReceiveRemoteNotification(userInfo: notification.request.content.userInfo)
+//        Hyber.didReceiveRemoteNotification(userInfo: notification.request.content.userInfo)
     }
 }
 
