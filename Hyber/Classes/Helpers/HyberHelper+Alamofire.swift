@@ -27,8 +27,8 @@ public extension Hyber {
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+//            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
             "X-Hyber-Installation-Id": kUUID,
             "sdkVersion":"2.1.0"
             ]
@@ -79,8 +79,8 @@ public extension Hyber {
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -96,14 +96,12 @@ public extension Hyber {
                     completionHandler(flag)
                try! realm.write {
                 
-//                    let list = List<Message>()
                     var results = realm.objects(Message.self).sorted(byProperty: "mDate",  ascending: false)
                     var realmSort = results.value(forKey: "mDate") as! Array<Double>
-                    let anotherCorrectSwiftSort = realmSort.sorted{$0 > $1}
+                    let anotherCorrectSwiftSort = realmSort.sorted{$0 < $1}
                     print(anotherCorrectSwiftSort)
                 }
-                
-
+    
                 HyberLogger.debug("Messages loaded")
 
             }, onError: { let flag = false
@@ -127,8 +125,8 @@ public extension Hyber {
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -184,8 +182,8 @@ extension Hyber{
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -221,8 +219,8 @@ extension Hyber{
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -257,8 +255,8 @@ extension Hyber{
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -275,7 +273,6 @@ extension Hyber{
             let decoded = try! JSONSerialization.jsonObject(with: jsonData, options:[])
 
             if let dictFromJSON = decoded as? [String:String] {
-                print(dictFromJSON)
         }
        
         HyberLogger.debug("JSON", decoded)
@@ -310,8 +307,8 @@ extension Hyber{
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -341,8 +338,8 @@ extension Hyber{
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-App-Fingerprint": "Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
+            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"

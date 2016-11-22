@@ -15,6 +15,7 @@
 		7617EC981DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */; };
 		7617EC9A1DBF99C100510884 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7617EC991DBF99C100510884 /* GoogleService-Info.plist */; };
 		76A592B11DDC715D004187E8 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A592B01DDC715D004187E8 /* MessageTableViewController.swift */; };
+		76A7593A1DE45200008A5DE0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A759391DE45200008A5DE0 /* StartViewController.swift */; };
 		76ABECC71DDCA5CE00373A2E /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */; };
 		B4579865DEAA345BEE352F5F /* Pods_Hyber_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A31A8E7E819220BFDA8A6574 /* Pods_Hyber_Tests.framework */; };
 		B997317E7D7A1F616006D671 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
@@ -71,6 +72,7 @@
 		767109F01DC0AC7700C531F2 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		767109F21DC0AC7700C531F2 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		76A592B01DDC715D004187E8 /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
+		76A759391DE45200008A5DE0 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		881F74C6321FBF6683EE513B /* Pods-Hyber_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber_Tests/Pods-Hyber_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A31A8E7E819220BFDA8A6574 /* Pods_Hyber_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,9 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				76A592B01DDC715D004187E8 /* MessageTableViewController.swift */,
-				76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */,
+				7678FC791DE49CE800537253 /* Controllers */,
+				7678FC7A1DE49CF400537253 /* Models */,
 				7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */,
 				7617EC991DBF99C100510884 /* GoogleService-Info.plist */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -168,6 +169,24 @@
 				607FACEA1AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7678FC791DE49CE800537253 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				76A592B01DDC715D004187E8 /* MessageTableViewController.swift */,
+				76A759391DE45200008A5DE0 /* StartViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7678FC7A1DE49CF400537253 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		AB1697F3DE0A9865C5A903F4 /* Frameworks */ = {
@@ -406,7 +425,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CBA7E281ACA00CD268C2624F /* [CP] Copy Pods Resources */ = {
@@ -436,7 +455,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -454,6 +473,7 @@
 				F3CAF7C51DE130F700704D9C /* ESRefreshFooterAnimator.swift in Sources */,
 				76ABECC71DDCA5CE00373A2E /* MessageTableViewCell.swift in Sources */,
 				F3CAF7C81DE130F700704D9C /* ESPullToRefresh+Manager.swift in Sources */,
+				76A7593A1DE45200008A5DE0 /* StartViewController.swift in Sources */,
 				F3CAF7C61DE130F700704D9C /* ESRefreshHeaderAnimator.swift in Sources */,
 				F3CAF7CA1DE130F700704D9C /* ESRefreshAnimator.swift in Sources */,
 				7617EC981DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift in Sources */,
