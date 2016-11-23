@@ -54,6 +54,14 @@ class MessageTableViewController: UITableViewController {
         readTasksAndUpdateUI()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        //scroll down
+        let numberOfSections = self.tableView.numberOfSections
+        let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
+        let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
+        self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.middle, animated: true)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
@@ -97,8 +105,7 @@ class MessageTableViewController: UITableViewController {
     }
     
     
-    
-    // MARK: - Table view data source
+      // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -142,7 +149,9 @@ class MessageTableViewController: UITableViewController {
         return cell!
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
         let cell = tableView.cellForRow(at: indexPath as IndexPath)
         if cell !=  nil {
             let list = lists[indexPath.row]
@@ -158,8 +167,10 @@ class MessageTableViewController: UITableViewController {
             }
             print ("You selected cell number: \(indexPath.row)!")
         }
-    }
 
+    
+    }
+    
  
     
     
@@ -265,3 +276,4 @@ extension CGRect {
         self.init(x:x, y:y, width:w, height:h)
     }
 }
+
