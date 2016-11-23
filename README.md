@@ -30,23 +30,17 @@ import Hyber
 
 In  `func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool` add following
 ```swift
-  HyberFirebaseMessagingDelegate.sharedInstance.registerForRemoteNotification() //Allow to get remove notificaion
-  HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging() //Allow to use firebaseHelper
+HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
 
-  Hyber.initialise(clientApiKey:"ClientApiKey", 
-  firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
-```
-
-In  `func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)` add following
-```swift
-  Hyber.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+Hyber.initialise(clientApiKey:"ClientApiKey", 
+firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
 ```
 
 In `func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)` add following
 ```swift
-   Hyber.didReceiveRemoteNotification(userInfo: userInfo)
-   
-   completionHandler(.newData)
+Hyber.didReceiveRemoteNotification(userInfo: userInfo)
+
+completionHandler(.newData)
 ```
 
 #### Register your application for Remote Notification
@@ -59,7 +53,7 @@ Register your application to receive remote push-notifications ([manual](https:/
 Don't forget add Push Notifications for your target (see `Capabilities` tab). And add turn on `Background Modes`, whith `Remote Notifications` flag ON)
 Use method for allow push notification
 ```swift
-  HyberFirebaseMessagingDelegate.sharedInstance.registerForRemoteNotification() 
+HyberFirebaseMessagingDelegate.sharedInstance.registerForRemoteNotification() 
 ```
 
 ### Usage
@@ -80,34 +74,61 @@ HyberLogger.minLevel = .warning
 ```
 
 > The severity levels are `trace`, `debug`, `info`, `warning`, and `error`.
+
+
 #### Subscriber information
-##### Add
-To add new subscriber you should call
+
+#### Add new user
+To add new subscriber you should call, phoneNumber is required
 ```swift
-    Hyber.registration(phoneId: String, completionHandler: { (success) -> Void in
-            if success {
-               
-            } else { 
-            	//catch errors here
-            }
-        })
+Hyber.registration(phoneId: String, completionHandler: { (success) -> Void in
+if success {
+
+} else { 
+//catch errors here
+}
+})
 ```
-In completion handler result you will get Hyber subscriber ID if success
+In completion handler result you will get Hyber sessionData if success
 
 
-#### Get delivered messages
-To get delivered messages call 
+#### Get delivered push's data array
+All messages what you get via Hyber push will be saved to local storage.
 Import RealmSwift to your header
-
-
+Example:
 ```swift
 import RealmSwift
 
- var lists : Results<Message>! //RealmObject
- let array = Array(lists) //NSArray Object
- //Do anything with array
+var lists : Results<Message>! //RealmObject
+let array = Array(lists) //NSArray Object
+//Do anything with array
 
 ```
+#### Load massege History
+For Loading message history from Hyber use method:
+Message history list include all channels messages: push/viber/sms
+```swift
+Hyber.getMessageList(completionHandler: { (success) -> Void in 
+if success {
+
+} else {
+//catch errors here
+}
+})
+```
+#### Sent Callback message 
+For reply to message use Callback method:
+```swift
+Hyber.sendMessageCallback(messageId: String, message: String, completionHandler: { (success) -> Void in
+if success {
+
+} else {
+//catch errors here
+}
+})
+```
+## Support information
+Project include demo app with all SDK methods.For any question contact [Hyber](http://hyber.io)
 
 ### How to get keys, push-notifications, IDs
 
@@ -122,7 +143,7 @@ Than download `GoogleService-Info.plist` from `General` tab (Firebase console, p
 Add this file to yours application project.
 
 ### License
-[MIT][LICENSE]
+[MIT](https://github.com/Incuube/Hyber-SDK-iOS/blob/swift-3.0/LICENSE)
 
 #### 3rdparties
 [Firebase Messaging](https://github.com/google/gcm/blob/master/LICENSE)
