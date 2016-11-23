@@ -111,7 +111,13 @@ public extension Hyber {
                 HyberLogger.info("Recieved message that was sended by Hyber via APNs")
                 
             }
-               HyberLogger.info(validJson)
+            let appDelegate = UIApplication.shared.delegate
+            
+            let murmur = Murmur(title: json["text"].string!)
+            show(whistle: murmur, action: .show(0.5))
+            show(whistle: murmur, action: .present)
+            hide(whistleAfter: 4)
+            HyberLogger.info(validJson)
         }
     
     }

@@ -141,9 +141,9 @@
                         <constraints>
                             <constraint firstItem="em3-Yc-5FY" firstAttribute="leading" secondItem="KRX-zl-JlI" secondAttribute="leadingMargin" id="9uZ-yx-D2Z"/>
                             <constraint firstItem="em3-Yc-5FY" firstAttribute="trailing" secondItem="KRX-zl-JlI" secondAttribute="trailingMargin" id="Gyw-kD-VWj"/>
-                            <constraint firstItem="em3-Yc-5FY" firstAttribute="top" secondItem="mb8-96-Dn0" secondAttribute="bottom" constant="249" id="IxN-G4-YeC"/>
                             <constraint firstItem="q4Z-Tq-yEF" firstAttribute="top" secondItem="em3-Yc-5FY" secondAttribute="bottom" constant="20" id="Lpd-NY-j1H"/>
                             <constraint firstItem="mb8-96-Dn0" firstAttribute="centerX" secondItem="em3-Yc-5FY" secondAttribute="centerX" id="Q6d-Oy-7vr"/>
+                            <constraint firstItem="mb8-96-Dn0" firstAttribute="centerY" secondItem="KRX-zl-JlI" secondAttribute="centerY" constant="-72" id="Whl-TG-sru"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -157,7 +157,7 @@
         <scene sceneID="rUK-5X-6ZI">
             <objects>
                 <navigationController storyboardIdentifier="message" id="4pQ-Ks-uAa" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="f8A-59-PmM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f8A-59-PmM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
