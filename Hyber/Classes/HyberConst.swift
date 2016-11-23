@@ -15,16 +15,16 @@ let baseURL = "production"
 //API
 let kHyberClientAPIKey = UserDefaults.standard.string(forKey:"clientApiKey")
 let kFCM = UserDefaults.standard.string(forKey: "fcmToken")
-let kRegUrl = baseUrlTest + "/mobile-abonents/register/device"
-let kUpdateUrl = baseUrlTest + "/mobile-abonents/update/device"
-let kRefreshToken = baseUrlTest + "/mobile-abonents/refreshtoken/device"
-let kSendMsgDr = "http://46.101.192.217/push-dr-receiver/sdk_api/dr"
-let kGetMsgHistory = baseUrlTest + "/mobile-abonents/messages/history"
-let kSendMsgCallback = baseUrlTest + "/push-callback-receiver/api/callback"
+let kRegUrl = "https://mobile.hyber.im/register/device"
+let kUpdateUrl = "https://mobile.hyber.im/update/device"
+let kRefreshToken = "https://mobile.hyber.im/refreshtoken/device"
+let kSendMsgDr = "https://push-dr.hyber.im"
+let kGetMsgHistory = "https://mobile.hyber.im/messages/history"
+let kSendMsgCallback = "https://push-callback.hyber.im"
 
 //** Features relise **//
 let kDeleteDevice = baseUrlTest + "/mobile-abonents/api/v1/device/delete"
-let kDR = baseUrlTest + "/push-dr-receiver/sdk_api/dr"
+let kDR = "https://push-dr.hyber.im"
 let kGetDeviceInfo = baseUrlTest + "/mobile-abonents/api/v1/device/me"
 
 //Device Info
@@ -34,4 +34,3 @@ let kDeviceType = "\(UIDevice.current.modelType)"
 let kDeviceName = UIDevice.current.modelName
 let kUUID = UIDevice.current.identifierForVendor!.uuidString
 let kBundleID = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String
-
