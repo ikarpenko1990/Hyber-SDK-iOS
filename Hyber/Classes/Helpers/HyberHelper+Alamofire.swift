@@ -3,9 +3,9 @@
 //  Pods
 //
 //  Created by Taras on 10/21/16.
-// 
+//
 //  Api Requests
-// 
+//
 
 import Foundation
 import Alamofire
@@ -18,7 +18,7 @@ import AlamofireObjectMapper
 import RxSwift
 
 public extension Hyber {
-  
+
     typealias CompletionHandler = (_ success:Bool) -> Void
 
     public static func registration(phoneId: String, completionHandler: @escaping CompletionHandler) {
@@ -27,12 +27,11 @@ public extension Hyber {
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-//            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
+            "X-Hyber-IOS-Bundle-Id":kBundleID!,
             "X-Hyber-Installation-Id": kUUID,
             "sdkVersion":"2.1.0"
             ]
-        
+
         let phoneData: Parameters = [
             "userPhone": phoneId,
             "osType": kOSType,
@@ -41,9 +40,9 @@ public extension Hyber {
             "deviceName": kDeviceName,
             "fcmToken": kFCM,
             "sdkVersion":"2.1.0"
-            
+
         ]
-        
+
         Networking.registerRequest(parameters: phoneData, headers: headers)
             .subscribe(onNext: { DataResponse  in
                 let json = JSON(DataResponse)
@@ -59,13 +58,13 @@ public extension Hyber {
             },
                onDisposed:  { HyberLogger.debug("disposed")
             })
-        
+
     }
 
 
-    
-    
-    
+
+
+
     public static func getMessageList(completionHandler: @escaping CompletionHandler) -> Void
     {
         let realm = try! Realm()
@@ -75,12 +74,11 @@ public extension Hyber {
         } else {
         var date = NSDate()
         var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
-        
+
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
+            "X-Hyber-IOS-Bundle-Id":kBundleID!,
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -88,20 +86,20 @@ public extension Hyber {
         let params:Parameters = [
             "startDate":timestamp
         ]
-        
+
         Networking.getMessagesRequest(parameters: params, headers: headers)
             .subscribe(onNext: { json in
                 let json = JSON(json)
                 let flag = true
                     completionHandler(flag)
                try! realm.write {
-                
+
                     var results = realm.objects(Message.self).sorted(byProperty: "mDate",  ascending: false)
                     var realmSort = results.value(forKey: "mDate") as! Array<Double>
                     let anotherCorrectSwiftSort = realmSort.sorted{$0 < $1}
                     print(anotherCorrectSwiftSort)
                 }
-    
+
                 HyberLogger.debug("Messages loaded")
 
             }, onError: { let flag = false
@@ -111,11 +109,11 @@ public extension Hyber {
         }
     }
 
-   
 
-    
+
+
     public static func sendMessageCallback(messageId: String ,message: String?, completionHandler: @escaping CompletionHandler) -> Void
-   
+
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
@@ -125,8 +123,7 @@ public extension Hyber {
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
+            "X-Hyber-IOS-Bundle-Id":kBundleID!,
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -134,19 +131,19 @@ public extension Hyber {
         let params: [String: Any] = [
             "messageId": messageId,
             "text":message!]
-        
+
             let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             // here "jsonData" is the dictionary encoded in JSON data
-            
+
             let decoded = try! JSONSerialization.jsonObject(with: jsonData, options: [])
             // here "decoded" is of type `Any`, decoded from JSON data
-            
+
             // you can now cast it with the right type
             if let dictFromJSON = decoded as? NSArray {
                 // use dictFromJSON
                 print(dictFromJSON)
             }
-       
+
 
         Networking.sentBiderectionalMessage(parameters: decoded as! [String : Any], headers: headers)
             .subscribe(onNext: {json in
@@ -160,30 +157,29 @@ public extension Hyber {
               onCompleted: { HyberLogger.debug("Message sented")
             })
     }
-    
+
     }
-    
-    
+
+
 }
 
 extension Hyber{
-    
-    
+
+
     static func updateDevice()  -> Void
     {
         let disposeBag = DisposeBag()
-        
+
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
             if token == nil {
             HyberLogger.info("Please reregister user for using SDK")
             } else {
-                
+
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
+            "X-Hyber-IOS-Bundle-Id":kBundleID!,
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -197,7 +193,7 @@ extension Hyber{
             "deviceName": kDeviceName,
             "modelName": kDeviceName,
             ] as [String : Any]
-        
+
         Networking.updateDeviceRequest(parameters: phoneData, headers: headers)
             .subscribe(onNext: {json in
                 let json = JSON(json)
@@ -207,7 +203,7 @@ extension Hyber{
         }
     }
 
-    
+
     static func refreshAuthToken() -> Void
     {
         let realm = try! Realm()
@@ -219,8 +215,7 @@ extension Hyber{
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
+            "X-Hyber-IOS-Bundle-Id":kBundleID!,
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
@@ -240,7 +235,7 @@ extension Hyber{
         }
     }
 
-    
+
     static func sentDeliveredStatus(messageId: String?) -> Void
     {
         let realm = try! Realm()
@@ -250,46 +245,45 @@ extension Hyber{
         } else {
         var date = NSDate()
         var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
-        
+
         let authToken = Session()
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
+            "X-Hyber-IOS-Bundle-Id":kBundleID!,
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
         ]
-        
-        
+
+
         let params:[String: Any] = [
             "messageId": messageId!,
             "receivedAt": timestamp
             ] as [String : Any]
-      
+
             let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
+
             let decoded = try! JSONSerialization.jsonObject(with: jsonData, options:[])
 
             if let dictFromJSON = decoded as? [String:String] {
         }
-       
+
         HyberLogger.debug("JSON", decoded)
         Networking.sentDeliveredStatus(parameters: decoded as! [String : Any], headers: headers)
             .subscribe(onNext: { _ in
                 let updateStatus = Message(value: ["messageId": messageId!, "isReported": true, "mDate": timestamp])
                 HyberLogger.debug("Delivered")
-            
+
             },
               onError: { print("Error", $0)
             },
               onCompleted: {
-            
+
             })
             try! realm.write {
                 realm.create(Message.self, value: ["messageId": messageId!, "isReported": true, "mDate": timestamp], update: true)
-                
+
             }
 
         }
@@ -307,17 +301,16 @@ extension Hyber{
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
+            "X-Hyber-IOS-Bundle-Id":kBundleID!,
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
         ]
-        
+
         let params:Parameters = [
             "deviceId": deviceId
         ]
-        
+
         Networking.deleteDevice(parameters: params, headers: headers)
             .subscribe(onNext: { json in
                 let json = JSON(json)
@@ -328,7 +321,7 @@ extension Hyber{
         }
     }
 
-    
+
     static func getDeviceInfo() -> Void {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
@@ -338,14 +331,13 @@ extension Hyber{
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            //            "X-Hyber-IOS-Bundle-Id":kBundleID!,"Q0hsXHsrc+n04JA0+jmZ+J0cz9o=",
-            "X-Hyber-App-Fingerprint": "vpEOMhMcsidtf64wx140rhnhLhA=",
+            "X-Hyber-IOS-Bundle-Id":kBundleID!,
             "X-Hyber-Installation-Id": kUUID,
             "X-Hyber-Auth-Token": token,
             "sdkVersion":"2.1.0"
         ]
         print(headers)
-        
+
         Networking.getDeviceInfoRequest(parameters: nil, headers: headers)
             .subscribe(onNext: { json in
                 let json = JSON(json)
@@ -357,5 +349,3 @@ extension Hyber{
     }
 
 }
-
-
