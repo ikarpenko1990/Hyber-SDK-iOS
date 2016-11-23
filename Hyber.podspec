@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Hyber'
-  s.version          = '0.1.0'
+  s.version          = '2.0.0'
   s.summary          = 'Hyber SDK for IOS'
 
 # This description is used to generate tags and improve search results.
@@ -24,7 +24,7 @@ TODO: Hyber SDK for IOS. Implement push notification and other Hyber functionali
   s.homepage         = 'https://github.com/Incuube/Hyber-SDK-iOS'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '4taras4' => '4taras4@gmail.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/Hyber.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
