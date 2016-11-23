@@ -1,4 +1,4 @@
-# Hyber SDK 2.0 for iOS
+# Hyber SDK for iOS
 [![Platform](https://img.shields.io/badge/Platforms-iOS-lightgray.svg)]()
 [![Swift version](https://img.shields.io/badge/Swift-3.0.x-orange.svg)]()
 [![Release][release-svg]][release-link]
@@ -32,7 +32,7 @@ In  `func application(application: UIApplication, didFinishLaunchingWithOptions 
 ```swift
 HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
 
-Hyber.initialise(clientApiKey:"ClientApiKey", 
+Hyber.initialise(clientApiKey:"ClientApiKey",
 firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
 ```
 
@@ -53,7 +53,7 @@ Register your application to receive remote push-notifications ([manual](https:/
 Don't forget add Push Notifications for your target (see `Capabilities` tab). And add turn on `Background Modes`, whith `Remote Notifications` flag ON)
 Use method for allow push notification
 ```swift
-HyberFirebaseMessagingDelegate.sharedInstance.registerForRemoteNotification() 
+HyberFirebaseMessagingDelegate.sharedInstance.registerForRemoteNotification()
 ```
 
 ### Usage
@@ -84,7 +84,7 @@ To add new subscriber you should call, phoneNumber is required
 Hyber.registration(phoneId: String, completionHandler: { (success) -> Void in
 if success {
 
-} else { 
+} else {
 //catch errors here
 }
 })
@@ -108,7 +108,7 @@ let array = Array(lists) //NSArray Object
 For Loading message history from Hyber use method:
 Message history list include all channels messages: push/viber/sms
 ```swift
-Hyber.getMessageList(completionHandler: { (success) -> Void in 
+Hyber.getMessageList(completionHandler: { (success) -> Void in
 if success {
 
 } else {
@@ -116,7 +116,7 @@ if success {
 }
 })
 ```
-#### Sent Callback message 
+#### Sent Callback message
 For reply to message use Callback method:
 ```swift
 Hyber.sendMessageCallback(messageId: String, message: String, completionHandler: { (success) -> Void in
