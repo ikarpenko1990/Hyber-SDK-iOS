@@ -44,17 +44,10 @@ extension Hyber {
         
     }
     
-//    public func clearHistory() -> Void {
-//        try! RealmData.urealm.write {
-//            RealmData.urealm.delete(RealmData.urealm.objects(Message.self))
-//        }
-//    }
-    
-    public class func getMessageHistory() -> [NSArray]? {
-        let realm = try! RealmData.urealm
-        let objects = try! realm.objects(Message.self).toArray(ofType : NSArray.self) as [NSArray]
-        
-        return objects.count > 0 ? objects : nil
+    func clearHistory() -> Void {
+        try! RealmData.urealm.write {
+            RealmData.urealm.delete(RealmData.urealm.objects(Message.self))
+        }
     }
     
 }

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'Hyber'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of Hyber.'
+  s.summary          = 'Hyber SDK for IOS'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,11 +18,10 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+TODO: Hyber SDK for IOS. Implement push notification and other Hyber functionality.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/Hyber'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/Incuube/Hyber-SDK-iOS'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '4taras4' => '4taras4@gmail.com' }
   s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/Hyber.git', :tag => s.version.to_s }
