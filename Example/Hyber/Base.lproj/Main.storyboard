@@ -98,7 +98,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2076" y="927"/>
+            <point key="canvasLocation" x="2049" y="948"/>
         </scene>
         <!--Start View Controller-->
         <scene sceneID="6hL-hl-cgk">
@@ -182,7 +182,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="405"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HPS-44-2Rw" id="wdE-sP-tAI">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="404"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="404.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoH-Fe-Aeq">
@@ -268,6 +268,7 @@
                                     <outlet property="timeLabel" destination="nvv-i8-rTU" id="hH7-I3-8m2"/>
                                     <outlet property="titleLabel" destination="JoH-Fe-Aeq" id="CpF-fQ-1j2"/>
                                     <outlet property="typeLabel" destination="LYS-lO-3LS" id="kSz-nP-1OE"/>
+                                    <segue destination="lWP-Jy-liq" kind="show" identifier="details" id="Gjy-Cd-RJd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -292,7 +293,41 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O5f-TT-p09" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2076" y="162"/>
+            <point key="canvasLocation" x="2051" y="162"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="xbO-dD-BbD">
+            <objects>
+                <viewController id="lWP-Jy-liq" customClass="WebViewController" customModule="Hyber_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ahp-KV-oRJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="X4f-JY-0GQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dpR-qb-72X">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView multipleTouchEnabled="YES" contentMode="scaleToFill" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYT-AK-sLQ">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zYT-AK-sLQ" firstAttribute="top" secondItem="ahp-KV-oRJ" secondAttribute="bottom" id="OXs-J4-TDx"/>
+                            <constraint firstItem="zYT-AK-sLQ" firstAttribute="leading" secondItem="dpR-qb-72X" secondAttribute="leading" id="akS-0K-SJh"/>
+                            <constraint firstAttribute="trailing" secondItem="zYT-AK-sLQ" secondAttribute="trailing" id="l5Q-3I-O0Y"/>
+                            <constraint firstItem="zYT-AK-sLQ" firstAttribute="bottom" secondItem="X4f-JY-0GQ" secondAttribute="top" id="vjq-Ww-MrU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webViewContainer" destination="zYT-AK-sLQ" id="hen-Mj-7CQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jTK-xt-ehH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3292.5" y="161.61971830985917"/>
         </scene>
     </scenes>
     <resources>

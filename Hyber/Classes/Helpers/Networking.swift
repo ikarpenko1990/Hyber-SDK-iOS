@@ -122,6 +122,7 @@ class Networking: NSObject{
                 return response.validate(statusCode: 200..<300)
                     .validate(contentType: ["application/json","text/json"])
                     .rx.json()
+                print(response)
             }
             .map {json in
                 let data = json
@@ -174,11 +175,9 @@ class Networking: NSObject{
             .subscribeOn(MainScheduler.asyncInstance)
             .observeOn(MainScheduler.instance)
             .flatMap {response ->Observable<Any> in
-                return response.validate(statusCode: 200..<300)
-                    .validate(contentType: ["application/json","text/json"])
-                    .rx.json()
-                 print("Sented delivery rate")
-            }
+                return response.validate(statusCode: 200..<402)
+                    .rx.propertyList()
+        }
        
         }
    
@@ -187,8 +186,7 @@ class Networking: NSObject{
             .subscribeOn(MainScheduler.asyncInstance)
             .observeOn(MainScheduler.instance)
             .flatMap {response ->Observable<Any> in
-                return response.validate(statusCode: 200..<300)
-                    .validate(contentType: ["application/json","text/json"])
+                return response.validate(statusCode: 200..<402)
                     .rx.json()
         }
             .map{_ in 
@@ -198,8 +196,11 @@ class Networking: NSObject{
     
     class func responseError(error: JSON) {
             if error["code"] == 2133{
-                Hyber.refreshAuthToken()
-                HyberLogger.debug("Trying refresh token")
+                Hyber.refreshAuthToken(completionHandler: { (success) -> Void in
+                    if success {
+                        HyberLogger.debug("Trying refresh token")
+                    }})
+                
             } else {
                 HyberLogger.error(error)
             }

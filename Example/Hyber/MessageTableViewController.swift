@@ -57,10 +57,12 @@ class MessageTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         //scroll down
-        let numberOfSections = self.tableView.numberOfSections
-        let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
-        let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
-        self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.middle, animated: true)
+        if lists.count > 1 {
+            let numberOfSections = self.tableView.numberOfSections
+            let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
+            let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
+            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.middle, animated: true)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -133,6 +135,7 @@ class MessageTableViewController: UITableViewController {
                     cell?.timeLabel.text = dateString
                 }
             }
+        
         let img = list.value(forKey: "mImageUrl") as! String?
         cell?.photoLabel?.downloadedFrom(link: img!)
         let midX = self.view.bounds.width / 7
@@ -154,23 +157,16 @@ class MessageTableViewController: UITableViewController {
     
         let cell = tableView.cellForRow(at: indexPath as IndexPath)
         if cell !=  nil {
-            let list = lists[indexPath.row]
-            if list.value(forKey: "mButtonUrl") != nil {
-                let link = list.value(forKey: "mButtonText") as! String?
-                if let url = URL(string: link!) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url, options: [:])
-                    } else {
-                        UIApplication.shared.openURL(url)
-                    }
-                }
-            }
-            print ("You selected cell number: \(indexPath.row)!")
+            self.performSegue(withIdentifier: "details", sender: lists[indexPath.row])
         }
-
-    
     }
     
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let tasksViewController = segue.destination as! WebViewController
+        tasksViewController.selectedUrl = sender as! Message
+    }
+
  
     
     

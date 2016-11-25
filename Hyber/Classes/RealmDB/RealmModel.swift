@@ -38,13 +38,8 @@ public class Message: Object, Mappable {
         isReported <- map["drTime"]
         mUser <- map["to"]
         mImageUrl <- map["img"]
-        
-
-
 
     }
-    
-
 
 }
 
@@ -80,7 +75,6 @@ class Session: Object, Mappable {
         mRefreshToken <- map["refreshToken"]
         mExpirationDate <- map["expirationDate"]
 
-        
     }
 
 }

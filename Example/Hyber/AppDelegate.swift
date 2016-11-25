@@ -13,6 +13,8 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import SwiftyJSON
+import Fabric
+import Crashlytics
 
 
 @UIApplicationMain
@@ -23,7 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
-        Hyber.initialise(clientApiKey:"295419c7-63b6-4b4e-b325-4636f7d74651", firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
+        Hyber.initialise(clientApiKey:"b5a5b6f4-5af7-11e6-8b77-86f30ca893d3", firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance, launchOptions: launchOptions)
+        Fabric.with([Crashlytics.self])
+
         return true
         
     }

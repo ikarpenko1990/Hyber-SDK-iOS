@@ -53,6 +53,7 @@ public extension Hyber {
             }, onError: { print("Error", $0)
                 let flag = false // false if download succeed,false otherwise
                 completionHandler(flag)
+                
             },
                onCompleted: { HyberLogger.debug("Register new subscriber")
             },
@@ -104,6 +105,11 @@ public extension Hyber {
 
             }, onError: { let flag = false
                 completionHandler(flag)
+                Hyber.refreshAuthToken(completionHandler: { (success) -> Void in
+                    if success {
+                      Networking.getMessagesRequest(parameters: params, headers: headers)
+                    }})
+
                 HyberLogger.debug("Error", $0)
             })
         }
@@ -153,8 +159,16 @@ public extension Hyber {
             },
             onError: { HyberLogger.debug("Error", $0)
                 let flag = false
-                completionHandler(flag)},
-              onCompleted: { HyberLogger.debug("Message sented")
+                completionHandler(flag)
+                Hyber.refreshAuthToken(completionHandler: { (success) -> Void in
+                    if success {
+                     Networking.sentBiderectionalMessage(parameters: decoded as! [String : Any], headers: headers)
+                    }})
+            },
+              onCompleted: {
+                let flag = true
+                completionHandler(flag)
+                HyberLogger.debug("Message sented")
             })
     }
 
@@ -197,14 +211,19 @@ extension Hyber{
         Networking.updateDeviceRequest(parameters: phoneData, headers: headers)
             .subscribe(onNext: {json in
                 let json = JSON(json)
-            },onError: { HyberLogger.debug("Error", $0)},
+            },onError: { HyberLogger.debug("Error", $0)
+                Hyber.refreshAuthToken(completionHandler: { (success) -> Void in
+                    if success {
+                         Networking.updateDeviceRequest(parameters: phoneData, headers: headers)
+                    }})
+            },
               onCompleted: { HyberLogger.debug("Device updated")
             })
         }
     }
 
 
-    static func refreshAuthToken() -> Void
+    static func refreshAuthToken( completionHandler: @escaping CompletionHandler) -> Void
     {
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
@@ -227,10 +246,17 @@ extension Hyber{
             .subscribe(onNext: { json in
                 let json = JSON(json)
                 print(json)
+                let flag = true
+                completionHandler(flag)
             },
               onError: { HyberLogger.debug("Error", $0)
+                let flag = false
+                completionHandler(flag)
             },
-              onCompleted: { HyberLogger.debug("Token refreshed")
+              onCompleted: {
+                HyberLogger.debug("Token refreshed. Try again")
+                let flag = true
+                completionHandler(flag)
             })
         }
     }
@@ -243,52 +269,54 @@ extension Hyber{
         if token == nil {
             HyberLogger.info("Please reregister user for using SDK")
         } else {
-        var date = NSDate()
-        var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
-
-        let authToken = Session()
-        let headers = [
-            "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token": token,
-            "sdkVersion":"2.1.0"
-        ]
-
-
-        let params:[String: Any] = [
-            "messageId": messageId!,
-            "receivedAt": timestamp
-            ] as [String : Any]
-
+            var date = NSDate()
+            var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
+            
+            let authToken = Session()
+            let headers = [
+                "Content-Type": "application/json",
+                "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+                "X-Hyber-IOS-Bundle-Id":kBundleID!,
+                "X-Hyber-Installation-Id": kUUID,
+                "X-Hyber-Auth-Token": token,
+                "sdkVersion":"2.1.0"
+            ]
+            
+            
+            let params:[String: Any] = [
+                "messageId": messageId!,
+                "receivedAt": timestamp
+                ] as [String : Any]
+            
             let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-
+            
             let decoded = try! JSONSerialization.jsonObject(with: jsonData, options:[])
-
+            
             if let dictFromJSON = decoded as? [String:String] {
-        }
-
-        HyberLogger.debug("JSON", decoded)
-        Networking.sentDeliveredStatus(parameters: decoded as! [String : Any], headers: headers)
-            .subscribe(onNext: { _ in
-                let updateStatus = Message(value: ["messageId": messageId!, "isReported": true, "mDate": timestamp])
-                HyberLogger.debug("Delivered")
-
-            },
-              onError: { print("Error", $0)
-            },
-              onCompleted: {
-
-            })
-            try! realm.write {
-                realm.create(Message.self, value: ["messageId": messageId!, "isReported": true, "mDate": timestamp], update: true)
-
             }
-
+            
+            HyberLogger.debug("JSON", decoded)
+            Networking.sentDeliveredStatus(parameters: decoded as! [String : Any], headers: headers)
+                .subscribe(onNext: { _ in
+                    let updateStatus = Message(value: ["messageId": messageId!, "isReported": true, "mDate": timestamp])
+                    try! realm.write {
+                        realm.create(Message.self, value: ["messageId": messageId!, "isReported": true, "mDate": timestamp], update: true)
+                        
+                    }
+                },
+                onError: { print("Error", $0)
+                    Hyber.refreshAuthToken(completionHandler: { (success) -> Void in
+                        if success {
+                            Networking.sentDeliveredStatus(parameters: decoded as! [String : Any], headers: headers)
+                        }})
+                },
+                           onCompleted: {
+                            
+                })
+           
+            
         }
     }
-
     /*** Next API release**/
 
     static func deleteDevice(deviceId: String) -> Void
@@ -317,6 +345,11 @@ extension Hyber{
                 print(json)
             },
                 onError: { HyberLogger.debug("Error", $0)
+                    Hyber.refreshAuthToken(completionHandler: { (success) -> Void in
+                        if success {
+                           Networking.deleteDevice(parameters: params, headers: headers)
+                        }})
+
             })
         }
     }
@@ -342,8 +375,13 @@ extension Hyber{
             .subscribe(onNext: { json in
                 let json = JSON(json)
                 print(json)
+                
             },
                 onError: { HyberLogger.debug("Error", $0)
+                    Hyber.refreshAuthToken(completionHandler: { (success) -> Void in
+                        if success {
+                           Networking.getDeviceInfoRequest(parameters: nil, headers: headers)
+                        }})
             })
     }
     }

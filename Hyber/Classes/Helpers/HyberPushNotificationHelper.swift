@@ -35,18 +35,8 @@ public extension Hyber {
     public static func didFinishLaunchingWithOptions(launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
     
     {
-        let remoteNotif: AnyObject? = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as AnyObject?
+       
         
-        //Accept push notification when app is not open
-        if (remoteNotif) != nil {
-            
-            didReceiveRemoteNotification(userInfo: remoteNotif as! [AnyHashable : Any])
-        }
-        
-        
-        func handleRemoteNotification(remoteNotif: AnyObject?){
-            //handle your notification here
-        }
     }
     public static func didRegisterForRemoteNotificationsWithDeviceToken(
         deviceToken: NSData)
@@ -95,8 +85,8 @@ public extension Hyber {
             if hyberMsgID != "null" {
                 HyberLogger.info("Recieved message that was sended by Hyber")
                 
-                Hyber.sentDeliveredStatus(messageId:hyberMsgID!)
-                
+                     Hyber.sentDeliveredStatus(messageId:hyberMsgID!)
+
                 HyberLogger.info("Sending delivery report ...")
             }
             
@@ -105,19 +95,17 @@ public extension Hyber {
                     
                     HyberLogger.info("Recieved message that was sended by Firebase Messaging, but not from Hyber")
                 }
-                
             } else {
                 
                 HyberLogger.info("Recieved message that was sended by Hyber via APNs")
                 
             }
-            let appDelegate = UIApplication.shared.delegate
             
-            let murmur = Murmur(title: json["text"].string!)
-            show(whistle: murmur, action: .show(0.5))
-            show(whistle: murmur, action: .present)
-            hide(whistleAfter: 4)
-            HyberLogger.info(validJson)
+//            let murmur = Murmur(title: json["text"].string!)
+//            show(whistle: murmur, action: .show(0.5))
+//            show(whistle: murmur, action: .present)
+//            hide(whistleAfter: 4)
+//            HyberLogger.info(validJson)
         }
     
     }
