@@ -38,7 +38,7 @@ TODO: Hyber SDK for IOS. Implement push notification and other Hyber functionali
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'Alamofire', '~> 4.0.1'
-  s.dependency 'Firebase', '3.7.1'
+  s.dependency 'Firebase/Core', '3.7.1'
   s.dependency 'Firebase/Messaging', '3.7.1'
   s.dependency 'RealmSwift', '2.0.3'
   s.dependency 'RxSwift', '3.0.0-rc.1'

@@ -12,6 +12,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		760898771DE6D598006FFC2C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760898761DE6D598006FFC2C /* WebViewController.swift */; };
 		7617EC981DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */; };
 		7617EC9A1DBF99C100510884 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7617EC991DBF99C100510884 /* GoogleService-Info.plist */; };
 		76A592B11DDC715D004187E8 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A592B01DDC715D004187E8 /* MessageTableViewController.swift */; };
@@ -66,6 +67,7 @@
 		607FACE51AFB9204008FA782 /* Hyber_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hyber_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* XCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTest.swift; sourceTree = "<group>"; };
+		760898761DE6D598006FFC2C /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberFirebaseMessagingDelegate.swift; sourceTree = "<group>"; };
 		7617EC991DBF99C100510884 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7617EC9B1DBF9CE500510884 /* Hyber_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyber_Example.entitlements; sourceTree = "<group>"; };
@@ -174,9 +176,10 @@
 		7678FC791DE49CE800537253 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				76A759391DE45200008A5DE0 /* StartViewController.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				76A592B01DDC715D004187E8 /* MessageTableViewController.swift */,
-				76A759391DE45200008A5DE0 /* StartViewController.swift */,
+				760898761DE6D598006FFC2C /* WebViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -411,7 +414,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 1495204e5404bc6b775f898b9e4092a256b3d138 0d5bc8be13c6f68e31ce4e302fdbc16af2aeee9e311dfafb8cfe1b51079e38ce";
 		};
 		7D6ED8E5C48C4852101C3634 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -476,6 +479,7 @@
 				76A7593A1DE45200008A5DE0 /* StartViewController.swift in Sources */,
 				F3CAF7C61DE130F700704D9C /* ESRefreshHeaderAnimator.swift in Sources */,
 				F3CAF7CA1DE130F700704D9C /* ESRefreshAnimator.swift in Sources */,
+				760898771DE6D598006FFC2C /* WebViewController.swift in Sources */,
 				7617EC981DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift in Sources */,
 				F3CAF7CC1DE130F700704D9C /* ESRefreshProtocol.swift in Sources */,
 			);
