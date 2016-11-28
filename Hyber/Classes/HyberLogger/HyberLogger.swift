@@ -51,8 +51,6 @@ public func <(x: Level, y: Level) -> Bool {
 
 open class Logger {
     
-    public let listener = Notification.Name("LoggerListener")
-
     public var enabled: Bool = true
     
     public var formatter: Formatter {

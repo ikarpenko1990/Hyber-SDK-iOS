@@ -15,23 +15,19 @@ class MessageTableViewController: UITableViewController {
     let realm = try! Realm()
     var lists : Results<Message>!
     let defaults = UserDefaults.standard
-
-    
     var isEditingMode = false
     //MARK: Actions 
     @IBOutlet weak var messageListsTableView: UITableView!
    
-    
     @IBAction func editAction(_ sender: Any) {
             self.defaults.set("2", forKey: "startScreen")
             self.defaults.synchronize()
     }
     
-    
+    //pull to refresh
     func handleRefresh(_ refreshControl: UIRefreshControl) {
-     
-        Hyber.getMessageList(completionHandler: { (success) -> Void in
-            
+         Hyber.getMessageList(completionHandler: { (success) -> Void in
+
             if success {
                 self.messageListsTableView.reloadData()
             } else {
@@ -57,7 +53,7 @@ class MessageTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         //scroll down
-        if lists.count > 1 {
+        if lists.count > 2 {
             let numberOfSections = self.tableView.numberOfSections
             let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
             let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
@@ -67,11 +63,10 @@ class MessageTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
-        
+        // refresh coredata
             let token = realm.addNotificationBlock { notification, realm in
                 self.readTasksAndUpdateUI()
             }
-        // later
         readTasksAndUpdateUI()
         token.stop()
     }
@@ -84,13 +79,12 @@ class MessageTableViewController: UITableViewController {
         self.messageListsTableView.es_addPullToRefresh {
             [weak self] in
             Hyber.getMessageList(completionHandler: { (success) -> Void in
-                
                 if success {
                     self?.messageListsTableView.reloadData()
                     self?.messageListsTableView.es_stopPullToRefresh(completion: true)
                 } else {
+                    self?.messageListsTableView.es_stopPullToRefresh(completion: false)
                     self?.getErrorAlert()
-                     self?.messageListsTableView.es_stopPullToRefresh(completion: false)
                 }
             })
 
@@ -121,71 +115,60 @@ class MessageTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? MessageTableViewCell
         let list = lists[indexPath.row]
-        cell?.titleLabel.text = list.value(forKey: "mTitle") as! String?
-        cell?.textBodyLabel.text = list.value(forKey: "mBody") as! String?
-        cell?.typeLabel.text = list.value(forKey: "mPartner") as! String?
-        cell?.statusLabel.text = "reported"
-        cell?.statusLabel.textColor = UIColor.green
-            if list.value(forKey: "mDate") != nil {
-                if let date = list.value(forKey: "mDate") as! Double? {
-                    let dateformatter = DateFormatter()
-                    dateformatter.dateStyle = DateFormatter.Style.short
-                    dateformatter.timeStyle = DateFormatter.Style.short
-                    let dateString = dateformatter.string(from: NSDate(timeIntervalSince1970: TimeInterval(date)) as Date)
-                    cell?.timeLabel.text = dateString
+            cell?.titleLabel.text = list.value(forKey: "mTitle") as! String?
+            cell?.textBodyLabel.text = list.value(forKey: "mBody") as! String?
+            cell?.typeLabel.text = list.value(forKey: "mPartner") as! String?
+            cell?.statusLabel.text = "reported"
+            cell?.statusLabel.textColor = UIColor.green
+                if list.value(forKey: "mDate") != nil {
+                    if let date = list.value(forKey: "mDate") as! Double? {
+                        let dateformatter = DateFormatter()
+                        dateformatter.dateStyle = DateFormatter.Style.short
+                        dateformatter.timeStyle = DateFormatter.Style.short
+                        let dateString = dateformatter.string(from: NSDate(timeIntervalSince1970: TimeInterval(date)) as Date)
+                        cell?.timeLabel.text = dateString
+                    }
                 }
-            }
         
-        let img = list.value(forKey: "mImageUrl") as! String?
-        cell?.photoLabel?.downloadedFrom(link: img!)
-        let midX = self.view.bounds.width / 7
-        if list.value(forKey: "mButtonText")  != nil {
-            let title = list.value(forKey: "mButtonText")
-            let button = UIButton()
-            button.frame = CGRectMake(midX, 340 , 240, 32)
-            button.layer.cornerRadius = 5
-            button.backgroundColor = UIColor.darkGray
-            button.setTitle(title as! String?, for: UIControlState.normal)
-            cell?.addSubview(button)
-        }
+                let img = list.value(forKey: "mImageUrl") as! String?
+            cell?.photoLabel?.downloadedFrom(link: img!)
+                let midX = self.view.bounds.width / 7
+       
+                    if list.value(forKey: "mButtonText")  != nil {
+                        let title = list.value(forKey: "mButtonText")
+                        let button = UIButton()
+                        button.frame = CGRectMake(midX, 340 , 240, 32)
+                        button.layer.cornerRadius = 5
+                        button.backgroundColor = UIColor.darkGray
+                        button.setTitle(title as! String?, for: UIControlState.normal)
+                        cell?.addSubview(button)
+                    }
         
         return cell!
     }
     
-    
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    
-        let cell = tableView.cellForRow(at: indexPath as IndexPath)
-        if cell !=  nil {
-            self.performSegue(withIdentifier: "details", sender: lists[indexPath.row])
-        }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let list = lists[indexPath.row]
+            if let url = URL(string: (list.value(forKey: "mButtonUrl") as! String?)!) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:])
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
     }
-    
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        let tasksViewController = segue.destination as! WebViewController
-        tasksViewController.selectedUrl = sender as! Message
-    }
-
- 
-    
-    
-    func linkButton(_ sender: Any) {
-       print("Button pressed")
-    }
-
+  
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let answerAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive,  title: "Answer") { (deleteAction, indexPath) -> Void in
-            
             let listToAnswer = self.lists[indexPath.row]
             let messageId = listToAnswer.value(forKey: "messageId") as? String
             self.sentAnswerAlert(messageId: messageId)
-            
             }
+        
         return [answerAction]
     }
     
@@ -195,21 +178,6 @@ class MessageTableViewController: UITableViewController {
     func getErrorAlert() {
         let alertController = UIAlertController(title: "Network error", message: "Please turn on your internet connection", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in }
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func goToUrlAlert(link: String? ) {
-        let alertController = UIAlertController(title: "Open safari?", message: "", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in
-            if let url = URL(string: link!) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, options: [:])
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
-            }
-        }
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -238,14 +206,14 @@ class MessageTableViewController: UITableViewController {
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
-
-    
     }
+    
     
 }
 
 //MARK: Extention for downloading images
 extension UIImageView {
+    
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { (data, response, error) in

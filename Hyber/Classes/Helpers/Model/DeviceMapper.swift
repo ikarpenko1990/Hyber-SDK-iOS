@@ -22,6 +22,7 @@ class DeviceMapper: Mappable {
     }
 }
 
+//MARK: DeviceInfo
 class DeviceDetails: Mappable {
     
     var installId: String?

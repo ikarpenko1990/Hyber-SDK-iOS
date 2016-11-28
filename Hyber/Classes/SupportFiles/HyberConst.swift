@@ -16,8 +16,8 @@ let baseURL = "production"
 
 let kHyberClientAPIKey = UserDefaults.standard.string(forKey:"clientApiKey")
 let kFCM = UserDefaults.standard.string(forKey: "fcmToken")
-//Release
 
+//Release
 let kRegUrl = "https://mobile.hyber.im/register/device"
 let kUpdateUrl = "https://mobile.hyber.im/update/device"
 let kRefreshToken =  "https://mobile.hyber.im/refreshtoken/device"
@@ -60,6 +60,6 @@ let kGetDeviceInfo = baseUrlDev + "/mobile-abonents/api/v1/device/me"
 let kOSType = "iPhone OS"
 let kOSVersion = UIDevice.current.systemVersion
 let kDeviceType = "\(UIDevice.current.modelType)"
-let kDeviceName = UIDevice.current.modelName
+let kDeviceName = "\(UIDevice.current.modelName)"
 let kUUID = UIDevice.current.identifierForVendor!.uuidString
 let kBundleID = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String

@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Hyber
 //
-//  Created by 4taras4 on 10/20/2016.
-//  Copyright (c) 2016 4taras4. All rights reserved.
+//  Created by Taras on 10/20/2016.
+//  Copyright (c) 2016 Incuube. All rights reserved.
 //
 
 import UIKit
@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
         Hyber.initialise(clientApiKey:"b5a5b6f4-5af7-11e6-8b77-86f30ca893d3", firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance, launchOptions: launchOptions)
+        //Init fabric
         Fabric.with([Crashlytics.self])
 
         return true
