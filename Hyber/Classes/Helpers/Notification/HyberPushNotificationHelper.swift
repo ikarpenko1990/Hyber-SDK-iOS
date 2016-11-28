@@ -101,11 +101,11 @@ public extension Hyber {
                 
             }
             
-//            let murmur = Murmur(title: json["text"].string!)
-//            show(whistle: murmur, action: .show(0.5))
-//            show(whistle: murmur, action: .present)
-//            hide(whistleAfter: 4)
-//            HyberLogger.info(validJson)
+            LocalNotificationView.show(withImage: nil,
+                                    title: json["alpha"].string,
+                                    message: json["text"].string,
+                                    duration: 2,
+                                    onTap: {})
         }
     
     }

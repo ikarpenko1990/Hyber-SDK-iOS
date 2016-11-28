@@ -23,7 +23,6 @@ public extension Hyber {
 
     public static func registration(phoneId: String, completionHandler: @escaping CompletionHandler) {
         let disposeBag = DisposeBag()
-
         let headers = [
             "Content-Type": "application/json",
             "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
@@ -31,7 +30,6 @@ public extension Hyber {
             "X-Hyber-Installation-Id": kUUID,
             "sdkVersion":"2.1.0"
             ]
-
         let phoneData: Parameters = [
             "userPhone": phoneId,
             "osType": kOSType,
@@ -40,7 +38,6 @@ public extension Hyber {
             "deviceName": kDeviceName,
             "fcmToken": kFCM,
             "sdkVersion":"2.1.0"
-
         ]
 
         Networking.registerRequest(parameters: phoneData, headers: headers)
@@ -48,12 +45,10 @@ public extension Hyber {
                 let json = JSON(DataResponse)
                 let flag = true // true if download succeed,false otherwise
                 completionHandler(flag)
-
                 updateDevice()
             }, onError: { print("Error", $0)
-                let flag = false // false if download succeed,false otherwise
+                let flag = false // false if download fail
                 completionHandler(flag)
-                
             },
                onCompleted: { HyberLogger.debug("Register new subscriber")
             },
@@ -94,7 +89,6 @@ public extension Hyber {
                 let flag = true
                     completionHandler(flag)
                try! realm.write {
-
                     var results = realm.objects(Message.self).sorted(byProperty: "mDate",  ascending: false)
                     var realmSort = results.value(forKey: "mDate") as! Array<Double>
                     let anotherCorrectSwiftSort = realmSort.sorted{$0 < $1}
@@ -109,7 +103,6 @@ public extension Hyber {
                     if success {
                       Networking.getMessagesRequest(parameters: params, headers: headers)
                     }})
-
                 HyberLogger.debug("Error", $0)
             })
         }
@@ -126,30 +119,20 @@ public extension Hyber {
         if token == nil {
             HyberLogger.info("Please reregister user for using SDK")
         } else {
-        let headers = [
-            "Content-Type": "application/json",
-            "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
-            "X-Hyber-IOS-Bundle-Id":kBundleID!,
-            "X-Hyber-Installation-Id": kUUID,
-            "X-Hyber-Auth-Token": token,
-            "sdkVersion":"2.1.0"
-        ]
-        let params: [String: Any] = [
-            "messageId": messageId,
-            "text":message!]
-
+            let headers = [
+                "Content-Type": "application/json",
+                "X-Hyber-Client-API-Key": kHyberClientAPIKey!,
+                "X-Hyber-IOS-Bundle-Id":kBundleID!,
+                "X-Hyber-Installation-Id": kUUID,
+                "X-Hyber-Auth-Token": token,
+                "sdkVersion":"2.1.0"
+                ]
+            let params: [String: Any] = [
+                "messageId": messageId,
+                "text":message!]
+            //convert to JSON Array body
             let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            // here "jsonData" is the dictionary encoded in JSON data
-
             let decoded = try! JSONSerialization.jsonObject(with: jsonData, options: [])
-            // here "decoded" is of type `Any`, decoded from JSON data
-
-            // you can now cast it with the right type
-            if let dictFromJSON = decoded as? NSArray {
-                // use dictFromJSON
-                print(dictFromJSON)
-            }
-
 
         Networking.sentBiderectionalMessage(parameters: decoded as! [String : Any], headers: headers)
             .subscribe(onNext: {json in
@@ -183,11 +166,10 @@ extension Hyber{
     static func updateDevice()  -> Void
     {
         let disposeBag = DisposeBag()
-
         let realm = try! Realm()
         var token: String = realm.objects(Session.self).first!.mToken!
-            if token == nil {
-            HyberLogger.info("Please reregister user for using SDK")
+        if token == nil {
+                    HyberLogger.info("Please reregister user for using SDK")
             } else {
 
         let headers = [
@@ -292,22 +274,18 @@ extension Hyber{
             
             let decoded = try! JSONSerialization.jsonObject(with: jsonData, options:[])
             
-            if let dictFromJSON = decoded as? [String:String] {
-            }
-            
-            HyberLogger.debug("JSON", decoded)
             Networking.sentDeliveredStatus(parameters: decoded as! [String : Any], headers: headers)
                 .subscribe(onNext: { _ in
-                    let updateStatus = Message(value: ["messageId": messageId!, "isReported": true, "mDate": timestamp])
                     try! realm.write {
                         realm.create(Message.self, value: ["messageId": messageId!, "isReported": true, "mDate": timestamp], update: true)
-                        
-                    }
+                        }
+                    HyberLogger.info("Delivered")
                 },
                 onError: { print("Error", $0)
                     Hyber.refreshAuthToken(completionHandler: { (success) -> Void in
                         if success {
                             Networking.sentDeliveredStatus(parameters: decoded as! [String : Any], headers: headers)
+                                .retry(1)
                         }})
                 },
                            onCompleted: {

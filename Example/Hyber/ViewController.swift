@@ -19,7 +19,6 @@ class ViewController: UIViewController  {
             if success {
                 self.defaults.set("1", forKey: "startScreen")
                 self.defaults.synchronize()
-                // go to message view controller
                 self.dismiss(animated: true, completion: nil)
             } else {
                 let alert = UIAlertController(title: "Alert", message: "Please input correct phone number", preferredStyle: UIAlertControllerStyle.alert)
@@ -28,7 +27,6 @@ class ViewController: UIViewController  {
             }
         })
         
-
     }
     
     @IBOutlet weak var numberTextFiled: UITextField!
@@ -38,7 +36,6 @@ class ViewController: UIViewController  {
     }
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         buttonDesign()
         setUpBackground()
@@ -57,17 +54,16 @@ class ViewController: UIViewController  {
     
     func setUpBackground() {
         let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.colors = [UIColor.init(red: 87, green: 115, blue: 249).cgColor,
+            gradient.colors = [UIColor.init(red: 87, green: 115, blue: 249).cgColor,
                            UIColor.init(red: 191, green: 82, blue: 251).cgColor]
-        gradient.locations = [0.0 , 1.0]
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+            gradient.locations = [0.0 , 1.0]
+            gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+            gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+            gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.layer.insertSublayer(gradient, at: 0)
     }
     
     override func resignFirstResponder() -> Bool {
-    
         numberTextFiled.resignFirstResponder()
         return super.resignFirstResponder()
     }
@@ -82,7 +78,6 @@ extension ViewController: UITextFieldDelegate {
     }
     
    internal func textField(_ shouldChangeCharactersIntextField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-        
     {
         let numberOnly = NSCharacterSet.init(charactersIn: "0123456789")
         let stringFromTextField = NSCharacterSet.init(charactersIn: string)
@@ -97,7 +92,6 @@ extension UIColor {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
     

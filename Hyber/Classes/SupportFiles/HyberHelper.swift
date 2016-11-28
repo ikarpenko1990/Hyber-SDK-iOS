@@ -15,10 +15,7 @@ import SwiftyJSON
 extension Hyber {
 
     public static func initialise(clientApiKey: String, firebaseMessagingHelper: HyberFirebaseMessagingHelper, launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Void  {
-                
-        
         if launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] != nil {
-            
             // For Notification
             if let localNotificationInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as! [AnyHashable : Any]? {
                 if let validJson = JSON(localNotificationInfo) as? [String:AnyObject] {
@@ -46,7 +43,9 @@ extension Hyber {
                 defaults.set(clientApiKey, forKey: "clientApiKey")
                 defaults.synchronize()
                 HyberLogger.info("Hyber SDK initialised")
-            }
+        }
+        
+        //Realm configuration
         var config = Realm.Configuration()
         // Use the default directory, but replace the filename with the username
         config.fileURL = config.fileURL!.deletingLastPathComponent()
@@ -65,9 +64,10 @@ extension Hyber {
         
     }
     
-    func clearHistory() -> Void {
-        try! RealmData.urealm.write {
-            RealmData.urealm.delete(RealmData.urealm.objects(Message.self))
+   public func clearHistory() -> Void {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(realm.objects(Message.self))
         }
     }
     
