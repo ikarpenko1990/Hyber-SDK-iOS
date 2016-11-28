@@ -15,6 +15,7 @@ class MessageTableViewController: UITableViewController {
     let realm = try! Realm()
     var lists : Results<Message>!
     let defaults = UserDefaults.standard
+    
     var isEditingMode = false
     //MARK: Actions 
     @IBOutlet weak var messageListsTableView: UITableView!
@@ -89,6 +90,8 @@ class MessageTableViewController: UITableViewController {
             })
 
         }
+        let array = Array(lists)
+        print(array)
     }
     
     func firstScreen() {
@@ -199,7 +202,7 @@ class MessageTableViewController: UITableViewController {
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         alertController.addTextField { (textField) in
-            textField.placeholder = "write something awsome for us 😊 "
+            textField.placeholder = "write something awsome for us 😊"
         }
         
         alertController.addAction(confirmAction)
