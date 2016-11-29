@@ -25,19 +25,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="380888886688" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76S-Is-bnA">
-                                <rect key="frame" x="44" y="202" width="231" height="30"/>
+                                <rect key="frame" x="44" y="202" width="232" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hyber_white" translatesAutoresizingMaskIntoConstraints="NO" id="sj8-RN-Ce6">
-                                <rect key="frame" x="97.5" y="45" width="125" height="37"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="hyber_white" translatesAutoresizingMaskIntoConstraints="NO" id="sj8-RN-Ce6">
+                                <rect key="frame" x="98" y="45" width="127" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="2XG-z0-Oak"/>
+                                    <constraint firstAttribute="height" constant="32" id="2XG-z0-Oak"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J06-7j-W4N">
-                                <rect key="frame" x="74.5" y="261" width="170" height="60"/>
+                                <rect key="frame" x="75" y="261" width="170" height="60"/>
                                 <color key="backgroundColor" red="0.80731683969497681" green="0.38100218772888184" blue="0.7640388011932373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Ede-iQ-RFL"/>
@@ -72,9 +72,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="76S-Is-bnA" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="202" id="8vo-hj-VFT"/>
-                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" id="E1O-3O-rGc"/>
+                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" constant="1.5" id="E1O-3O-rGc"/>
                             <constraint firstItem="sj8-RN-Ce6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="25" id="Y1a-un-cMX"/>
-                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="dFl-Wz-pwB"/>
+                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="1.5" id="dFl-Wz-pwB"/>
                             <constraint firstItem="J06-7j-W4N" firstAttribute="top" secondItem="76S-Is-bnA" secondAttribute="bottom" constant="29" id="vkr-2c-1yI"/>
                             <constraint firstItem="76S-Is-bnA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="28" id="yjH-Iu-jz7"/>
                             <constraint firstItem="J06-7j-W4N" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" id="zMT-ZB-Alw"/>
@@ -98,7 +98,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2049" y="948"/>
+            <point key="canvasLocation" x="2047.5" y="947.53521126760563"/>
         </scene>
         <!--Start View Controller-->
         <scene sceneID="6hL-hl-cgk">

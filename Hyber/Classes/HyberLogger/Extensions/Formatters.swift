@@ -14,8 +14,7 @@ extension Formatters {
         .message
     ])
     
-    public static let minimal = Formatter("%@ %@: %@", [
-        .location,
+    public static let minimal = Formatter("%@: %@", [
         .level,
         .message
     ])
