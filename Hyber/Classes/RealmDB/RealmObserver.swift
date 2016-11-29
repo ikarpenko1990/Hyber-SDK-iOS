@@ -17,19 +17,19 @@ import RealmSwift
 class RealmObserver<E>: ObserverType {
     var realm: Realm?
     var configuration: Realm.Configuration?
-    
+
     let binding: (Realm, E) -> Void
-    
+
     init(realm: Realm, binding: @escaping (Realm, E) -> Void) {
         self.realm = realm
         self.binding = binding
     }
-    
+
     init(configuration: Realm.Configuration, binding: @escaping (Realm, E) -> Void) {
         self.configuration = configuration
         self.binding = binding
     }
-    
+
     /**
      Binds next element
      */
@@ -42,20 +42,20 @@ class RealmObserver<E>: ObserverType {
                 binding(realm, element)
                 return;
             }
-            
+
             guard let realm = realm else {
                 fatalError("No realm in RealmObserver at time of a .Next event")
             }
-            
+
             binding(realm, element)
-            
+
         case .error:
             realm = nil
         case .completed:
             realm = nil
         }
     }
-    
+
     /**
      Erases the type of observer
      
@@ -64,7 +64,7 @@ class RealmObserver<E>: ObserverType {
     func asObserver() -> AnyObserver<E> {
         return AnyObserver(eventHandler: on)
     }
-    
+
     deinit {
         realm = nil
     }
