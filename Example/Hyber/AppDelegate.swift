@@ -10,9 +10,6 @@ import UIKit
 import Hyber
 import UserNotifications
 import Firebase
-import FirebaseInstanceID
-import FirebaseMessaging
-import SwiftyJSON
 import Fabric
 import Crashlytics
 
@@ -27,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
         Hyber.initialise(clientApiKey:"b5a5b6f4-5af7-11e6-8b77-86f30ca893d3", firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance, launchOptions: launchOptions)
         //Init fabric
-        Fabric.with([Crashlytics.self])
+        Fabric.with([Crashlytics.self, Answers.self])
 
         return true
         

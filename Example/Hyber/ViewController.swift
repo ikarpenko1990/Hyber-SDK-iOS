@@ -15,7 +15,8 @@ class ViewController: UIViewController  {
     let defaults = UserDefaults.standard
     @IBOutlet weak var registrationBtn: UIButton!
     @IBAction func registetrationAction(_ sender: UIButton) {
-        Hyber.registration(phoneId: numberTextFiled.text!, completionHandler: { (success) -> Void in
+        
+    Hyber.registration(phoneId: numberTextFiled.text!, completionHandler: { (success) -> Void in
             if success {
                 self.defaults.set("1", forKey: "startScreen")
                 self.defaults.synchronize()
@@ -69,6 +70,8 @@ class ViewController: UIViewController  {
     }
     
 }
+
+
 
 extension ViewController: UITextFieldDelegate {
     
