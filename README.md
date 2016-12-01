@@ -33,7 +33,7 @@ In  `func application(application: UIApplication, didFinishLaunchingWithOptions 
 HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
 
 Hyber.initialise(clientApiKey:"ClientApiKey",
-firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance)
+firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance, launchOptions: launchOptions)
 ```
 
 In `func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)` add following
