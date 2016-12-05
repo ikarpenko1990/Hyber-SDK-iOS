@@ -24,8 +24,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="380888886688" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76S-Is-bnA">
-                                <rect key="frame" x="44" y="202" width="232" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="93 333 33 33" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76S-Is-bnA">
+                                <rect key="frame" x="75" y="202" width="201" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
@@ -50,6 +50,19 @@
                                     <action selector="registetrationAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QWn-BI-dQy"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aE3-mR-OVp" customClass="CountryPicker">
+                                <rect key="frame" x="0.0" y="352" width="320" height="216"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liF-5H-aVZ">
+                                <rect key="frame" x="21" y="202" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="codePickerAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0db-y6-9Qb"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbI-il-fMv">
                                 <rect key="frame" x="122" y="486" width="170" height="60"/>
                                 <color key="backgroundColor" red="0.80731683970000001" green="0.38100218769999999" blue="0.76403880120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -72,12 +85,16 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="76S-Is-bnA" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="202" id="8vo-hj-VFT"/>
-                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" constant="1.5" id="E1O-3O-rGc"/>
+                            <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" constant="-14" id="E1O-3O-rGc"/>
+                            <constraint firstItem="aE3-mR-OVp" firstAttribute="centerX" secondItem="J06-7j-W4N" secondAttribute="centerX" id="Ned-gm-zxQ"/>
                             <constraint firstItem="sj8-RN-Ce6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="25" id="Y1a-un-cMX"/>
                             <constraint firstItem="sj8-RN-Ce6" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="1.5" id="dFl-Wz-pwB"/>
+                            <constraint firstItem="aE3-mR-OVp" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="mAl-ux-n8f"/>
+                            <constraint firstItem="liF-5H-aVZ" firstAttribute="top" secondItem="76S-Is-bnA" secondAttribute="top" id="nee-iR-4l6"/>
+                            <constraint firstItem="76S-Is-bnA" firstAttribute="leading" secondItem="liF-5H-aVZ" secondAttribute="trailing" constant="8" symbolic="YES" id="sjG-tT-7Fo"/>
                             <constraint firstItem="J06-7j-W4N" firstAttribute="top" secondItem="76S-Is-bnA" secondAttribute="bottom" constant="29" id="vkr-2c-1yI"/>
-                            <constraint firstItem="76S-Is-bnA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="28" id="yjH-Iu-jz7"/>
-                            <constraint firstItem="J06-7j-W4N" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" id="zMT-ZB-Alw"/>
+                            <constraint firstItem="76S-Is-bnA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="59" id="yjH-Iu-jz7"/>
+                            <constraint firstItem="J06-7j-W4N" firstAttribute="centerX" secondItem="76S-Is-bnA" secondAttribute="centerX" constant="-15.5" id="zMT-ZB-Alw"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -86,6 +103,8 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="countryCodeBtn" destination="liF-5H-aVZ" id="txe-eq-zxM"/>
+                        <outlet property="countryPhoneCodePicker" destination="aE3-mR-OVp" id="W6w-0G-DAT"/>
                         <outlet property="numberTextFiled" destination="76S-Is-bnA" id="RSF-ZE-1M0"/>
                         <outlet property="registrationBtn" destination="J06-7j-W4N" id="Acb-ZJ-CxF"/>
                     </connections>

@@ -10,13 +10,30 @@ import UIKit
 import Hyber
 import UserNotifications
 import Firebase
+import libPhoneNumber_iOS
 
-class ViewController: UIViewController  {
+class ViewController: UIViewController, CountryPhoneCodePickerDelegate  {
+    @IBOutlet weak var countryCodeBtn: UIButton!
+    @IBAction func codePickerAction(_ sender: Any) {
+        if countryPhoneCodePicker.isHidden == true {
+            countryPhoneCodePicker.isHidden = false
+            view.endEditing(true)
+        } else {
+            countryPhoneCodePicker.isHidden = true
+        }
+    }
+  
+    @IBOutlet weak var numberTextFiled: UITextField!
+    var phoneCodeLoad: String?
+    
     let defaults = UserDefaults.standard
     @IBOutlet weak var registrationBtn: UIButton!
     @IBAction func registetrationAction(_ sender: UIButton) {
+        var phoneNumber = phoneCodeLoad! + numberTextFiled.text!
+        phoneNumber.remove(at: phoneNumber.startIndex)
+        print(phoneNumber)
         
-    Hyber.registration(phoneId: numberTextFiled.text!, completionHandler: { (success) -> Void in
+        Hyber.registration(phoneId: phoneNumber, completionHandler: { (success) -> Void in
             if success {
                 self.defaults.set("1", forKey: "startScreen")
                 self.defaults.synchronize()
@@ -30,37 +47,61 @@ class ViewController: UIViewController  {
         
     }
     
-    @IBOutlet weak var numberTextFiled: UITextField!
+    @IBOutlet weak var countryPhoneCodePicker: CountryPicker!
     
     @IBAction func tabGestureAction(_ sender: Any) {
         numberTextFiled.resignFirstResponder()
+        countryPhoneCodePicker.isHidden = true
     }
-
+    
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(true)
+        countryPhoneCodePicker.isHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         buttonDesign()
         setUpBackground()
+        //Gestures
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
-            view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(tap)
+        //Country codes
+        let locale = Locale.current
+        let code = (locale as NSLocale).object(forKey: NSLocale.Key.countryCode) as! String?
+        let phoneNumberUtil = NBPhoneNumberUtil.sharedInstance()
+        phoneCodeLoad = "+\(phoneNumberUtil!.getCountryCode(forRegion: code)!)" as String?
+        countryCodeBtn.setTitle(phoneCodeLoad, for: .normal)
+        countryPhoneCodePicker.countryPhoneCodeDelegate = self
+        countryPhoneCodePicker.setCountry(code!)
     }
-       
+    
+    // MARK: - CountryPhoneCodePicker Delegate
+    
+    func countryPhoneCodePicker(_ picker: CountryPicker, didSelectCountryCountryWithName name: String, countryCode: String, phoneCode: String ) {
+        DispatchQueue.main.async {
+            self.countryCodeBtn.setTitle(phoneCode, for:.normal)
+        }
+        
+    }
+    
     func buttonDesign() {
         registrationBtn.layer.cornerRadius = 20
     }
     
     func dismissKeyboard() {
         view.endEditing(true)
+        countryPhoneCodePicker.isHidden = true
     }
     
     
     func setUpBackground() {
         let gradient: CAGradientLayer = CAGradientLayer()
-            gradient.colors = [UIColor.init(red: 87, green: 115, blue: 249).cgColor,
+        gradient.colors = [UIColor.init(red: 87, green: 115, blue: 249).cgColor,
                            UIColor.init(red: 191, green: 82, blue: 251).cgColor]
-            gradient.locations = [0.0 , 1.0]
-            gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-            gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-            gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        gradient.locations = [0.0 , 1.0]
+        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.layer.insertSublayer(gradient, at: 0)
     }
     
@@ -80,7 +121,7 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
     
-   internal func textField(_ shouldChangeCharactersIntextField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    internal func textField(_ shouldChangeCharactersIntextField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         let numberOnly = NSCharacterSet.init(charactersIn: "0123456789")
         let stringFromTextField = NSCharacterSet.init(charactersIn: string)
@@ -101,5 +142,5 @@ extension UIColor {
     convenience init(netHex:Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
-
+    
 }
