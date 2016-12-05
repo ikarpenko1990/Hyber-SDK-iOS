@@ -27,7 +27,7 @@ let kGetMsgHistory = "https://mobile.hyber.im/messages/history"
 let kSendMsgCallback = "https://push-callback.hyber.im"
 
 //** Features relise **//
-let kDeleteDevice = baseUrlDev + "/mobile-abonents/api/v1/device/delete"
+let kDeleteDevice = "/mobile-abonents/api/v1/device/delete"
 let kDR = "https://push-dr.hyber.im"
-let kGetDeviceInfo = baseUrlDev + "/mobile-abonents/api/v1/device/me"
+let kGetDeviceInfo = "/mobile-abonents/api/v1/device/me"
 

@@ -6,6 +6,7 @@ target 'Hyber_Example' do
   pod 'Hyber', :path => '../'
   pod 'Fabric'
       pod 'Crashlytics'
+  pod 'libPhoneNumber-iOS', '~> 0.8'
   target 'Hyber_Tests' do
     inherit! :search_paths
 
