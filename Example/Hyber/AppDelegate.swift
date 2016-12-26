@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                          launchOptions: launchOptions)
         //Init fabric
         Fabric.with([Crashlytics.self, Answers.self])
-        
+        HyberLogger.minLevel = .info
         return true
         
     }

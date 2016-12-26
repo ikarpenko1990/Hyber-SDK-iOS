@@ -68,7 +68,7 @@ public extension Hyber {
         } else {
 
             var token: String = realm.objects(Session.self).last!.mToken!
-            var kUUID:String = realm.objects(Session.self).first!.mRefreshToken!
+            var kUUID:String = realm.objects(Session.self).first!.mSessionToken!
             var date = NSDate()
                 try! realm.write {
                     realm.delete(realm.objects(Message.self))
@@ -115,7 +115,7 @@ public extension Hyber {
             }
             
             var token: String = realm.objects(Session.self).last!.mToken!
-            var kUUID:String = realm.objects(Session.self).first!.mRefreshToken!
+            var kUUID:String = realm.objects(Session.self).first!.mSessionToken!
             var date = NSDate()
             var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
             var timeString = String(timestamp)
@@ -161,7 +161,7 @@ public extension Hyber {
             HyberLogger.info("Please register user session")
         } else {
         var token: String = realm.objects(Session.self).last!.mToken!
-        var kUUID:String = realm.objects(Session.self).first!.mRefreshToken!
+        var kUUID:String = realm.objects(Session.self).first!.mSessionToken!
         var date = NSDate()
         var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
         var timeString = String(timestamp)
@@ -203,7 +203,7 @@ public extension Hyber {
                 HyberLogger.info("Please register user session")
             } else {
             var token: String = realm.objects(Session.self).last!.mToken!
-            var kUUID:String = realm.objects(Session.self).first!.mRefreshToken!
+            var kUUID:String = realm.objects(Session.self).first!.mSessionToken!
                 try! realm.write {
                      realm.delete(realm.objects(Device.self))
                 }
@@ -242,7 +242,7 @@ extension Hyber {
             HyberLogger.info("Please register user session")
         } else {
             var token: String = realm.objects(Session.self).last!.mToken!
-            var kUUID:String = realm.objects(Session.self).first!.mRefreshToken!
+            var kUUID:String = realm.objects(Session.self).first!.mSessionToken!
             var date = NSDate()
             var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
             var timeString = String(timestamp)
@@ -279,7 +279,7 @@ extension Hyber {
             HyberLogger.info("Please register user session")
         } else {
             var token: String = realm.objects(Session.self).last!.mToken!
-            var kUUID:String = realm.objects(Session.self).first!.mRefreshToken!
+            var kUUID:String = realm.objects(Session.self).first!.mSessionToken!
             var date = NSDate()
             var timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
             var timeString = String(timestamp)

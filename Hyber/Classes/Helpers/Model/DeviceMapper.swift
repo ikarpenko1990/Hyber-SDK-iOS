@@ -25,8 +25,6 @@ class DeviceMapper: Mappable {
 //MARK: DeviceInfo
 class DeviceDetails: Mappable {
 
-    var installId: String?
-    var fcmToken: String?
     var osType: String?
     var osVersion: String?
     var deviceType: String?
@@ -40,8 +38,6 @@ class DeviceDetails: Mappable {
     }
 
     func mapping(map: Map) {
-        installId <- map["installId"]
-        fcmToken <- map["fcmTken"]
         osType <- map["osType"]
         osVersion <- map["osVersion"]
         deviceType <- map["deviceType"]

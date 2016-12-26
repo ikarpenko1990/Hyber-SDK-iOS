@@ -46,10 +46,8 @@ public class Message: Object, Mappable {
 class Session: Object, Mappable {
   dynamic var mUserId: String?
   dynamic var mUser: User?
-  dynamic var mToken: String? = nil
-  dynamic var mRefreshToken: String?
-  dynamic var mExpirationDate: String?
-  dynamic var mExpired = false
+  dynamic var mToken:String?
+  dynamic var mSessionToken: String?
     
     override static func primaryKey() -> String? {
     return "mUserId"
@@ -58,7 +56,7 @@ class Session: Object, Mappable {
   override static func indexedProperties() -> [String] {
     return [
         "mToken",
-      "mRefreshToken",
+      "mSessionToken",
     ]
   }
     
@@ -72,8 +70,7 @@ class Session: Object, Mappable {
     func mapping(map: Map) {
         mUserId <- map["userPhone"]
         mToken <- map["authToken"]
-        mRefreshToken <- map["refreshToken"]
-        mExpirationDate <- map["expirationDate"]
+        mSessionToken <- map["sessionToken"]
 
     }
 
@@ -81,7 +78,7 @@ class Session: Object, Mappable {
 
 class User: Object, Mappable {
   dynamic var mId: String?
-  dynamic var mPhone: String?
+  dynamic var mPhone: String? = ""
   dynamic var isActive = false
 
   override static func primaryKey() -> String? {
@@ -111,9 +108,7 @@ class User: Object, Mappable {
 
 public class Device: Object, Mappable {
     
-    dynamic var installationId: String?
     dynamic var osType: String?
-    dynamic var fcmToken: String?
     dynamic var osVersion: String?
     dynamic var deviceType: String?
     dynamic var deviceName: String?
@@ -121,7 +116,6 @@ public class Device: Object, Mappable {
     dynamic var createdAt: String?
     dynamic var updatedAt: String?
     dynamic var deviceId: String?
-    dynamic var userId: String?
     dynamic var isActive = false
     
   public override static func primaryKey() -> String? {
@@ -135,8 +129,6 @@ public class Device: Object, Mappable {
     
    public func mapping(map: Map) {
         deviceId              <- map["deviceId"]
-        installationId        <- map["installId"]
-        fcmToken              <- map["fcmTken"]
         osType                <- map["osType"]
         osVersion             <- map["osVersion"]
         deviceType            <- map["deviceType"]

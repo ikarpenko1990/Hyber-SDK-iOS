@@ -15,9 +15,8 @@ class DataRealm {
    static func session(uuid: String) -> Void {
         var sessionId = uuid
         let newSession = Session()
-            newSession.mRefreshToken = sessionId
+            newSession.mSessionToken = sessionId
             newSession.mToken = "session"
-            newSession.mExpirationDate = "end session"
             newSession.mUserId = "current"
         let realm = try! Realm()
         
@@ -37,7 +36,7 @@ class DataRealm {
         let user = User()
             user.mPhone = profile["userPhone"].string
         let newSession = Session()
-            newSession.mToken = session["token"].string
+            newSession.mToken = session["token"].string!
             newSession.mUser = user
             newSession.mUserId = profile["userId"].string
         let realm = try! Realm()

@@ -43,8 +43,6 @@ class MessageTableViewController: UITableViewController {
     //Mark: Main function
     func readAndUpdateUI() {
         lists = realm.objects(Message.self)
-        let messageArray = Array(lists)
-        print("MEssages Array:\(messageArray)")
         self.messageListsTableView.setEditing(false, animated: true)
         self.messageListsTableView.reloadData()
     }

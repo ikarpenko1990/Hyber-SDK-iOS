@@ -488,13 +488,9 @@ extension Reactive where Base: DataRequest {
                         }
                         observer.on(.completed)
                     case .failure(let error):
-                        if packedResponse.response?.statusCode == 401{
-                            HyberLogger.info("User autorization failed please register user ")
+                        if packedResponse.response?.statusCode == 401 {
+                            HyberLogger.info("UNAUTHORIZED. Incorrect: Token/session/phone")
                         }
-                        else if packedResponse.response?.statusCode == 400{
-                    
-                        }
-
                         observer.on(.error(error as Error))
                     }
             }
