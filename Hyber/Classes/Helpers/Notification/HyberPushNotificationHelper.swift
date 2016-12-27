@@ -67,11 +67,27 @@ public extension Hyber {
             newMessages.mTitle = json["alpha"].string
             newMessages.mPartner = "push"
             newMessages.mBody = json["text"].string
-            if let optionsArray = json["options"].rawValue as? [String: Any] {
-                newMessages.mImageUrl = optionsArray["img_url"] as! String
-                newMessages.mButtonUrl = optionsArray["action_url"] as! String
-                newMessages.mButtonText = optionsArray["caption"] as! String
-            }
+          if json["options"] != nil {
+                    if let optionsArray = json["options"].rawValue as? [String: Any] {
+                        if optionsArray["img_url"] is NSNull {
+                            HyberLogger.info("Image:Null")
+                        } else {
+                            newMessages.mImageUrl = optionsArray["img_url"] as! String?
+                        }
+                        
+                        if optionsArray["action_url"] is NSNull {
+                            HyberLogger.info("Action:Null")
+                        } else {
+                            newMessages.mButtonUrl = optionsArray["action_url"] as! String?
+                        }
+                        
+                        if optionsArray["caption"] is NSNull {
+                          HyberLogger.info("Caption:Null")
+                        } else {
+                         newMessages.mButtonText = optionsArray["caption"] as! String?
+                        }
+                    }
+                }
             messages.append(newMessages)
             try! realm.write {
                 realm.add(newMessages, update: true)
