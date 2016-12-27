@@ -135,6 +135,7 @@
 		7CCABE4312F41178A389BC1C /* Pods-Hyber_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber_Example/Pods-Hyber_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		881F74C6321FBF6683EE513B /* Pods-Hyber_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber_Tests/Pods-Hyber_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A31A8E7E819220BFDA8A6574 /* Pods_Hyber_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F30CF2821E12A84C005E92F6 /* Hyber_Example copy 2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Hyber_Example copy 2-Info.plist"; path = "/Users/tarik/Desktop/Hyber-SDK-iOS/Example/Hyber_Example copy 2-Info.plist"; sourceTree = "<absolute>"; };
 		F31F57291E1104D300E81888 /* Hyber_Example copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hyber_Example copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F31F572A1E1104D300E81888 /* Hyber_Example copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Hyber_Example copy-Info.plist"; path = "/Users/tarik/Desktop/Hyber-SDK-iOS/Example/Hyber_Example copy-Info.plist"; sourceTree = "<absolute>"; };
 		F3B8F04C1E1284570029B5BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TD/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 				76838C7C1DED7EC200D2F31E /* TD */,
 				76838C7D1DED7ECA00D2F31E /* Prod */,
 				F31F572A1E1104D300E81888 /* Hyber_Example copy-Info.plist */,
+				F30CF2821E12A84C005E92F6 /* Hyber_Example copy 2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
