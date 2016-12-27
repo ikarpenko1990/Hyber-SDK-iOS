@@ -65,7 +65,6 @@ class Networking: NSObject {
                 return response.validate(statusCode: 200..<300)
                     .validate(contentType: ["application/json", "text/json"])
                     .rx.json()
-                print(response)
             }
             .map { json in
                 let data = json

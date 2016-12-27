@@ -18,11 +18,13 @@ before_install:
 script:
 - set -o pipefail
 #- xcodebuild clean build -project Hyber.xcodeproj -scheme "Hyber-Example" -sdk iphonesimulator
+#- xcodebuild -version
+#- xcodebuild -showsdks
 
 # Run `pod lib lint` if specified
 - if [ $POD_LINT == "YES" ]; then
-    pod lib lint --verbose;
-fi
+   pod lib lint;
+   fi
 
 notifications:
   slack:

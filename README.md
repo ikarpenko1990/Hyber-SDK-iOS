@@ -43,7 +43,7 @@ In `func application(application: UIApplication, didReceiveRemoteNotification us
 ```swift
 	Hyber.didReceiveRemoteNotification(userInfo: userInfo)
 
-completionHandler(.newData)
+	completionHandler(.newData)
 ```
 
 #### Register your application for Remote Notification

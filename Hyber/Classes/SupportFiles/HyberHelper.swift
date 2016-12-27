@@ -22,7 +22,7 @@ extension Hyber {
                     didReceiveRemoteNotification(userInfo: userInfo!)
                 }
             } else {
-            var notificationPayload: NSDictionary = launchOptions![UIApplicationLaunchOptionsKey.remoteNotification] as! NSDictionary
+            let notificationPayload: NSDictionary = launchOptions![UIApplicationLaunchOptionsKey.remoteNotification] as! NSDictionary
                 didReceiveRemoteNotification(userInfo: notificationPayload as! [AnyHashable : Any])
                 UIApplication.shared.applicationIconBadgeNumber = 0
             }
@@ -53,7 +53,6 @@ extension Hyber {
         let defaults = UserDefaults.standard
             defaults.set(fcmToken, forKey: "fcmToken")
             defaults.synchronize()
-            print("FCMToken: \(defaults.object(forKey: "fcmToken"))")
         }
 
     public static func clearHistory(entity: Object.Type) -> Void {
@@ -65,15 +64,10 @@ extension Hyber {
     
     public static func LogOut() -> Void {
         let realm = try! Realm()
-        let session = realm.objects(User.self)
-         if session != nil {
-            try! realm.write {
+           try! realm.write {
                 realm.deleteAll()
             }
             HyberLogger.info("User logout")
-        } else {
-            HyberLogger.info("Please autorize to use SDK. User unautorized")
-        }
     }
     
 }
