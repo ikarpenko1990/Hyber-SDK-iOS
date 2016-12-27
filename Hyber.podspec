@@ -41,15 +41,15 @@ TODO: Hyber SDK for IOS. Implement push notification and other Hyber functionali
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   #s.frameworks = 'CommonCrypto'
-  s.dependency 'Alamofire', '~> 4.0.1'
-  s.dependency 'Firebase/Core', '3.7.1'
-  s.dependency 'Firebase/Messaging', '3.7.1'
-  s.dependency 'RealmSwift', '2.0.3'
+  s.dependency 'Alamofire', '~> 4.2.0'
+  s.dependency 'Firebase/Core', '3.11.0'
+  s.dependency 'Firebase/Messaging', '3.11.0'
+  s.dependency 'RealmSwift', '2.1.2'
   s.dependency 'RxSwift', '3.0.0-rc.1'
   #s.dependency 'RxCocoa', '3.0.0-rc.1'
-  s.dependency 'ObjectMapper', '~> 2.1.0'
-  s.dependency 'SwiftyJSON', '3.1.1'
-  s.dependency 'CryptoSwift','0.6.6'
+  s.dependency 'ObjectMapper', '~> 2.2.2'
+  s.dependency 'SwiftyJSON', '3.1.3'
+  s.dependency 'CryptoSwift','0.6.7'
   
 
 

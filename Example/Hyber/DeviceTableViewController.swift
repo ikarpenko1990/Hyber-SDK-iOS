@@ -14,6 +14,9 @@ class DeviceTableViewController: UITableViewController {
     let realm = try! Realm()
     var deviceList: Results<Device>!
 
+    @IBAction func sts(_ sender: Any) {
+        Hyber.LogOut()
+    }
     
     @IBOutlet var deviceListsTableView: UITableView!
 
@@ -21,8 +24,6 @@ class DeviceTableViewController: UITableViewController {
         deviceList = realm.objects(Device.self)
         self.deviceListsTableView.setEditing(false, animated: true)
         self.deviceListsTableView.reloadData()
-        let devices = Array(deviceList)
-        print("Devices: \(devices)")
     }
 
     override func viewDidLoad() {
@@ -42,7 +43,7 @@ class DeviceTableViewController: UITableViewController {
             [weak self] in
              Hyber.getDeviceList(completionHandler: { (success) -> Void in
                 if success {
-                    self?.deviceListsTableView.reloadData()
+                    self?.readAndUpdateUI()
                     self?.deviceListsTableView.es_stopPullToRefresh(completion: true)
                 } else {
                     self?.deviceListsTableView.es_stopPullToRefresh(completion: false)
@@ -69,6 +70,9 @@ class DeviceTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceCell", for: indexPath) as? DeviceTableViewCell
+        if (cell == nil) {
+            print("No data")
+        } else {
         let list = self.deviceList[indexPath.row]
             cell?.DeviceName.text = list.value(forKey: "deviceName") as! String?
             cell?.deviceId.text = list.value(forKey: "deviceId") as! String?
@@ -90,13 +94,15 @@ class DeviceTableViewController: UITableViewController {
                 }
         
             cell?.updateDevice.text = list.value(forKey:"updatedAt") as! String?
+        DispatchQueue.main.async {
             let active = list.value(forKey: "isActive") as! Bool?
                 if active == true {
                     cell?.currentDevice.isHidden = false
                  } else {
                     cell?.currentDevice.isHidden = true
                 }
-            
+             }
+        }
         return cell!
     }
     
@@ -116,7 +122,11 @@ class DeviceTableViewController: UITableViewController {
                         if success {
                            
                         } else {
-                            Hyber.getDeviceList(completionHandler:{(success) -> Void in})
+                            Hyber.getDeviceList(completionHandler:{(success) -> Void in
+                                if success{
+                                self.deviceListsTableView.reloadData()
+                                }
+                            })
                         }
                     })
                 }

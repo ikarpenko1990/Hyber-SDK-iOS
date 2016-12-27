@@ -140,7 +140,7 @@ class Networking: NSObject {
                 let data = json
                 let validJson = JSON(data)
                 DataRealm.saveDeiveList(json:validJson)
-            HyberLogger.info(validJson)
+            HyberLogger.debug(validJson)
             return validJson
         }
     }

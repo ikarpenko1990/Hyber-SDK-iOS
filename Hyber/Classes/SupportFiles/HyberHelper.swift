@@ -36,9 +36,9 @@ extension Hyber {
             HyberLogger.info("Hyber SDK initialised")
          }
         //Realm configuration
-        var config = Realm.Configuration(schemaVersion: 4,
+        var config = Realm.Configuration(schemaVersion: 1,
                                          migrationBlock: { migration, oldSchemaVersion in
-                                         if (oldSchemaVersion < 4) {
+                                         if (oldSchemaVersion < 1) {
                                                         // Nothing to do!
                                                         // Realm will automatically detect new properties and removed properties
                                         }
