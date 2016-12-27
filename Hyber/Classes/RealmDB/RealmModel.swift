@@ -10,7 +10,7 @@ public class Message: Object, Mappable {
   dynamic var mPartner: String?
   dynamic var mTitle: String?
   dynamic var mBody: String?
-  dynamic var mDate: Double = 0.0
+  dynamic var mDate:  String?
   dynamic var mImageUrl: String?
   dynamic var mButtonUrl: String?
   dynamic var mButtonText: String?
@@ -46,7 +46,7 @@ public class Message: Object, Mappable {
 class Session: Object, Mappable {
   dynamic var mUserId: String?
   dynamic var mUser: User?
-  dynamic var mToken: String?
+  dynamic var mToken: String? = nil
   dynamic var mRefreshToken: String?
   dynamic var mExpirationDate: String?
   dynamic var mExpired = false
@@ -57,7 +57,7 @@ class Session: Object, Mappable {
 
   override static func indexedProperties() -> [String] {
     return [
-      "mToken",
+        "mToken",
       "mRefreshToken",
     ]
   }
@@ -81,16 +81,16 @@ class Session: Object, Mappable {
 
 class User: Object, Mappable {
   dynamic var mId: String?
-  var mPhone: Int?
+  dynamic var mPhone: String?
   dynamic var isActive = false
 
   override static func primaryKey() -> String? {
-    return "mId"
+    return "mPhone"
   }
 
   override static func indexedProperties() -> [String] {
     return [
-      "mPhone",
+      "mPhone","mId"
     ]
   }
     
@@ -109,36 +109,31 @@ class User: Object, Mappable {
 }
 
 
-class Device: Object, Mappable {
+public class Device: Object, Mappable {
     
-    dynamic var installationId = ""
-    dynamic var osType = ""
+    dynamic var installationId: String?
+    dynamic var osType: String?
     dynamic var fcmToken: String?
-    dynamic var osVersion = ""
-    dynamic var deviceType = ""
-    dynamic var deviceName = ""
-    dynamic var modelName = ""
+    dynamic var osVersion: String?
+    dynamic var deviceType: String?
+    dynamic var deviceName: String?
+    dynamic var modelName: String?
     dynamic var createdAt: String?
     dynamic var updatedAt: String?
     dynamic var deviceId: String?
-    let userId = User()
+    dynamic var userId: String?
+    dynamic var isActive = false
     
-    override static func primaryKey() -> String? {
+  public override static func primaryKey() -> String? {
         return "deviceId"
     }
-    
-    override static func indexedProperties() -> [String] {
-        return [
-        "deviceId"
-        ]
-    }
-    
-    convenience required init?(map: Map) {
+        
+  public  convenience required init?(map: Map) {
         self.init()
         mapping(map: map)
     }
     
-    func mapping(map: Map) {
+   public func mapping(map: Map) {
         deviceId              <- map["deviceId"]
         installationId        <- map["installId"]
         fcmToken              <- map["fcmTken"]

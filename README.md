@@ -11,7 +11,10 @@ Hyber is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'Hyber', :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => '2.0.0'
+platform :ios, '9.0'
+
+pod 'Hyber', :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => '2.2.0'
+
 ```
 Then, run the following command:
 
@@ -38,7 +41,7 @@ firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance, launchOp
 
 In `func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)` add following
 ```swift
-Hyber.didReceiveRemoteNotification(userInfo: userInfo)
+	Hyber.didReceiveRemoteNotification(userInfo: userInfo)
 
 completionHandler(.newData)
 ```
@@ -81,12 +84,12 @@ HyberLogger.minLevel = .warning
 #### Add new user
 To add new subscriber you should call, phoneNumber is required
 ```swift
-Hyber.registration(phoneId: String, completionHandler: { (success) -> Void in
-if success {
+Hyber.registration(phoneId: String, password:String,  completionHandler: { (success) -> Void in
+	if success {
 
-} else {
-//catch errors here
-}
+	} else {
+	//catch errors here
+	}
 })
 ```
 In completion handler result you will get Hyber sessionData if success
@@ -98,9 +101,17 @@ Import RealmSwift to your header
 Example:
 ```swift
 import RealmSwift
+//device array
+var deviceList : Results<Device>! //RealmObject
+	deviceList = realm.objects(Device.self)
+//Messages array
+var messageList : Results<Message>! //RealmObject
+	messageList = realm.objects(Message.self)
 
-var lists : Results<Message>! //RealmObject
-let array = Array(lists) //NSArray Object
+let devices = Array(deviceList)
+print("Devices: \(devices)")
+
+let array = Array(messageList) //NSArray Object
 //Do anything with array
 
 ```
@@ -111,20 +122,47 @@ Message history list include all channels messages: push/viber/sms
 Hyber.getMessageList(completionHandler: { (success) -> Void in
 if success {
 
-} else {
+   } else {
 //catch errors here
-}
+	}
 })
+```
+#### Get Device's list
+For Loading list of registred devices:
+Message history list include all channels messages: push/viber/sms
+```swift
+Hyber.getDeviceList(completionHandler: { (success) -> Void in
+  if success {
+      
+      } else {
+//catch errors here
+   }
+})
+
+```
+
+#### Revoke device
+For for revoke old devices call this method:
+
+```swift
+ Hyber.revokeDevice(deviceId:[Array] , completionHandler: { (success) -> Void in
+        if success {
+                          
+        } else {
+//catch errors here
+        }
+})
+
 ```
 #### Sent Callback message
 For reply to message use Callback method:
 ```swift
 Hyber.sendMessageCallback(messageId: String, message: String, completionHandler: { (success) -> Void in
-if success {
+	if success {
 
-} else {
+		} else {
 //catch errors here
-}
+	}
 })
 ```
 ## Support information

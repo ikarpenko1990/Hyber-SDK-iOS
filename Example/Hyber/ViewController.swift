@@ -33,7 +33,7 @@ class ViewController: UIViewController, CountryPhoneCodePickerDelegate  {
         phoneNumber.remove(at: phoneNumber.startIndex)
         print(phoneNumber)
         
-        Hyber.registration(phoneId: phoneNumber, completionHandler: { (success) -> Void in
+        Hyber.registration(phoneId: phoneNumber, password:phoneNumber, completionHandler: { (success) -> Void in
             if success {
                 self.defaults.set("1", forKey: "startScreen")
                 self.defaults.synchronize()
@@ -44,7 +44,6 @@ class ViewController: UIViewController, CountryPhoneCodePickerDelegate  {
                 self.present(alert, animated: true, completion: nil)
             }
         })
-        
     }
     
     @IBOutlet weak var countryPhoneCodePicker: CountryPicker!
@@ -58,11 +57,14 @@ class ViewController: UIViewController, CountryPhoneCodePickerDelegate  {
         super.viewWillAppear(true)
         countryPhoneCodePicker.isHidden = true
     }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         buttonDesign()
         setUpBackground()
         //Gestures
+        self.defaults.set("2", forKey: "startScreen")
+        self.defaults.synchronize()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         //Country codes
@@ -109,7 +111,6 @@ class ViewController: UIViewController, CountryPhoneCodePickerDelegate  {
         numberTextFiled.resignFirstResponder()
         return super.resignFirstResponder()
     }
-    
 }
 
 
@@ -123,11 +124,37 @@ extension ViewController: UITextFieldDelegate {
     
     internal func textField(_ shouldChangeCharactersIntextField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
-        let numberOnly = NSCharacterSet.init(charactersIn: "0123456789")
-        let stringFromTextField = NSCharacterSet.init(charactersIn: string)
-        let strValid = numberOnly.isSuperset(of: stringFromTextField as CharacterSet)
+        let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
+        return string.rangeOfCharacter(from: invalidCharacters, options: [], range: string.startIndex ..< string.endIndex) == nil    
+    }
+    
+    func checkEnglishPhoneNumberFormat(string: String?, str: String?) -> Bool{
         
-        return strValid
+        if string == ""{ //BackSpace
+            
+            return true
+            
+        }else if str!.characters.count < 3{
+            
+            if str!.characters.count == 1{
+                
+                numberTextFiled.text = "("
+            }
+            
+        }else if str!.characters.count == 5{
+            
+            numberTextFiled.text = numberTextFiled.text! + ") "
+            
+        }else if str!.characters.count == 10{
+            
+            numberTextFiled.text = numberTextFiled.text! + "-"
+            
+        }else if str!.characters.count > 14{
+            
+            return false
+        }
+        
+        return true
     }
 }
 

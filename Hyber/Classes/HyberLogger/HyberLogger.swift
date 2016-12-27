@@ -13,7 +13,6 @@ public extension Hyber {
 
     static let hyberLog : Logger = {
         let log = Logger()
-        
         return log
     }()
 
@@ -28,11 +27,11 @@ public enum Level {
     var description: String {
         
         switch self {
-        case .trace: return "✅HyberTrace"
+        case .trace: return "✅ HyberTrace"
         case .debug: return "🐞HyberDEBUG"
         case .info: return "❗️HyberInfo"
-        case .warning: return "⚠️HyberWarinig"
-        case .error: return "❌HyberERROR"
+        case .warning: return "⚠️ HyberWarinig"
+        case .error: return "❌ HyberERROR"
         }
         
         return String(describing: self).uppercased()
