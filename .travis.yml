@@ -20,9 +20,9 @@ script:
 #- xcodebuild clean build -project Hyber.xcodeproj -scheme "Hyber-Example" -sdk iphonesimulator
 
 # Run `pod lib lint` if specified
-  - if [ $POD_LINT == "YES" ]; then
-      pod lib lint --private --verbose;
-    fi
+- if [ $POD_LINT == "YES" ]; then
+    pod lib lint --verbose;
+fi
 
 notifications:
   slack:
