@@ -12,7 +12,7 @@ import SwiftyJSON
 import Realm
 import RealmSwift
 import ObjectMapper
-import AlamofireObjectMapper
+
 /**
  The delegate of a `Hyber` object must adopt the
  `HyberRemoteNotificationReciever` protocol.
@@ -30,31 +30,19 @@ public extension Hyber {
      
     - Parameter deviceToken: registered remote Apple Push-notifications device doken
      */
-
-    public static func didFinishLaunchingWithOptions(launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
-
-    {
-
-
-    }
-    public static func didRegisterForRemoteNotificationsWithDeviceToken(
-                                                                        deviceToken: NSData)
-    {
-
-        HyberLogger.info("New apns token came")
-
+    public static func didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: NSData) {
         didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
-
         firebaseMessagingHelper?.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
-
+        HyberLogger.info(deviceToken)
     }
 
     /**
      Handles receiving of push-notification
      */
-    public static func didReceiveRemoteNotification(userInfo: [AnyHashable: Any])
-    {
+    public static func didReceiveRemoteNotification(userInfo: [AnyHashable: Any]) {
         let validJson = JSON(userInfo)
+        HyberLogger.info(userInfo)
+        UIApplication.shared.applicationIconBadgeNumber = 1
         let fcmMsgID = validJson["gcm.message_id"].rawString()
         let messageString = validJson["message"].rawString()
         if let data = messageString?.data(using: String.Encoding.utf8) {
@@ -94,14 +82,10 @@ public extension Hyber {
             }
             if hyberMsgID != "null" {
                 HyberLogger.info("Recieved message that was sended by Hyber")
-                if UIApplication.shared.applicationState == .inactive {
-                    Hyber.sentDeliveredStatus(messageId: hyberMsgID!)
-                } else {
-                    Hyber.sentDeliveredStatus(messageId: hyberMsgID!)
-                }
-
+                Hyber.sentDeliveredStatus(messageId: hyberMsgID!)
                 HyberLogger.info("Sending delivery report ...")
             }
+            
             if fcmMsgID != .none {
                 if hyberMsgID == "null" {
                     HyberLogger.info("Recieved message that was sended by Firebase Messaging, but not from Hyber")
@@ -109,9 +93,10 @@ public extension Hyber {
             } else {
                 HyberLogger.info("Recieved message that was sended by Hyber via APNs")
             }
+            
             LocalNotificationView.show(withImage: nil,
-                                       title: json["alpha"].string,
-                                       message: json["text"].string,
+                                       title: json["title"].string,
+                                       message: json["body"].string,
                                        duration: 2,
                                        onTap: { })
         }

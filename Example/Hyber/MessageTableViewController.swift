@@ -13,20 +13,22 @@ import SwiftyJSON
 
 class MessageTableViewController: UITableViewController {
     let realm = try! Realm()
-    var lists : Results<Message>!
+    var lists: Results<Message>!
     let defaults = UserDefaults.standard
     
     var isEditingMode = false
     //MARK: Actions 
     @IBOutlet weak var messageListsTableView: UITableView!
    
-    @IBAction func editAction(_ sender: Any) {
-            self.defaults.set("2", forKey: "startScreen")
-            self.defaults.synchronize()
+    @IBAction func logoutAction(_ sender: Any) {
+        Hyber.LogOut()
     }
-    
+   
+    @IBAction func revoke(_ sender: Any) {
+    }
     //pull to refresh
     func handleRefresh(_ refreshControl: UIRefreshControl) {
+    
          Hyber.getMessageList(completionHandler: { (success) -> Void in
 
             if success {
@@ -35,20 +37,21 @@ class MessageTableViewController: UITableViewController {
                 self.getErrorAlert()
             }
         })
-        self.messageListsTableView.reloadData()
         refreshControl.endRefreshing()
     }
     
     //Mark: Main function
-    func readTasksAndUpdateUI() {
+    func readAndUpdateUI() {
         lists = realm.objects(Message.self)
+        let messageArray = Array(lists)
+        print("MEssages Array:\(messageArray)")
         self.messageListsTableView.setEditing(false, animated: true)
         self.messageListsTableView.reloadData()
     }
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        readTasksAndUpdateUI()
+        readAndUpdateUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,9 +69,9 @@ class MessageTableViewController: UITableViewController {
         super.viewDidLoad()
         // refresh coredata
             let token = realm.addNotificationBlock { notification, realm in
-                self.readTasksAndUpdateUI()
+                self.readAndUpdateUI()
             }
-        readTasksAndUpdateUI()
+        readAndUpdateUI()
         token.stop()
     }
     
@@ -76,22 +79,10 @@ class MessageTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         firstScreen()
-        readTasksAndUpdateUI()
-        self.messageListsTableView.es_addPullToRefresh {
-            [weak self] in
-            Hyber.getMessageList(completionHandler: { (success) -> Void in
-                if success {
-                    self?.messageListsTableView.reloadData()
-                    self?.messageListsTableView.es_stopPullToRefresh(completion: true)
-                } else {
-                    self?.messageListsTableView.es_stopPullToRefresh(completion: false)
-                    self?.getErrorAlert()
-                }
-            })
-
+        readAndUpdateUI()
+        self.messageListsTableView.es_addPullToRefresh() {
+            self.getMessageList()
         }
-        let array = Array(lists)
-        print(array)
     }
     
     func firstScreen() {
@@ -103,6 +94,17 @@ class MessageTableViewController: UITableViewController {
         }
     }
     
+    func getMessageList() {
+        Hyber.getMessageList(completionHandler: { (success) -> Void in
+            if success {
+                self.messageListsTableView.reloadData()
+                self.messageListsTableView.es_stopPullToRefresh(completion: true)
+            } else {
+                self.messageListsTableView.es_stopPullToRefresh(completion: false)
+                self.getErrorAlert()
+            }
+        })
+    }
     
       // MARK: - Table view data source
 
@@ -115,8 +117,8 @@ class MessageTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? MessageTableViewCell
+       
         let list = lists[indexPath.row]
             cell?.titleLabel.text = list.value(forKey: "mTitle") as! String?
             cell?.textBodyLabel.text = list.value(forKey: "mBody") as! String?
@@ -124,34 +126,39 @@ class MessageTableViewController: UITableViewController {
             cell?.statusLabel.text = "reported"
             cell?.statusLabel.textColor = UIColor.green
                 if list.value(forKey: "mDate") != nil {
-                    if let date = list.value(forKey: "mDate") as! Double? {
-                        let dateformatter = DateFormatter()
-                        dateformatter.dateStyle = DateFormatter.Style.short
-                        dateformatter.timeStyle = DateFormatter.Style.short
-                        let dateString = dateformatter.string(from: NSDate(timeIntervalSince1970: TimeInterval(date)) as Date)
-                        cell?.timeLabel.text = dateString
+                    if let date = list.value(forKey: "mDate") as! String? {
+                        cell?.timeLabel.text = date
                     }
                 }
-        
+            if list.value(forKey: "mImageUrl")  != nil {
                 let img = list.value(forKey: "mImageUrl") as! String?
-            cell?.photoLabel?.downloadedFrom(link: img!)
-                let midX = self.view.bounds.width / 7
-       
-                    if list.value(forKey: "mButtonText")  != nil {
-                        let title = list.value(forKey: "mButtonText")
-                        let button = UIButton()
-                        button.frame = CGRectMake(midX, 340 , 240, 32)
+                cell?.photoLabel?.downloadedFrom(link: img!)
+            } else {
+               cell?.photoLabel?.image = nil
+            }
+    
+            if list.value(forKey: "mButtonText")  != nil {
+                    let midX = self.view.bounds.width / 7
+                    let title = list.value(forKey: "mButtonText")
+                    let button = UIButton()
+                        button.frame = CGRectMake(midX, 80 , 240, 32)
                         button.layer.cornerRadius = 5
                         button.backgroundColor = UIColor.darkGray
                         button.setTitle(title as! String?, for: UIControlState.normal)
-                        cell?.addSubview(button)
-                    }
-        
+                    cell?.addSubview(button)
+            } else {
+                print("No text")
+            }
+    
+
         return cell!
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let list = lists[indexPath.row]
+        if list.value(forKey: "mButtonUrl") != nil {
+
             if let url = URL(string: (list.value(forKey: "mButtonUrl") as! String?)!) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url, options: [:])
@@ -159,6 +166,10 @@ class MessageTableViewController: UITableViewController {
                     UIApplication.shared.openURL(url)
                 }
             }
+        } else {
+            print("No url")
+        }
+        
     }
   
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
@@ -179,7 +190,7 @@ class MessageTableViewController: UITableViewController {
     // MARK: - Allerts
     
     func getErrorAlert() {
-        let alertController = UIAlertController(title: "Network error", message: "Please turn on your internet connection", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Error", message: "Somesing wrong please try later", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in }
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
@@ -212,6 +223,21 @@ class MessageTableViewController: UITableViewController {
     }
     
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let list = lists[indexPath.row]
+        let img = list.value(forKey: "mImageUrl") as? String
+        let caption = list.value(forKey: "mButtonText") as? String
+            if img !=  nil {
+                return 460.0
+            }
+        
+            else if (caption == nil) && img ==  nil {
+                return 140.0
+            }
+        
+        return 180.0
+    }
+    
 }
 
 //MARK: Extention for downloading images
@@ -224,6 +250,7 @@ extension UIImageView {
                 let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                 let data = data, error == nil,
+                
                 let image = UIImage(data: data)
                 else { return }
             DispatchQueue.main.async() { () -> Void in
@@ -243,4 +270,3 @@ extension CGRect {
         self.init(x:x, y:y, width:w, height:h)
     }
 }
-

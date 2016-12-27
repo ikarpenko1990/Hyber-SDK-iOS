@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 extension Date {
     init?(jsonDate: String) {
@@ -38,10 +39,18 @@ extension Date {
         // Success! Create NSDate and return.
         self.init(timeIntervalSince1970: timeStamp)
     }
+    
+
+
 }
 
-
-
+extension NSDate {
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM dd yyyy"
+        return dateFormatter.string(from: self as Date)
+    }
+}
 public extension UIDevice {
 
     var modelName: String {
@@ -120,7 +129,7 @@ public extension UIDevice {
         case "iPad5,1", "iPad5,2": return "tablet"
         case "iPad6,3", "iPad6,4", "iPad6,7", "iPad6,8": return "tablet"
         case "AppleTV5,3": return "tablet"
-        case "i386", "x86_64": return "Simulator"
+        case "i386", "x86_64": return "phone"
         default: return identifier
         }
     }
@@ -132,3 +141,5 @@ extension Bundle {
         return self.main.infoDictionary?[key as String] as? String
     }
 }
+
+

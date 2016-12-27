@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import Hyber
 import UserNotifications
-//HyberFirebaseHelper wiil be initialized with new RESTAPI
+//HyberFirebaseHelper will be initialized with new RESTAPI
 
  class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper {
 
@@ -18,7 +18,7 @@ import UserNotifications
         return HyberFirebaseMessagingDelegate()
     }()
     
-    private override init() {
+  private override init() {
         super.init()
         addApplicationDidObservers()
         
@@ -31,9 +31,10 @@ import UserNotifications
     
   public  func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
         let firebaseMessagingToken = FIRInstanceID.instanceID().token()
-    
+    print("FIREBASE TOKEN:\(firebaseMessagingToken)")
         self.firebaseMessagingToken = firebaseMessagingToken
-        Hyber.saveToken(fcmToken:self.firebaseMessagingToken! as String)
+        Hyber.saveToken(fcmToken:firebaseMessagingToken!)
+        connectToFirebaseMessaging()
     }
     
     deinit {
@@ -112,6 +113,7 @@ import UserNotifications
 extension HyberFirebaseMessagingDelegate {
     
 
+
     
     func didEnterBackground() {
         FIRMessaging.messaging().disconnect()
@@ -143,6 +145,7 @@ extension HyberFirebaseMessagingDelegate {
     
 }
 
+
 /** [START ios_10_message_handling]
  You must assign your delegate object to the UNUserNotificationCenter object no later before your app finishes launching. For example, in an iOS app, you must assign it in the application(_:willFinishLaunchingWithOptions:) or application(_:didFinishLaunchingWithOptions:) method.*/
 @available(iOS 10, *)
@@ -153,6 +156,12 @@ extension HyberFirebaseMessagingDelegate : UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 //        Hyber.didReceiveRemoteNotification(userInfo: notification.request.content.userInfo)
     }
+    
+//    func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                                didReceive response: UNNotificationResponse,
+//                                withCompletionHandler completionHandler: @escaping () -> Void) {
+//        Hyber.didReceiveRemoteNotification(userInfo: response.notification.request.content.userInfo)
+//    }
 }
 
 extension HyberFirebaseMessagingDelegate : FIRMessagingDelegate {

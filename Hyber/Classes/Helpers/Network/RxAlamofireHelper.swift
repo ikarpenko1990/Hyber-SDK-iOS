@@ -13,6 +13,8 @@ import RxSwift
 /// Default instance of unknown error
 public let RxAlamofireUnknownError = NSError(domain: "RxAlamofireHyber", code: -1, userInfo: nil)
 
+
+
 // MARK: Convenience functions
 
 public func urlRequest(_ method: Alamofire.HTTPMethod,
@@ -486,6 +488,13 @@ extension Reactive where Base: DataRequest {
                         }
                         observer.on(.completed)
                     case .failure(let error):
+                        if packedResponse.response?.statusCode == 401{
+                            HyberLogger.info("User autorization failed please register user ")
+                        }
+                        else if packedResponse.response?.statusCode == 400{
+                    
+                        }
+
                         observer.on(.error(error as Error))
                     }
             }
