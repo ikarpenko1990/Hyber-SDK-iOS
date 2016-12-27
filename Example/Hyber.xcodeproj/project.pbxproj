@@ -55,7 +55,7 @@
 		F31F571E1E1104D300E81888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		F31F57201E1104D300E81888 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		F31F57211E1104D300E81888 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
-		F31F572B1E1104EE00E81888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76838C7E1DED7F6700D2F31E /* GoogleService-Info.plist */; };
+		F3B8F04D1E1284570029B5BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3B8F04C1E1284570029B5BA /* GoogleService-Info.plist */; };
 		F3CAF7C51DE130F700704D9C /* ESRefreshFooterAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BD1DE130F600704D9C /* ESRefreshFooterAnimator.swift */; };
 		F3CAF7C61DE130F700704D9C /* ESRefreshHeaderAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BE1DE130F700704D9C /* ESRefreshHeaderAnimator.swift */; };
 		F3CAF7C71DE130F700704D9C /* icon_pull_to_refresh_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CAF7BF1DE130F700704D9C /* icon_pull_to_refresh_arrow@2x.png */; };
@@ -137,6 +137,7 @@
 		A31A8E7E819220BFDA8A6574 /* Pods_Hyber_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F31F57291E1104D300E81888 /* Hyber_Example copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hyber_Example copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F31F572A1E1104D300E81888 /* Hyber_Example copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Hyber_Example copy-Info.plist"; path = "/Users/tarik/Desktop/Hyber-SDK-iOS/Example/Hyber_Example copy-Info.plist"; sourceTree = "<absolute>"; };
+		F3B8F04C1E1284570029B5BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TD/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F3CAF7BD1DE130F600704D9C /* ESRefreshFooterAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESRefreshFooterAnimator.swift; sourceTree = "<group>"; };
 		F3CAF7BE1DE130F700704D9C /* ESRefreshHeaderAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESRefreshHeaderAnimator.swift; sourceTree = "<group>"; };
 		F3CAF7BF1DE130F700704D9C /* icon_pull_to_refresh_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pull_to_refresh_arrow@2x.png"; sourceTree = "<group>"; };
@@ -186,6 +187,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				F3B8F04C1E1284570029B5BA /* GoogleService-Info.plist */,
 				7617EC9B1DBF9CE500510884 /* Hyber_Example.entitlements */,
 				607FACD21AFB9204008FA782 /* Example */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -488,7 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F31F572B1E1104EE00E81888 /* GoogleService-Info.plist in Resources */,
+				F3B8F04D1E1284570029B5BA /* GoogleService-Info.plist in Resources */,
 				F31F571C1E1104D300E81888 /* icon_pull_to_refresh_arrow@2x.png in Resources */,
 				F31F571D1E1104D300E81888 /* CountryView.xib in Resources */,
 				F31F571E1E1104D300E81888 /* Main.storyboard in Resources */,
