@@ -13,7 +13,7 @@ import SwiftyJSON
 class DataRealm {
     
    static func session(uuid: String) -> Void {
-        var sessionId = uuid
+        let sessionId = uuid
         let newSession = Session()
             newSession.mSessionToken = sessionId
             newSession.mToken = "session"
@@ -29,10 +29,6 @@ class DataRealm {
         
         let session = json["session"]
         let profile = json["profile"]
-        let error = json["error"]
-        if error != nil {
-            responseError(error: error)
-        }
         let user = User()
             user.mPhone = profile["userPhone"].string
         let newSession = Session()
@@ -48,7 +44,6 @@ class DataRealm {
     }
 
     static func updateDevice(json: JSON) -> Void {
-        let deviceId = json["deviceId"].string
         let realm = try! Realm()
         try! realm.write {
              realm.create(Device.self, value: ["deviceId": json["deviceId"].string, "isActive": true], update: true)
@@ -57,14 +52,11 @@ class DataRealm {
     
     static func saveMessages(json: JSON) -> Void {
         let message = json["messages"].arrayObject
-        let error = json["error"]
-        if error != nil {
-            responseError(error: error)
-        }
+    
         let realm = try! Realm()
         let messages = List<Message>()
         HyberLogger.info(message)
-        if let jsonArray = message as? [[String: Any]] {
+        if let jsonArray = message as? [[String: AnyObject]] {
             for messagesArray in jsonArray {
                 let newMessages = Message()
                     newMessages.mId = messagesArray["phone"] as? String
@@ -73,18 +65,22 @@ class DataRealm {
                     newMessages.mPartner = messagesArray["partner"] as? String
                     newMessages.mBody = messagesArray["body"] as? String
                     newMessages.mDate = messagesArray["time"] as? String
+                
                 if messagesArray["button"] != nil {
-                    if let optionsArray = messagesArray["button"] as? [String: Any] {
+                    if let optionsArray = messagesArray["button"] as? [String: AnyObject] {
                         newMessages.mButtonUrl = optionsArray["url"] as? String
                         newMessages.mButtonText = optionsArray["text"] as? String
                     }
                 }
+               
                 if messagesArray["image"] != nil {
-                    if let imageArray = messagesArray["image"] as? [String:Any]{
+                    if let imageArray = messagesArray["image"] as? [String:AnyObject] {
                         newMessages.mImageUrl = imageArray["url"] as? String
                     }
                 }
+                
                 messages.append(newMessages)
+                
                 try! realm.write {
                     realm.add(newMessages, update: true)
                 }
@@ -125,7 +121,7 @@ class DataRealm {
             newMessages.mTitle = json["title"].string
             newMessages.mPartner = "push"
             newMessages.mBody = json["body"].string
-        if let imageArray = json["image"].rawValue as? [String: Any] {
+        if let imageArray = json["image"].rawValue as? [String: AnyObject] {
             if imageArray["url"] is NSNull {
                 HyberLogger.info("Image:Null")
             } else {
@@ -134,7 +130,7 @@ class DataRealm {
         }
         
         if json["button"] != nil {
-            if let optionsArray = json["button"].rawValue as? [String: Any] {
+            if let optionsArray = json["button"].rawValue as? [String: AnyObject] {
                 if optionsArray["text"] is NSNull {
                     HyberLogger.info("Action:Null")
                 } else {
