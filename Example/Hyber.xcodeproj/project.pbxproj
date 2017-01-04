@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1256B40C0933D63BFA938BEE /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
-		3DF316736A5A30A2DBC23EC8 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
-		598A002FFC0CE40636C9E49F /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -25,7 +22,6 @@
 		76A7593A1DE45200008A5DE0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A759391DE45200008A5DE0 /* StartViewController.swift */; };
 		76ABECC71DDCA5CE00373A2E /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */; };
 		76F2B1921DF54DF9003D098C /* CountryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F2B1911DF54DF9003D098C /* CountryView.xib */; };
-		82F8C7DC935E200E7D0159A9 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
 		B4579865DEAA345BEE352F5F /* Pods_Hyber_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A31A8E7E819220BFDA8A6574 /* Pods_Hyber_Tests.framework */; };
 		B997317E7D7A1F616006D671 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
 		F31F57041E1104D300E81888 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76397B6D1DF5681600E2FF51 /* CountryView.swift */; };
@@ -46,15 +42,35 @@
 		F31F57131E1104D300E81888 /* HyberFirebaseMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */; };
 		F31F57141E1104D300E81888 /* ESRefreshProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C41DE130F700704D9C /* ESRefreshProtocol.swift */; };
 		F31F57161E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
-		F31F57171E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
-		F31F57181E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
-		F31F57191E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
-		F31F571A1E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
 		F31F571C1E1104D300E81888 /* icon_pull_to_refresh_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CAF7BF1DE130F700704D9C /* icon_pull_to_refresh_arrow@2x.png */; };
 		F31F571D1E1104D300E81888 /* CountryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F2B1911DF54DF9003D098C /* CountryView.xib */; };
 		F31F571E1E1104D300E81888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		F31F57201E1104D300E81888 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		F31F57211E1104D300E81888 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
+		F33911271E13CC06000BB90F /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76397B6D1DF5681600E2FF51 /* CountryView.swift */; };
+		F33911281E13CC06000BB90F /* DeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769540D31DFE9AA200705F3F /* DeviceTableViewController.swift */; };
+		F33911291E13CC06000BB90F /* CountryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76397B6C1DF5681600E2FF51 /* CountryPicker.swift */; };
+		F339112A1E13CC06000BB90F /* ESPullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C11DE130F700704D9C /* ESPullToRefresh.swift */; };
+		F339112B1E13CC06000BB90F /* ESRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C31DE130F700704D9C /* ESRefreshComponent.swift */; };
+		F339112C1E13CC06000BB90F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		F339112D1E13CC06000BB90F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
+		F339112E1E13CC06000BB90F /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A592B01DDC715D004187E8 /* MessageTableViewController.swift */; };
+		F339112F1E13CC06000BB90F /* ESRefreshFooterAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BD1DE130F600704D9C /* ESRefreshFooterAnimator.swift */; };
+		F33911301E13CC06000BB90F /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */; };
+		F33911311E13CC06000BB90F /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769540D71DFE9ABD00705F3F /* DeviceTableViewCell.swift */; };
+		F33911321E13CC06000BB90F /* ESPullToRefresh+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C01DE130F700704D9C /* ESPullToRefresh+Manager.swift */; };
+		F33911331E13CC06000BB90F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A759391DE45200008A5DE0 /* StartViewController.swift */; };
+		F33911341E13CC06000BB90F /* ESRefreshHeaderAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BE1DE130F700704D9C /* ESRefreshHeaderAnimator.swift */; };
+		F33911351E13CC06000BB90F /* ESRefreshAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C21DE130F700704D9C /* ESRefreshAnimator.swift */; };
+		F33911361E13CC06000BB90F /* HyberFirebaseMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */; };
+		F33911371E13CC06000BB90F /* ESRefreshProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C41DE130F700704D9C /* ESRefreshProtocol.swift */; };
+		F33911391E13CC06000BB90F /* Pods_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A3461B1F45367F8D9A8FEC /* Pods_Hyber_Example.framework */; };
+		F339113F1E13CC06000BB90F /* icon_pull_to_refresh_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CAF7BF1DE130F700704D9C /* icon_pull_to_refresh_arrow@2x.png */; };
+		F33911401E13CC06000BB90F /* CountryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F2B1911DF54DF9003D098C /* CountryView.xib */; };
+		F33911411E13CC06000BB90F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
+		F33911431E13CC06000BB90F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		F33911441E13CC06000BB90F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
+		F339114E1E13CC1E000BB90F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76838C801DED804E00D2F31E /* GoogleService-Info.plist */; };
 		F3B8F04D1E1284570029B5BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3B8F04C1E1284570029B5BA /* GoogleService-Info.plist */; };
 		F3CAF7C51DE130F700704D9C /* ESRefreshFooterAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BD1DE130F600704D9C /* ESRefreshFooterAnimator.swift */; };
 		F3CAF7C61DE130F700704D9C /* ESRefreshHeaderAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BE1DE130F700704D9C /* ESRefreshHeaderAnimator.swift */; };
@@ -88,6 +104,16 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F31F57251E1104D300E81888 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F33911481E13CC06000BB90F /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -135,9 +161,10 @@
 		7CCABE4312F41178A389BC1C /* Pods-Hyber_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber_Example/Pods-Hyber_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		881F74C6321FBF6683EE513B /* Pods-Hyber_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber_Tests/Pods-Hyber_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A31A8E7E819220BFDA8A6574 /* Pods_Hyber_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F30CF2821E12A84C005E92F6 /* Hyber_Example copy 2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Hyber_Example copy 2-Info.plist"; path = "/Users/tarik/Desktop/Hyber-SDK-iOS/Example/Hyber_Example copy 2-Info.plist"; sourceTree = "<absolute>"; };
 		F31F57291E1104D300E81888 /* Hyber_Example copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hyber_Example copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F31F572A1E1104D300E81888 /* Hyber_Example copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Hyber_Example copy-Info.plist"; path = "/Users/tarik/Desktop/Hyber-SDK-iOS/Example/Hyber_Example copy-Info.plist"; sourceTree = "<absolute>"; };
+		F339114C1E13CC06000BB90F /* Hyber_Example copy 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hyber_Example copy 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F339114D1E13CC07000BB90F /* Hyber_Example copy 22-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Hyber_Example copy 22-Info.plist"; path = "/Users/tarik/Desktop/Hyber-SDK-iOS/Example/Hyber_Example copy 22-Info.plist"; sourceTree = "<absolute>"; };
 		F3B8F04C1E1284570029B5BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TD/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F3CAF7BD1DE130F600704D9C /* ESRefreshFooterAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESRefreshFooterAnimator.swift; sourceTree = "<group>"; };
 		F3CAF7BE1DE130F700704D9C /* ESRefreshHeaderAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESRefreshHeaderAnimator.swift; sourceTree = "<group>"; };
@@ -155,10 +182,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B997317E7D7A1F616006D671 /* Pods_Hyber_Example.framework in Frameworks */,
-				1256B40C0933D63BFA938BEE /* Pods_Hyber_Example.framework in Frameworks */,
-				3DF316736A5A30A2DBC23EC8 /* Pods_Hyber_Example.framework in Frameworks */,
-				598A002FFC0CE40636C9E49F /* Pods_Hyber_Example.framework in Frameworks */,
-				82F8C7DC935E200E7D0159A9 /* Pods_Hyber_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,10 +198,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F31F57161E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */,
-				F31F57171E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */,
-				F31F57181E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */,
-				F31F57191E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */,
-				F31F571A1E1104D300E81888 /* Pods_Hyber_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F33911381E13CC06000BB90F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F33911391E13CC06000BB90F /* Pods_Hyber_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +225,7 @@
 				76838C7C1DED7EC200D2F31E /* TD */,
 				76838C7D1DED7ECA00D2F31E /* Prod */,
 				F31F572A1E1104D300E81888 /* Hyber_Example copy-Info.plist */,
-				F30CF2821E12A84C005E92F6 /* Hyber_Example copy 2-Info.plist */,
+				F339114D1E13CC07000BB90F /* Hyber_Example copy 22-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +235,7 @@
 				607FACD01AFB9204008FA782 /* Hyber_Example.app */,
 				607FACE51AFB9204008FA782 /* Hyber_Tests.xctest */,
 				F31F57291E1104D300E81888 /* Hyber_Example copy.app */,
+				F339114C1E13CC06000BB90F /* Hyber_Example copy 2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -412,6 +440,28 @@
 			productReference = F31F57291E1104D300E81888 /* Hyber_Example copy.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F33911241E13CC06000BB90F /* Hyber_Example copy 2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F33911491E13CC06000BB90F /* Build configuration list for PBXNativeTarget "Hyber_Example copy 2" */;
+			buildPhases = (
+				F33911251E13CC06000BB90F /* [CP] Check Pods Manifest.lock */,
+				F33911261E13CC06000BB90F /* Sources */,
+				F33911381E13CC06000BB90F /* Frameworks */,
+				F339113E1E13CC06000BB90F /* Resources */,
+				F33911451E13CC06000BB90F /* [CP] Embed Pods Frameworks */,
+				F33911461E13CC06000BB90F /* [CP] Copy Pods Resources */,
+				F33911471E13CC06000BB90F /* ShellScript */,
+				F33911481E13CC06000BB90F /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Hyber_Example copy 2";
+			productName = Hyber;
+			productReference = F339114C1E13CC06000BB90F /* Hyber_Example copy 2.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -419,7 +469,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Incuube;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
@@ -445,6 +495,9 @@
 					F31F57011E1104D300E81888 = {
 						DevelopmentTeam = 9QE2X4J468;
 					};
+					F33911241E13CC06000BB90F = {
+						DevelopmentTeam = 9QE2X4J468;
+					};
 				};
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Hyber" */;
@@ -463,6 +516,7 @@
 				607FACCF1AFB9204008FA782 /* Hyber_Example */,
 				607FACE41AFB9204008FA782 /* Hyber_Tests */,
 				F31F57011E1104D300E81888 /* Hyber_Example copy */,
+				F33911241E13CC06000BB90F /* Hyber_Example copy 2 */,
 			);
 		};
 /* End PBXProject section */
@@ -498,6 +552,19 @@
 				F31F571E1E1104D300E81888 /* Main.storyboard in Resources */,
 				F31F57201E1104D300E81888 /* LaunchScreen.xib in Resources */,
 				F31F57211E1104D300E81888 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F339113E1E13CC06000BB90F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F339114E1E13CC1E000BB90F /* GoogleService-Info.plist in Resources */,
+				F339113F1E13CC06000BB90F /* icon_pull_to_refresh_arrow@2x.png in Resources */,
+				F33911401E13CC06000BB90F /* CountryView.xib in Resources */,
+				F33911411E13CC06000BB90F /* Main.storyboard in Resources */,
+				F33911431E13CC06000BB90F /* LaunchScreen.xib in Resources */,
+				F33911441E13CC06000BB90F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +732,64 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 1495204e5404bc6b775f898b9e4092a256b3d138 0d5bc8be13c6f68e31ce4e302fdbc16af2aeee9e311dfafb8cfe1b51079e38ce";
 		};
+		F33911251E13CC06000BB90F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F33911451E13CC06000BB90F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyber_Example/Pods-Hyber_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F33911461E13CC06000BB90F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyber_Example/Pods-Hyber_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F33911471E13CC06000BB90F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 1495204e5404bc6b775f898b9e4092a256b3d138 0d5bc8be13c6f68e31ce4e302fdbc16af2aeee9e311dfafb8cfe1b51079e38ce";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -720,6 +845,30 @@
 				F31F57121E1104D300E81888 /* ESRefreshAnimator.swift in Sources */,
 				F31F57131E1104D300E81888 /* HyberFirebaseMessagingDelegate.swift in Sources */,
 				F31F57141E1104D300E81888 /* ESRefreshProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F33911261E13CC06000BB90F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F33911271E13CC06000BB90F /* CountryView.swift in Sources */,
+				F33911281E13CC06000BB90F /* DeviceTableViewController.swift in Sources */,
+				F33911291E13CC06000BB90F /* CountryPicker.swift in Sources */,
+				F339112A1E13CC06000BB90F /* ESPullToRefresh.swift in Sources */,
+				F339112B1E13CC06000BB90F /* ESRefreshComponent.swift in Sources */,
+				F339112C1E13CC06000BB90F /* ViewController.swift in Sources */,
+				F339112D1E13CC06000BB90F /* AppDelegate.swift in Sources */,
+				F339112E1E13CC06000BB90F /* MessageTableViewController.swift in Sources */,
+				F339112F1E13CC06000BB90F /* ESRefreshFooterAnimator.swift in Sources */,
+				F33911301E13CC06000BB90F /* MessageTableViewCell.swift in Sources */,
+				F33911311E13CC06000BB90F /* DeviceTableViewCell.swift in Sources */,
+				F33911321E13CC06000BB90F /* ESPullToRefresh+Manager.swift in Sources */,
+				F33911331E13CC06000BB90F /* StartViewController.swift in Sources */,
+				F33911341E13CC06000BB90F /* ESRefreshHeaderAnimator.swift in Sources */,
+				F33911351E13CC06000BB90F /* ESRefreshAnimator.swift in Sources */,
+				F33911361E13CC06000BB90F /* HyberFirebaseMessagingDelegate.swift in Sources */,
+				F33911371E13CC06000BB90F /* ESRefreshProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,6 +1117,50 @@
 			};
 			name = Release;
 		};
+		F339114A1E13CC06000BB90F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CCABE4312F41178A389BC1C /* Pods-Hyber_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Hyber_Example.entitlements;
+				DEVELOPMENT_TEAM = 9QE2X4J468;
+				INFOPLIST_FILE = "Hyber_Example copy 22-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MODULE_NAME = ExampleApp;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEVELOPMENT";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test.Hyber-Example-sdk-2-prod";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		F339114B1E13CC06000BB90F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CADFED9D76FC9930488D42A /* Pods-Hyber_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Hyber_Example.entitlements;
+				DEVELOPMENT_TEAM = 9QE2X4J468;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = "Hyber_Example copy 22-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MODULE_NAME = ExampleApp;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEVELOPMENT";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test.Hyber-Example-sdk-2-prod";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1003,6 +1196,15 @@
 			buildConfigurations = (
 				F31F57271E1104D300E81888 /* Debug */,
 				F31F57281E1104D300E81888 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F33911491E13CC06000BB90F /* Build configuration list for PBXNativeTarget "Hyber_Example copy 2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F339114A1E13CC06000BB90F /* Debug */,
+				F339114B1E13CC06000BB90F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

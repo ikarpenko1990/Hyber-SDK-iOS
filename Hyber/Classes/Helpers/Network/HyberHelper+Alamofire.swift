@@ -192,7 +192,6 @@ public extension Hyber {
         }
     }
     
-    
    public static func getDeviceList(completionHandler: @escaping CompletionHandler) -> Void {
         let realm = try! Realm()
          if realm.objects(User.self).first?.mPhone == nil {
@@ -231,6 +230,65 @@ public extension Hyber {
                 })
         }
     }
+    
+    //Network handler
+    
+    public static func fetchMessageArea(completionHandler: @escaping (AnyObject?, Error?) -> ()) {
+        let realm = try! Realm()
+        if realm.objects(User.self).first?.mPhone == nil {
+            HyberLogger.info("Please register user session")
+        } else {
+            let token: String = realm.objects(Session.self).last!.mToken!
+            let kUUID:String = realm.objects(Session.self).first!.mSessionToken!
+            let date = NSDate()
+            try! realm.write {
+                realm.delete(realm.objects(Message.self))
+            }
+            let timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
+            let timeString = String(timestamp)
+            let shaPass = token + ":" + timeString
+            let crytped = shaPass.sha256()
+            let headers = [
+                "Content-Type": "application/json",
+                "X-Hyber-Session-Id":  "\(kUUID)",
+                "X-Hyber-Auth-Token": "\(crytped)",
+                "X-Hyber-Timestamp": "\(timeString)"
+            ]
+            let parameters : Parameters = [
+                "startDate": timestamp
+            ]
+                Networking.getMessagesArea(parameters: parameters, headers: headers, completionHandler: completionHandler)
+            
+        }
+    }
+    
+    public static func fetchDeviceList(completionHandler: @escaping (AnyObject?, Error?) -> ()) {
+        let realm = try! Realm()
+        if realm.objects(User.self).first?.mPhone == nil {
+            HyberLogger.info("Please register user session")
+        } else {
+            let token: String = realm.objects(Session.self).last!.mToken!
+            let kUUID:String = realm.objects(Session.self).first!.mSessionToken!
+            try! realm.write {
+                realm.delete(realm.objects(Device.self))
+            }
+            let date = NSDate()
+            let timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
+            let timeString = String(timestamp)
+            let shaPass = token + ":" + timeString
+            let crytped = shaPass.sha256()
+            
+            let headers = [
+                "Content-Type": "application/json",
+                "X-Hyber-Session-Id":  "\(kUUID)",
+                "X-Hyber-Auth-Token": "\(crytped)",
+                "X-Hyber-Timestamp": "\(timeString)"
+            ]
+            
+            Networking.getDeviceArea(parameters: nil, headers: headers, completionHandler: completionHandler)
+        }
+    }
+
 }
 
 extension Hyber {

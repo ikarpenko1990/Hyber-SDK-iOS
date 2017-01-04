@@ -143,5 +143,31 @@ class Networking: NSObject {
             return validJson
         }
     }
+    
+    //MARK: - Method with Handler
+    class func getMessagesArea(parameters: [String: Any]?, headers: [String: String], completionHandler: @escaping (AnyObject?, Error?) -> ()) {
+        Alamofire.request(kGetMsgHistory, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers) .responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                completionHandler(value as AnyObject?, nil)
+            case .failure(let error):
+                completionHandler(nil, error)
+                HyberLogger.error(error)
+            }
+        }
+    }
+    
+    class func getDeviceArea(parameters: [String: Any]?, headers: [String: String], completionHandler: @escaping (AnyObject?, Error?) -> ()) {
+        Alamofire.request(kGetDeviceInfo, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers) .responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                completionHandler(value as AnyObject?, nil)
+            case .failure(let error):
+                completionHandler(nil, error)
+                HyberLogger.error(error)
+            }
+        }
+    }
+
 
 }
