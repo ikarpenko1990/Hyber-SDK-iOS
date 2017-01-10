@@ -470,11 +470,7 @@ extension Reactive where Base: DataRequest {
         }
     }
 
-    public func result<T: DataResponseSerializerProtocol>(
-                                                          queue: DispatchQueue? = nil,
-                                                          responseSerializer: T)
-        -> Observable<T.SerializedObject>
-    {
+    public func result<T: DataResponseSerializerProtocol>(queue: DispatchQueue? = nil, responseSerializer: T) -> Observable<T.SerializedObject> {
         return Observable.create { observer in
             let dataRequest = self.validateSuccessfulResponse()
                 .response(queue: queue, responseSerializer: responseSerializer) { (packedResponse) -> Void in
