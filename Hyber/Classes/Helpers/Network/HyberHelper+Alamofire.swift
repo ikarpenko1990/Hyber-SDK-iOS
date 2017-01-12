@@ -12,7 +12,6 @@ import CoreData
 import Realm
 import RealmSwift
 import SwiftyJSON
-import ObjectMapper
 import RxSwift
 import CryptoSwift
 
@@ -343,13 +342,14 @@ extension Hyber {
             let timeString = String(timestamp)
             let shaPass = token + ":" + timeString
             let crytped = shaPass.sha256()
+            var calendar = NSCalendar.current
+            HyberLogger.info(calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date as Date))
             let headers = [
                 "Content-Type": "application/json",
                 "X-Hyber-Session-Id":  "\(kUUID)",
                 "X-Hyber-Auth-Token": "\(crytped)",
                 "X-Hyber-Timestamp": "\(timeString)"
                 ]
-
             let params: Parameters = [
                 "messageId": messageId!
             ]

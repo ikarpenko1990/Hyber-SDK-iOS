@@ -11,7 +11,6 @@ import UserNotifications
 import SwiftyJSON
 import Realm
 import RealmSwift
-import ObjectMapper
 
 /**
  The delegate of a `Hyber` object must adopt the

@@ -10,9 +10,11 @@ import UIKit
 import Hyber
 import UserNotifications
 import Firebase
+import CountryPicker
 import libPhoneNumber_iOS
 
-class ViewController: UIViewController, CountryPhoneCodePickerDelegate  {
+class ViewController: UIViewController, CountryPickerDelegate  {
+
     @IBOutlet weak var countryCodeBtn: UIButton!
     @IBAction func codePickerAction(_ sender: Any) {
         if countryPhoneCodePicker.isHidden == true {
@@ -73,19 +75,18 @@ class ViewController: UIViewController, CountryPhoneCodePickerDelegate  {
         let phoneNumberUtil = NBPhoneNumberUtil.sharedInstance()
         phoneCodeLoad = "+\(phoneNumberUtil!.getCountryCode(forRegion: code)!)" as String?
         countryCodeBtn.setTitle(phoneCodeLoad, for: .normal)
-        countryPhoneCodePicker.countryPhoneCodeDelegate = self
+        countryPhoneCodePicker.countryPickerDelegate = self
         countryPhoneCodePicker.setCountry(code!)
     }
     
     // MARK: - CountryPhoneCodePicker Delegate
     
-    func countryPhoneCodePicker(_ picker: CountryPicker, didSelectCountryCountryWithName name: String, countryCode: String, phoneCode: String ) {
+    public func countryPhoneCodePicker(_ picker: CountryPicker, didSelectCountryWithName name: String, countryCode: String, phoneCode: String, flag: UIImage) {
         DispatchQueue.main.async {
             self.countryCodeBtn.setTitle(phoneCode, for:.normal)
         }
-        
     }
-    
+
     func buttonDesign() {
         registrationBtn.layer.cornerRadius = 20
     }

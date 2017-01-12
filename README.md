@@ -13,7 +13,7 @@ it, simply add the following line to your Podfile:
 ```ruby
 platform :ios, '9.0'
 
-pod 'Hyber', :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => '2.2.0'
+pod 'Hyber', :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => '2.0.0'
 
 ```
 Then, run the following command:
@@ -115,8 +115,8 @@ let array = Array(messageList) //NSArray Object
 //Do anything with array
 
 ```
-#### Load massege History
-For Loading message history from Hyber use method:
+#### Load massege history
+For Loading message history from Hyber-SDK use method:
 Message history list include all channels messages: push/viber/sms
 ```swift
 Hyber.getMessageList(completionHandler: { (success) -> Void in
@@ -127,7 +127,7 @@ if success {
 	}
 })
 ```
-#### Get Device's list
+#### Get device's list
 For Loading list of registred devices:
 Message history list include all channels messages: push/viber/sms
 ```swift
@@ -138,6 +138,28 @@ Hyber.getDeviceList(completionHandler: { (success) -> Void in
 //catch errors here
    }
 })
+
+```
+
+#### Fetch massege history
+For for revoke old devices call this method:
+
+```swift
+	Hyber.fetchMessageArea { AnyObject, Error in
+   	 	print("responseObject = \(AnyObject); error = \(Error)")
+    	return
+	}
+
+```
+
+#### Fetch device's list
+For fetch list of registred devices:
+Message history list include all channels messages: push/viber/sms
+```swift
+ 	Hyber.fetchDeviceList { AnyObject, Error in
+        print("responseObject = \(AnyObject); error = \(Error)")
+        return
+    }
 
 ```
 

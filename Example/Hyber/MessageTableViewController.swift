@@ -28,7 +28,6 @@ class MessageTableViewController: UITableViewController {
     }
     //pull to refresh
     func handleRefresh(_ refreshControl: UIRefreshControl) {
-    
          Hyber.getMessageList(completionHandler: { (success) -> Void in
 
             if success {
@@ -38,7 +37,10 @@ class MessageTableViewController: UITableViewController {
             }
         })
         refreshControl.endRefreshing()
-    }
+    
+     }
+    
+  
     
     //Mark: Main function
     func readAndUpdateUI() {
