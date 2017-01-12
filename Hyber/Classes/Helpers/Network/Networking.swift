@@ -12,7 +12,6 @@ import CoreData
 import Realm
 import RealmSwift
 import SwiftyJSON
-import ObjectMapper
 import RxSwift
 
 

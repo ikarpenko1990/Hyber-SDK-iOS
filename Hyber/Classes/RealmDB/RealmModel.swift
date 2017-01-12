@@ -1,9 +1,8 @@
 import Foundation
 import RealmSwift
-import ObjectMapper
 
 
-public class Message: Object, Mappable {
+public class Message: Object {
   dynamic var mId: String?
   dynamic var messageId: String?
   dynamic var mUser: User?
@@ -20,30 +19,9 @@ public class Message: Object, Mappable {
   override public static func primaryKey() -> String? {
     return "messageId"
   }
-    
-    convenience required public init?(map: Map) {
-        self.init()
-        
-        mapping(map: map)
-    }
-    
-    public func mapping(map: Map) {
-        messageId <- map["messageId"]
-        mPartner <- map["partner"]
-        mTitle <- map["from"]
-        mBody <- map["text"]
-        mDate <- map["drTime"]
-        mButtonUrl <- map["action"]
-        mButtonText <- map["caption"]
-        isReported <- map["drTime"]
-        mUser <- map["to"]
-        mImageUrl <- map["img"]
-
-    }
-
 }
 
-class Session: Object, Mappable {
+class Session: Object {
   dynamic var mUserId: String?
   dynamic var mUser: User?
   dynamic var mToken:String?
@@ -59,24 +37,9 @@ class Session: Object, Mappable {
       "mSessionToken",
     ]
   }
-    
-    convenience required init?(map: Map) {
-        self.init()
-        mapping(map: map)
-    }
-    
-
-    
-    func mapping(map: Map) {
-        mUserId <- map["userPhone"]
-        mToken <- map["authToken"]
-        mSessionToken <- map["sessionToken"]
-
-    }
-
 }
 
-class User: Object, Mappable {
+class User: Object {
   dynamic var mId: String?
   dynamic var mPhone: String? = ""
   dynamic var isActive = false
@@ -90,23 +53,10 @@ class User: Object, Mappable {
       "mPhone","mId"
     ]
   }
-    
-    convenience required init?(map: Map) {
-        self.init()
-        mapping(map: map)
-    }
-    
-    func mapping(map: Map) {
-        mId <- map["userId"]
-        mPhone <- map["userPhone"]      
-        
-        
-    }
- 
 }
 
 
-public class Device: Object, Mappable {
+public class Device: Object {
     
     dynamic var osType: String?
     dynamic var osVersion: String?
@@ -121,22 +71,4 @@ public class Device: Object, Mappable {
   public override static func primaryKey() -> String? {
         return "deviceId"
     }
-        
-  public  convenience required init?(map: Map) {
-        self.init()
-        mapping(map: map)
-    }
-    
-   public func mapping(map: Map) {
-        deviceId              <- map["deviceId"]
-        osType                <- map["osType"]
-        osVersion             <- map["osVersion"]
-        deviceType            <- map["deviceType"]
-        deviceName            <- map["devicaName"]
-        modelName             <- map["modelName"]
-        createdAt             <- map["createdAt"]
-        updatedAt             <- map["updatedAt"]
-
-    }
-    
 }

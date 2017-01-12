@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Hyber'
-  s.version          = '2.2.0'
+  s.version          = '2.0.0'
   s.summary          = 'Hyber SDK for IOS'
 
 # This description is used to generate tags and improve search results.
@@ -25,26 +25,17 @@ TODO: Hyber SDK for IOS. Implement push notification and other Hyber functionali
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Taras Markevych' => 't.markevych@incuube.com' }
   s.source           = { :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/lulz_ua'
+  s.social_media_url = '#'
 
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'Hyber/Classes/**/*'
-
-  # s.preserve_path = "${POD_ROOT}/Classes/SupportFiles/Header-Bridging-Header.h"
-  #s.xcconfig = { 'SWIFT_OBJC_BRIDGING_HEADER' => '${POD_ROOT}/Classes/SupportFiles/Header-Bridging-Header.h' } 
-
-  # s.resource_bundles = {
-  #   'Hyber' => ['Hyber/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
   s.dependency 'Alamofire', '~> 4.2.0'
   s.dependency 'Firebase/Core', '3.11.0'
   s.dependency 'Firebase/Messaging', '3.11.0'
   s.dependency 'RealmSwift', '2.1.2'
   s.dependency 'RxSwift', '3.0.0-rc.1'
-  s.dependency 'ObjectMapper', '~> 2.2.2'
+  #s.dependency 'ObjectMapper', '~> 2.2.2'
   s.dependency 'SwiftyJSON', '3.1.3'
   s.dependency 'CryptoSwift','0.6.7'
   
