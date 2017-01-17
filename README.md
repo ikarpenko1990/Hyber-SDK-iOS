@@ -142,7 +142,7 @@ Hyber.getDeviceList(completionHandler: { (success) -> Void in
 ```
 
 #### Fetch massege history
-For for revoke old devices call this method:
+Message history list include all channels messages: push/viber/sms
 
 ```swift
 	Hyber.fetchMessageArea { AnyObject, Error in
@@ -154,7 +154,6 @@ For for revoke old devices call this method:
 
 #### Fetch device's list
 For fetch list of registred devices:
-Message history list include all channels messages: push/viber/sms
 ```swift
  	Hyber.fetchDeviceList { AnyObject, Error in
         print("responseObject = \(AnyObject); error = \(Error)")

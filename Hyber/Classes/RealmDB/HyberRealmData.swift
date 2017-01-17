@@ -113,14 +113,14 @@ class DataRealm {
         }
     }
     
-    static func saveNotification(json: JSON) -> Void {
+    static func saveNotification(json: JSON, message: JSON) -> Void {
         let realm = try! Realm()
         let messages = List<Message>()
         let newMessages = Message()
-            newMessages.messageId = json["messageId"].rawString()
-            newMessages.mTitle = json["title"].string
-            newMessages.mPartner = "push"
-            newMessages.mBody = json["body"].string
+        newMessages.messageId = json["messageId"].rawString()
+        newMessages.mTitle = message["title"].string
+        newMessages.mPartner = "push"
+        newMessages.mBody = message["body"].string
         if let imageArray = json["image"].rawValue as? [String: AnyObject] {
             if imageArray["url"] is NSNull {
                 HyberLogger.info("Image:Null")
