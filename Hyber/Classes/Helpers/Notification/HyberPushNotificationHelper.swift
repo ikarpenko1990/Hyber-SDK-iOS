@@ -40,6 +40,8 @@ public extension Hyber {
      */
     public static func didReceiveRemoteNotification(userInfo: [AnyHashable: Any]) {
         let validJson = JSON(userInfo)
+        let aps = validJson["aps"]
+        let alert = aps["alert"]
         HyberLogger.info(userInfo)
         UIApplication.shared.applicationIconBadgeNumber = 1
         let fcmMsgID = validJson["gcm.message_id"].rawString()
@@ -48,8 +50,8 @@ public extension Hyber {
             var json = JSON(data: data)
             let hyberMsgID = json["messageId"].rawString()
             
-            DataRealm.saveNotification(json: json)
-            
+            DataRealm.saveNotification(json: json, message: alert)
+           
             if hyberMsgID != "null" {
                 HyberLogger.info("Recieved message that was sended by Hyber")
                 Hyber.sentDeliveredStatus(messageId: hyberMsgID!)
