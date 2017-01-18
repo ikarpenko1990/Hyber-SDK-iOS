@@ -13,7 +13,7 @@ it, simply add the following line to your Podfile:
 ```ruby
 platform :ios, '9.0'
 
-pod 'Hyber', :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => '2.0.0'
+pod 'Hyber', :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => '2.1.0'
 
 ```
 Then, run the following command:
