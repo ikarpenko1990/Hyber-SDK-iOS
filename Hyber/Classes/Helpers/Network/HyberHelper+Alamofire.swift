@@ -41,7 +41,7 @@ public extension Hyber {
             "osVersion": kOSVersion,
             "deviceType": kDeviceType,
             "deviceName": kDeviceName,
-            "sdkVersion": "2.2.0"
+            "sdkVersion": "2.1.0"
         ]
        
         HyberLogger.info("Session id: \(headers),  Phone info: \(phoneData)")
@@ -316,7 +316,7 @@ extension Hyber {
                 "osVersion": kOSVersion,
                 "deviceType": kDeviceType,
                 "deviceName": kDeviceName,
-                "sdkVersion": "2.2.0"
+                "sdkVersion": "2.1.0"
             ]
             HyberLogger.info("Phone info:\(phoneData)")
             
