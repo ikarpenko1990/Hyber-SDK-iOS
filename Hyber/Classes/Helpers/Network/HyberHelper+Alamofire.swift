@@ -200,9 +200,6 @@ public extension Hyber {
             } else {
                 let token: String = realm.objects(Session.self).last!.mToken!
                 let kUUID:String = realm.objects(Session.self).first!.mSessionToken!
-                try! realm.write {
-                     realm.delete(realm.objects(Device.self))
-                }
                 let date = NSDate()
                 let timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
                 let timeString = String(timestamp)
@@ -342,18 +339,22 @@ extension Hyber {
             let timeString = String(timestamp)
             let shaPass = token + ":" + timeString
             let crytped = shaPass.sha256()
-            var calendar = NSCalendar.current
-            HyberLogger.info(calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date as Date))
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm:ss.SSS' 'Z"
+            let dateString: String = dateFormatter.string(from: date as Date)
+            
+            
             let headers = [
                 "Content-Type": "application/json",
                 "X-Hyber-Session-Id":  "\(kUUID)",
                 "X-Hyber-Auth-Token": "\(crytped)",
                 "X-Hyber-Timestamp": "\(timeString)"
-                ]
-            let params: Parameters = [
-                "messageId": messageId!
             ]
-
+            let params: Parameters = [
+                "messageId": messageId!,
+                "receivedAt": dateString
+            ]
+            
             let jsonData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             let decoded = try! JSONSerialization.jsonObject(with: jsonData, options: [])
 

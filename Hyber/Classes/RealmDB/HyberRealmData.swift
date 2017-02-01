@@ -55,6 +55,7 @@ class DataRealm {
     
         let realm = try! Realm()
         let messages = List<Message>()
+        
         HyberLogger.info(message)
         if let jsonArray = message as? [[String: AnyObject]] {
             for messagesArray in jsonArray {
@@ -65,6 +66,7 @@ class DataRealm {
                     newMessages.mPartner = messagesArray["partner"] as? String
                     newMessages.mBody = messagesArray["body"] as? String
                     newMessages.mDate = messagesArray["time"] as? String
+                    newMessages.isReported = true
                 
                 if messagesArray["button"] != nil {
                     if let optionsArray = messagesArray["button"] as? [String: AnyObject] {
