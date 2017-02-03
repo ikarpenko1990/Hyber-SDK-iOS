@@ -85,6 +85,9 @@ class Networking: NSObject {
                 return response.validate(statusCode: 200..<500)
                     .rx.json()
         }
+            .map { _ in
+                HyberLogger.debug(HTTPURLResponse())
+        }
 
     }
 
@@ -115,10 +118,6 @@ class Networking: NSObject {
             .map { json in
                 let data = json
                 let validJson = JSON(data)
-                let error = validJson["error"]
-                if error != nil {
-                    DataRealm.responseError(error: error)
-                }
                 HyberLogger.info(validJson)
                 return validJson
         }
@@ -138,7 +137,7 @@ class Networking: NSObject {
                 let data = json
                 let validJson = JSON(data)
                 DataRealm.saveDeiveList(json:validJson)
-            HyberLogger.debug(validJson)
+                HyberLogger.debug(validJson)
             return validJson
         }
     }

@@ -33,8 +33,7 @@ public enum Level {
         case .warning: return "⚠️ HyberWarinig"
         case .error: return "❌ HyberERROR"
         }
-        
-        return String(describing: self).uppercased()
+    
     }
 }
 
