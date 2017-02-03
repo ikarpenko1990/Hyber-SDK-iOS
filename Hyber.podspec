@@ -25,7 +25,6 @@ TODO: Hyber SDK for IOS. Implement push notification and other Hyber functionali
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Taras Markevych' => 't.markevych@incuube.com' }
   s.source           = { :git => 'https://github.com/Incuube/Hyber-SDK-iOS.git', :tag => s.version.to_s }
-  s.social_media_url = '#'
 
   s.ios.deployment_target = '9.0'
 

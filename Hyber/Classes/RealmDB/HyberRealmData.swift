@@ -1,7 +1,7 @@
 //
 //  HyberRealmData.swift
 //  Pods
-//
+//  
 //  Created by Taras on 10/25/16.
 //
 //
@@ -13,20 +13,25 @@ import SwiftyJSON
 class DataRealm {
     
    static func session(uuid: String) -> Void {
+    do {
         let sessionId = uuid
         let newSession = Session()
             newSession.mSessionToken = sessionId
             newSession.mToken = "session"
             newSession.mUserId = "current"
-        let realm = try! Realm()
+        let realm = try Realm()
         
-        try! realm.write {
+        try realm.write {
              realm.add(newSession, update: true)
         }
+        } catch _ {
+            HyberLogger.error(Error.self)
+        }
+
     }
     
     static func saveProfile(json: JSON) -> Void {
-        
+        do {
         let session = json["session"]
         let profile = json["profile"]
         let user = User()
@@ -35,28 +40,35 @@ class DataRealm {
             newSession.mToken = session["token"].string!
             newSession.mUser = user
             newSession.mUserId = profile["userId"].string
-        let realm = try! Realm()
-        try! realm.write {
+        let realm = try Realm()
+        try realm.write {
             realm.add(newSession, update: true)
             realm.add(user, update: true)
             HyberLogger.info("Data Saved")
         }
+        } catch _ {
+            HyberLogger.error(Error.self)
+        }
+
     }
 
     static func updateDevice(json: JSON) -> Void {
-        let realm = try! Realm()
-        try! realm.write {
-             realm.create(Device.self, value: ["deviceId": json["deviceId"].string, "isActive": true], update: true)
+        do {
+        let realm = try Realm()
+        try realm.write {
+             realm.create(Device.self, value: ["deviceId": json["deviceId"].string!, "isActive": true], update: true)
+        }
+        } catch _ {
+            HyberLogger.error(Error.self)
         }
     }
     
     static func saveMessages(json: JSON) -> Void {
         let message = json["messages"].arrayObject
-    
-        let realm = try! Realm()
+        do {
+        let realm = try Realm()
         let messages = List<Message>()
-        
-        HyberLogger.info(message)
+        HyberLogger.info(message!)
         if let jsonArray = message as? [[String: AnyObject]] {
             for messagesArray in jsonArray {
                 let newMessages = Message()
@@ -83,16 +95,22 @@ class DataRealm {
                 
                 messages.append(newMessages)
                 
-                try! realm.write {
+                try realm.write {
                     realm.add(newMessages, update: true)
                 }
             }
+         
+            }
+        } catch _ {
+            HyberLogger.error(Error.self)
         }
     }
     
     static func saveDeiveList(json: JSON) -> Void {
         let rawArray = json["devices"].rawValue
-        let realm = try! Realm()
+        do {
+        
+        let realm = try Realm()
         let deviceList = List<Device>()
         
         if let jsonArray = rawArray as? [[String: Any]] {
@@ -108,14 +126,19 @@ class DataRealm {
                 newDevice.updatedAt = deviceArray["updatedAt"] as? String
                 
                 deviceList.append(newDevice)
-                try! realm.write {
+                try realm.write {
                     realm.add(newDevice, update: true)
                 }
             }
         }
+        
+        } catch _ {
+            HyberLogger.error(Error.self)
+        }
     }
     
     static func saveNotification(json: JSON, message: JSON) -> Void {
+        do {
         let realm = try! Realm()
         let messages = List<Message>()
         let newMessages = Message()
@@ -148,10 +171,16 @@ class DataRealm {
         }
         
         messages.append(newMessages)
-        try! realm.write {
+        try realm.write {
             realm.add(newMessages, update: true)
         }
+            
+    } catch _ {
+        HyberLogger.error(Error.self)
     }
+    
+    }
+
     
     class func responseError(error: JSON) {
         HyberLogger.error(error)

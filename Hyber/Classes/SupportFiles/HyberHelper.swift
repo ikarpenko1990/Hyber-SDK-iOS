@@ -15,8 +15,8 @@ import SwiftyJSON
 extension Hyber {
 
     public static func initialise(clientApiKey: String, firebaseMessagingHelper: HyberFirebaseMessagingHelper, launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Void {
-        UIApplication.shared.applicationIconBadgeNumber = 0
         if launchOptions == nil {
+            UIApplication.shared.applicationIconBadgeNumber = 0
              let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any]
                 if userInfo != nil {
                     didReceiveRemoteNotification(userInfo: userInfo!)
