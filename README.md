@@ -2,8 +2,8 @@
 [![Platform](https://img.shields.io/badge/Platforms-iOS-lightgray.svg)]()
 [![Swift version](https://img.shields.io/badge/Swift-3.0.x-orange.svg)]()
 [![Release][release-svg]][release-link]
-
 [![Build Status][travis-build-status-svg]][travis-build-status-link]
+[![codecov](https://codecov.io/gh/Incuube/Hyber-SDK-iOS/branch/swift-3.0/graph/badge.svg)][codecov-link]
 
 ## Installation
 
@@ -211,7 +211,7 @@ Add this file to yours application project.
 [Alamofire](https://github.com/Alamofire/Alamofire/blob/master/LICENSE)
 
 
-
+[codecov-link]: https://codecov.io/gh/Incuube/Hyber-SDK-iOS
 [release-svg]: http://github-release-version.herokuapp.com/github/Incuube/Hyber-SDK-iOS/release.svg
 [release-link]: https://github.com/Incuube/Hyber-SDK-iOS/releases/latest
 

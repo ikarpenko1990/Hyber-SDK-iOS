@@ -16,8 +16,9 @@ import RxSwift
 
 
 class Networking: NSObject {
-
+    
     let disposeBag = DisposeBag()
+
     
     class func registerRequest(parameters: [String: Any]?, headers: [String: String]) -> Observable<Any> {
         return request(.post, kRegUrl, parameters: parameters, encoding: JSONEncoding.prettyPrinted, headers: headers)

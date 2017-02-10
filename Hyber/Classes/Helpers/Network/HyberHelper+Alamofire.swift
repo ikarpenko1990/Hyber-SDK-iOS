@@ -17,9 +17,10 @@ import CryptoSwift
 
 
 public extension Hyber {
-    
 
     typealias CompletionHandler = (_ success: Bool) -> Void
+    
+    static let disposeBag = DisposeBag()
     
     public static func registration(phoneId: String, password: String, completionHandler: @escaping CompletionHandler) {
         LogOut()
@@ -57,6 +58,7 @@ public extension Hyber {
                 let flag = false // false if download fail
                 completionHandler(flag)
             })
+            .addDisposableTo(disposeBag)
 
 
         
@@ -100,7 +102,8 @@ public extension Hyber {
                         completionHandler(flag)
                         HyberLogger.info("Error", $0)
                     })
-                
+                    .addDisposableTo(disposeBag)
+
             }
         } catch _ {
             HyberLogger.error(Error.self)
@@ -157,6 +160,8 @@ public extension Hyber {
                                 completionHandler(flag)
                                 HyberLogger.info("Message sented")
                     })
+                    .addDisposableTo(disposeBag)
+
                 
             }
         } catch _ {
@@ -203,6 +208,8 @@ public extension Hyber {
                                 let flag = false
                                 completionHandler(flag)
                     })
+                    .addDisposableTo(disposeBag)
+
             }
         } catch _ {
             HyberLogger.error(Error.self)
@@ -231,7 +238,10 @@ public extension Hyber {
                     "X-Hyber-Auth-Token": "\(crytped)",
                     "X-Hyber-Timestamp": "\(timeString)"
                 ]
-                
+                let realm = try! Realm()
+                try! realm.write {
+                    realm.delete(realm.objects(Device.self))
+                }
                 Networking.getDeviceInfoRequest(parameters: nil, headers: headers)
                     .subscribe(onNext: { _ in
                         let flag = true
@@ -243,6 +253,8 @@ public extension Hyber {
                                 let flag = false
                                 completionHandler(flag)
                     })
+                    .addDisposableTo(disposeBag)
+
             }
         } catch _ {
             HyberLogger.error(Error.self)
@@ -356,6 +368,8 @@ extension Hyber {
                     .subscribe(onNext: { _ in
                     }, onError: { HyberLogger.info("Error", $0)
                     }, onCompleted: { HyberLogger.info("Device updated")})
+                    .addDisposableTo(disposeBag)
+
             }
             
         } catch _ {
@@ -403,6 +417,8 @@ extension Hyber {
                         }
                         HyberLogger.info("Delivered report")
                     }, onError: { HyberLogger.info("Error", $0)})
+                    .addDisposableTo(disposeBag)
+
             }
             
         } catch _ {
