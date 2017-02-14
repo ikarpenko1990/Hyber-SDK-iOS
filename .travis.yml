@@ -1,30 +1,33 @@
-language: objective-c,
-os: osx,
+language: objective-c
+osx_image: xcode8.2
+os: osx
 rvm:
-  - 2.2
-osx_image: xcode8,
-env: scheme='Siesta iOS' platform='iOS Simulator,OS=10.0,name=iPhone SE',
-group: stable,
-dist: osx,
-xcode_workspace: "../Example/Hyber.xcworkspace"
-xcode_scheme: Hyber-Example
-podfile: "./Example/Podfile"
+  - 2.0
+env:
+  global:
+  - WORKSPACE=Example/Hyber.xcworkspace
+  - IOS_FRAMEWORK_SCHEME="Hyber"
+  - IOS_SDK=iphonesimulator10.0
+  - EXAMPLE_SCHEME="Hyber-Example"
+podfile: "../Example/Podfile"
 before_install:
-- gem install cocoapods
-- which pod
-- pod --version
-- gem install xcpretty
-
+- gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+- cd Example
+- pod repo update
+- pod install
+- cd -
 script:
-- set -o pipefail
-#- xcodebuild clean build -project Hyber.xcodeproj -scheme "Hyber-Example" -sdk iphonesimulator
-#- xcodebuild -version
-#- xcodebuild -showsdks
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  - xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Hyber-Example" -sdk "iphonesimulator10.2" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+ # - xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Pods/Hyber" -sdk "iphonesimulator10.2" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
 
-# Run `pod lib lint` if specified
-- if [ $POD_LINT == "YES" ]; then
-   pod lib lint;
-   fi
+# - pod repo update
+#  - pod lib lint --allow-warnings
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 
 notifications:
   slack:

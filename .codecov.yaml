@@ -1,0 +1,13 @@
+codecov:
+  branch: swift-3.0
+
+coverage:
+  round: up
+  range: 50..70
+
+  status:
+      project:
+        default:
+          enabled: yes
+          target: auto
+

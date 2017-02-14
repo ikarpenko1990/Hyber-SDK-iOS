@@ -8,12 +8,6 @@ target 'Hyber_Example' do
       pod 'Crashlytics'
   pod 'libPhoneNumber-iOS', '~> 0.8'
   pod 'CountryPickerSwift'
-
-  target 'Hyber_Tests' do
-    inherit! :search_paths
-
-
-  end
 end
 
 

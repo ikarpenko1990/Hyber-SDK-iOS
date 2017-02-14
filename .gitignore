@@ -30,6 +30,24 @@ playground.xcworkspace
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 Pods/
+Pods/Alamofire/
+Pods/CountryPickerSwift/
+Pods/Crashlytics/
+Pods/CryptoSwift/
+Pods/Fabric/
+Pods/Firebase/
+Pods/FirebaseCore/
+Pods/FirebaseAnalytics/
+Pods/FirebaseInstanceID/
+Pods/FirebaseMessaging/
+Pods/GoogleInterchangeUtilities/
+Pods/GoogleSymbolUtilities/
+Pods/GoogleToolboxForMac/
+Pods/libPhoneNumber-iOS/
+Pods/Realm/
+Pods/RealmSwift/
+Pods/RxSwift/
+Pods/SwiftyJSON/
 
 # Carthage
 #
