@@ -31,9 +31,9 @@ import UserNotifications
     
   public  func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
         let firebaseMessagingToken = FIRInstanceID.instanceID().token()
-    print("FIREBASE TOKEN:\(firebaseMessagingToken)")
+        print("FIREBASE TOKEN:\(firebaseMessagingToken)")
         self.firebaseMessagingToken = firebaseMessagingToken
-        Hyber.saveToken(fcmToken:firebaseMessagingToken!)
+        Hyber.saveToken(fcmToken:self.firebaseMessagingToken!)
         connectToFirebaseMessaging()
     }
     
@@ -55,7 +55,7 @@ import UserNotifications
             if changed {
                 
                 #if DEBUG
-                    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .sandbox)
+                    FIRInstanceID.instanceID().setAPNSToken(deviceToken as Data, type: .sandbox)
                 #else
                     FIRInstanceID.instanceID().setAPNSToken(deviceToken as Data, type: .prod)
                 #endif

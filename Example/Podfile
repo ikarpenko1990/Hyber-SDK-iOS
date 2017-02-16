@@ -1,13 +1,20 @@
 use_frameworks!
 platform :ios, '9.0'
+project 'Hyber'
 
+abstract_target 'TARGET_PODS' do
 
-target 'Hyber_Example' do
   pod 'Hyber', :path => '../'
   pod 'Fabric'
       pod 'Crashlytics'
   pod 'libPhoneNumber-iOS', '~> 0.8'
   pod 'CountryPickerSwift'
+
+target 'Hyber_Example'
+target 'Hyber_Example_td'
+target 'Hyber_Example_prod'
+target 'Hyber_ExampleTests' 
+
 end
 
 

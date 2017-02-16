@@ -43,7 +43,6 @@ public extension Hyber {
         let aps = validJson["aps"]
         let alert = aps["alert"]
         HyberLogger.info(userInfo)
-        UIApplication.shared.applicationIconBadgeNumber = 1
         let fcmMsgID = validJson["gcm.message_id"].rawString()
         let messageString = validJson["message"].rawString()
         if let data = messageString?.data(using: String.Encoding.utf8) {
@@ -55,7 +54,6 @@ public extension Hyber {
             if hyberMsgID != "null" {
                 HyberLogger.info("Recieved message that was sended by Hyber")
                 Hyber.sentDeliveredStatus(messageId: hyberMsgID!)
-                HyberLogger.info("Sending delivery report ...")
             }
             
             if fcmMsgID != .none {
@@ -67,10 +65,10 @@ public extension Hyber {
             }
             
             LocalNotificationView.show(withImage: nil,
-                                       title: json["title"].string,
-                                       message: json["body"].string,
+                                       title: alert["title"].string,
+                                       message: alert["body"].string,
                                        duration: 2,
-                                       onTap: { })
+                                       onTap: nil)
         }
     }
 

@@ -2,33 +2,53 @@ language: objective-c
 osx_image: xcode8.2
 os: osx
 rvm:
-  - 2.0
+- 2.0
 env:
   global:
-  - WORKSPACE=Example/Hyber.xcworkspace
-  - IOS_FRAMEWORK_SCHEME="Hyber"
-  - IOS_SDK=iphonesimulator10.0
-  - EXAMPLE_SCHEME="Hyber-Example"
-podfile: "../Example/Podfile"
+  - WORKSPACE="Example/Hyber.xcworkspace"
+  - APP_NAME="Hyber Prod"
+  - EMAILS="4taras4@gmail.com"
+  - GROUP_ALIASES="GMS Worldwide"
+  - PROFILE_NAME="prodlink"
+  - 'DEVELOPER_NAME="iPhone Distribution: Taras Markevych (KUWZ652QР9)"'
+  - secure: bIm1mZY0RJc8OevTbCkAqEbCK1aX4ibe8WmM7e9oNPuccovfXpMn7isjCCVS/cZwd8SnnhyUI/zF8O6LXiDcSVpxk4aF2IjJcqvllF2iyuke/DfRQJ4mTVo6Ye88I1f6NimJRqCZ+Daf6HR3Bcx5XP1PEeQeYiqioE4KFjK0rVR8gXRVeBu42a1CeX7kccveWkFs/rUXQei8+4TFzL732pEQ2IhZQ33ht5x3nz57JgBBZ4H4Hap9++M2TLIA3rqovNhlZD466ZxMkOZbDht+EPUV0VFdvnUTmHzXwrCpXm0AA7MNCqd0pV1FNtEPQvlanA9T00GpQKjv7fi203gBCdtjCzydhVkUsuTVq7J+eyuFbnWgkyDcSi2dYrI0wUTf7XYyQvAp5HghZUPbNV80saVdl7sQcP/CYzGYQsLjzdeXxOFdbV6PiFRstPCe/0S9+inz1hQT4Jr8d8g21fkihNp44Zw5hdEfmz90nYW4985rOOXHtRs0ecMkoKhOLly2wNOS3suacO6EZ6vIwngxP8VUoo0mWwhqtZlQPDip1H6qcJ/PpMYHbbEs15lBFc9skhtJG97Wlx088FUEEBc0tRsBp9/9ut0iAuNlwOEkDLlZy041XeAyo3JW4oYLDsqswLLhAZIGg/wF2u/B2QATreX8tvL5oGdPTsX3ARpxQ+I=
+  - secure: CA0nSML4LHApF7tjud+5e3zelkvy13I7w7pckye5RrpcznvxeBRxScWuIhrawPO1tg01/GV0OcVfneG54CcAp6s/60jcXmTj7lAgymBQ3iA+Gc3kDeWoySeFvWdWgIE+b+f6FC+0SOd5G3UEQUhoLsB8xdk3t2/S6MxSPhGj+/s8+ltpNks6yu+n2r0jKJnqgpquNUzO36vDC+/ZuVquOxvEe83xmNblJEiedKlzFwg6O7ptWv3hLoM/M83MfXfzE6iMsUf/USyii7jY646OFz97ByjNebQDYUPDf6HBg3MGUmRekHeb0prcPaGAZjK7HYakGOMNsQ0q6dtOmp3bW4e1Vpnzc3w+zWwrwar85eZ0ZzC0yMpT59jmG8yNHHMZ+HtUblJuaR0BQ7bVZ/qTrMc3CXs63GEhZQfhoYFHusWjL1cWrO2dS6X/JizZHFAhdr6BaXrg3Kk4Zu7uV+Wk3Sy+7yFPYrmpqPS482wG9UrTRAW76zg9JVqvpc3U3A/Qso6wWQEta1PBcvhcOy6O2OZ08+1I/FzMHMqb7lLB0gCfY1FatDUxMVg9xa+0oJu/flyQ2nvbBaLt+53vC4INzKzLvujWLCWcmduieleNWFX5n4zrcPfmF+RrHR5JL9QmNieowNDpr0ltgH9LfNNdx9+ulMtp634U7+FLgkGPumc=
+  - secure: ZC8sTU/WOoRYqiVcZjKLFHmTpz8uJgkeOwhrwaLCLnelFfqf563MfMMg10zkWIq9myQUo1Hmn+Vy8mGM7V8rwfWds3q2svMN7mmfq3GC4UwoBr/2fw7bIsb0ERCCN/jzere1sJVkUsDMX8e2YXoenl3XoY/w4SjD/RvNAISmTI8cOAgNzqYoszRBxTb7w7S1An9+WLtqCWhzr8FX1C+CslhpbmFCRDLdYYG0EvbzKoEHZkh/ZZpg1yrJY4C4gLRwEuQs/fRxfarelfbZiXh//BzEWs5/4rdvA4goHnchdhB34FkvhJfcDJFirw7NBTkNFvxN/CTjZw9NBBdhdWpcUHGrDLlIXiML80FyyrlNyZRVT4WUs0TBanmCkLJv5jdE9NcxR1+6FznBlyofUvY4FvyKEaczbEj+NVf2PzNDU2r6PP1Qie5ot6NT5qhutmQStd5ivmXJOOGl6UtwZtUwsQnMn14l1aSfbnNArPZ61pA0UAQLMQmHp4FB58xJ8Nu2Y+KjIHzRYl/SC67wPEc5zr0XXDwnLRS5YBkiiqcEDwVqfRFsW5Sdv3dtPDAOgYpo5U/2SDDE6X38vBh/1tf3IDxddCFfvJH38gl7cCWbg8ukeykc3eZKkO83E5sBCxN4aGHm2mZ8xIldQRcEvs9AC5QMnqcBuxHHnm2U0Z1u1yg=
+  # matrix:
+  # - DESTINATION="OS=10.2,name=iPhone 6"    SCHEME="Hyber"                   SDK="iphonesimulator10.2"     RUN_TESTS="YES"
+  #   BUILD_EXAMPLE="NO"
+  # - DESTINATION="generic/platform=iOS"     SCHEME="Hyber-Example-prod"      SDK="iphoneos"                RUN_TESTS="YES"
+  #   BUILD_EXAMPLE="YES"
 before_install:
 - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+- gem install xcpretty
 - cd Example
-- pod repo update
+- pod repo update  --silent
 - pod install
 - cd -
+before_script:
+- "./travis/scripts/add-key.sh"
+- travis_wait 30 pip install scipy
+
 script:
-  - set -o pipefail
-  - xcodebuild -version
-  - xcodebuild -showsdks
-  - xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Hyber-Example" -sdk "iphonesimulator10.2" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
- # - xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Pods/Hyber" -sdk "iphonesimulator10.2" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
-
-# - pod repo update
-#  - pod lib lint --allow-warnings
-
+- xcodebuild -version -showsdks
+- set -o pipefail && xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Hyber-Test" -destination "platform=iOS Simulator,OS=10.1,name=iPhone 7 Plus" -sdk "iphonesimulator10.2"  -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty
+# Build Release 
+#- xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Hyber-Example-prod" -sdk "iphoneos" -destination "generic/platform=iOS" -configuration Release OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO 'CODE_SIGN_RESOURCE_RULES_PATH=$(SDKROOT)/ResourceRules.plist' -quiet
+# - if [ $RUN_TESTS == "YES" ]; then xcodebuild -workspace "Example/Hyber.xcworkspace"
+#   $SCHEME" -sdk "$SDK" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES
+#   test | xcpretty; else xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme
+#   "$SCHEME" -sdk "$SDK" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
+#   fi
+# - if [ $BUILD_EXAMPLE == "YES" ]; then xcodebuild -workspace "Example/Hyber.xcworkspace"
+#   -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release OBJROOT=$PWD/build
+#   SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO 'CODE_SIGN_RESOURCE_RULES_PATH=$(SDKROOT)/ResourceRules.plist'; 
+#   fi
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-
+#- "./travis/scripts/sign-and-upload.sh"
+after_script:
+- "./travis/scripts/remove-key.sh"
 notifications:
   slack:
     secure: UdQT7LK2lKRjz0tbgU0K9x/HJSTseQ1yzBMEiEhbkTTxh/jDl5s7XcruBQOAdB+F2zThhJizdlV1ppoCS76JNnwnzhuX8FBSiA18t3HcyMrp9v/ctQ/Y7V8JVFME4Ngzmp7gmklgy40p+oLTE4CwLO2ZV+1WJWr/HdfSpMiI4LG2CI+PGhBjjgARkmMNgtrZfpW/+L9P/NlZ8ymZkGWcjVadh8/BN3wp1PvhNNrJ+aBSu05Jv+UanvjfTKlmH3d/rqJqidHzZF3n+NUgFaMNAKS2siGlG+zQUcQ1X0+VtObj1S6a1B8KMss9yKQwia85DV5pJ7qxIUBtQqqDd/LIAhRmwF5UYx76/Gh+73WEAbC4TWYQf0zK6L+ASzUROIfj9O0J1ouyBP7UNYfiX8VlEFD+A0giKw2m4bl4VVLGcd9mka0QU5CKgplw4fHjzrGcKilzX2f+COzdoOYfutq6IDpD6A9KLeSjlmt4tduEZAZMm8Vm8r5uu7Q0hGumNJ6zMoROaJpi9CuU3Trt6C2whlXqFZF1NimNDsL23risOnq3CE8MO/XZeRNtTaXy1nco81yrqOqeaPJF2hzPJZvJ650kQC5r6OkzMP0OE3uEN/mX008mLCWyfXTRsEUdhHCY4GiAkaAthidMKvSKrKi05bn3dUT7O3p9ThHFKP1o+7I=

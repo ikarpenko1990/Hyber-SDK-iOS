@@ -15,7 +15,10 @@ class MessageTableViewController: UITableViewController {
     let realm = try! Realm()
     var lists: Results<Message>!
     let defaults = UserDefaults.standard
+    let notificationIdentifier: String = "GetNewPush"
     
+    // Register to receive notification
+
     var isEditingMode = false
     //MARK: Actions 
     @IBOutlet weak var messageListsTableView: UITableView!
@@ -26,7 +29,7 @@ class MessageTableViewController: UITableViewController {
    
     @IBAction func revoke(_ sender: Any) {
     }
-    //pull to refresh
+
     func handleRefresh(_ refreshControl: UIRefreshControl) {
          Hyber.getMessageList(completionHandler: { (success) -> Void in
 
@@ -37,7 +40,6 @@ class MessageTableViewController: UITableViewController {
             }
         })
         refreshControl.endRefreshing()
-    
      }
     
   
@@ -67,12 +69,7 @@ class MessageTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
-        // refresh coredata
-            let token = realm.addNotificationBlock { notification, realm in
-                self.readAndUpdateUI()
-            }
         readAndUpdateUI()
-        token.stop()
     }
     
   
@@ -80,8 +77,10 @@ class MessageTableViewController: UITableViewController {
         super.viewDidLoad()
         firstScreen()
         readAndUpdateUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(MessageTableViewController.readAndUpdateUI), name:NSNotification.Name(rawValue: "GetNewPush"), object: nil)
         self.messageListsTableView.es_addPullToRefresh() {
             self.getMessageList()
+            self.messageListsTableView.es_stopPullToRefresh(completion: true)
         }
     }
     
@@ -110,7 +109,7 @@ class MessageTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if let listsTasks = lists{
+        if let listsTasks = lists {
             return listsTasks.count
         } 
         return 0
@@ -146,11 +145,8 @@ class MessageTableViewController: UITableViewController {
                         button.backgroundColor = UIColor.darkGray
                         button.setTitle(title as! String?, for: UIControlState.normal)
                     cell?.addSubview(button)
-            } else {
-                print("No text")
             }
-    
-
+        
         return cell!
         
     }
@@ -200,7 +196,7 @@ class MessageTableViewController: UITableViewController {
         let alertController = UIAlertController(title: "Answer", message: "Please input your message", preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "Sent", style: .default) { (_) in
-            if let field = alertController.textFields![0] as? UITextField {
+            if let field = alertController.textFields![0] as UITextField! {
                 Hyber.sendMessageCallback(messageId: messageId!, message: field.text, completionHandler: { (success) -> Void in
                     if success {
                         self.messageListsTableView.reloadData()
@@ -231,7 +227,7 @@ class MessageTableViewController: UITableViewController {
                 return 460.0
             }
         
-            else if (caption == nil) && img ==  nil {
+            else if (caption == nil) && img == nil {
                 return 140.0
             }
         
@@ -240,33 +236,3 @@ class MessageTableViewController: UITableViewController {
     
 }
 
-//MARK: Extention for downloading images
-extension UIImageView {
-    
-    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() { () -> Void in
-                self.image = image
-            }
-            }.resume()
-    }
-    
-    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloadedFrom(url: url, contentMode: mode)
-    }
-}
-
-extension CGRect {
-    init(_ x:CGFloat, _ y:CGFloat, _ w:CGFloat, _ h:CGFloat) {
-        self.init(x:x, y:y, width:w, height:h)
-    }
-}
