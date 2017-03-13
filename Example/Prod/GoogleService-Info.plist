@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>936881676680-6mo40l83fsnbiqmt79lit7nk5t7voga0.apps.googleusercontent.com</string>
+	<string>936881676680-sj179u9ijl093dth4nfids6322v2ljba.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.936881676680-6mo40l83fsnbiqmt79lit7nk5t7voga0</string>
+	<string>com.googleusercontent.apps.936881676680-sj179u9ijl093dth4nfids6322v2ljba</string>
 	<key>API_KEY</key>
 	<string>AIzaSyA9ESAhLzyeFO5koRxCXEPlqvtN6kQaxyk</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.test.Hyber-Example-sdk-2-prod</string>
+	<string>com.incuube.Hyber-Example-sdk-2-prod</string>
 	<key>PROJECT_ID</key>
 	<string>hyber-example</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:936881676680:ios:a387707975aceb48</string>
+	<string>1:936881676680:ios:b508c97a68e694ac</string>
 	<key>DATABASE_URL</key>
 	<string>https://hyber-example.firebaseio.com</string>
 </dict>

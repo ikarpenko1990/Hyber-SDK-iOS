@@ -1,3 +1,4 @@
+
 import RealmSwift
 import SwiftyJSON
 import XCTest
@@ -21,6 +22,15 @@ class HyberRealmTests: XCTestCase {
         print(utc)
     }
     
+    func testNetworkingMethods() {
+        Hyber.LogOut()
+        Hyber.getMessageList(completionHandler:{_ in })
+        Hyber.getDeviceList(completionHandler:{_ in })
+        Hyber.revokeDevice(deviceId: ["",], completionHandler: (completionHandler:{_ in }))
+        Hyber.updateDevice()
+        Hyber.sentDeliveredStatus(messageId: nil)
+    }
+    
     func testSaveProfile() {
         let session = ["token": "dsfsfsf"]
         let user = ["userPhone": "380000000000",
@@ -28,6 +38,7 @@ class HyberRealmTests: XCTestCase {
         let fulfile = ["profile":user,"session":session ]
         let json = JSON(fulfile)
         DataRealm.saveProfile(json: json)
+        print("Save profile passed")
     }
     
     func testDevices() {
@@ -51,7 +62,14 @@ class HyberRealmTests: XCTestCase {
         let devices = ["devices": [device1, device2]]
         let json = JSON(devices)
         DataRealm.saveDeiveList(json: json)
-        
+        print("Save device passed")
+    }
+    
+    func testUpdateDevice() {
+            let device = ["deviceId":"1"]
+            let json = JSON(device)
+            DataRealm.updateDevice(json: json)
+            XCTAssertTrue(true, "\(json)")
     }
     
     func testSaveMessage() {
@@ -94,26 +112,35 @@ class HyberRealmTests: XCTestCase {
         let msgs = ["messages": [msg1,msg2,msg3]]
         let json = JSON(msgs)
         DataRealm.saveMessages(json: json)
+        print("Save messages passed")
+
     }
     
-    func saveNotification() {
+    func testSaveNotification() {
         let headers = [ "title":"4rwre4r",
                         "body":"43rw3r",]
         let notification = ["notification":headers]
+        let img = [ "text": "Title button",
+                    "url": "http://google.com"
+        ]
+        let btn = ["image": "http://google.com",
+                   "url": "http://google.com"]
         
         let msg = ["messageId": "12345",
-                   "button": NSNull(),
+                   "button": btn,
                    "body": "Some text here",
-                   "image": NSNull(),
+                   "image": img,
                    "phone": "1234567890",
                    "title": "TestTitle",
                    "time": "22-11-1970 14:30",
                    "partner": "Incuube"] as [String : Any]
         let notif = JSON(notification)
         let json = JSON(msg)
-        
+        let push = ["aps":notif,"data":json] as [AnyHashable:Any]
         DataRealm.saveNotification(json: json, message: notif)
+        Hyber.didReceiveRemoteNotification(userInfo: push)
     }
+    
     func testDeleteEntity() {
         Hyber.clearHistory(entity:Session.self)
     }
@@ -124,11 +151,5 @@ class HyberRealmTests: XCTestCase {
         let BundleID = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String
         print("Phone data: \(model), \(type), \(BundleID)")
     }
-    
-    func testCleamDB() {
-        Hyber.LogOut()
-        XCTAssert(true, "Tests passed, base cleaned")
-    }
-    
     
 }

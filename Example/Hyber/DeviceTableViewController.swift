@@ -13,50 +13,46 @@ import RealmSwift
 class DeviceTableViewController: UITableViewController {
     let realm = try! Realm()
     var deviceList: Results<Device>!
-
+    
     @IBAction func sts(_ sender: Any) {
         Hyber.LogOut()
     }
     
     @IBOutlet var deviceListsTableView: UITableView!
 
+    
     func readAndUpdateUI() {
         deviceList = realm.objects(Device.self)
         self.deviceListsTableView.setEditing(false, animated: true)
         self.deviceListsTableView.reloadData()
+       
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         readAndUpdateUI()
+        deviceListsTableView.es_addPullToRefresh {
+            [weak self] in
+         self?.loadDeviceList()
+        }
+        
+    }
+    
+    func loadDeviceList() {
         Hyber.getDeviceList(completionHandler: { (success) -> Void in
             if success {
-                self.deviceListsTableView.reloadData()
+                self.readAndUpdateUI()
                 self.deviceListsTableView.es_stopPullToRefresh(completion: true)
             } else {
                 self.deviceListsTableView.es_stopPullToRefresh(completion: false)
                 self.getErrorAlert()
             }
         })
-        
-        self.deviceListsTableView.es_addPullToRefresh {
-            [weak self] in
-             Hyber.getDeviceList(completionHandler: { (success) -> Void in
-                if success {
-                    self?.readAndUpdateUI()
-                    self?.deviceListsTableView.es_stopPullToRefresh(completion: true)
-                } else {
-                    self?.deviceListsTableView.es_stopPullToRefresh(completion: false)
-                    self?.getErrorAlert()
-                }
-            })
-        }
-        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        readAndUpdateUI()
     }
     
     //MARK: - TABLE VIEW Controller
@@ -70,10 +66,8 @@ class DeviceTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceCell", for: indexPath) as? DeviceTableViewCell
-        if (cell == nil) {
-            print("No data")
-        } else {
-        let list = self.deviceList[indexPath.row]
+        if (cell != nil) {
+            let list = self.deviceList[indexPath.row]
             cell?.DeviceName.text = list.value(forKey: "deviceName") as! String?
             cell?.deviceId.text = list.value(forKey: "deviceId") as! String?
             let ios = "ios"
@@ -83,26 +77,30 @@ class DeviceTableViewController: UITableViewController {
                 } else {
                     cell?.osTypeImage.image = UIImage(named: "androidIcon")
                 }
+            
             cell?.osVersion.text = list.value(forKey: "osVersion") as! String?
         
             let phone = "phone"
             let typeDevice = list.value(forKey: "deviceType") as! String?
+            
              if typeDevice == phone {
-                    cell?.deviceTypeImage.image = UIImage(named: "iPhone")
-                } else {
-                    cell?.deviceTypeImage.image = UIImage(named: "tablet")
-                }
-        
-            cell?.updateDevice.text = list.value(forKey:"updatedAt") as! String?
-        DispatchQueue.main.async {
-            let active = list.value(forKey: "isActive") as! Bool?
-                if active == true {
-                    cell?.currentDevice.isHidden = false
-                 } else {
-                    cell?.currentDevice.isHidden = true
-                }
+                cell?.deviceTypeImage.image = UIImage(named: "iPhone")
+             } else {
+                cell?.deviceTypeImage.image = UIImage(named: "tablet")
              }
-        }
+            
+            cell?.updateDevice.text = list.value(forKey:"updatedAt") as! String?
+            
+            DispatchQueue.main.async {
+                let active = list.value(forKey: "isActive") as! Bool?
+                    if active == true {
+                        cell?.currentDevice.isHidden = false
+                    } else {
+                    cell?.currentDevice.isHidden = true
+                    }
+                }
+            }
+        
         return cell!
     }
     
@@ -140,7 +138,7 @@ class DeviceTableViewController: UITableViewController {
     //MARK: - Data Function
     
     func getErrorAlert() {
-        let alertController = UIAlertController(title: "Network error", message: "Please turn on your internet connection. Or login again", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Network error", message: "Something wrong. Please try later", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in }
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)

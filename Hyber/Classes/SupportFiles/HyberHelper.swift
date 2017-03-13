@@ -28,13 +28,10 @@ extension Hyber {
             }
         
         let defaults = UserDefaults.standard
-         if defaults.object(forKey: "clientApiKey") == nil {
             defaults.set(clientApiKey, forKey: "clientApiKey")
             defaults.synchronize()
-            HyberLogger.info("Hyber SDK initialised, Client API KEY: \(clientApiKey) saved!")
-         } else {
-            HyberLogger.info("Hyber SDK initialised")
-         }
+            HyberLogger.info("Hyber SDK initialised, Client API KEY: \(clientApiKey)!")
+       
         //Realm configuration
         var config = Realm.Configuration(schemaVersion: 1,
                                          migrationBlock: { migration, oldSchemaVersion in

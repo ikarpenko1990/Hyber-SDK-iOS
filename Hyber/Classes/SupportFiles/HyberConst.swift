@@ -18,6 +18,7 @@ let kBundleID = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as
 let kHyberClientAPIKey = UserDefaults.standard.string(forKey:"clientApiKey")
 let kFCM = UserDefaults.standard.string(forKey: "fcmToken")
 
+
 let kRegUrl = "https://mobile.hyber.im/v1/device/registration"
 let kUpdateUrl = "https://mobile.hyber.im/v1/device/update"
 let kSendMsgDr = "https://push-dr.hyber.im/v1/message/dr"
@@ -27,5 +28,4 @@ let kSendMsgCallback = "https://push-callback.hyber.im/v1/message/callback"
 //** Features relise **//
 let kDeleteDevice = "https://mobile.hyber.im/v1/device/revoke"
 let kGetDeviceInfo = "https://mobile.hyber.im/v1/device/all"
-
 

@@ -15,7 +15,12 @@ import libPhoneNumber_iOS
 
 class ViewController: UIViewController, CountryPickerDelegate  {
 
+    var phoneCodeLoad: String?
+    
+    let defaults = UserDefaults.standard
+//MARK: - Outlets
     @IBOutlet weak var countryCodeBtn: UIButton!
+    
     @IBAction func codePickerAction(_ sender: Any) {
         if countryPhoneCodePicker.isHidden == true {
             countryPhoneCodePicker.isHidden = false
@@ -26,10 +31,9 @@ class ViewController: UIViewController, CountryPickerDelegate  {
     }
   
     @IBOutlet weak var numberTextFiled: UITextField!
-    var phoneCodeLoad: String?
     
-    let defaults = UserDefaults.standard
     @IBOutlet weak var registrationBtn: UIButton!
+    
     @IBAction func registetrationAction(_ sender: UIButton) {
         var phoneNumber = phoneCodeLoad! + numberTextFiled.text!
         phoneNumber.remove(at: phoneNumber.startIndex)
@@ -54,6 +58,7 @@ class ViewController: UIViewController, CountryPickerDelegate  {
         numberTextFiled.resignFirstResponder()
         countryPhoneCodePicker.isHidden = true
     }
+//MARK: - Controller functions
     
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(true)
@@ -159,16 +164,4 @@ extension ViewController: UITextFieldDelegate {
     }
 }
 
-extension UIColor {
-    convenience init(red: Int, green: Int, blue: Int) {
-        assert(red >= 0 && red <= 255, "Invalid red component")
-        assert(green >= 0 && green <= 255, "Invalid green component")
-        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-    }
-    
-    convenience init(netHex:Int) {
-        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
-    }
-    
-}
+

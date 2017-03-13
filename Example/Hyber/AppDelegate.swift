@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         HyberFirebaseMessagingDelegate.sharedInstance.configureFirebaseMessaging()
-        Hyber.initialise(clientApiKey:"b5a5b6f4-5af7-11e6-8b77-86f30ca893d3",
+        Hyber.initialise(clientApiKey:clientApiKey,
                          firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance,
                          launchOptions: launchOptions)
         //Init fabric
@@ -36,9 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
-        // b5a5b6f4-5af7-11e6-8b77-86f30ca893d3-295419c7-63b6-4b4e-b325-4636f7d74651-777be306-2260-47ba-8979-63081aa7334e
         // TODO: Handle data of notification
         Hyber.didReceiveRemoteNotification(userInfo: userInfo)
+        NotificationCenter.default.post(name: Notification.Name("GetNewPush"), object: nil)
         completionHandler(.newData)
     }
    
