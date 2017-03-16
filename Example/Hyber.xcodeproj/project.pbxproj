@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		02398402347E2EFDF6115945 /* Pods_TARGET_PODS_Hyber_Example_prod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAF2A2F7856D8690C7B18C9 /* Pods_TARGET_PODS_Hyber_Example_prod.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1A00FA151E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00FA141E77E0D400DB0F57 /* ItemCollectionViewCell.swift */; };
+		1A00FA161E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00FA141E77E0D400DB0F57 /* ItemCollectionViewCell.swift */; };
+		1A00FA171E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00FA141E77E0D400DB0F57 /* ItemCollectionViewCell.swift */; };
+		1A00FA191E77E48A00DB0F57 /* MessageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00FA181E77E48A00DB0F57 /* MessageCollectionViewController.swift */; };
+		1A00FA1A1E77E48A00DB0F57 /* MessageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00FA181E77E48A00DB0F57 /* MessageCollectionViewController.swift */; };
+		1A00FA1B1E77E48A00DB0F57 /* MessageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00FA181E77E48A00DB0F57 /* MessageCollectionViewController.swift */; };
 		1A506B4A1E66E0C3009ADD95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		1A60ECB51E656DFC006767F1 /* Exstentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60ECB41E656DFC006767F1 /* Exstentions.swift */; };
 		1A60ECB61E656DFC006767F1 /* Exstentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60ECB41E656DFC006767F1 /* Exstentions.swift */; };
@@ -17,7 +23,7 @@
 		1AE367731E6EB6CF001A5F17 /* XCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766C8C5D1E55A88B00610E43 /* XCTest.swift */; };
 		1AE367741E6EB717001A5F17 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 766C8C5F1E55A88B00610E43 /* Info.plist */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		607FACD81AFB9204008FA782 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* RegisterViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -25,11 +31,9 @@
 		766C8C8C1E55C2F100610E43 /* DeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769540D31DFE9AA200705F3F /* DeviceTableViewController.swift */; };
 		766C8C8D1E55C2F100610E43 /* ESPullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C11DE130F700704D9C /* ESPullToRefresh.swift */; };
 		766C8C8E1E55C2F100610E43 /* ESRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C31DE130F700704D9C /* ESRefreshComponent.swift */; };
-		766C8C8F1E55C2F100610E43 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		766C8C8F1E55C2F100610E43 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* RegisterViewController.swift */; };
 		766C8C901E55C2F100610E43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		766C8C911E55C2F100610E43 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A592B01DDC715D004187E8 /* MessageTableViewController.swift */; };
 		766C8C921E55C2F100610E43 /* ESRefreshFooterAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BD1DE130F600704D9C /* ESRefreshFooterAnimator.swift */; };
-		766C8C931E55C2F100610E43 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */; };
 		766C8C941E55C2F100610E43 /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769540D71DFE9ABD00705F3F /* DeviceTableViewCell.swift */; };
 		766C8C951E55C2F100610E43 /* ESPullToRefresh+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C01DE130F700704D9C /* ESPullToRefresh+Manager.swift */; };
 		766C8C961E55C2F100610E43 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A759391DE45200008A5DE0 /* StartViewController.swift */; };
@@ -43,11 +47,9 @@
 		7693DC641E5C243E007D5F07 /* DeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769540D31DFE9AA200705F3F /* DeviceTableViewController.swift */; };
 		7693DC651E5C243E007D5F07 /* ESPullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C11DE130F700704D9C /* ESPullToRefresh.swift */; };
 		7693DC661E5C243E007D5F07 /* ESRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C31DE130F700704D9C /* ESRefreshComponent.swift */; };
-		7693DC681E5C243E007D5F07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		7693DC681E5C243E007D5F07 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* RegisterViewController.swift */; };
 		7693DC691E5C243E007D5F07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		7693DC6A1E5C243E007D5F07 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A592B01DDC715D004187E8 /* MessageTableViewController.swift */; };
 		7693DC6B1E5C243E007D5F07 /* ESRefreshFooterAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BD1DE130F600704D9C /* ESRefreshFooterAnimator.swift */; };
-		7693DC6C1E5C243E007D5F07 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */; };
 		7693DC6D1E5C243E007D5F07 /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769540D71DFE9ABD00705F3F /* DeviceTableViewCell.swift */; };
 		7693DC6E1E5C243E007D5F07 /* ESPullToRefresh+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7C01DE130F700704D9C /* ESPullToRefresh+Manager.swift */; };
 		7693DC6F1E5C243E007D5F07 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A759391DE45200008A5DE0 /* StartViewController.swift */; };
@@ -62,9 +64,7 @@
 		7693DC891E5C2F6E007D5F07 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F505871E55D63100551044 /* ApiKey.swift */; };
 		769540D41DFE9AA200705F3F /* DeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769540D31DFE9AA200705F3F /* DeviceTableViewController.swift */; };
 		769540D81DFE9ABD00705F3F /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769540D71DFE9ABD00705F3F /* DeviceTableViewCell.swift */; };
-		76A592B11DDC715D004187E8 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A592B01DDC715D004187E8 /* MessageTableViewController.swift */; };
 		76A7593A1DE45200008A5DE0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A759391DE45200008A5DE0 /* StartViewController.swift */; };
-		76ABECC71DDCA5CE00373A2E /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */; };
 		76F505861E55D5DC00551044 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F505851E55D5DC00551044 /* ApiKey.swift */; };
 		76F5058A1E55D66700551044 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F505891E55D66700551044 /* ApiKey.swift */; };
 		76FA0B551E5B1B4600E35EB7 /* HyberFirebaseMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */; };
@@ -127,6 +127,8 @@
 /* Begin PBXFileReference section */
 		042A0B44447F1B2B05A5A087 /* Pods-TARGET_PODS-Hyber_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TARGET_PODS-Hyber_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TARGET_PODS-Hyber_Example/Pods-TARGET_PODS-Hyber_Example.release.xcconfig"; sourceTree = "<group>"; };
 		19CDC397422BD8BC52355097 /* Pods-Hyber_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyber_Example/Pods-Hyber_Example.release.xcconfig"; sourceTree = "<group>"; };
+		1A00FA141E77E0D400DB0F57 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		1A00FA181E77E48A00DB0F57 /* MessageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewController.swift; sourceTree = "<group>"; };
 		1A60ECB41E656DFC006767F1 /* Exstentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exstentions.swift; sourceTree = "<group>"; };
 		1AE367691E6EB605001A5F17 /* Hyber_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hyber_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CAF2A2F7856D8690C7B18C9 /* Pods_TARGET_PODS_Hyber_Example_prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TARGET_PODS_Hyber_Example_prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,7 +138,7 @@
 		607FACD01AFB9204008FA782 /* Hyber_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hyber_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -155,9 +157,7 @@
 		7693DC881E5C2E6C007D5F07 /* Hyber_Example_prod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hyber_Example_prod.entitlements; sourceTree = SOURCE_ROOT; };
 		769540D31DFE9AA200705F3F /* DeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTableViewController.swift; sourceTree = "<group>"; };
 		769540D71DFE9ABD00705F3F /* DeviceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTableViewCell.swift; sourceTree = "<group>"; };
-		76A592B01DDC715D004187E8 /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		76A759391DE45200008A5DE0 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		76C012EA1E57264700DBACA4 /* Hyber_Example_prod-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Hyber_Example_prod-info.plist"; path = "Prod/Hyber_Example_prod-info.plist"; sourceTree = "<group>"; };
 		76F505851E55D5DC00551044 /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiKey.swift; path = Prod/ApiKey.swift; sourceTree = SOURCE_ROOT; };
 		76F505871E55D63100551044 /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiKey.swift; path = TD/ApiKey.swift; sourceTree = "<group>"; };
@@ -259,7 +259,6 @@
 				7678FC7A1DE49CF400537253 /* Models */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
-				F3CAF7BB1DE130F600704D9C /* PulltoRefresh */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
@@ -270,6 +269,7 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F3CAF7BB1DE130F600704D9C /* PulltoRefresh */,
 				7617EC991DBF99C100510884 /* GoogleService-Info.plist */,
 				7693DC881E5C2E6C007D5F07 /* Hyber_Example_prod.entitlements */,
 				7693DC861E5C263C007D5F07 /* Hyber_Example_td.entitlements */,
@@ -294,8 +294,8 @@
 			children = (
 				76A759391DE45200008A5DE0 /* StartViewController.swift */,
 				769540D31DFE9AA200705F3F /* DeviceTableViewController.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				76A592B01DDC715D004187E8 /* MessageTableViewController.swift */,
+				607FACD71AFB9204008FA782 /* RegisterViewController.swift */,
+				1A00FA181E77E48A00DB0F57 /* MessageCollectionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -304,7 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				769540D71DFE9ABD00705F3F /* DeviceTableViewCell.swift */,
-				76ABECC61DDCA5CE00373A2E /* MessageTableViewCell.swift */,
+				1A00FA141E77E0D400DB0F57 /* ItemCollectionViewCell.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -846,15 +846,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A00FA191E77E48A00DB0F57 /* MessageCollectionViewController.swift in Sources */,
 				769540D41DFE9AA200705F3F /* DeviceTableViewController.swift in Sources */,
 				F3CAF7C91DE130F700704D9C /* ESPullToRefresh.swift in Sources */,
 				F3CAF7CB1DE130F700704D9C /* ESRefreshComponent.swift in Sources */,
+				1A00FA151E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */,
 				1A60F9D91E640A4E0006C7EF /* HyberFirebaseMessagingDelegate.swift in Sources */,
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				607FACD81AFB9204008FA782 /* RegisterViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				76A592B11DDC715D004187E8 /* MessageTableViewController.swift in Sources */,
 				F3CAF7C51DE130F700704D9C /* ESRefreshFooterAnimator.swift in Sources */,
-				76ABECC71DDCA5CE00373A2E /* MessageTableViewCell.swift in Sources */,
 				769540D81DFE9ABD00705F3F /* DeviceTableViewCell.swift in Sources */,
 				F3CAF7C81DE130F700704D9C /* ESPullToRefresh+Manager.swift in Sources */,
 				76F5058A1E55D66700551044 /* ApiKey.swift in Sources */,
@@ -870,15 +870,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A00FA1B1E77E48A00DB0F57 /* MessageCollectionViewController.swift in Sources */,
 				766C8C8C1E55C2F100610E43 /* DeviceTableViewController.swift in Sources */,
 				766C8C8D1E55C2F100610E43 /* ESPullToRefresh.swift in Sources */,
 				766C8C8E1E55C2F100610E43 /* ESRefreshComponent.swift in Sources */,
+				1A00FA171E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */,
 				76FA0B551E5B1B4600E35EB7 /* HyberFirebaseMessagingDelegate.swift in Sources */,
-				766C8C8F1E55C2F100610E43 /* ViewController.swift in Sources */,
+				766C8C8F1E55C2F100610E43 /* RegisterViewController.swift in Sources */,
 				766C8C901E55C2F100610E43 /* AppDelegate.swift in Sources */,
-				766C8C911E55C2F100610E43 /* MessageTableViewController.swift in Sources */,
 				766C8C921E55C2F100610E43 /* ESRefreshFooterAnimator.swift in Sources */,
-				766C8C931E55C2F100610E43 /* MessageTableViewCell.swift in Sources */,
 				766C8C941E55C2F100610E43 /* DeviceTableViewCell.swift in Sources */,
 				766C8C951E55C2F100610E43 /* ESPullToRefresh+Manager.swift in Sources */,
 				766C8C961E55C2F100610E43 /* StartViewController.swift in Sources */,
@@ -894,16 +894,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A00FA1A1E77E48A00DB0F57 /* MessageCollectionViewController.swift in Sources */,
 				7693DC641E5C243E007D5F07 /* DeviceTableViewController.swift in Sources */,
 				7693DC891E5C2F6E007D5F07 /* ApiKey.swift in Sources */,
 				7693DC651E5C243E007D5F07 /* ESPullToRefresh.swift in Sources */,
+				1A00FA161E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */,
 				1A60F9DA1E640A4E0006C7EF /* HyberFirebaseMessagingDelegate.swift in Sources */,
 				7693DC661E5C243E007D5F07 /* ESRefreshComponent.swift in Sources */,
-				7693DC681E5C243E007D5F07 /* ViewController.swift in Sources */,
+				7693DC681E5C243E007D5F07 /* RegisterViewController.swift in Sources */,
 				7693DC691E5C243E007D5F07 /* AppDelegate.swift in Sources */,
-				7693DC6A1E5C243E007D5F07 /* MessageTableViewController.swift in Sources */,
 				7693DC6B1E5C243E007D5F07 /* ESRefreshFooterAnimator.swift in Sources */,
-				7693DC6C1E5C243E007D5F07 /* MessageTableViewCell.swift in Sources */,
 				7693DC6D1E5C243E007D5F07 /* DeviceTableViewCell.swift in Sources */,
 				7693DC6E1E5C243E007D5F07 /* ESPullToRefresh+Manager.swift in Sources */,
 				7693DC6F1E5C243E007D5F07 /* StartViewController.swift in Sources */,

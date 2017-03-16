@@ -14,10 +14,10 @@ class DeviceTableViewController: UITableViewController {
     let realm = try! Realm()
     var deviceList: Results<Device>!
     
-    @IBAction func sts(_ sender: Any) {
+    @IBAction func logoutAction(_ sender: Any) {
         Hyber.LogOut()
     }
-    
+
     @IBOutlet var deviceListsTableView: UITableView!
 
     
@@ -30,13 +30,24 @@ class DeviceTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        readAndUpdateUI()
+        firtLoadView()
         deviceListsTableView.es_addPullToRefresh {
             [weak self] in
          self?.loadDeviceList()
         }
         
     }
+    
+    func firtLoadView() {
+        if UserDefaults.standard.object(forKey: "firtsLoadDevice") == nil {
+            loadDeviceList()
+            UserDefaults.standard.set("loaded", forKey: "firtsLoadDevice")
+            UserDefaults.standard.synchronize()
+        } else {
+            readAndUpdateUI()
+        }
+    }
+    
     
     func loadDeviceList() {
         Hyber.getDeviceList(completionHandler: { (success) -> Void in
@@ -118,7 +129,6 @@ class DeviceTableViewController: UITableViewController {
             let confirmAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
                 Hyber.revokeDevice(deviceId:[devices.value(forKey: "deviceId") as Any] , completionHandler: { (success) -> Void in
                         if success {
-                           
                         } else {
                             Hyber.getDeviceList(completionHandler:{(success) -> Void in
                                 if success{

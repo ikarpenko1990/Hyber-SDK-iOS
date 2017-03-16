@@ -28,4 +28,3 @@ let kSendMsgCallback = "https://push-callback.hyber.im/v1/message/callback"
 //** Features relise **//
 let kDeleteDevice = "https://mobile.hyber.im/v1/device/revoke"
 let kGetDeviceInfo = "https://mobile.hyber.im/v1/device/all"
-
