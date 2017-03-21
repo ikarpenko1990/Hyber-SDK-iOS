@@ -154,18 +154,18 @@ class DataRealm {
                 }
             }
             
-            if json["button"].array != nil {
+            if json["button"] != nil {
                 if let optionsArray = json["button"].rawValue as? [String: AnyObject] {
                     if optionsArray["text"] is NSNull {
                         HyberLogger.info("Action:Null")
                     } else {
-                        newMessages.mButtonUrl = optionsArray["text"] as! String?
+                        newMessages.mButtonUrl = optionsArray["url"] as! String?
                     }
                     
                     if optionsArray["url"] is NSNull {
                         HyberLogger.info("Caption:Null")
                     } else {
-                        newMessages.mButtonText = optionsArray["url"] as! String?
+                        newMessages.mButtonText = optionsArray["text"] as! String?
                     }
                 }
             }
