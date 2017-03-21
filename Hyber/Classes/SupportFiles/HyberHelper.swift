@@ -45,7 +45,7 @@ extension Hyber {
 
     }
 
-    public static func saveToken(fcmToken: String) -> Void {
+    public static func saveToken(fcmToken: String?) -> Void {
         //sync fcm Token
         let defaults = UserDefaults.standard
             defaults.set(fcmToken, forKey: "fcmToken")
