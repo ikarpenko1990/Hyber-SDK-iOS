@@ -20,6 +20,12 @@
 		1A60ECB71E656DFC006767F1 /* Exstentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60ECB41E656DFC006767F1 /* Exstentions.swift */; };
 		1A60F9D91E640A4E0006C7EF /* HyberFirebaseMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */; };
 		1A60F9DA1E640A4E0006C7EF /* HyberFirebaseMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */; };
+		1A8236ED1E83F98B00D1A4D7 /* LocalPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236EC1E83F98B00D1A4D7 /* LocalPush.swift */; };
+		1A8236EE1E83F98B00D1A4D7 /* LocalPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236EC1E83F98B00D1A4D7 /* LocalPush.swift */; };
+		1A8236EF1E83F98B00D1A4D7 /* LocalPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236EC1E83F98B00D1A4D7 /* LocalPush.swift */; };
+		1A8236F11E83FBA200D1A4D7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236F01E83FBA200D1A4D7 /* Notification.swift */; };
+		1A8236F21E83FBA200D1A4D7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236F01E83FBA200D1A4D7 /* Notification.swift */; };
+		1A8236F31E83FBA200D1A4D7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236F01E83FBA200D1A4D7 /* Notification.swift */; };
 		1AE367731E6EB6CF001A5F17 /* XCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766C8C5D1E55A88B00610E43 /* XCTest.swift */; };
 		1AE367741E6EB717001A5F17 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 766C8C5F1E55A88B00610E43 /* Info.plist */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -130,6 +136,8 @@
 		1A00FA141E77E0D400DB0F57 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		1A00FA181E77E48A00DB0F57 /* MessageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewController.swift; sourceTree = "<group>"; };
 		1A60ECB41E656DFC006767F1 /* Exstentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exstentions.swift; sourceTree = "<group>"; };
+		1A8236EC1E83F98B00D1A4D7 /* LocalPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalPush.swift; sourceTree = "<group>"; };
+		1A8236F01E83FBA200D1A4D7 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		1AE367691E6EB605001A5F17 /* Hyber_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hyber_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CAF2A2F7856D8690C7B18C9 /* Pods_TARGET_PODS_Hyber_Example_prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TARGET_PODS_Hyber_Example_prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2242231196F989AF3B30E84E /* Pods_Hyber_Example_Hyber_Example_td.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_Example_Hyber_Example_td.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +233,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A8236F41E83FBCF00D1A4D7 /* Local Push */ = {
+			isa = PBXGroup;
+			children = (
+				1A8236EC1E83F98B00D1A4D7 /* LocalPush.swift */,
+				1A8236F01E83FBA200D1A4D7 /* Notification.swift */,
+			);
+			name = "Local Push";
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -252,14 +269,10 @@
 		607FACD21AFB9204008FA782 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				76F505891E55D66700551044 /* ApiKey.swift */,
+				1A8236F41E83FBCF00D1A4D7 /* Local Push */,
 				7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */,
 				7678FC791DE49CE800537253 /* Controllers */,
 				7678FC7A1DE49CF400537253 /* Models */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				607FACDC1AFB9204008FA782 /* Images.xcassets */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = Example;
@@ -269,6 +282,11 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				76F505891E55D66700551044 /* ApiKey.swift */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
+				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				F3CAF7BB1DE130F600704D9C /* PulltoRefresh */,
 				7617EC991DBF99C100510884 /* GoogleService-Info.plist */,
 				7693DC881E5C2E6C007D5F07 /* Hyber_Example_prod.entitlements */,
@@ -851,12 +869,14 @@
 				F3CAF7C91DE130F700704D9C /* ESPullToRefresh.swift in Sources */,
 				F3CAF7CB1DE130F700704D9C /* ESRefreshComponent.swift in Sources */,
 				1A00FA151E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */,
+				1A8236ED1E83F98B00D1A4D7 /* LocalPush.swift in Sources */,
 				1A60F9D91E640A4E0006C7EF /* HyberFirebaseMessagingDelegate.swift in Sources */,
 				607FACD81AFB9204008FA782 /* RegisterViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				F3CAF7C51DE130F700704D9C /* ESRefreshFooterAnimator.swift in Sources */,
 				769540D81DFE9ABD00705F3F /* DeviceTableViewCell.swift in Sources */,
 				F3CAF7C81DE130F700704D9C /* ESPullToRefresh+Manager.swift in Sources */,
+				1A8236F11E83FBA200D1A4D7 /* Notification.swift in Sources */,
 				76F5058A1E55D66700551044 /* ApiKey.swift in Sources */,
 				76A7593A1DE45200008A5DE0 /* StartViewController.swift in Sources */,
 				F3CAF7C61DE130F700704D9C /* ESRefreshHeaderAnimator.swift in Sources */,
@@ -875,12 +895,14 @@
 				766C8C8D1E55C2F100610E43 /* ESPullToRefresh.swift in Sources */,
 				766C8C8E1E55C2F100610E43 /* ESRefreshComponent.swift in Sources */,
 				1A00FA171E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */,
+				1A8236EF1E83F98B00D1A4D7 /* LocalPush.swift in Sources */,
 				76FA0B551E5B1B4600E35EB7 /* HyberFirebaseMessagingDelegate.swift in Sources */,
 				766C8C8F1E55C2F100610E43 /* RegisterViewController.swift in Sources */,
 				766C8C901E55C2F100610E43 /* AppDelegate.swift in Sources */,
 				766C8C921E55C2F100610E43 /* ESRefreshFooterAnimator.swift in Sources */,
 				766C8C941E55C2F100610E43 /* DeviceTableViewCell.swift in Sources */,
 				766C8C951E55C2F100610E43 /* ESPullToRefresh+Manager.swift in Sources */,
+				1A8236F31E83FBA200D1A4D7 /* Notification.swift in Sources */,
 				766C8C961E55C2F100610E43 /* StartViewController.swift in Sources */,
 				766C8C971E55C2F100610E43 /* ESRefreshHeaderAnimator.swift in Sources */,
 				766C8C981E55C2F100610E43 /* ESRefreshAnimator.swift in Sources */,
@@ -899,12 +921,14 @@
 				7693DC891E5C2F6E007D5F07 /* ApiKey.swift in Sources */,
 				7693DC651E5C243E007D5F07 /* ESPullToRefresh.swift in Sources */,
 				1A00FA161E77E0D400DB0F57 /* ItemCollectionViewCell.swift in Sources */,
+				1A8236EE1E83F98B00D1A4D7 /* LocalPush.swift in Sources */,
 				1A60F9DA1E640A4E0006C7EF /* HyberFirebaseMessagingDelegate.swift in Sources */,
 				7693DC661E5C243E007D5F07 /* ESRefreshComponent.swift in Sources */,
 				7693DC681E5C243E007D5F07 /* RegisterViewController.swift in Sources */,
 				7693DC691E5C243E007D5F07 /* AppDelegate.swift in Sources */,
 				7693DC6B1E5C243E007D5F07 /* ESRefreshFooterAnimator.swift in Sources */,
 				7693DC6D1E5C243E007D5F07 /* DeviceTableViewCell.swift in Sources */,
+				1A8236F21E83FBA200D1A4D7 /* Notification.swift in Sources */,
 				7693DC6E1E5C243E007D5F07 /* ESPullToRefresh+Manager.swift in Sources */,
 				7693DC6F1E5C243E007D5F07 /* StartViewController.swift in Sources */,
 				7693DC701E5C243E007D5F07 /* ESRefreshHeaderAnimator.swift in Sources */,

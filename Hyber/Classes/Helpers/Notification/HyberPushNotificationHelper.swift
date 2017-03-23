@@ -63,12 +63,6 @@ public extension Hyber {
             } else {
                 HyberLogger.info("Recieved message that was sended by Hyber via APNs")
             }
-            
-            LocalNotificationView.show(withImage: nil,
-                                       title: alert["title"].string,
-                                       message: alert["body"].string,
-                                       duration: 2,
-                                       onTap: nil)
         }
     }
 

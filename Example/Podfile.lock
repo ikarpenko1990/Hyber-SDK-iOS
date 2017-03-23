@@ -35,7 +35,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - Hyber (2.1.0):
+  - Hyber (2.1.1):
     - Alamofire (~> 4.2.0)
     - CryptoSwift (= 0.6.7)
     - Firebase/Core (= 3.11.0)
@@ -77,7 +77,7 @@ SPEC CHECKSUMS:
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  Hyber: b5d71e832ff10fea8ac440f596e4aca5fc17a9ff
+  Hyber: 17e35d8fabbecfe8e41551f92b69f3d5e3154f9f
   libPhoneNumber-iOS: 63bab980d1fc9783d82d955800ac9d7c1d81fde3
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
