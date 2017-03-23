@@ -37,7 +37,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
+        
         Hyber.didReceiveRemoteNotification(userInfo: userInfo)
+        var message: String?
+        var title: String?
+        
+        if let aps = userInfo["aps"] as? NSDictionary {
+            if let alert = aps["alert"] as? NSDictionary {
+                if let alertMessage = alert["body"] as? String {
+                    message = alertMessage
+                }
+                if let alertMessage = alert["title"] as? String {
+                    title = alertMessage
+                }
+            }
+        }
+        
+        LocalNotificationView.show(withImage: nil,title: title, message: message, duration: 2, onTap: nil)
         NotificationCenter.default.post(name: Notification.Name("GetNewPush"), object: nil)
         completionHandler(.newData)
     }
