@@ -61,7 +61,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Hyber:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
@@ -86,4 +86,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3581dfbfd66ba0be4cda7beae33f609c51fed4dc
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.1.1

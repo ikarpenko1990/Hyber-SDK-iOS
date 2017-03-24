@@ -14,7 +14,7 @@ import UIKit
 
 internal let UILayoutPriorityNotificationPadding: Float = 999
 
-internal struct Notification {
+internal struct NotificationName {
     static let titleFont = UIFont.boldSystemFont(ofSize: 14)
     static let subtitleFont = UIFont.systemFont(ofSize: 13)
     
