@@ -14,7 +14,7 @@ open class LocalNotificationView: UIToolbar {
     
     open static var sharedNotification = LocalNotificationView()
     
-    open var titleFont = Notification.titleFont {
+    open var titleFont = NotificationName.titleFont {
         didSet {
             titleLabel.font = titleFont
         }
@@ -24,7 +24,7 @@ open class LocalNotificationView: UIToolbar {
             titleLabel.textColor = titleTextColor
         }
     }
-    open var subtitleFont = Notification.subtitleFont {
+    open var subtitleFont = NotificationName.subtitleFont {
         didSet {
             subtitleLabel.font = subtitleFont
         }
@@ -34,7 +34,7 @@ open class LocalNotificationView: UIToolbar {
             subtitleLabel.textColor = subtitleTextColor
         }
     }
-    open var duration: TimeInterval = Notification.exhibitionDuration
+    open var duration: TimeInterval = NotificationName.exhibitionDuration
     
     open fileprivate(set) var isAnimating = false
     open fileprivate(set) var isDragging = false
@@ -293,7 +293,7 @@ public extension LocalNotificationView {
     
     // MARK: - Public Methods
     
-    public func show(withImage image: UIImage?, title: String?, message: String?, duration: TimeInterval = Notification.exhibitionDuration, onTap: (() -> ())?) {
+    public func show(withImage image: UIImage?, title: String?, message: String?, duration: TimeInterval = NotificationName.exhibitionDuration, onTap: (() -> ())?) {
         
         /// Invalidate dismissTimer
         self.dismissTimer = nil
@@ -316,7 +316,7 @@ public extension LocalNotificationView {
             window?.addSubview(self)
         }
         
-        UIView.animate(withDuration: Notification.animationDuration, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+        UIView.animate(withDuration: NotificationName.animationDuration, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
             
             var frame = self.frame
             frame.origin.y += frame.size.height
@@ -327,7 +327,7 @@ public extension LocalNotificationView {
         }
         
         if self.duration > 0 {
-            let time = self.duration + Notification.animationDuration
+            let time = self.duration + NotificationName.animationDuration
             self.dismissTimer = Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(LocalNotificationView.scheduledDismiss), userInfo: nil, repeats: false)
         }
         
@@ -351,7 +351,7 @@ public extension LocalNotificationView {
         isAnimating = true
         self.dismissTimer = nil
         
-        UIView.animate(withDuration: Notification.animationDuration, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+        UIView.animate(withDuration: NotificationName.animationDuration, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
             
             var frame = self.frame
             frame.origin.y -= frame.size.height
@@ -370,7 +370,7 @@ public extension LocalNotificationView {
     }
     
     
-    public static func show(withImage image: UIImage?, title: String?, message: String?, duration: TimeInterval = Notification.exhibitionDuration, onTap: (() -> ())? = nil) {
+    public static func show(withImage image: UIImage?, title: String?, message: String?, duration: TimeInterval = NotificationName.exhibitionDuration, onTap: (() -> ())? = nil) {
         self.sharedNotification.show(withImage: image, title: title, message: message, duration: duration, onTap: onTap)
     }
     

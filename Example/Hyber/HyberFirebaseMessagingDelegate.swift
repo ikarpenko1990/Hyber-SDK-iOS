@@ -30,10 +30,11 @@ import UserNotifications
     }
     
   public  func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
-        let firebaseMessagingToken = FIRInstanceID.instanceID().token()
-        print("FIREBASE TOKEN:\(firebaseMessagingToken)")
-        self.firebaseMessagingToken = firebaseMessagingToken
-        Hyber.saveToken(fcmToken:self.firebaseMessagingToken!)
+    guard let firebaseMessagingToken = FIRInstanceID.instanceID().token() else {
+        print("token not generated")
+        return
+    }
+        Hyber.saveToken(fcmToken:firebaseMessagingToken)
         connectToFirebaseMessaging()
     }
     
