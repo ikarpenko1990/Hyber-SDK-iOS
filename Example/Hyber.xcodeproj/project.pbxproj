@@ -76,7 +76,7 @@
 		76FA0B551E5B1B4600E35EB7 /* HyberFirebaseMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7617EC971DBF8EC000510884 /* HyberFirebaseMessagingDelegate.swift */; };
 		79991DB25C965E488A3020CA /* Pods_TARGET_PODS_Hyber_Example_td.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97CD1A8138F5542A32816DB6 /* Pods_TARGET_PODS_Hyber_Example_td.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D074658E55D623CDE956853F /* Pods_TARGET_PODS_Hyber_ExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EBF5D15B966E231ADD887E /* Pods_TARGET_PODS_Hyber_ExampleTests.framework */; };
-		E5AA70AD59D1A10470BB2F24 /* Pods_TARGET_PODS_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB80970BC1C10CC0D51C631 /* Pods_TARGET_PODS_Hyber_Example.framework */; };
+		E5AA70AD59D1A10470BB2F24 /* Pods_TARGET_PODS_Hyber_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB80970BC1C10CC0D51C631 /* Pods_TARGET_PODS_Hyber_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F3CAF7C51DE130F700704D9C /* ESRefreshFooterAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BD1DE130F600704D9C /* ESRefreshFooterAnimator.swift */; };
 		F3CAF7C61DE130F700704D9C /* ESRefreshHeaderAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CAF7BE1DE130F700704D9C /* ESRefreshHeaderAnimator.swift */; };
 		F3CAF7C71DE130F700704D9C /* icon_pull_to_refresh_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3CAF7BF1DE130F700704D9C /* icon_pull_to_refresh_arrow@2x.png */; };
