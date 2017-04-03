@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Hyber'
-  s.version          = '2.1.1'
+  s.version          = '2.2.2'
   s.summary          = 'Hyber SDK for IOS'
 
 # This description is used to generate tags and improve search results.

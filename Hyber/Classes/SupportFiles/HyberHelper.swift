@@ -42,6 +42,7 @@ extension Hyber {
         })
         config.fileURL = config.fileURL!.deletingLastPathComponent().appendingPathComponent("Hyber.realm")
         Realm.Configuration.defaultConfiguration = config
+        updateDevice()
 
     }
 
@@ -64,7 +65,7 @@ extension Hyber {
            try! realm.write {
                 realm.deleteAll()
             }
-            HyberLogger.info("User logout")
+        HyberLogger.info("User logout")
     }
     
 }
