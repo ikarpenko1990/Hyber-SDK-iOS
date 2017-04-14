@@ -24,8 +24,8 @@ public extension Hyber {
     static let standart =  UserDefaults.standard
     
     public static func registration(phoneId: String, password: String, completionHandler: @escaping CompletionHandler) {
-        var currentTime = Int64(Date().timeIntervalSince1970 * 1000)
-        var lastAuthTime = standart.integer(forKey: "authTime") ?? 0
+        let currentTime = Int64(Date().timeIntervalSince1970 * 1000)
+        let lastAuthTime = standart.integer(forKey: "authTime")as Int? ?? 0
         if (currentTime - lastAuthTime) <= 1000 {
             HyberLogger.error("Too mutch requests per second")
             return
@@ -248,7 +248,7 @@ extension Hyber {
             if realm.objects(User.self).first?.mPhone == nil {
                 HyberLogger.info("Please register user session")
             } else {
-                guard let fcmToken = kFCM else { return}
+                guard let fcmToken = kFCM else { return }
                 let phoneData: Parameters = [
                     "fcmToken": fcmToken,
                     "osType": kOSType,
