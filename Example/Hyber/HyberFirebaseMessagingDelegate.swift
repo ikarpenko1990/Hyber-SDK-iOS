@@ -72,7 +72,7 @@ import UserNotifications
         FIRMessaging.messaging().connect { (error) in
             
             if (error != nil) {
-                print("Unable to connect with FCM. \(error)")
+                print("Unable to connect with FCM. \(String(describing: error))")
             } else {
                 print("Connected to FCM.")
             }

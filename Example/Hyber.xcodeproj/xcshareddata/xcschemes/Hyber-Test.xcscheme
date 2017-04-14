@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0830"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5F6CE45AABB9F1D0AD48637BC059DF8F"
+               BlueprintIdentifier = "BAADEF5CC6EAEFC543CE543A5BCFE011"
                BuildableName = "Hyber.framework"
                BlueprintName = "Hyber"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -75,7 +75,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5F6CE45AABB9F1D0AD48637BC059DF8F"
+            BlueprintIdentifier = "BAADEF5CC6EAEFC543CE543A5BCFE011"
             BuildableName = "Hyber.framework"
             BlueprintName = "Hyber"
             ReferencedContainer = "container:Pods/Pods.xcodeproj">
