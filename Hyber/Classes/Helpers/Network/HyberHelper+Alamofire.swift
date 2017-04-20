@@ -24,7 +24,7 @@ public extension Hyber {
     static let standart =  UserDefaults.standard
     
     public static func registration(phoneId: String, password: String, completionHandler: @escaping CompletionHandler) {
-        let currentTime = Int64(Date().timeIntervalSince1970 * 1000)
+        let currentTime = Int(Date().timeIntervalSince1970 * 1000)
         let lastAuthTime = standart.integer(forKey: "authTime")as Int? ?? 0
         if (currentTime - lastAuthTime) <= 1000 {
             HyberLogger.error("Too mutch requests per second")
@@ -86,7 +86,6 @@ public extension Hyber {
                         let flag = true
                         completionHandler(flag)
                         HyberLogger.debug("Messages loaded")
-                        
                     }, onError: { let flag = false
                         completionHandler(flag)
                         HyberLogger.info("Error", $0)

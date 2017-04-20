@@ -17,33 +17,26 @@ extension Hyber {
     public static func initialise(clientApiKey: String, firebaseMessagingHelper: HyberFirebaseMessagingHelper, launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Void {
         if launchOptions == nil {
             UIApplication.shared.applicationIconBadgeNumber = 0
-             let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any]
-                if userInfo != nil {
-                    didReceiveRemoteNotification(userInfo: userInfo!)
-                }
-            } else {
-            let notificationPayload: NSDictionary = launchOptions![UIApplicationLaunchOptionsKey.remoteNotification] as! NSDictionary
+        } else {
+            let notificationPayload = launchOptions![UIApplicationLaunchOptionsKey.remoteNotification]
                 didReceiveRemoteNotification(userInfo: notificationPayload as! [AnyHashable : Any])
                 UIApplication.shared.applicationIconBadgeNumber = 0
-            }
+        }
         
         let defaults = UserDefaults.standard
             defaults.set(clientApiKey, forKey: "clientApiKey")
             defaults.synchronize()
             HyberLogger.info("Hyber SDK initialised, Client API KEY: \(clientApiKey)!")
-       
-        //Realm configuration
-        var config = Realm.Configuration(schemaVersion: 1,
-                                         migrationBlock: { migration, oldSchemaVersion in
-                                         if (oldSchemaVersion < 1) {
-                                                        // Nothing to do!
-                                                        // Realm will automatically detect new properties and removed properties
-                                        }
-        })
-        config.fileURL = config.fileURL!.deletingLastPathComponent().appendingPathComponent("Hyber.realm")
-        Realm.Configuration.defaultConfiguration = config
-        updateDevice()
-
+            var config = Realm.Configuration(schemaVersion: 1,
+                                                    migrationBlock: { migration, oldSchemaVersion in
+                                                        if (oldSchemaVersion < 1) {
+                                                            // Nothing to do!
+                                                            // Realm will automatically detect new properties and removed properties
+                                                        }
+            })
+            config.fileURL = config.fileURL!.deletingLastPathComponent().appendingPathComponent("Hyber.realm")
+            Realm.Configuration.defaultConfiguration = config
+            updateDevice()
     }
 
     public static func saveToken(fcmToken: String?) -> Void {

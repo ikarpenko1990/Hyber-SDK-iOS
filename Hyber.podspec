@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Hyber'
-  s.version          = '2.2.3'
+  s.version          = '2.2.4'
   s.summary          = 'Hyber SDK for IOS'
 
 # This description is used to generate tags and improve search results.
@@ -30,9 +30,9 @@ TODO: Hyber SDK for IOS. Implement push notification and other Hyber functionali
 
   s.source_files = 'Hyber/Classes/**/*'
   s.dependency 'Alamofire', '~> 4.4.0'
-  s.dependency 'Firebase/Core', '3.16.0'
-  s.dependency 'Firebase/Messaging', '3.16.0'
-  s.dependency 'RealmSwift', '2.5.1'
+  s.dependency 'Firebase/Core', '3.11'
+  s.dependency 'Firebase/Messaging', '3.11'
+  s.dependency 'RealmSwift', '2.6.1'
   s.dependency 'RxSwift', '3.4.0'
   #s.dependency 'ObjectMapper', '~> 2.2.2'
   s.dependency 'SwiftyJSON', '3.1.4'

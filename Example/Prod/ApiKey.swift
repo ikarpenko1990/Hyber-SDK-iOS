@@ -8,4 +8,4 @@
 
 import UIKit
 
-let clientApiKey = "Hyber-client-api-key-string"
+let clientApiKey = "Demo"
