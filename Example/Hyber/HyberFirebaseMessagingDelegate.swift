@@ -5,20 +5,18 @@
 //  Created by Vitalii Budnik on 11/26/15.
 //  Copyright © 2015 Global Message Services AG. All rights reserved.
 //
-
 import Foundation
 import Firebase
 import Hyber
 import UserNotifications
 //HyberFirebaseHelper will be initialized with new RESTAPI
-
- class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper {
-
+class HyberFirebaseMessagingDelegate: NSObject, HyberFirebaseMessagingHelper {
+    
     static let sharedInstance: HyberFirebaseMessagingDelegate = {
         return HyberFirebaseMessagingDelegate()
     }()
     
-  private override init() {
+    private override init() {
         super.init()
         addApplicationDidObservers()
         
@@ -29,7 +27,7 @@ import UserNotifications
         
     }
     
-  public  func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
+    public  func onFirebaseMessagingTokenRefresh(notification: NSNotification?) {
         if let firebaseMessagingToken = FIRInstanceID.instanceID().token() {
             print(firebaseMessagingToken)
             Hyber.saveToken(fcmToken:firebaseMessagingToken)
@@ -41,7 +39,7 @@ import UserNotifications
         removeObservers()
     }
     
-     var deviceToken: NSData? = .none {
+    var deviceToken: NSData? = .none {
         didSet {
             
             guard let deviceToken = deviceToken else { return }
@@ -65,7 +63,7 @@ import UserNotifications
         }
     }
     
-     func connectToFirebaseMessaging() {
+    func connectToFirebaseMessaging() {
         
         guard deviceToken != .none else { return }
         
@@ -84,7 +82,7 @@ import UserNotifications
     }
     // register for recive Notification
     func registerForRemoteNotification() {
-     
+        
         
         if #available(iOS 10.0, *) {
             let center  = UNUserNotificationCenter.current()
@@ -101,7 +99,7 @@ import UserNotifications
             UIApplication.shared.registerForRemoteNotifications()
         }
     }
-
+    
     
     var firebaseMessagingToken: String? = .none
     
@@ -112,8 +110,8 @@ import UserNotifications
 //MARK: ApplicationDelegate
 extension HyberFirebaseMessagingDelegate {
     
-
-
+    
+    
     
     func didEnterBackground() {
         FIRMessaging.messaging().disconnect()
@@ -154,14 +152,14 @@ extension HyberFirebaseMessagingDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        Hyber.didReceiveRemoteNotification(userInfo: notification.request.content.userInfo)
+        //        Hyber.didReceiveRemoteNotification(userInfo: notification.request.content.userInfo)
     }
     
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,
-//                                didReceive response: UNNotificationResponse,
-//                                withCompletionHandler completionHandler: @escaping () -> Void) {
-//        Hyber.didReceiveRemoteNotification(userInfo: response.notification.request.content.userInfo)
-//    }
+    //    func userNotificationCenter(_ center: UNUserNotificationCenter,
+    //                                didReceive response: UNNotificationResponse,
+    //                                withCompletionHandler completionHandler: @escaping () -> Void) {
+    //        Hyber.didReceiveRemoteNotification(userInfo: response.notification.request.content.userInfo)
+    //    }
 }
 
 extension HyberFirebaseMessagingDelegate : FIRMessagingDelegate {

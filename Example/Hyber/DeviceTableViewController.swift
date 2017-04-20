@@ -11,7 +11,6 @@ import Hyber
 import RealmSwift
 
 class DeviceTableViewController: UITableViewController {
-    let realm = try! Realm()
     var deviceList: Results<Device>!
     
     @IBAction func logoutAction(_ sender: Any) {
@@ -22,6 +21,7 @@ class DeviceTableViewController: UITableViewController {
 
     
     func readAndUpdateUI() {
+        let realm = try! Realm()
         deviceList = realm.objects(Device.self)
         self.deviceListsTableView.setEditing(false, animated: true)
         self.deviceListsTableView.reloadData()

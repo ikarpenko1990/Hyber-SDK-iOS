@@ -27,8 +27,7 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidLoad()
-        readAndUpdateUI()
+        super.viewDidAppear(true)
     }
     
     func layoutSubviews() {
@@ -37,7 +36,6 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        readAndUpdateUI()
         firstScreenLoader()
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 310, height: 300)
@@ -48,7 +46,7 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.allowsMultipleSelection = false
-               NotificationCenter.default.addObserver(self, selector: #selector(MessageCollectionViewController.readAndUpdateUI),
+        NotificationCenter.default.addObserver(self, selector: #selector(MessageCollectionViewController.readAndUpdateUI),
                                                name:NSNotification.Name(rawValue: "GetNewPush"),
                                                object: nil)
         self.clearsSelectionOnViewWillAppear = false
@@ -60,6 +58,7 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
+        readAndUpdateUI()
         if lists.count > 2 {
             let sectionNumber = 0
             self.collectionView?.scrollToItem(at:NSIndexPath.init(row:(self.collectionView?.numberOfItems(inSection: sectionNumber))!-1,section: sectionNumber) as IndexPath,
@@ -71,11 +70,10 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
     func readAndUpdateUI() {
             lists = realm.objects(Message.self)
             collectionView?.reloadData()
-            print(lists)
     }
    
     func getMessageList() {
-        Hyber.getMessageList(completionHandler: { (success) -> Void in
+        Hyber.getMessageList(completionHandler: {(success) -> Void in
             if success {
                 self.collectionView?.reloadData()
                 self.collectionView?.es_stopPullToRefresh(completion: true)
@@ -177,13 +175,13 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
     func sentAnswerAlert(replyMessageId: String?) {
         let alertController = UIAlertController(title: "Answer", message: "Please input your message", preferredStyle: .alert)
         
-        let confirmAction = UIAlertAction(title: "Sent", style: .default) { (_) in
+        let confirmAction = UIAlertAction(title: "Sent", style: .default) { [weak self] _ in
             if let field = alertController.textFields![0] as UITextField! {
                 Hyber.sendMessageCallback(messageId: replyMessageId!, message: field.text, completionHandler: { (success) -> Void in
                     if success {
-                        self.collectionView?.reloadData()
+                        self?.collectionView?.reloadData()
                     } else {
-                        self.alertMessage(title: "Error", text: "Message was not sented. Please, try later")
+                        self?.alertMessage(title: "Error", text: "Message was not sented. Please, try later")
                     }
                 })
             }

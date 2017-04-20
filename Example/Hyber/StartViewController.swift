@@ -23,7 +23,6 @@ class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.performSegue(withIdentifier: "firstSegue", sender: self)
         firstScreen()
     }
    

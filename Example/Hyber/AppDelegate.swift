@@ -25,13 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Hyber.initialise(clientApiKey:clientApiKey,
                          firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance,
                          launchOptions: launchOptions)
-        //Init fabric
         Fabric.with([Crashlytics.self, Answers.self])
         return true
         
     }
    
-    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // If you are receiving a notification message while your app is in the background,
