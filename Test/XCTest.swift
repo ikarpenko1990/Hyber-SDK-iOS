@@ -26,7 +26,7 @@ class HyberRealmTests: XCTestCase {
         Hyber.LogOut()
         Hyber.getMessageList(completionHandler:{_ in })
         Hyber.getDeviceList(completionHandler:{_ in })
-        Hyber.revokeDevice(deviceId: ["",], completionHandler: (completionHandler:{_ in }))
+        Hyber.revokeDevice(deviceId: [""], completionHandler:{_ in })
         Hyber.updateDevice()
         Hyber.sentDeliveredStatus(messageId: nil)
     }

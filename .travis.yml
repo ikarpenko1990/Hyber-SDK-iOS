@@ -1,8 +1,8 @@
 language: objective-c
-osx_image: xcode8.2
+osx_image: xcode8.3
 os: osx
 rvm:
-- 2.0
+  - 2.0
 env:
   global:
   - WORKSPACE="Example/Hyber.xcworkspace"
@@ -20,11 +20,11 @@ env:
   # - DESTINATION="generic/platform=iOS"     SCHEME="Hyber-Example-prod"      SDK="iphoneos"                RUN_TESTS="YES"
   #   BUILD_EXAMPLE="YES"
 before_install:
+- gem update
 - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
 - gem install xcpretty
 - cd Example
-- pod repo update  --silent
-- pod install
+- pod install --repo-update
 - cd -
 before_script:
 - "./travis/scripts/add-key.sh"
@@ -32,7 +32,7 @@ before_script:
 
 script:
 - xcodebuild -version -showsdks
-- set -o pipefail && xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Hyber-Test" -destination "platform=iOS Simulator,OS=10.1,name=iPhone 7 Plus" -sdk "iphonesimulator10.2"  -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty
+- set -o pipefail && xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Hyber-Example-prod" -destination "platform=iOS Simulator,OS=10.3,name=iPhone 7 Plus" -sdk "iphonesimulator10.3"  -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test -quiet | xcpretty
 # Build Release 
 #- xcodebuild -workspace "Example/Hyber.xcworkspace" -scheme "Hyber-Example-prod" -sdk "iphoneos" -destination "generic/platform=iOS" -configuration Release OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO 'CODE_SIGN_RESOURCE_RULES_PATH=$(SDKROOT)/ResourceRules.plist' -quiet
 # - if [ $RUN_TESTS == "YES" ]; then xcodebuild -workspace "Example/Hyber.xcworkspace"
