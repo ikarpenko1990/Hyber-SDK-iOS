@@ -31,8 +31,13 @@ class ViewController: UIViewController, CountryPickerDelegate  {
     }
   
     @IBOutlet weak var numberTextFiled: UITextField!
+    @IBAction func settingAction(_ sender: Any) {
+        let settingViewController = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+        self.present(settingViewController, animated: true)
+    }
     
     @IBOutlet weak var registrationBtn: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     
     @IBAction func registetrationAction(_ sender: UIButton) {
         var phoneNumber = phoneCodeLoad! + numberTextFiled.text!

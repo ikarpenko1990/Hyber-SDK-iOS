@@ -8,4 +8,13 @@
 
 import UIKit
 
-let clientApiKey = "Hyber-client-api-key-string"
+let clientApiKey = "\(gedApiKeyTest)"
+
+class func gedApiKeyTest() -> String {
+    let def = UserDefaults.standard
+    if def.object(forKey: "apikey") == nil {
+        return "demo"
+    } else {
+        return def.string(forKey: "apikey")
+    }
+}
