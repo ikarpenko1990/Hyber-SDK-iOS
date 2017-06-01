@@ -16,7 +16,8 @@ import libPhoneNumber_iOS
 class ViewController: UIViewController, CountryPickerDelegate  {
 
     var phoneCodeLoad: String?
-    
+    let notificationIdentifier: String = "GetNewsetting"
+
     let defaults = UserDefaults.standard
 //MARK: - Outlets
     @IBOutlet weak var countryCodeBtn: UIButton!
@@ -99,6 +100,7 @@ class ViewController: UIViewController, CountryPickerDelegate  {
 
     func buttonDesign() {
         registrationBtn.layer.cornerRadius = 20
+        settingButton.layer.cornerRadius = 5
     }
     
     func dismissKeyboard() {
@@ -169,4 +171,19 @@ extension ViewController: UITextFieldDelegate {
     }
 }
 
-
+extension UIViewController {
+    
+    /// UIAlertView
+    ///
+    /// - Parameters:
+    ///   - title: String of title
+    ///   - message: message
+    public func showAllertMessage(title:String,  message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+        exit(0)}
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+}

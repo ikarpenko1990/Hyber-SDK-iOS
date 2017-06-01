@@ -46,7 +46,7 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.allowsMultipleSelection = false
-        NotificationCenter.default.addObserver(self, selector: #selector(MessageCollectionViewController.readAndUpdateUI),
+        NotificationCenter.default.addObserver(self, selector: #selector(readAndUpdateUI),
                                                name:NSNotification.Name(rawValue: "GetNewPush"),
                                                object: nil)
         self.clearsSelectionOnViewWillAppear = false
@@ -109,10 +109,17 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let listsTasks = lists {
-            return listsTasks.count
+        let list = lists
+        if list?.count == 0 {
+            let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width:self.view.bounds.size.width, height: self.view.bounds.size.height))
+            emptyLabel.text = "No messages"
+            emptyLabel.textColor = UIColor.black
+            emptyLabel.textAlignment = NSTextAlignment.center
+            self.collectionView?.backgroundView = emptyLabel
+            return 0
+        } else {
+            return lists!.count
         }
-        return 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

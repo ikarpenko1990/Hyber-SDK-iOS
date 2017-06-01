@@ -40,10 +40,11 @@ class DeviceTableViewController: UITableViewController {
     
     func firtLoadView() {
         if UserDefaults.standard.object(forKey: "firtsLoadDevice") == nil {
-            loadDeviceList()
             UserDefaults.standard.set("loaded", forKey: "firtsLoadDevice")
             UserDefaults.standard.synchronize()
+            readAndUpdateUI()
         } else {
+            loadDeviceList()
             readAndUpdateUI()
         }
     }

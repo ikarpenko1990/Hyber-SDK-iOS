@@ -13,19 +13,22 @@ class SettingsViewController: UIViewController {
     var newKey = ""
     @IBAction func saveAction(_ sender: Any) {
         newKey = apiKeyTextField.text!
-        def.set(newKey, forKey: "apikey")
+        def.set(newKey, forKey: "clientApiKey")
         def.synchronize()
-        self.dismiss(animated: true)
+        self.showAllertMessage(title: "Attention", message: "Application will relaunch, for reset settings" )
     }
     
+    @IBOutlet var bundleLabel: UIView!
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
     @IBAction func resetAction(_ sender: Any) {
-        def.removeObject(forKey: "apikey")
+        def.removeObject(forKey: "clientApiKey")
+        newKey = "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3"
+        apiKeyTextField.text! = newKey
+        def.set(newKey, forKey: "clientApiKey")
         def.synchronize()
-        self.viewDidLoad()
     }
     
     @IBOutlet weak var apiKeyTextField: UITextField!
@@ -34,7 +37,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         DispatchQueue.main.async {
-            self.apiKeyTextField.text = gedApiKeyProd()
+            self.apiKeyTextField.text = gedApiKeyTest()
             if let defauls = self.def.object(forKey: "fcmToken") {
                  self.fcmTokenLabel.text = defauls as? String
             }
