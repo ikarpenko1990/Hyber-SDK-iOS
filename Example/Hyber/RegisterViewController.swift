@@ -12,6 +12,8 @@ import UserNotifications
 import Firebase
 import CountryPicker
 import libPhoneNumber_iOS
+import AELog
+import AEConsole
 
 class ViewController: UIViewController, CountryPickerDelegate  {
 
@@ -43,15 +45,16 @@ class ViewController: UIViewController, CountryPickerDelegate  {
     @IBAction func registetrationAction(_ sender: UIButton) {
         var phoneNumber = phoneCodeLoad! + numberTextFiled.text!
         phoneNumber.remove(at: phoneNumber.startIndex)
-        print(phoneNumber)
+        aelog(phoneNumber)
         
         Hyber.registration(phoneId: phoneNumber, password:phoneNumber, completionHandler: { (success) -> Void in
+           aelog()
             if success {
                 self.defaults.set("1", forKey: "startScreen")
                 self.defaults.synchronize()
                 self.dismiss(animated: true, completion: nil)
             } else {
-                let alert = UIAlertController(title: "Alert", message: "Please input correct phone number", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Alert", message: "Error something wrong", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -76,6 +79,7 @@ class ViewController: UIViewController, CountryPickerDelegate  {
         buttonDesign()
         setUpBackground()
         //Gestures
+        aelog("Current server link \(Hyber.currentLink.current)")
         self.defaults.set("2", forKey: "startScreen")
         self.defaults.synchronize()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
@@ -124,6 +128,7 @@ class ViewController: UIViewController, CountryPickerDelegate  {
         numberTextFiled.resignFirstResponder()
         return super.resignFirstResponder()
     }
+    
 }
 
 
@@ -169,6 +174,7 @@ extension ViewController: UITextFieldDelegate {
         
         return true
     }
+    
 }
 
 extension UIViewController {

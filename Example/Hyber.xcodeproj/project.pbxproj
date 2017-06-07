@@ -32,6 +32,12 @@
 		1A8236F11E83FBA200D1A4D7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236F01E83FBA200D1A4D7 /* Notification.swift */; };
 		1A8236F21E83FBA200D1A4D7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236F01E83FBA200D1A4D7 /* Notification.swift */; };
 		1A8236F31E83FBA200D1A4D7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8236F01E83FBA200D1A4D7 /* Notification.swift */; };
+		1AD7A1391EE7F605003B03CE /* AEConsole.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7A1371EE7F605003B03CE /* AEConsole.plist */; };
+		1AD7A13A1EE7F605003B03CE /* AELog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7A1381EE7F605003B03CE /* AELog.plist */; };
+		1AD7A13B1EE7F60B003B03CE /* AEConsole.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7A1371EE7F605003B03CE /* AEConsole.plist */; };
+		1AD7A13C1EE7F60B003B03CE /* AELog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7A1381EE7F605003B03CE /* AELog.plist */; };
+		1AD7A13D1EE7F60C003B03CE /* AEConsole.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7A1371EE7F605003B03CE /* AEConsole.plist */; };
+		1AD7A13E1EE7F60C003B03CE /* AELog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AD7A1381EE7F605003B03CE /* AELog.plist */; };
 		1AE367731E6EB6CF001A5F17 /* XCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766C8C5D1E55A88B00610E43 /* XCTest.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* RegisterViewController.swift */; };
@@ -145,6 +151,8 @@
 		1A78DC781ED70126008DF788 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		1A8236EC1E83F98B00D1A4D7 /* LocalPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalPush.swift; sourceTree = "<group>"; };
 		1A8236F01E83FBA200D1A4D7 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		1AD7A1371EE7F605003B03CE /* AEConsole.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AEConsole.plist; sourceTree = "<group>"; };
+		1AD7A1381EE7F605003B03CE /* AELog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AELog.plist; sourceTree = "<group>"; };
 		1AE367691E6EB605001A5F17 /* Hyber_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hyber_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CAF2A2F7856D8690C7B18C9 /* Pods_TARGET_PODS_Hyber_Example_prod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TARGET_PODS_Hyber_Example_prod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2242231196F989AF3B30E84E /* Pods_Hyber_Example_Hyber_Example_td.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_Example_Hyber_Example_td.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,6 +307,8 @@
 				7693DC881E5C2E6C007D5F07 /* Hyber_Example_prod.entitlements */,
 				7693DC861E5C263C007D5F07 /* Hyber_Example_td.entitlements */,
 				7617EC9B1DBF9CE500510884 /* Hyber_Example.entitlements */,
+				1AD7A1371EE7F605003B03CE /* AEConsole.plist */,
+				1AD7A1381EE7F605003B03CE /* AELog.plist */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 				1A60ECB41E656DFC006767F1 /* Exstentions.swift */,
 			);
@@ -590,10 +600,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AD7A1391EE7F605003B03CE /* AEConsole.plist in Resources */,
 				F3CAF7C71DE130F700704D9C /* icon_pull_to_refresh_arrow@2x.png in Resources */,
 				1A78DC7C1ED70126008DF788 /* SettingsViewController.xib in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				7617EC9A1DBF99C100510884 /* GoogleService-Info.plist in Resources */,
+				1AD7A13A1EE7F605003B03CE /* AELog.plist in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -603,10 +615,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AD7A13D1EE7F60C003B03CE /* AEConsole.plist in Resources */,
 				1A506B4A1E66E0C3009ADD95 /* Images.xcassets in Resources */,
 				1A78DC7E1ED70126008DF788 /* SettingsViewController.xib in Resources */,
 				766C8CAD1E55C32100610E43 /* GoogleService-Info.plist in Resources */,
 				766C8C9E1E55C2F100610E43 /* icon_pull_to_refresh_arrow@2x.png in Resources */,
+				1AD7A13E1EE7F60C003B03CE /* AELog.plist in Resources */,
 				766C8C9F1E55C2F100610E43 /* Main.storyboard in Resources */,
 				766C8CA11E55C2F100610E43 /* LaunchScreen.xib in Resources */,
 			);
@@ -616,10 +630,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AD7A13B1EE7F60B003B03CE /* AEConsole.plist in Resources */,
 				7693DC871E5C265E007D5F07 /* GoogleService-Info.plist in Resources */,
 				1A78DC7D1ED70126008DF788 /* SettingsViewController.xib in Resources */,
 				7693DC791E5C243E007D5F07 /* icon_pull_to_refresh_arrow@2x.png in Resources */,
 				7693DC7A1E5C243E007D5F07 /* Main.storyboard in Resources */,
+				1AD7A13C1EE7F60B003B03CE /* AELog.plist in Resources */,
 				7693DC7B1E5C243E007D5F07 /* LaunchScreen.xib in Resources */,
 				7693DC7C1E5C243E007D5F07 /* Images.xcassets in Resources */,
 			);

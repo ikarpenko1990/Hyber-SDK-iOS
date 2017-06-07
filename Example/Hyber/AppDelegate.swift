@@ -12,7 +12,8 @@ import UserNotifications
 import Firebase
 import Fabric
 import Crashlytics
-
+import AELog
+import AEConsole
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                          firebaseMessagingHelper: HyberFirebaseMessagingDelegate.sharedInstance,
                          launchOptions: launchOptions)
         Fabric.with([Crashlytics.self, Answers.self])
+        application.applicationSupportsShakeToEdit = true
+        AEConsole.launch(with: self)
+        aelog("hi tester")
         return true
         
     }
@@ -42,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var title: String?
         
         if let aps = userInfo["aps"] as? NSDictionary {
+            aelog("\(userInfo) and APS: \(aps)")
             if let alert = aps["alert"] as? NSDictionary {
                 if let alertMessage = alert["body"] as? String {
                     message = alertMessage
@@ -51,11 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
         LocalNotificationView.show(withImage: nil,title: title, message: message, duration: 2, onTap: nil)
         NotificationCenter.default.post(name: Notification.Name("GetNewPush"), object: nil)
         completionHandler(.newData)
     }
-   
-       
+    
 }

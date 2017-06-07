@@ -1,4 +1,7 @@
 PODS:
+  - AEConsole (0.3.0):
+    - AELog (~> 0.3)
+  - AELog (0.3.0)
   - Alamofire (4.4.0)
   - CountryPickerSwift (1.4.2)
   - Crashlytics (3.8.4):
@@ -53,6 +56,7 @@ PODS:
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
+  - AEConsole
   - CountryPickerSwift
   - Crashlytics
   - Fabric
@@ -64,6 +68,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  AEConsole: bde8ae8616522b88909dff1ba7a4aa6e86568e6e
+  AELog: 69608a89a1d0460ad32bba73f8e1043e12764d85
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   CountryPickerSwift: 3a6a3904bfada4871b9c4ac034d83d45fc7ed3c4
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
@@ -84,6 +90,6 @@ SPEC CHECKSUMS:
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: fe73b240cc2539b83d3529c5d15ca8cdc9e81efe
+PODFILE CHECKSUM: 9b8dd5fdd21704a6103432af67ccffb10dc6a222
 
 COCOAPODS: 1.2.1

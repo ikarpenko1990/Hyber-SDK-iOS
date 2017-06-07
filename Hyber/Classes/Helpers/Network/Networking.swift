@@ -21,6 +21,7 @@ class Networking: NSObject {
 
     
     class func registerRequest(parameters: [String: Any]?, headers: [String: String]) -> Observable<Any> {
+        print(kRegUrl)
         return request(.post, kRegUrl, parameters: parameters, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .subscribeOn(MainScheduler.asyncInstance)
             .observeOn(MainScheduler.instance)

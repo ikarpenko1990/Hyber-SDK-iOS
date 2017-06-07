@@ -9,6 +9,7 @@ pod 'Hyber', :path => '../'
   pod 'Crashlytics'
   pod 'libPhoneNumber-iOS', '~> 0.8'
   pod 'CountryPickerSwift'
+  pod 'AEConsole'
 
 target 'Hyber_Example'
 target 'Hyber_Example_td'

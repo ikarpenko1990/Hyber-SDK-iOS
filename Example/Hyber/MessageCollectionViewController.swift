@@ -9,7 +9,8 @@
 import UIKit
 import Hyber
 import RealmSwift
-
+import AELog
+import AEConsole
 private let reuseIdentifier = "messageCell"
 
 class MessageCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -54,6 +55,7 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
             self?.getMessageList()
             self?.collectionView?.es_stopPullToRefresh(completion: true, ignoreFooter: false)
         }
+        aelog("\(lists)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,8 +70,8 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
 
     
     func readAndUpdateUI() {
-            lists = realm.objects(Message.self)
-            collectionView?.reloadData()
+        lists = realm.objects(Message.self)
+        collectionView?.reloadData()
     }
    
     func getMessageList() {
@@ -212,6 +214,7 @@ class MessageCollectionViewController: UICollectionViewController, UICollectionV
         self.present(alertController, animated: true, completion: nil)
     }
 
+    
 }
 
 

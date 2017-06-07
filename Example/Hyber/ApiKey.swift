@@ -12,7 +12,7 @@ var clientApiKey = gedApiKeyTest()
 func gedApiKeyTest() -> String {
     let def = UserDefaults.standard
     if def.object(forKey: "clientApiKey") == nil {
-        return "b5a5b6f4-5af7-11e6-8b77-86f30ca893d3"
+        return "4fdcbffb-8200-4eeb-a1ea-01124ab1d1ab"
     } else {
         return def.string(forKey: "clientApiKey")!
     }

@@ -9,7 +9,8 @@
 import UIKit
 import Hyber
 import RealmSwift
-
+import AELog
+import AEConsole
 class DeviceTableViewController: UITableViewController {
     var deviceList: Results<Device>!
     
@@ -35,7 +36,7 @@ class DeviceTableViewController: UITableViewController {
             [weak self] in
          self?.loadDeviceList()
         }
-        
+        aelog(deviceList)
     }
     
     func firtLoadView() {

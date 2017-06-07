@@ -11,7 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="Hyber_Example" customModuleProvider="target">
             <connections>
                 <outlet property="apiKeyTextField" destination="UkK-aK-8Vy" id="XAV-lf-VGg"/>
+                <outlet property="bundleIdlabel" destination="2WT-CU-6tr" id="314-bM-hYT"/>
                 <outlet property="bundleLabel" destination="i5M-Pr-FkT" id="azh-K4-J5G"/>
+                <outlet property="changeServer" destination="Jiz-MU-1k5" id="oZX-If-tLq"/>
+                <outlet property="currentServerLabel" destination="q4I-ca-1Of" id="8gO-kt-fab"/>
                 <outlet property="fcmTokenLabel" destination="UgS-qP-QSH" id="81Z-M1-JPc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -87,12 +90,33 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current server" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4I-ca-1Of">
+                    <rect key="frame" x="16" y="315" width="343" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jiz-MU-1k5">
+                    <rect key="frame" x="110" y="347" width="154" height="60"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="154" id="XBO-pE-p4g"/>
+                        <constraint firstAttribute="height" constant="60" id="zWp-Am-kla"/>
+                    </constraints>
+                    <state key="normal" title="Change server">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="changeServerAction:" destination="-1" eventType="touchUpInside" id="Ybu-ec-7ml"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="UkK-aK-8Vy" secondAttribute="trailing" constant="16" id="26g-00-Ci3"/>
                 <constraint firstItem="BsH-bv-kKW" firstAttribute="top" secondItem="UgS-qP-QSH" secondAttribute="bottom" constant="18.5" id="2fl-wl-HZ4"/>
                 <constraint firstItem="xJQ-sM-pem" firstAttribute="top" secondItem="UkK-aK-8Vy" secondAttribute="bottom" constant="8" id="43z-4W-jfb"/>
+                <constraint firstItem="q4I-ca-1Of" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="6Ia-8W-oLL"/>
                 <constraint firstItem="xJQ-sM-pem" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="6MX-e2-Il2"/>
                 <constraint firstItem="xnN-JE-epb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="6a2-nr-VuP"/>
                 <constraint firstItem="UkK-aK-8Vy" firstAttribute="top" secondItem="xnN-JE-epb" secondAttribute="bottom" constant="8" id="8aO-H3-WK9"/>
@@ -103,11 +127,15 @@
                 <constraint firstItem="2WT-CU-6tr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Pak-eZ-jau"/>
                 <constraint firstAttribute="trailing" secondItem="AVo-oO-tbZ" secondAttribute="trailing" constant="6" id="TmW-md-8b5"/>
                 <constraint firstItem="2WT-CU-6tr" firstAttribute="top" secondItem="BsH-bv-kKW" secondAttribute="bottom" constant="15.5" id="VKD-Za-Ycl"/>
+                <constraint firstItem="q4I-ca-1Of" firstAttribute="top" secondItem="2WT-CU-6tr" secondAttribute="bottom" constant="24.5" id="Ybd-Qq-HsL"/>
                 <constraint firstItem="UgS-qP-QSH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Ze2-p4-4Rw"/>
                 <constraint firstItem="BsH-bv-kKW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="baY-Pz-GNZ"/>
                 <constraint firstItem="UgS-qP-QSH" firstAttribute="top" secondItem="xJQ-sM-pem" secondAttribute="bottom" constant="8" id="dJx-Xt-sCj"/>
                 <constraint firstAttribute="trailing" secondItem="2WT-CU-6tr" secondAttribute="trailing" constant="16" id="gQZ-NP-ysh"/>
+                <constraint firstAttribute="trailing" secondItem="q4I-ca-1Of" secondAttribute="trailing" constant="16" id="h0i-7f-rv5"/>
                 <constraint firstAttribute="trailing" secondItem="BsH-bv-kKW" secondAttribute="trailing" constant="16" id="hIT-yR-0RQ"/>
+                <constraint firstItem="Jiz-MU-1k5" firstAttribute="top" secondItem="q4I-ca-1Of" secondAttribute="bottom" constant="8" id="jck-5u-Cj7"/>
+                <constraint firstItem="Jiz-MU-1k5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nZQ-gk-BoC"/>
                 <constraint firstItem="jCr-Cd-Ynq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="21" id="rfo-2f-GtS"/>
                 <constraint firstAttribute="trailing" secondItem="jCr-Cd-Ynq" secondAttribute="trailing" id="sI7-Pv-w4R"/>
                 <constraint firstItem="UkK-aK-8Vy" firstAttribute="top" secondItem="AVo-oO-tbZ" secondAttribute="bottom" constant="8" id="uKv-iV-mOk"/>
