@@ -36,7 +36,7 @@ TODO: Hyber SDK for IOS. Implement push notification and other Hyber functionali
   s.dependency 'RxSwift', '3.4.0'
   #s.dependency 'ObjectMapper', '~> 2.2.2'
   s.dependency 'SwiftyJSON', '3.1.4'
-  s.dependency 'CryptoSwift','0.6.8'
+  s.dependency 'CryptoSwift','1.3.2'
   
 
 
